@@ -1,12 +1,32 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom';
+import Navbar from "./Components/Navbar/Navbar";
+
+
+
+const Dashboard = React.lazy(()=>import('./Pages/Dashboard/Dashboard'))
+
+
+const Layout =()=>{
+    return(<>
+            <Navbar/>
+               <Outlet/>
+        </>)
+}
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">Asset Project</h1>
-    </div>
+   <BrowserRouter>
+       <Routes>
+           <Route path="/" element={<Layout />}>
+               <Route path="/" element={<Dashboard/>} />
+               <Route path="/dashboard" element={<Dashboard/>} />
+           </Route>
+       </Routes>
+   </BrowserRouter>
   );
 }
 
