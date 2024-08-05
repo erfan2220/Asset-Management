@@ -45,9 +45,12 @@ const Dashboard = () =>
 {
     const [currentIndex,setCurrentIndex] = useState(1);
     const [openText,setOpenText]=useState(false)
+    const [menuName,setMenuName]=useState("")
 
-    const handleIndex =(index:number)=>{
+
+    const handleIndex =(index:number,name:string)=>{
         setCurrentIndex(index)
+        setMenuName(name)
     }
     const handleMenuOpen =(condition:boolean)=>{
         setOpenText(condition)
@@ -87,7 +90,7 @@ const Dashboard = () =>
                  onMouseEnter={()=>{handleMenuOpen(true)}} onMouseLeave={()=>handleMenuOpen(false)}>
                 {
                     menu.map((item,index)=>(
-                        <div className="flex flex-row items-center gap-[12px]" onClick={()=>handleIndex(index)}>
+                        <div className="flex flex-row items-center gap-[12px]" onClick={()=>handleIndex(index,item.name)}>
                             {item.name === 'Asset' && (
                                 <AssetIcon
                                     className={`${currentIndex === index ? 'text-[#007BFF]' : 'text-[#FFF]'}`}
@@ -134,7 +137,7 @@ const Dashboard = () =>
             </div>
             <div>
                 <div>
-                     <h2>Assets</h2>
+
                 </div>
 
             </div>
