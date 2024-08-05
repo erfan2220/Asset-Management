@@ -45,7 +45,7 @@ const Dashboard = () =>
 {
     const [currentIndex,setCurrentIndex] = useState(1);
     const [openText,setOpenText]=useState(false)
-    const [menuName,setMenuName]=useState("")
+    const [menuName,setMenuName]=useState("Asset")
 
 
     const handleIndex =(index:number,name:string)=>{
