@@ -35,7 +35,7 @@ const menu = [
 ];
 
 const Dashboard = () => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [openText, setOpenText] = useState(false);
   const [menuName, setMenuName] = useState("Asset");
   const navigate = useNavigate();
@@ -119,11 +119,10 @@ const Dashboard = () => {
           )}
 
           {openText && (
-            <h2
-              className={
+            <h2 className={
                 currentIndex === index
-                  ? "text-[16px] text-[#007BFF]"
-                  : "text-[16px] text-[#FFF] opacity-60"
+                  ? "text-[16px] text-[#007BFF] text-nowrap"
+                  : "text-[16px] text-[#FFF] opacity-60 text-nowrap"
               }
             >
               {item.name}

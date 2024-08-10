@@ -1,0 +1,11 @@
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+.custom-icon {
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
