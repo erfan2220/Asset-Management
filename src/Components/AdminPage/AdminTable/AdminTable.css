@@ -1,0 +1,20 @@
+/* Scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
+.table-scroll-container::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    height: 8px; /* Height of the scrollbar */
+}
+
+.table-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #007BFF; /* Color of the scrollbar thumb */
+    border-radius: 20px; /* Roundness of the scrollbar thumb */
+}
+
+.table-scroll-container::-webkit-scrollbar-track {
+
+}
+
+/* Scrollbar styling for Firefox */
+.table-scroll-container {
+    scrollbar-width: thin; /* Make scrollbar thinner */
+    scrollbar-color: #BDBDBD #fff; /* Set thumb and track color */
+}

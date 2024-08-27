@@ -1,0 +1,23 @@
+.icon-container {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.icon-container img {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-container.active {
+    background-color: #007BFF;
+}
+
+.icon-container:not(.active):hover {
+    background-color: #e0e0e0;
+}

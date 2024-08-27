@@ -1,0 +1,29 @@
+
+@keyframes scaling {
+    0%, 100% {
+        transform: scale(0.2);
+        background-color: #CCE5FF;
+    }
+    40% {
+        transform: scale(1);
+        background-color: #99CAFF;
+    }
+    50% {
+        transform: scale(1);
+        background-color: #3395FF;
+    }
+    80% {
+        transform: scale(1);
+        background-color: #007BFF;
+    }
+}
+.circlesRotating div {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    transform: scale(0);
+    background-color: red;
+    animation: scaling 2s ease-in-out infinite;
+    display: inline-block;
+    margin: 0.5rem;
+}

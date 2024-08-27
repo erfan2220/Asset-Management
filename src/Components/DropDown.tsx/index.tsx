@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useState, useEffect, useRef } from "react";
 
 interface Option {
@@ -9,25 +10,33 @@ interface CustomSelectDropdownProps {
   options: Option[];
   placeholder: string;
   onSelect: (option: Option) => void;
+  setOption?: (option: Option) => void; // Optional
+  option?: Option | null; // Optional
 }
 
 const CustomSelectDropdown: React.FC<CustomSelectDropdownProps> = ({
   options,
   placeholder,
   onSelect,
+   setOption,
+   option
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
+
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (option: Option) => {
-    setSelectedOption(option);
+  const handleSelect = (option1: Option) => {
+    setSelectedOption(option1);
+    setOption(option1)
     setIsOpen(false);
-    onSelect(option);
+    onSelect(option1);
   };
 
   const handleClickOutside = (event: MouseEvent) => {

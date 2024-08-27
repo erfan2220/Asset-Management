@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as AssetIcon } from "./Menu/6.svg";
-import { ReactComponent as LocationIcon } from "./Menu/4.svg";
-import { ReactComponent as WorkOrderIcon } from "./Menu/3.svg";
-import { ReactComponent as ScoreIcon } from "./Menu/2.svg";
-import { ReactComponent as AdminIcon } from "./Menu/1.svg";
+import { ReactComponent as AssetIcon } from "../../images/Menu/6.svg";
+import { ReactComponent as LocationIcon } from "../../images/Menu/4.svg";
+import { ReactComponent as WorkOrderIcon } from "../../images/Menu/3.svg";
+import { ReactComponent as ScoreIcon } from "../../images/Menu/2.svg";
+import { ReactComponent as AdminIcon } from "../../images/Menu/1.svg";
+import { ReactComponent as MapIcon } from "../../images/Menu/mapIcon.svg";
 
 const menu = [
   {
     name: "Asset",
     subMenu: ["Data table ", "Map", "Charts", "Matrix"],
     route: "/asset",
+  },
+  {
+    name: "Map",
+    subMenu: [],
+    route: "/map",
   },
   {
     name: "Location",
@@ -30,7 +36,7 @@ const menu = [
   {
     name: "Admin Panel",
     subMenu: [],
-    route: "/admin-panel",
+    route: "/AdminPanel",
   },
 ];
 
@@ -69,8 +75,7 @@ const Dashboard = () => {
       onMouseEnter={() => {
         handleMenuOpen(true);
       }}
-      onMouseLeave={() => handleMenuOpen(false)}
-    >
+      onMouseLeave={() => handleMenuOpen(false)}>
       {menu.map((item, index) => (
         <div
           key={item.name}
@@ -79,6 +84,14 @@ const Dashboard = () => {
         >
           {item.name === "Asset" && (
             <AssetIcon
+              className={`${
+                currentIndex === index ? "text-[#007BFF]" : "text-[#FFF]"
+              }`}
+              stroke={currentIndex === index ? "#007bff" : "#ffffff"}
+            />
+          )}
+          {item.name === "Map" && (
+            <MapIcon
               className={`${
                 currentIndex === index ? "text-[#007BFF]" : "text-[#FFF]"
               }`}
@@ -119,12 +132,9 @@ const Dashboard = () => {
           )}
 
           {openText && (
-            <h2 className={
-                currentIndex === index
+            <h2 className={currentIndex === index
                   ? "text-[16px] text-[#007BFF] text-nowrap"
-                  : "text-[16px] text-[#FFF] opacity-60 text-nowrap"
-              }
-            >
+                  : "text-[16px] text-[#FFF] opacity-60 text-nowrap"}>
               {item.name}
             </h2>
           )}

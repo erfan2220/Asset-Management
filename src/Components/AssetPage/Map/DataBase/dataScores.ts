@@ -5,7 +5,7 @@ export  const Items1 =[
     },
     {
         index:2,
-        name:"Criticaly"
+        name:"Critically"
     },
     {
         index:3,

@@ -1,0 +1,133 @@
+.asset_filter_page_header
+{
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    align-items: center;
+    direction: ltr;
+    width: 92%;
+    border: 1px solid #E0E0E0;
+    margin: 10px auto;
+    position: relative;
+    padding: 10px 0 12px 16px;
+    border-radius: 26px;
+    gap: 17px;
+
+
+}
+.asset_filter_page_header h2
+{
+    color: #212121;
+    margin-right: 25px;
+}
+.asset_filter_page_item
+{
+    border-radius: 26px;
+    border: 1px solid #E0E0E0;
+    display: flex;
+    direction: ltr;
+    gap: 10px;
+    color: #212121;
+    cursor: pointer;
+    align-items: center;
+}
+
+.Selected_asset_filter_page_item
+{
+    border-radius: 26px;
+    border: 1px solid #007BFF;
+    background-color: #E5F2FF;
+    display: flex;
+    direction: ltr;
+    gap: 10px;
+    color: #212121;
+    cursor: pointer;
+    align-items: center;
+}
+
+.nameandcount
+{
+    display: flex;
+    flex-direction: row;
+}
+.buttonFilterAsset1
+{
+    padding: 17px;
+}
+.buttonFilterAsset1Off
+{
+    background-color: #BDBDBD;
+    border-radius: 16px;
+    width: 30px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.SelectedbuttonFilterAsset1Off
+{
+    background-color: #007BFF;
+    border-radius: 16px;
+    width: 30px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.buttonFilterAsset1On
+{
+    background-color: #007BFF;
+}
+
+.circleFilterAsset1
+{
+    background-color: white;
+    border-radius: 25px;
+    height: 60%;
+    position: absolute;
+    left: 15%;
+    width: 35%;
+}
+.SelectedcircleFilterAsset1
+{
+    background-color: white;
+    border-radius: 25px;
+    height: 60%;
+    position: absolute;
+    right: 15%;
+    width: 35%;
+}
+.asset_filter_page_img
+{
+    border-radius: 26px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    direction: ltr;
+    gap: 14px;
+}
+.asset_filter_page_img span{
+    color: #212121;
+}
+.asset_filter_page_span
+{
+    color:#212121;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+
+    padding: 13px;
+}
+.asset_filter_page_img_border
+{
+    border-radius: 26px;
+    padding: 13px 0 13px 20px ;
+}
+
+.map_data_information_base_category
+{
+    width: 92%;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+}

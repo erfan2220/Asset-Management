@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {Items1, Items2, Items3} from "./DataBase/dataScores";
 import {Items4} from "./DataBase/dataAssets";
 import LeafletMap from "./leafletMap/Leaflet";
@@ -7,9 +7,11 @@ import LeafletMap from "./leafletMap/Leaflet";
 
 
 
+
 const Map = () => {
     const [currentTab, setCurrentTab] = useState(0)
     const [currentIndex,setCurrentIndex]=useState(1)
+    const [actionTab,setActionTab]=useState(0)
 
 
     const DegreeIcon =()=> (
@@ -62,6 +64,7 @@ const Map = () => {
 
 
     return (
+        <div className="relative">
         <div className="relative w-full h-[641px] rounded-[16px] border-[1px]  overflow-hidden">
             <LeafletMap/>
             <div className=" z-50 absolute right-[20px] top-[20px] flex flex-col bg-white w-[40px] h-[80px] justify-center items-center
@@ -73,123 +76,123 @@ const Map = () => {
                             <div key={index} className="relative cursor-pointer" onClick={() => handleClick(index)}>
                                 {icon.svgIcon}
                             </div>
+                        </div>)}
 
-                            {
-                                currentTab ===0 && (
-                                    <div className="z-50 absolute right-[56px] top-0 bg-white rounded-[4px]
-                                 w-[188px] h-[371px] py-[16px] ">
-                                        <div className="flex flex-col pb-[8px] border-b-[1px] px-[16px]">
-                                            <h2>Scores</h2>
-                                            <span className="text-[12px] opacity-50">Layer</span>
-                                        </div>
+                {
+                    currentTab ===0 && (
+                        <div className="z-50 absolute right-[56px] top-0 bg-white rounded-[4px]
+                                 w-[188px] h-[440px] py-[16px] ">
+                            <div className="flex flex-col pb-[8px] border-b-[1px] px-[16px]">
+                                <h2>Scores</h2>
+                                <span className="text-[12px] opacity-50">Layer</span>
+                            </div>
+                            <div
+                                className="flex flex-col gap-[12px] pt-[8px] px-[16px]  pb-[6px]  border-opacity-10">
+                                {Items1.map((item) => (
+                                    <div key={item.index} className="flex flex-row gap-[6px] items-center">
                                         <div
-                                            className="flex flex-col gap-[12px] pt-[8px] px-[16px]  pb-[6px]  border-opacity-10">
-                                            {Items1.map((item) => (
-                                                <div className="flex flex-row gap-[6px] items-center">
-                                                    <div
-                                                        className={currentIndex === item.index ? "w-[16px] h-[16px] rounded-full border-[1px] border-[#007bFF]  p-[3px] justify-center items-center" :
-                                                            "w-[16px] h-[16px] rounded-full border-[1px] border-[#212121] opacity-50 justify-center items-center"}
-                                                        onClick={() => handleIndex(item.index)}>
-                                                        {currentIndex ===item.index &&(
-                                                            <div className=" w-[8px] h-[8px] rounded-full bg-[#66B0FF] p-[4px]">
+                                            className={currentIndex === item.index ? "w-[16px] h-[16px] rounded-full border-[1px] border-[#007bFF]  p-[3px] justify-center items-center" :
+                                                "w-[16px] h-[16px] rounded-full border-[1px] border-[#212121] opacity-50 justify-center items-center"}
+                                            onClick={() => handleIndex(item.index)}>
+                                            {currentIndex ===item.index &&(
+                                                <div className=" w-[8px] h-[8px] rounded-full bg-[#66B0FF] p-[4px]">
 
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                    <span>{item.name}</span>
                                                 </div>
-                                            ))}
+                                            )}
                                         </div>
-                                        <div
-                                            className="flex flex-col gap-[12px] pt-[8px] px-[16px]  pb-[6px]  border-opacity-10">
-                                            {Items2.map((item) => (
-                                                <div className="flex flex-row gap-[6px] items-center">
-                                                    <div
-                                                        className={currentIndex === item.index ? "w-[16px] h-[16px] rounded-full border-[1px] border-[#007bFF]  p-[3px] justify-center items-center" :
-                                                            "w-[16px] h-[16px] rounded-full border-[1px] border-[#212121] opacity-50 justify-center items-center"}
-                                                        onClick={() => handleIndex(item.index)}>
-                                                        {currentIndex ===item.index &&(
-                                                            <div className=" w-[8px] h-[8px] rounded-full bg-[#66B0FF] p-[4px]">
-
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                    <span>{item.name}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                        <div
-                                            className="flex flex-col gap-[12px] pt-[8px] px-[16px]  pb-[6px]  border-opacity-10">
-                                            {Items3.map((item) => (
-                                                <div className="flex flex-row gap-[6px] items-center">
-                                                    <div
-                                                        className={currentIndex === item.index ? "w-[16px] h-[16px] rounded-full border-[1px] border-[#007bFF]  p-[3px] justify-center items-center" :
-                                                            "w-[16px] h-[16px] rounded-full border-[1px] border-[#212121] opacity-50 justify-center items-center"}
-                                                        onClick={() => handleIndex(item.index)}>
-                                                        {currentIndex ===item.index &&(
-                                                            <div className=" w-[8px] h-[8px] rounded-full bg-[#66B0FF] p-[4px]">
-
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                    <span>{item.name}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-
-
+                                        <span>{item.name}</span>
                                     </div>
-                                )
-                            }
-                            {
-                                currentTab === 1 && (
-                                    <div>
-                                    <div className="z-50 absolute right-[56px] top-0 bg-white rounded-[4px]
-                                 w-[188px] h-[371px] py-[16px] ">
-                                        {/*<div className="flex flex-col pb-[8px] border-b-[1px] px-[16px]">*/}
-                                        {/*    <h2>Assets</h2>*/}
-                                        {/*    <span className="text-[12px] opacity-50">Layer</span>*/}
-                                        {/*</div>*/}
-                                        <div className="flex flex-col gap-[12px] pt-[8px] px-[16px]
-                                    pb-[6px] border-b-[1px] border-b-[#000] border-opacity-10">
-                                            {Items4.map((item) => (
-                                                <div className="flex flex-row gap-[6px] items-center">
-                                                    <div
-                                                        className={currentIndex === item.index ? "w-[16px] h-[16px] rounded-full border-[1px] border-[#007bFF]  p-[3px] justify-center items-center" :
-                                                            "w-[16px] h-[16px] rounded-full border-[1px] border-[#212121] opacity-50 justify-center items-center"}
-                                                        onClick={() => handleIndex(item.index)}>
-                                                        {currentIndex ===item.index &&(
-                                                            <div className=" w-[8px] h-[8px] rounded-full bg-[#66B0FF] p-[4px]">
+                                ))}
+                            </div>
+                            {/*
+                                <div
+                                className="flex flex-col gap-[12px] pt-[8px] px-[16px]  pb-[6px]  border-opacity-10">
+                                {Items2.map((item) => (
+                                    <div key={item.index} className="flex flex-row gap-[6px] items-center">
+                                        <div
+                                            className={currentIndex === item.index ? "w-[16px] h-[16px] rounded-full border-[1px] border-[#007bFF]  p-[3px] justify-center items-center" :
+                                                "w-[16px] h-[16px] rounded-full border-[1px] border-[#212121] opacity-50 justify-center items-center"}
+                                            onClick={() => handleIndex(item.index)}>
+                                            {currentIndex ===item.index &&(
+                                                <div className=" w-[8px] h-[8px] rounded-full bg-[#66B0FF] p-[4px]">
 
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                    <span>{item.name}</span>
                                                 </div>
-                                            ))}
+                                            )}
+                                        </div>
+                                        <span>{item.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div
+                                className="flex flex-col gap-[12px] pt-[8px] px-[16px]  pb-[6px]  border-opacity-10">
+                                {Items3.map((item) => (
+                                    <div key={item.index} className="flex flex-row gap-[6px] items-center">
+                                        <div
+                                            className={currentIndex === item.index ? "w-[16px] h-[16px] rounded-full border-[1px] border-[#007bFF]  p-[3px] justify-center items-center" :
+                                                "w-[16px] h-[16px] rounded-full border-[1px] border-[#212121] opacity-50 justify-center items-center"}
+                                            onClick={() => handleIndex(item.index)}>
+                                            {currentIndex ===item.index &&(
+                                                <div className=" w-[8px] h-[8px] rounded-full bg-[#66B0FF] p-[4px]">
+
+                                                </div>
+                                            )}
+                                        </div>
+                                        <span>{item.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            */}
+
+
+
                         </div>
-
-
-
-                    </div>
-
-
-
-                                    </div>
                     )
                 }
+                {
+                    currentTab === 1 && (
+                        <div>
+
+                            <div className="serviceRequest absolute right-[56px] top-0 bg-white rounded-[4px]
+                                 w-[188px] h-[371px] py-[16px] ">
+                                <div className="flex flex-col pb-[8px] border-b-[1px] px-[16px]">
+                                    <h2>Assets</h2>
+                                    <span className="text-[12px] opacity-50">Layer</span>
+                                </div>
+                                <div className="flex flex-col gap-[12px] pt-[8px] px-[16px]
+                                    pb-[6px]  border-opacity-10">
+                                    {Items4.map((item) => (
+                                        <div key={item.index} className="flex flex-row justify-between items-center">
+
+                                            <span>{item.name}</span>
+                                            <div
+                                                className={currentIndex === item.index ? "relative w-[30px] h-[18px] bg-[#007bFF] rounded-full":
+                                                    "relative w-[30px] h-[18px] bg-[#BDBDBD] rounded-full"}
+                                                onClick={() => handleIndex(item.index)}>
+                                                <div className={ currentIndex===item.index ? "absolute bg-white rounded-full right-[4px] top-[4px] w-[10px] h-[10px]" :
+                                                    "absolute bg-white rounded-full left-[4px] top-[4px] w-[10px] h-[10px]" }>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
 
 
-            </div>)}
+                            </div>
+
+
+                        </div>
+                    )
+                }
 
 
             </div>
 
             {
-                currentTab===0 && (
+                currentTab === 0 && (
                     <div className="z-40 absolute left-[20px] bottom-[20px] w-[165px] h-[194px] flex flex-col gap-[14px]
             bg-white py-[18px] border-[1px] rounded-[4px] justify-between p-[18px]">
-                        <div className="flex flex-row justify-between items-center">
+                    <div className="flex flex-row justify-between items-center">
                             <h2>Health</h2>
                             <span className="text-[12px] opacity-60">July 2024</span>
                         </div>
@@ -222,7 +225,189 @@ const Map = () => {
                 )
             }
 
+        </div>
+            {actionTab===1 &&(
+                <div>
+                    <div className=" serviceRequest absolute rounded-[4px] top-[10%] left-[20%]
+                                    bg-white p-[20px] w-[460px] h-[526px]">
+                    <div className="flex flex-row items-center justify-between">
+                        <h2 className="text-[18px]">Create Service Request</h2>
+                        <img src="/images/Asset/map/tooltip/close.svg" className="cursor-pointer"
+                             alt="" onClick={()=>setActionTab(7)}/>
+                    </div>
 
+                    <div className="flex flex-row justify-between pr-[68px] mt-[24px] mb-[20px]">
+
+                        <div className="flex flex-row items-center gap-[14px]">
+                            <img src="/images/Asset/map/tooltip/AssetNumber.svg" alt=""/>
+                            <div className="flex flex-col">
+                                <h1 className="text-[14px] text-[#757575] opacity-90">Asset number</h1>
+                                <span className="text-[14px] text-[#4242424]">PMPDEVICE009</span>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-row items-center gap-[14px]">
+                            <img src="/images/Asset/map/tooltip/AssetNumber.svg" alt=""/>
+                            <div className="flex flex-col">
+                                <h1 className="text-[14px] text-[#757575] opacity-90">Asset description</h1>
+                                <span  className="text-[14px] text-[#4242424]"> Field Pump 009</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="flex flex-col gap-[8px]">
+                        <label className="text-[#757575] text-[14px] opacity-90">Summary</label>
+                        <input height="84" type="text" placeholder="Summarize the work" className="w-full
+                            border-[1px] border-[#D9D9D9] rounded-[4px] pt-[8px] px-[12px] pb-[52px]"/>
+
+                        <label className="text-[#757575] text-[14px] opacity-90">Description</label>
+                        <input height="84" type="text" placeholder="Describe the work in more details..." className="w-full
+                            border-[1px] border-[#D9D9D9] rounded-[4px] pt-[8px] px-[12px] pb-[52px]"/>
+
+                        <label className="text-[#757575] text-[14px] opacity-90">Priority</label>
+                        <select>
+                            <option value="">choose an option...</option>
+                        </select>
+
+                        <div className="flex flex-row justify-end gap-[16px]">
+                            <button className="rounded-[4px] border-[1px] border-[#e0e0e0] py-[7px] px-[23px]">cancel</button>
+                            <button className="rounded-[4px] bg-[#007BFF] text-white border-[#e0e0e0] py-[7px] px-[23px]">Create</button>
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+                    <div className="fixed top-0 left-0 bg-[#40404066]"></div>
+                </div>
+            )}
+
+            {actionTab===3 && (
+                <div>
+                    <div className="z-50 serviceRequest absolute rounded-[4px] top-[-200px] left-[20%] overflow-visible
+                                        bg-white p-[20px] w-[460px] h-[830px]">
+                    <div className="flex flex-row items-center justify-between">
+                        <h2 className="text-[18px]">Create Plan</h2>
+                        <img src="/images/Asset/map/tooltip/close.svg" className="cursor-pointer"
+                             alt="" onClick={() => setActionTab(7)}/>
+                    </div>
+
+                    <div className="flex flex-row justify-between pr-[68px] mt-[24px] mb-[20px]">
+
+                        <div className="flex flex-row items-center gap-[14px]">
+                            <img src="/images/Asset/map/tooltip/AssetNumber.svg" alt=""/>
+                            <div className="flex flex-col">
+                                <h1 className="text-[14px] text-[#757575] opacity-90">Asset number</h1>
+                                <span className="text-[14px] text-[#4242424]">PMPDEVICE009</span>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-row items-center gap-[14px]">
+                            <img src="/images/Asset/map/tooltip/AssetNumber.svg" alt=""/>
+                            <div className="flex flex-col">
+                                <h1 className="text-[14px] text-[#757575] opacity-90">Asset description</h1>
+                                <span className="text-[14px] text-[#4242424]"> Field Pump 009</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <h3 className="mb-[10px]">Plan details</h3>
+
+                    <div className="flex flex-col gap-[8px]">
+                        <label className="text-[#757575] text-[14px] opacity-90">Summary</label>
+                        <input height="84" type="text" placeholder="Summarize the work" className="w-full
+                            border-[1px] border-[#D9D9D9] rounded-[4px] pt-[8px] px-[12px] pb-[52px]"/>
+
+                        <div className=" flex flex-col gap-[8px] pb-[16px] border-b-[1px] border-b-[#EEEEEE]">
+                            <label className="text-[#757575] text-[14px] opacity-90 mt-[16px]">Plan type</label>
+                            <select className="border-[1px] py-[8px] pl-[12px]">
+                                <option value="">choose an option...</option>
+                            </select>
+                        </div>
+
+                        <h3>Schedule</h3>
+
+                        <div className="flex flex-row ">
+                            <div className="flex flex-col gap-[8px] w-[50%]">
+                                <span>Target start date</span>
+                                <div
+                                    className="flex flex-row  items-center justify-between gap-[4px] py-[8px] px-[11px]">
+                                    <h2>M/D/YY</h2>
+                                    <img src="/images/Asset/map/tooltip/calender.svg" alt=""/>
+
+                                </div>
+
+
+                            </div>
+
+                            <div className="flex flex-col gap-[8px]  w-[50%]">
+                                <span>Expected downtime in hours</span>
+                                <div className="flex flex-row  items-center justify-between gap-[4px]">
+                                    <h2>--</h2>
+                                    <div className="flex flex-col  gap-[4px]">
+                                        <img src="/images/Asset/map/tooltip/arrowUp.svg" alt=""/>
+                                        <img src="/images/Asset/map/tooltip/arrowDownUnActive.svg" alt=""/>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <h3>Costs</h3>
+
+                        <div className="flex flex-row ">
+                            <div className="flex flex-col gap-[8px] w-[50%]">
+                                <span>Estimated capital expense(USD)</span>
+                                <div className="flex flex-row  items-center justify-between gap-[4px] py-[8px] px-[11px]">
+                                    <h2>M/D/YY</h2>
+                                    <img src="/images/Asset/map/tooltip/calender.svg" alt=""/>
+                                </div>
+
+
+                            </div>
+
+                            <div className="flex flex-col gap-[8px]  w-[50%]">
+                                <span>Estimated operating expense(USD)</span>
+                                <div className="flex flex-row  items-center justify-between gap-[4px]">
+                                    <h2>--</h2>
+                                    <div className="flex flex-col  gap-[4px]">
+                                        <img src="/images/Asset/map/tooltip/arrowUp.svg" alt=""/>
+                                        <img src="/images/Asset/map/tooltip/arrowDownUnActive.svg" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-row mt-[16x] mb-[24px]">
+                            <div className="flex flex-col gap-[8px] w-[50%]">
+                                <span>Estimated capital expense(USD)</span>
+                                <div className="flex flex-row  items-center justify-between gap-[4px] py-[8px] px-[11px]">
+                                    <h2>M/D/YY</h2>
+                                    <img src="/images/Asset/map/tooltip/calender.svg" alt=""/>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div className="flex flex-row justify-end gap-[16px]">
+                            <button className="rounded-[4px] border-[1px] border-[#e0e0e0] py-[7px] px-[23px]">cancel</button>
+                            <button className="rounded-[4px] bg-[#007BFF] text-white border-[#e0e0e0] py-[7px] px-[23px]">Create</button>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                </div>
+            )}
         </div>
     );
 };

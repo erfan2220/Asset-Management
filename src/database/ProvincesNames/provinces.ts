@@ -1,0 +1,37 @@
+//@ts-nocheck
+const provincesImages =
+    {
+    "East Azerbaijan":"/images/Assets/Provinces/east azerbaijan.svg",
+    "West Azerbaijan":"/images/Assets/Provinces/west azerbaijan.svg",
+    "Ardabil":"/images/Assets/Provinces/ardebil.svg",
+    "Esfahan":"/images/Assets/Provinces/esfahan.svg",
+    "Alborz":"/images/Assets/Provinces/alborz.svg",
+    "Ilam":"/images/Assets/Provinces/ilam.svg",
+    "Bushehr":"/images/Assets/Provinces/boushehr.svg",
+    "Tehran":"/images/Assets/Provinces/tehran.svg",
+    "South Khorasan":"/images/Assets/Provinces/khorasan jonubi.svg",
+    "Khorasan Razavi":"/images/Assets/Provinces/khorasan razavi.svg",
+    "North Khorasan":"/images/Assets/Provinces/khorasan shomali.svg",
+    "Khuzestan":"/images/Assets/Provinces/khouzestan.svg",
+    "Zanjan":"/images/Assets/Provinces/zanjan.svg",
+    "Semnan":"/images/Assets/Provinces/semnan.svg",
+    "Sistan va Baluchestan":"/images/Assets/Provinces/sistan-balouchestan.svg",
+    "Fars":"/images/Assets/Provinces/fars.svg",
+    "Qazvin":"/images/Assets/Provinces/ghazvin.svg",
+    "Qom":"/images/Assets/Provinces/qom.svg",
+    "Lorestan":"/images/Assets/Provinces/lorestan.svg",
+    "Mazandaran":"/images/Assets/Provinces/mazandaran.svg",
+    "Markazi":"/images/Assets/Provinces/markazi.svg",
+    "Hormozgan":"/images/Assets/Provinces/hormozgan.svg",
+    "Hamedan":"/images/Assets/Provinces/hamedan.svg",
+    "Chaharmahal Bakhtiari":"/images/Assets/Provinces/chaharmahal-bakhtiari.svg",
+    "Golestan":"/images/Assets/Provinces/golestan.svg",
+    "Gilan":"/images/Assets/Provinces/gilan.svg",
+    "Kordestan":"/images/Assets/Provinces/kordestan.svg",
+    "Kerman":"/images/Assets/Provinces/tehran.svg",
+    "Kermanshah":"/images/Assets/Provinces/kermanshah.svg",
+    "Yazd":"/images/Assets/Provinces/yazd.svg",
+    "Kohgiluyeh and Boyer Ahmad":"/images/Assets/Provinces/kohgilouyeh.svg",
+}
+
+export default provincesImages;
