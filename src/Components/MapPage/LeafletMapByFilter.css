@@ -1,0 +1,131 @@
+.leaflet-container
+{
+    width: 100%;
+    height: 100%;
+}
+
+.pupop_sites_2
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    direction: ltr;
+}
+.item_marker_charts
+{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.item_marker_charts h3
+{
+    direction: ltr;
+}
+.item_marker_charts2
+{
+    display: flex;
+    flex-direction: column;
+}
+.item_marker_charts2_vendor h3
+{
+    direction: ltr;
+}
+
+.mapInfoContainer
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 10px;
+    left: 50px;
+
+}
+.mapInfoContainerColumns
+{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.siteNameContainer
+{
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    padding: 23px 24px;
+    box-shadow: 4px 4px 8px 0  #00000014;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 300px;
+    border-radius: 6px;
+    z-index: 999;
+    gap: 8px;
+}
+.siteNameContainer img
+{
+    width: 24px;
+    height: 24px;
+}
+.siteNameContainer span
+{
+    font-size: 20px;
+    font-weight: 600;
+    color: #212121;
+}
+.leafletMapByFilterItem
+{
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    padding: 23px 24px;
+    box-shadow: 4px 4px 8px 0  #00000014;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 300px;
+    border-radius: 6px;
+    z-index: 999;
+    justify-content: space-between;
+    gap: 8px;
+}
+.leftData
+{
+    display: flex;
+    flex-direction: column;
+}
+.leftData h3
+{
+    font-weight: 400;
+    font-size: 16px;
+    color: #212121;
+    margin-bottom: 18px;
+}
+.leftData h2
+{
+    font-weight: 600;
+    font-size: 24px;
+    color: #212121;
+}
+.leftData h6
+{
+    font-weight: 700;
+    text-align: right;
+    font-size: 18px;
+    color: #212121;
+}
+.rightData
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.rightData h4
+{
+    color: #757575;
+    font-weight: 400;
+    font-size: 16px;
+text-align: right;
+}
+.rateContainerLeafletMap
+{
+    margin-bottom: 18px;
+}
