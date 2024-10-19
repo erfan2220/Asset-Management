@@ -111,7 +111,7 @@ const Network = () =>
         return false;
     };
 
-
+/*
     useEffect(() =>
     {
         const promises = [];
@@ -240,6 +240,81 @@ const Network = () =>
 
 
     }, []);
+
+    */
+
+    useEffect(() => {
+        const promises = [];
+
+        // Function to safely handle and skip invalid data
+        const handleData = (data, setter) => {
+            if (data) {
+                setter(data); // If data is valid, set the state
+            }
+        };
+
+        const promise1 = fetchAndCacheData("sites_count_cache", "http://10.15.90.87:5001/api/assets/sites_count_per_province")
+            .then(data => handleData(data, setTotalCount))
+            .catch(error => console.error("Error fetching sites count per province data:", error));
+
+        promises.push(promise1);
+
+        const promise2 = fetchAndCacheData("cells_count_cache_datatat", "http://10.15.90.87:5001/api/assets/cells_count_per_province")
+            .then(data => handleData(data, setCellsCount))
+            .catch(error => console.error("Error fetching cells count per province data:", error));
+
+        promises.push(promise2);
+
+        const promise3 = fetchAndCacheData("cities_per_province_cache", "http://10.15.90.87:5001/api/assets/cities")
+            .then(data => handleData(data, setCityCount))
+            .catch(error => console.error("Error fetching cities per province data:", error));
+
+        promises.push(promise3);
+
+        const promise4 = fetchAndCacheData("traffic_per_province_cache", "http://10.15.90.87:5001/api/assets/traffic_per_province")
+            .then(data => handleData(data, setTotalTraffic))
+            .catch(error => console.error("Error fetching traffic per province data:", error));
+
+        promises.push(promise4);
+
+        const promise5 = fetchAndCacheData("traffic_per_all_country", "http://10.15.90.87:5001/api/assets/traffic_total")
+            .then(data => handleData(data, setTotaldata))
+            .catch(error => console.error("Error fetching traffic per province data:", error));
+
+        promises.push(promise5);
+
+        const promise6 = fetchAndCacheData("sites_count_per_country", "http://10.15.90.87:5001/api/assets/sites_count_per_tech")
+            .then(data => handleData(data, setData))
+            .catch(error => console.log(error));
+
+        promises.push(promise6);
+
+        const promise7 = fetchAndCacheData("cell_counts_per_all_country", "http://10.15.90.87:5001/api/assets/cells_count")
+            .then(data => handleData(data, setCellsSitePerProvince))
+            .catch(error => console.log(error));
+
+        promises.push(promise7);
+
+        const promise8 = fetchAndCacheData("data_country", "http://10.15.90.87:5001/api/assets/total_profit_margin")
+            .then(data => handleData(data, setDataCountry))
+            .catch(error => console.log(error));
+
+        promises.push(promise8);
+
+        const promise9 = fetchAndCacheData("data_country", "http://10.15.90.72:9098/api/map/Site/province-count")
+            .then(data => handleData(data, setDataCountry))
+            .catch(error => console.log(error));
+
+        promises.push(promise9);
+
+        // Wait for all promises to resolve
+        Promise.all(promises)
+            .then(() => setLoading(true)) // Set loading to false once all data is fetched
+            .catch(error => console.error("Error in one of the promises:", error)); // Handle any errors in the promises
+
+    }, []);
+
+
     useEffect(()=>
     {
 
@@ -913,7 +988,7 @@ const Network = () =>
                                                                         <div className="total_map_data_item_for_quantity_3">
                                                                             <div className="total_map_data_item_2">
                                                                                 <h3>Traffic PS</h3>
-                                                                                <p>{format(dataCountry.data[dataCountry.data.length-2][`total_ps`])}</p>
+                                                                                <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_ps`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="4"/>

@@ -318,7 +318,7 @@
 {
     left: 0;
     min-width: 100%;
-    background-image: url("../../images/mapbg.svg");
+    background-image: url("../../../images/mapbg.svg");
     background-size: cover;
     flex: 1;
 }
@@ -490,7 +490,7 @@
     justify-content: space-between;
     gap: 16px;
     direction: ltr;
-    background-color: #FFFFFF;
+    background-color: #fafafa;
     border: 1px solid #E0E0E0;
 }
 
