@@ -7,6 +7,7 @@ import Rate from "../../dataCharts/rateColor/Rate";
 import loading from "../../../Loading/Loading";
 import "./ActiveTab1Country.css"
 import {Shamsi} from "basic-shamsi";
+import {provinceNameVariations} from "../../../../database/dictionaryProvinces/dictionaryProvinces";
 
 
 const ActiveTab1Country = (props) =>
@@ -81,6 +82,15 @@ const ActiveTab1Country = (props) =>
         }
     };
 
+    const getCanonicalProvinceName = (provinceName) => {
+        for (const groupObj of provinceNameVariations) {
+            const variations = Object.values(groupObj)[0];
+            if (variations.some(variation => variation.toLowerCase() === provinceName.toLowerCase())) {
+                return variations[0]; // Return the first variation as the canonical name
+            }
+        }
+        return provinceName; // Return the original name if no match found
+    };
 
     const handleDateChange = (dates) =>
     {

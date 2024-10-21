@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="Adding two parts contains cityMapping and ProvinceMapping">
+    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="losting-map">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/AssetView1.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/AssetView1.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetTable/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetTable/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Menu/Menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Menu/Menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/IranMapWrapperData/provinces/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/IranMapWrapperData/provinces/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +56,8 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Losting-Map",
-    "javascript.nodejs.core.library.configured.version": "20.18.0",
-    "javascript.nodejs.core.library.typings.version": "",
+    "javascript.nodejs.core.library.configured.version": "20.13.1",
+    "javascript.nodejs.core.library.typings.version": "20.13.0",
     "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/Components/AssetPage/AssetView1/ActiveTab1Country",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -72,7 +66,7 @@
     "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\Users\\EH4840132046\\React projects\\Asset-front\\Asset-front\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\Erfan Hashemi\\Desktop\\Asset-front\\Asset-front\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -95,7 +89,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-WS-242.21829.149" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
       </set>
     </attachedChunks>
   </component>
@@ -116,7 +110,8 @@
       <workItem from="1728973250215" duration="15543000" />
       <workItem from="1729059049686" duration="19043000" />
       <workItem from="1729318905832" duration="1222000" />
-      <workItem from="1729320162047" duration="40777000" />
+      <workItem from="1729320162047" duration="41623000" />
+      <workItem from="1729499846182" duration="336000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />
@@ -158,7 +153,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729346988822</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="losting-map">
+      <option name="closed" value="true" />
+      <created>1729493383860</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1729493383860</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +181,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Tab2 continues map" />
     <MESSAGE value="Adding two parts contains cityMapping and ProvinceMapping" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding two parts contains cityMapping and ProvinceMapping" />
+    <MESSAGE value="losting-map" />
+    <option name="LAST_COMMIT_MESSAGE" value="losting-map" />
   </component>
 </project>
