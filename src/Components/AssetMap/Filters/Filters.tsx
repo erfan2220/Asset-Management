@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
+import assetView1 from "../../AssetPage/AssetView1/AssetView1";
 
 interface FilterProps {
     view: number;
@@ -12,18 +13,19 @@ const Filters:React.FC<FilterProps> = (props) =>
     const navigate=useNavigate();
     const handleIndex=(index:number)=>
     {
-        if(index===1)
-        {
-            navigate("/AssetView1",{state:{view:index}})
-        }
-        else if(index===2)
-        {
-            navigate("/AssetView2",{state:{view:index}})
-        }
-        if(index===3)
-        {
-            navigate("/AssetView3",{state:{view:index}})
-        }
+        // if(index===1)
+        // {
+        //     navigate("/AssetView1",{state:{view:index}})
+        // }
+        // else if(index===2)
+        // {
+        //     navigate("/AssetView2",{state:{view:index}})
+        // }
+        // if(index===3)
+        // {
+        //     navigate("/AssetView3",{state:{view:index}})
+        // }
+        props.setView(index)
 
     }
     return (
