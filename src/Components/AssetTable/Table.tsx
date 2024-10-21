@@ -26,7 +26,7 @@ const columns = [
 const Table = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
     const [tabHeaders,setTabHeaders]=useState([])
     const [filterType,setFilterType]=useState(-1)
     const [searchTerm,setSearchTerm]=useState("")
@@ -41,6 +41,13 @@ const Table = () => {
     const [exportOpen,setExportOpen]=useState(false)
     const [exportType,setExportType]=useState(-1)
 
+    const [selectedAsset, setSelectedAsset] = useState(""); // For the selected asset
+    const [selectedType, setSelectedType] = useState("");   // For the selected type
+
+
+
+    const tableRef = useRef(null);
+
 
     // const { data, isLoading, error } = useQuery({
     //     queryKey: ['tableData'],
@@ -48,7 +55,6 @@ const Table = () => {
     // });
 
 
-    const tableRef = useRef(null);
 
     useEffect(() =>
     {
@@ -81,6 +87,9 @@ const Table = () => {
         )
     );
 
+    const [filteredDataState, setFilteredDataState] = useState(filteredData);
+
+
     // Pagination logic
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -95,6 +104,21 @@ const Table = () => {
     {
         setFilterType(index)
     }
+
+
+    const handleFilterSave = () => {
+        const filteredData = filteredDataInPage.filter(item => {
+            const matchAsset = selectedAsset ? item.assetName === selectedAsset : true;
+            const matchType = selectedType ? item.type === selectedType : true;
+            return matchAsset && matchType;
+        });
+
+        // Update your filtered data to be displayed based on the selected filters
+        // Assuming you have a setFilteredData function to update the data
+        setFilteredDataState(filteredData);
+        setFilterType(-1); // Close the filter modal after saving
+    };
+
 
     useEffect(() => {
         const fetchMyData = async () => {
@@ -117,13 +141,6 @@ const Table = () => {
 
         fetchMyData();
     }, []);
-
-
-
-
-
-
-
 
 
 
@@ -157,9 +174,6 @@ const Table = () => {
 
         console.log(`View '${viewName}' saved with headers:`, headerArray);
     }
-
-
-
 
 
     const handleSelect = (option: any) => {
@@ -211,6 +225,7 @@ const Table = () => {
     }
 
 
+    let filterFinal = filteredDataState.length > 0 ? filteredDataState : filteredDataInPage;
 
 
     return (
@@ -254,9 +269,9 @@ const Table = () => {
 
                 {loading ?
                     <LoadingProgress/> :
-                    <div className="flex flex-col">
+                    <div className="flex flex-col mr-[20px]">
                         <div ref={tableRef}
-                             className="table-scroll-container ml-[20px] w-[calc(90vw)] overflow-x-scroll">
+                             className="table-scroll-container ml-[20px] w-full  overflow-x-scroll">
                             <div className="flex flex-row items-center justify-between
                                             border-[1px] border-[#E0E0E0] py-[20px] px-[23px]">
                                 <div className=" w-[316px] flex flex-row items-center
@@ -286,13 +301,13 @@ const Table = () => {
                                     <div   key={index} className={` text-left py-[14px] pl-[12px] pr-[20px] whitespace-nowrap ${
                                         index === 0
                                             ? `sticky  left-0 z-10 bg-[#E5F2FF] ${
-                                                isScrolled ? 'border-r-2 border-[#e0e0e0]' : ''
+                                                isScrolled ? 'border-r-[2px] border-[#e0e0e0]' : ''
                                             }` 
                                             : 'border-[1px] border-[#e0e0e0]'
                                     }`}
                                         style={{
                                             width:`calc(100%/${tabHeaders.length})`,
-                                            maxWidth: '440px',
+                                            maxWidth: '286px',
                                             overflow: 'hidden',
                                             textOverflow: 'ellipsis',
                                             whiteSpace: 'nowrap',
@@ -301,10 +316,13 @@ const Table = () => {
                                         {index === 0 && (
                                             <input
                                                 type="checkbox"
-                                                className="w-[18px] h-[18px] mr-[36px]  bg-transparent border-none outline-none"
+                                                className="w-[14px] h-[14px] mr-[12px]  bg-transparent border-none outline-none"
                                             />
                                         )}
-                                        {item}
+                                        <span>
+                                             {item}
+                                        </span>
+
                                     </div>)
                                 ))}
                             </div>
@@ -335,11 +353,14 @@ const Table = () => {
                                 border-[#D9D9D9] w-[460px]  p-[20px] z-50 rounded-[4px]">
                                     <div className="flex flex-row items-center justify-between">
                                         <h2>Filter</h2>
-                                        <img className="cursor-pointer" src="/images/Asset/filter/close.svg" alt="" onClick={()=>setFilterType(-1)}/>
+                                        <img className="cursor-pointer" src="/images/Asset/filter/close.svg" alt=""
+                                             onClick={() => setFilterType(-1)}/>
                                     </div>
-                                    <p className="text-[16px] text-[#616161] mt-[26px]">You can choose a query or filter some attributes of table</p>
+                                    <p className="text-[16px] text-[#616161] mt-[26px]">You can choose a query or filter
+                                        some attributes of table</p>
                                     <h3 className="mt-[20px] text-[14px] text-[#757575] text-opacity-90">Query</h3>
-                                    <select className="mt-[8px] w-full border-[1px] border-[#D9D9D9] py-[8px] outline-none rounded-[4px]">
+                                    <select
+                                        className="mt-[8px] w-full border-[1px] border-[#D9D9D9] py-[8px] outline-none rounded-[4px]">
                                         <option value="">select...</option>
                                     </select>
                                     <div className="border-[1px] w-full border-[#EEEEEE] mt-[20px]"></div>
@@ -349,27 +370,40 @@ const Table = () => {
                                     </div>
 
                                     <h3 className="mt-[20px] text-[14px] opacity-90 text-[#757575]">Asset</h3>
-                                    <select className="mt-[8px] w-full border-[1px] border-[#D9D9D9] py-[8px] outline-none rounded-[4px]">
+                                    <select
+                                        className="mt-[8px] w-full border-[1px] border-[#D9D9D9] py-[8px] outline-none rounded-[4px]"
+                                        value={selectedAsset}
+                                        onChange={(e) => setSelectedAsset(e.target.value)}
+                                    >
                                         <option value="">select...</option>
+                                        {[...new Set(filteredDataInPage.map(item => item.assetName))].map((assetName) => (
+                                            <option key={assetName} value={assetName}>{assetName}</option>
+                                        ))}
                                     </select>
 
                                     <h3 className="mt-[20px] text-[14px] opacity-90 text-[#757575]">Type</h3>
-                                    <select className="mt-[8px] w-full border-[1px] border-[#D9D9D9] py-[8px] outline-none rounded-[4px]">
+                                    <select
+                                        className="mt-[8px] w-full border-[1px] border-[#D9D9D9] py-[8px] outline-none rounded-[4px]"
+                                        value={selectedType}
+                                        onChange={(e) => setSelectedType(e.target.value)}
+                                    >
                                         <option value="">select...</option>
+                                        {[...new Set(filteredDataInPage.map(item => item.type))].map((type) => (
+                                            <option key={type} value={type}>{type}</option>
+                                        ))}
                                     </select>
 
                                     <div className="flex flex-row justify-end items-center gap-[16px] mt-[32px]">
                                         <button className="border-[1px] rounded-[4px] border-[#e0e0e0]
-                                         text-[#212121] py-[7px] px-[23px]">cancel</button>
+                                         text-[#212121] py-[7px] px-[23px]" onClick={()=>setFilterType(-1)}>cancel
+                                        </button>
 
                                         <button className="bg-[#007BFF] text-white border-[1px] rounded-[4px] border-[#e0e0e0]
-                                         py-[7px] px-[23px]">save</button>
-
-
+                                         py-[7px] px-[23px]" onClick={handleFilterSave}>save
+                                        </button>
 
 
                                     </div>
-
 
 
                                 </div>
@@ -377,31 +411,29 @@ const Table = () => {
                         )
                     }
 
-                    <table className="border-[1px] border-[#e0e0e0] w-full">
-                        <thead className="bg-[#E5F2FF]">
+                            <table className="border-[1px] border-[#e0e0e0] w-full">
+                                <thead className="bg-[#E5F2FF]">
 
 
+                                </thead>
 
+                                <tbody>
 
-                        </thead>
-
-                        <tbody>
-
-                        {filteredDataInPage.map((row, rowIndex) => (
-                            <tr className="cursor-pointer" key={rowIndex} onClick={()=>handleNavigate()}>
-                                {tabHeaders.map((header, colIndex) => {
-                                    if (selectedHeaders.has(header)) return null; // Skip rendering column if it's selected
+                                {filterFinal.map((row, rowIndex) => (
+                                    <tr className="cursor-pointer" key={rowIndex} onClick={() => handleNavigate()}>
+                                        {tabHeaders.map((header, colIndex) => {
+                                            if (selectedHeaders.has(header)) return null; // Skip rendering column if it's selected
 
                                     if (header === "assetName") {
                                         return (
                                             <td
                                                 key={colIndex}
-                                                className={`sticky left-0 z-10 bg-white  flex flex-row items-center gap-[22px] 
+                                                className={`sticky left-0 z-10 bg-white  
                                                 border-b-[1px] border-b-[#e0e0e0] py-[14px] pl-[12px] ${
                                                     isScrolled ? 'border-r-2 border-[#e0e0e0]' : ''
                                                 }`}
                                                 style={{
-                                                    width: `100%`,
+                                                    width: `calc(100%/${tabHeaders.length})`,
                                                     maxWidth:'286px',
                                                     overflow: 'hidden',
                                                     textOverflow: 'ellipsis',
@@ -410,10 +442,10 @@ const Table = () => {
                                             >
                                                 <input
                                                     type="checkbox"
-                                                    className="w-[18px] h-[18px] bg-transparent border-none outline-none"
+                                                    className="w-[14px] h-[14px] bg-transparent border-none outline-none"
                                                 />
                                                 <span
-                                                    className="py-[14px] pl-[12px] whitespace-nowrap pr-[20px] text-[#007BFF]"
+                                                    className="py-[14px] pl-[4px] whitespace-nowrap pr-[20px] text-[#007BFF]"
                                                     style={{
                                                         width: `100%`,
                                                         maxWidth:'250px',

@@ -20,6 +20,7 @@ const AssetCategories = lazy(() => import("./Components/AssetCategory/Table/Asse
 const AssetView1 = lazy(() => import("./Components/AssetPage/AssetView1/AssetView1"));
 const AssetView2 = lazy(() => import("./Components/AssetPage/AssetView2/AssetView2"));
 const AssetView3 = lazy(() => import("./Components/AssetPage/AssetView3/AssetView3"));
+const DynamicTable = lazy(() => import("./Components/DynamicTable/DynamicTable"));
 
 
 
@@ -54,6 +55,7 @@ function App() {
                             <Route path="/AssetView1" element={<AssetView1 />} />
                             <Route path="/AssetView2" element={<AssetView2 />} />
                             <Route path="/AssetView3" element={<AssetView3 />} />
+                            <Route path="/DynamicTable" element={<DynamicTable />} />
                         </Route>
                         <Route path="/AdminPanel" element={<AdminPanel />} />
                     </Routes>

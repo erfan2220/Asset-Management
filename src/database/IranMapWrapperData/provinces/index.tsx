@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React from 'react'
-import { MapProps } from '../../IranMapWrapperData/interfaces.ts'
+// import { MapProps } from '../../IranMapWrapperData/interfaces.ts'
 
 import Alborz from './Alborz'
 import Ardabil from './Ardabil'

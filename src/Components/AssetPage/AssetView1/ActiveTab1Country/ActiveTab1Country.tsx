@@ -21,6 +21,13 @@ const ActiveTab1Country = (props) =>
     const [calenderOpen,setCalenderOpen]=useState(false)
     const [sitePoints, setSitePoints] = useState([]);
 
+    const [totalTraffic,setTotalTraffic]=useState(null)
+    const [totalCount,setTotalCount]=useState(null)
+    const [cellsCount,setCellsCount]=useState(null)
+    const [cityCount,setCityCount]=useState(null)
+    const [totaldata,setTotaldata]=useState(null)
+
+    const [cellsSitePerProvince ,setCellsSitePerProvince ]=useState()
     const [values, setValues] = useState([
         new DateObject({ calendar: persian, locale: persian_fa })
     ]);
@@ -174,7 +181,7 @@ const ActiveTab1Country = (props) =>
             "http://10.15.90.87:5001/api/assets/sites_count_per_tech")
             .then(data2 => {
                 // Handle the data as needed
-                setData(data2);
+                props.setData(data2);
 
             })
             .catch(error => {

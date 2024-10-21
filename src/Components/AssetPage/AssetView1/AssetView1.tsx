@@ -29,7 +29,6 @@ const AssetView1 = () =>
 {
 
     const [activeIndex,setActiveIndex]=useState(2)
-    const [data, setData] = useState(null);
     const [dataPerProvince, setDataPerProvince] = useState(null);
     const [provinceName, setProvinceName] = useState("");
     const [cityName,setCityName]=useState("")
@@ -43,7 +42,6 @@ const AssetView1 = () =>
     const [cityCount,setCityCount]=useState(null)
     const [cityCountSelected,setCityCountSelected]=useState(null)
     const [totaldata,setTotaldata]=useState(null)
-    const [cellsSitePerProvince,setCellsSitePerProvince]=useState(null)
 
     const [dataCountry,setDataCountry]=useState([])
     const [activeTab,setActiveTab]=useState(1)
@@ -52,6 +50,9 @@ const AssetView1 = () =>
     const [mapProvincesData, setMapProvincesData] = useState(initialMapData);
 
     const [mapIranData, setMapIranData] = useState(initialMapDataIran);
+
+    const [data, setData] = useState(null);
+    const [cellsSitePerProvince,setCellsSitePerProvince]=useState(null)
 
     const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
@@ -305,7 +306,7 @@ const AssetView1 = () =>
                 });
 
 
-        }, []);
+        });
 
 
 
@@ -651,7 +652,6 @@ const AssetView1 = () =>
     const selectProvinceHandler = (province) =>
     {
         setProvinceName(province.name)
-        console.log("ptototototo",province.name)
         setSelectedProvince(province.name);
         setPupop(true)
     }
@@ -806,7 +806,6 @@ const AssetView1 = () =>
         setShowSites(true)
     }
 
-    console.log("values",values)
     return (
         loading ? <div className="Assets_container">
                     <div className="Assets-map-2">
@@ -835,7 +834,7 @@ const AssetView1 = () =>
                                         (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
                                             "map_fixed_positition pt-[30px] px-[35px] pb-[0] overflow-hidden relative"
                                     }>
-                                        <Filters view={view}/>
+                                        <Filters  view={view}/>
                                         {/*<div className="timeIntervalContainer2row">*/}
                                         {/*    <div className="timeIntervalContainer2">*/}
                                         {/*        <button onClick={() => {*/}
@@ -1104,8 +1103,8 @@ const AssetView1 = () =>
                                         </div>
                                         {/*Total data left direction of map */}
                                         {!pupop && (
-                                            <div >
-                                            <ActiveTab1Country provinceName={provinceName} setProvinceName={setProvinceName}/>
+                                            <div>
+                                                <ActiveTab1Country  setData={setData} data={data} provinceName={provinceName} setProvinceName={setProvinceName}/>
                                             </div>
                                             // <div className="total_map_data">
                                             //     <div className="header_total_map_data_2">

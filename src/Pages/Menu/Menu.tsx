@@ -107,6 +107,7 @@ const Menu = () => {
   const handleInnerSubSubMenuClick = (subIndex) =>
   {
     setOpenSubSubMenuIndex(subIndex)
+    navigate('/DynamicTable')
   };
 
   return (
@@ -178,13 +179,9 @@ const Menu = () => {
                             subItem.subMenu.map((innerSubItem) => (
                                 <div key={innerSubItem} className="ml-[20px]">
                                   <h4
-                                      className={innerSubItem===openSubSubMenuIndex?"text-[16px] text-[#007BFF] text-nowrap cursor-pointer"
-                                          :"text-[16px] text-[#FFF] opacity-60 text-nowrap"}
-                                      onClick={() =>
-                                      {
-                                          handleInnerSubSubMenuClick(innerSubItem)
-                                          alert(`Navigating to ${innerSubItem}`)}
-                                      }>
+                                      className={innerSubItem===openSubSubMenuIndex?"text-[16px] text-[#007BFF] text-nowrap cursor-pointer flex flex-col gap-[20px] mt-[24px]"
+                                          :"text-[16px] text-[#FFF]  text-nowrap flex flex-col gap-[20px] mt-[24px]"}
+                                      onClick={() => handleInnerSubSubMenuClick(innerSubItem)}>
                                     {innerSubItem}
                                   </h4>
                                 </div>

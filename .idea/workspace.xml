@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="Adding two parts contains cityMapping and ProvinceMapping">
-      <change afterPath="$PROJECT_DIR$/public/images/Asset/map/View1/CalendarBlank.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/Asset/map/View1/CaretDown.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView2/Asset.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/network/Network.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/network/Network.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/AssetView1.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/AssetView1.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AssetTable/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetTable/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Menu/Menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Menu/Menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Menu/Menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/IranMapWrapperData/provinces/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/IranMapWrapperData/provinces/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +26,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="First-Branch" />
+        <entry key="$PROJECT_DIR$" value="Add-Calender" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,7 +61,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "map-Province-City-Branch",
+    "git-widget-placeholder": "Losting-Map",
     "javascript.nodejs.core.library.configured.version": "20.18.0",
     "javascript.nodejs.core.library.typings.version": "",
     "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/Components/AssetPage/AssetView1/ActiveTab1Country",
@@ -121,7 +116,7 @@
       <workItem from="1728973250215" duration="15543000" />
       <workItem from="1729059049686" duration="19043000" />
       <workItem from="1729318905832" duration="1222000" />
-      <workItem from="1729320162047" duration="20126000" />
+      <workItem from="1729320162047" duration="40777000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />
@@ -155,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727008201500</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Adding calen">
+      <option name="closed" value="true" />
+      <created>1729346988822</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729346988822</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
