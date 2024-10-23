@@ -126,8 +126,8 @@
 
 .map_data_information_base_category
 {
-    width: 92%;
     margin: 0 auto;
     border-radius: 8px;
     overflow: hidden;
+    z-index: ;
 }

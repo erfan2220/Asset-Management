@@ -36,16 +36,8 @@ const AssetView2 = () =>
     const [timeInterval, setTimeInterval] = useState("CS");
     const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
     return (
-        <div className="Assets_container">
-
-            <div className="Assets-map-2">
-                <div>
-                    <div className="Assets_header">
-                        <h2>Assets/Filter</h2>
-                    </div>
-                    <FilterMap/>
-                </div>
-            </div>
+        <div>
+                    {/*<FilterMap/>*/}
         </div>
     );
 };

@@ -5,6 +5,7 @@ import CustomSelectDropdown from "../DropDown.tsx";
 import LoadingProgress from "../Loading/Loading";
 import Pagination from "../AssetTable/pagination/Pagination";
 import {useNavigate} from "react-router-dom";
+import DynamicApi from "./DynamicApi"
 
 const DynamicTable = () =>
 {
