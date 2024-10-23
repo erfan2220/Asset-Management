@@ -4,7 +4,7 @@ import DynamicNames from "../../database/DynamicApiAssetCategories/DynamicNames"
 import CustomSelectDropdown from "../DropDown.tsx";
 import LoadingProgress from "../Loading/Loading";
 import Pagination from "../AssetTable/pagination/Pagination";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import DynamicApi from "./DynamicApi"
 
 const DynamicTable = () =>
@@ -81,6 +81,12 @@ const DynamicTable = () =>
     const filteredDataInPage = filteredData.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
+    const location = useLocation();
+    const subIndex = location.state?.subIndex;
+
+
+
+
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -105,27 +111,37 @@ const DynamicTable = () =>
     };
 
 
+
     useEffect(() => {
         const fetchMyData = async () => {
-            try {
-                const response = await fetch('http://10.15.90.72:9098/api/inventory');
+            setLoading(true); // Reset loading state
+            setData([]); // Optionally clear previous data
+            const apiEntry = DynamicApi.find(api => api.name === subIndex);
+            const apiUrl = apiEntry ? apiEntry.url : null;
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+            if (apiUrl) {
+                try {
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                    const result = await response.json();
+                    setData(result.content);
+                    setTabHeaders(Object.keys(result.content[0])); // Adjust if needed
+                } catch (error) {
+                    setError(error.message);
+                } finally {
+                    setLoading(false);
                 }
-
-                const result = await response.json();
-                setData(result.content); // Assuming `content` contains your data
-                setTabHeaders(Object.keys(result.content[1]))
-                setLoading(false);
-            } catch (error) {
-                setError(error.message);
+            } else {
+                setError('Invalid subIndex');
                 setLoading(false);
             }
         };
 
         fetchMyData();
-    }, []);
+    }, [subIndex]);
+
+
 
 
 

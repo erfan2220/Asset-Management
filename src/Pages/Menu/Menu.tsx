@@ -11,6 +11,13 @@ import { ReactComponent as AssetCategories } from "../../images/Menu/8.svg";
 import { ReactComponent as SubMenu } from "../../images/Menu/10.svg";
 
 const menu = [
+
+  {
+    name: "Map",
+    subMenu: [],
+    route: "/map",
+    icon: <MapIcon />,
+  },
   {
     name: "Asset",
     Items: ["Data table", "Map", "Charts", "Matrix"],
@@ -45,30 +52,24 @@ const menu = [
     route: "/asset-categories",
     icon: <AssetCategories />,
   },
-  {
-    name: "Map",
-    subMenu: [],
-    route: "/map",
-    icon: <MapIcon />,
-  },
-  {
-    name: "Location",
-    subMenu: [],
-    route: "/location",
-    icon: <LocationIcon />,
-  },
-  {
-    name: "Work order queues",
-    subMenu: [],
-    route: "/work-order-queues",
-    icon: <WorkOrderIcon />,
-  },
-  {
-    name: "Score Settings",
-    subMenu: [],
-    route: "/score-settings",
-    icon: <ScoreIcon />,
-  },
+  // {
+  //   name: "Location",
+  //   subMenu: [],
+  //   route: "/location",
+  //   icon: <LocationIcon />,
+  // },
+  // {
+  //   name: "Work order queues",
+  //   subMenu: [],
+  //   route: "/work-order-queues",
+  //   icon: <WorkOrderIcon />,
+  // },
+  // {
+  //   name: "Score Settings",
+  //   subMenu: [],
+  //   route: "/score-settings",
+  //   icon: <ScoreIcon />,
+  // },
   {
     name: "Admin Panel",
     subMenu: [],
@@ -107,7 +108,7 @@ const Menu = () => {
   const handleInnerSubSubMenuClick = (subIndex) =>
   {
     setOpenSubSubMenuIndex(subIndex)
-    navigate('/DynamicTable')
+    navigate('/DynamicTable', { state: { subIndex } });
   };
 
   return (
@@ -148,8 +149,8 @@ const Menu = () => {
                 )}
                 {
                     item.subMenu.length>0 && openText &&
-                    <img src="./images/assetCategories/CaretDown.svg" alt="" className={ openSubMenu === index ? "rotate-180"
-                        :""} />
+                    <img src="./images/assetCategories/CaretDown.svg" alt="" className={ openSubMenu === index ? ""
+                        :"rotate-180"} />
                 }
               </div>
 
@@ -167,7 +168,7 @@ const Menu = () => {
                               onClick={() =>
                                   subItem.subMenu && subItem.subMenu.length > 0
                                       ? handleInnerSubMenuClick(subIndex)
-                                      : alert(`Navigating to ${subItem.name}`)
+                                      : handleInnerSubSubMenuClick(innerSubItem)
                               }
                           >
                             {subItem.name}

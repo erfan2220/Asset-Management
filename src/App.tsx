@@ -45,7 +45,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Layout />}>
 
-                            <Route index element={<Asset />}/>
+                            <Route index element={<AssetMap />}/>
                             <Route path="/asset" element={<Asset />} />
                             <Route path="/map" element={<AssetMap />} />
                             <Route path="/network" element={<Network />} />

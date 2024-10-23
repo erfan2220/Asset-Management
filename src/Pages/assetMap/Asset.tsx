@@ -22,6 +22,7 @@ import {Calendar, DateObject} from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import {Shamsi} from "basic-shamsi";
+import SiteMap from "../../Components/AssetPage/SiteMap/FilterMap";
 
 
 const Assets = () =>
@@ -124,6 +125,8 @@ const Assets = () =>
 
     const [technologyIndex,setTechnologyIndex]=useState(1)
     const [technologyLayer,setTechnologyLayer]=useState(1)
+    const [searchCode,setSearchCode]=useState(null)
+    const [searchSiteData,setSearchSiteData]=useState(null)
 
     // function addRandomNumbersToObject(data)
     // {
@@ -1253,6 +1256,31 @@ const Assets = () =>
     //         </div>)
     // );
 
+    const handleSearchCodes=(e)=>
+    {
+
+        setSearchCode(e.target.value)
+        if(e.target.value !=="")
+        {
+            fetch(`http://10.15.90.72:9098/api/inventory/site/${e.target.value}`)
+                .then(response => {
+                    if (!response.ok) {
+                        // throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Convert response to JSON
+                })
+                .then(data => {
+                    setSearchSiteData(data.content[0]);
+                    console.log("setSearchSiteData", data.content[0]);
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+    }
+
     return(
         <div className="Assets_container">
 
@@ -1268,7 +1296,7 @@ const Assets = () =>
                                 className="w-[357px] flex flex-row gap-[8px] bg-white border-[1px] border-[#e0e0e0] py-[11px] px-[12px] rounded-[4px]">
                                 <img src="./images/Asset/map/View1/search.svg" alt=""/>
                                 <input type="text" placeholder="search code site....."
-                                       className="bg-none outline-none w-[100%]"/>
+                                       className="bg-none outline-none w-[100%]"  onChange={(e) => handleSearchCodes(e)}/>
                             </div>
                         </div>
 
@@ -1277,8 +1305,26 @@ const Assets = () =>
                                 <div className="Map_intilizer_container">
                                     <div className="Total_information_map_details">
 
-
-                                        {view === 1 && (
+                                        {
+                                            searchCode !=="" &&
+                                                (
+                                                    <div>
+                                                        <motion.div className={
+                                                            (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
+                                                                "pb-[0] overflow-hidden relative"
+                                                        }>
+                                                            <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
+                                                                     setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
+                                                                     setView={setView} view={view}
+                                                                     setItemName={setItemName} itemName={itemName}
+                                                            />
+                                                            <div >
+                                                                <SiteMap searchSiteData={searchSiteData}/>
+                                                            </div>
+                                                        </motion.div>
+                                                    </div>)
+                                        }
+                                        {searchCode ==="" && view === 1 && (
                                             <div>
                                                                 <motion.div className={
                                                                     (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
@@ -1356,7 +1402,7 @@ const Assets = () =>
                                             </div>
                                         )}
                                         {
-                                            view === 2 && (
+                                            searchCode ==="" && view === 2 && (
                                                 <div>
                                                     <motion.div className={
                                                         (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
@@ -1374,80 +1420,20 @@ const Assets = () =>
                                                 </div>)
                                         }
                                         {
-                                            view === 3 && (
+                                            searchCode ==="" && view === 3 && (
                                                 <div>
                                                     <motion.div className={
                                                         (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
-                                                            "map_fixed_positition pt-[30px] px-[35px] pb-[0] overflow-hidden relative"
+                                                            "pb-[0] overflow-hidden relative"
                                                     }>
                                                         <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
                                                                  setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
-                                                                 setView={setView} view={view}/>
-                                                        {/*<div className="timeIntervalContainer2row">*/}
-                                                        {/*    <div className="timeIntervalContainer2">*/}
-                                                        {/*        <button onClick={() => {*/}
-                                                        {/*            handleIntervalChange("CS");*/}
-                                                        {/*        }} className={timeInterval === "CS" ? "timeActive" : ""}>CS</button>*/}
-                                                        {/*        <button onClick={() => handleIntervalChange("PS")} className={timeInterval === "PS" ? "timeActive" : ""}>PS</button>*/}
-                                                        {/*    </div>*/}
-                                                        {/*</div>*/}
-                                                        {provinceName !== "" &&
-                                                            <div>
-                                                                <div
-                                                                    className="backItem absolute right-[20px] top-[20px] z-50 "
-                                                                    onClick={() => {
-                                                                        handleBackMap()
-                                                                    }}>
-                                                                    <img src="/images/arrow/back.svg"
-                                                                         alt=""/>
-                                                                    <span>Back</span>
-                                                                </div>
-                                                            </div>
-                                                        }
-                                                        {/*{*/}
-                                                        {/*    provinceName === "" ?  <IranMap setPupop={setPupop} provinceName={provinceName}*/}
-                                                        {/*         setProvinceName={setProvinceName} ref={onMapRef}/>:*/}
-                                                        {/*        <motion.div className="province_Container"  onClick={()=>{*/}
-                                                        {/*            handleProvinceSites()*/}
-                                                        {/*        }}>*/}
-                                                        {/*              <img src={provincesImages[provinceName]}  alt="" width={400}/>*/}
-                                                        {/*        </motion.div>*/}
-                                                        {/*}*/}
-
-                                                        {
-                                                            (provinceName === "" && cityName === "") ? (
-                                                                <IranMap
-                                                                    data={mapIranData}
-                                                                    colorRange='78, 132, 243'
-                                                                    width={600}
-                                                                    textColor='#000'
-                                                                    defaultSelectedProvince=''
-                                                                    deactiveProvinceColor='#eee'
-                                                                    selectedProvinceColor='#3bcc6d'
-                                                                    tooltipTitle='Traffic CS: '
-                                                                    selectProvinceHandler={selectProvinceHandler}
-                                                                />
-                                                            ) : (provinceName !== "" && cityName === "") ? (
-                                                                <IranProvincesMap
-                                                                    province={selectedProvince}
-                                                                    provinceData={mapProvincesData}
-                                                                    colorRange="78, 132, 243"
-                                                                    deactiveProvinceColor="#eee"
-                                                                    selectedProvinceColor="#3bcc6d"
-                                                                    tooltipTitle="تعداد:"
-                                                                    textColor="#000"
-                                                                    width={600}
-                                                                    selectProvinceHandler={selectProvinceHandler2}
-                                                                    setCityName2={setCityName}
-                                                                    cityName2={cityName}
-                                                                />
-                                                            ) : (<div className="w-full h-full">
-                                                                <MapPerProvince cityName={cityName}
-                                                                                ProvinceName={provinceName}/>
-                                                            </div>)
-                                                        }
-
-
+                                                                 setView={setView} view={view}
+                                                                 setItemName={setItemName} itemName={itemName}
+                                                        />
+                                                        <div >
+                                                            <FilterMap itemName={itemName}/>
+                                                        </div>
                                                     </motion.div>
                                                 </div>)
                                         }

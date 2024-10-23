@@ -108,7 +108,7 @@ const LeafletFilter = ({ points }: LeafletFilterProps) => {
 
             // Add zoom control to a custom position (e.g., bottom-right)
             L.control.zoom({
-                position: 'topright' // Change to 'topright', 'bottomleft', or 'bottomright'
+                position: 'bottomright' // Change to 'topright', 'bottomleft', or 'bottomright'
             }).addTo(mapRef.current);
 
             const tileLayerOffline = L.tileLayer("http://10.15.90.87/tiles/{z}/{x}/{y}.png", {
@@ -133,7 +133,7 @@ const LeafletFilter = ({ points }: LeafletFilterProps) => {
 
                 if (!isNaN(latitude) && !isNaN(longitude)) {
                     const customIcon = L.icon({
-                        iconUrl: "./FilterMap/BSC.svg",
+                        iconUrl: "./images/map/FilterMap/BSC.svg",
                         iconSize: [32, 32],
                         iconAnchor: [16, 16]
                     });
@@ -151,7 +151,7 @@ const LeafletFilter = ({ points }: LeafletFilterProps) => {
         }
     }, [points]);
 
-    return <div id="map-container" style={{ width: "100%", height: "670px" ,position:"relative"}} >
+    return <div id="map-container" style={{ width: "100%", height: "675px" ,position:"relative"}} >
         <div className="mapInfoContainer">
             <div className="mapInfoContainerColumns">
 
