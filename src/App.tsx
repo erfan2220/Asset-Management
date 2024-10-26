@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './Redux/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import AdminPanel from "./Pages/AdminPanel/AdminPanel";
+
 
 
 const queryClient = new QueryClient();
@@ -21,7 +21,7 @@ const AssetView1 = lazy(() => import("./Components/AssetPage/AssetView1/AssetVie
 const AssetView2 = lazy(() => import("./Components/AssetPage/AssetView2/AssetView2"));
 const AssetView3 = lazy(() => import("./Components/AssetPage/AssetView3/AssetView3"));
 const DynamicTable = lazy(() => import("./Components/DynamicTable/DynamicTable"));
-
+const AdminPanel = lazy(() => import("./Pages/AdminPanel/AdminPanel"));
 
 
 const Layout = () => (
