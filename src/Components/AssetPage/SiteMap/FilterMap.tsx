@@ -4,9 +4,13 @@ import LeafletFilter from "./leafletPoints/leafletFiltersPoints";
 import { useEffect, useState } from "react";
 
 
+
+
 const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
-const SiteMap = ({searchSiteData}) => {
-    // Initialize state variables
+
+
+const SiteMap = ({searchSiteData}) =>
+{
     const [bscPoints, setBscPoints] = useState([]);
     const [mscPoints, setMscPoints] = useState([]);
     const [sitePoints, setSitePoints] = useState([]);

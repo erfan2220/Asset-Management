@@ -1,44 +1,47 @@
-import React, {useState} from 'react';
-import FilterMap from "../filterMap/FilterMap";
-import {
-    mapData as initialMapData,
-    mapDataIran as initialMapDataIran
-} from "../../../database/IranMapWrapperData/mapData";
-import "./Asset.css"
-const AssetView2 = () =>
-{
-    const [activeIndex,setActiveIndex]=useState(2)
-    const [data, setData] = useState(null);
-    const [dataPerProvince, setDataPerProvince] = useState(null);
-    const [provinceName, setProvinceName] = useState("");
-    const [cityName,setCityName]=useState("")
-    const [  selectedProvince,setSelectedProvince] = useState("")
-    const [sitePoints, setSitePoints] = useState([]);
-    const [pupop,setPupop]=useState(false)
-    const [loading,setLoading]=useState(false)
-    const [totalTraffic,setTotalTraffic]=useState(null)
-    const [totalCount,setTotalCount]=useState(null)
-    const [cellsCount,setCellsCount]=useState(null)
-    const [cityCount,setCityCount]=useState(null)
-    const [cityCountSelected,setCityCountSelected]=useState(null)
-    const [totaldata,setTotaldata]=useState(null)
-    const [cellsSitePerProvince,setCellsSitePerProvince]=useState(null)
+//@ts-nocheck
+import MapPerProvince from "../../../Components/MapPage/MapPerProvince";
+import IranProvincesMap from "../../../Components/AssetPage/IranMapWrapper/IranMapWrapper";
+import React, { lazy, Suspense } from 'react';
+import { IranMap } from 'react-iran-map'
 
-    const [dataCountry,setDataCountry]=useState(null)
-    const [siteTypesOpen,setSiteTypesOpen]=useState(false)
-    const [activeTab,setActiveTab]=useState(1)
-    const [showSites,setShowSites]=useState(false)
-    const[mapPopup,setMapPopup]=useState(false)
-    const [activeMapState,setActiveMapState]=useState(1)
-    const [mapProvincesData, setMapProvincesData] = useState(initialMapData);
-    const [groupDictionary,setGroupDictionary]=useState()
-    const [mapIranData, setMapIranData] = useState(initialMapDataIran);
-    const [timeInterval, setTimeInterval] = useState("CS");
-    const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
+const AssetView2 = ({ provinceName, cityName, mapIranData, selectProvinceHandler, selectedProvince, mapProvincesData, selectProvinceHandler2, setCityName }) =>
+{
     return (
-        <div>
-                    {/*<FilterMap/>*/}
-        </div>
+        <Suspense fallback={<div>Loading Map...</div>}>
+            {
+                (provinceName === "" && cityName === "") ? (
+                    <IranMap
+                        data={mapIranData}
+                        colorRange="78, 132, 243"
+                        width={600}
+                        textColor="#000"
+                        defaultSelectedProvince=""
+                        deactiveProvinceColor="#eee"
+                        selectedProvinceColor="#3bcc6d"
+                        tooltipTitle="Traffic CS: "
+                        selectProvinceHandler={selectProvinceHandler}
+                    />
+                ) : (provinceName !== "" && cityName === "") ? (
+                    <IranProvincesMap
+                        province={selectedProvince}
+                        provinceData={mapProvincesData}
+                        colorRange="78, 132, 243"
+                        deactiveProvinceColor="#eee"
+                        selectedProvinceColor="#3bcc6d"
+                        tooltipTitle="تعداد:"
+                        textColor="#000"
+                        width={600}
+                        selectProvinceHandler={selectProvinceHandler2}
+                        setCityName2={setCityName}
+                        cityName2={cityName}
+                    />
+                ) : (
+                    <div className="w-full h-full">
+                        <MapPerProvince cityName={cityName} ProvinceName={provinceName} />
+                    </div>
+                )
+            }
+        </Suspense>
     );
 };
 

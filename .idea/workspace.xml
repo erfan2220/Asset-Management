@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="losting-map">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetMap/Filters/Filters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetMap/Filters/Filters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView2/AssetView2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView2/AssetView2.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/SiteMap/FilterMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/SiteMap/FilterMap.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/SiteMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/SiteMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +64,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Losting-Map",
-    "javascript.nodejs.core.library.configured.version": "20.13.1",
-    "javascript.nodejs.core.library.typings.version": "20.13.0",
+    "git-widget-placeholder": "backup-project",
+    "javascript.nodejs.core.library.configured.version": "18.20.4",
+    "javascript.nodejs.core.library.typings.version": "",
     "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/Components/AssetPage/AssetView1/ActiveTab1Country",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -66,7 +75,7 @@
     "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\Users\\Erfan Hashemi\\Desktop\\Asset-front\\Asset-front\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\EH4840132046\\React projects\\Asset-front\\Asset-front\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -89,7 +98,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-WS-242.21829.149" />
       </set>
     </attachedChunks>
   </component>
@@ -112,6 +121,8 @@
       <workItem from="1729318905832" duration="1222000" />
       <workItem from="1729320162047" duration="41623000" />
       <workItem from="1729499846182" duration="336000" />
+      <workItem from="1729948378903" duration="15000" />
+      <workItem from="1729954331305" duration="8803000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />

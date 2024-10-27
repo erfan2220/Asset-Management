@@ -1,6 +1,5 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import assetView1 from "../../AssetPage/AssetView1/AssetView1";
 import "./Filters.css"
 
 interface FilterProps {
@@ -12,6 +11,8 @@ interface FilterProps {
     setTechnologyLayer: (technologyLayer: number) => void;
     itemName: string;
     setItemName: (itemName: string) => void;
+    searchCode: string;
+    setSearchCode: (searchCode: string) => void;
 }
 
 
@@ -127,26 +128,12 @@ const Filters:React.FC<FilterProps> = (props) =>
     ]
 
 
-
-
     const navigate=useNavigate();
 
     const handleIndex=(index:number)=>
     {
-        // if(index===1)
-        // {
-        //     navigate("/AssetView1",{state:{view:index}})
-        // }
-        // else if(index===2)
-        // {
-        //     navigate("/AssetView2",{state:{view:index}})
-        // }
-        // if(index===3)
-        // {
-        //     navigate("/AssetView3",{state:{view:index}})
-        // }
         props.setView(index)
-
+        props.setSearchCode("")
     }
 
     const handleTopologyIndex=(index:number)=>
@@ -157,10 +144,8 @@ const Filters:React.FC<FilterProps> = (props) =>
     {
         props.setTechnologyLayer(index)
         props.setItemName(name)
-
     }
 
-    console.log("itemName111",props.itemName)
     return (
         <div className=" test flex flex-col bg-white w-[40px] h-[120px] absolute left-[20px] top-[20px]">
             <div className={props.view===1?"bg-[#007bFF] p-[8px]":"p-[8px]"} onClick={()=>handleIndex(1)}>

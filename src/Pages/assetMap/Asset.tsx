@@ -59,8 +59,6 @@ const Assets = () =>
 
     const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
-    /*set view for showing in map in different view*/
-    // let view=1;
     const [view,setView]=useState(1)
     const [provinceConvertorData,setProvinceConvertorData]=useState([])
     const [values, setValues] = useState([
@@ -108,11 +106,9 @@ const Assets = () =>
 
         setValues(dates);
 
-        // Convert each date to Shamsi format (e.g., '۱۴۰۳/۰۷/۰۱')
         const persianDates = dates.map(date => date.format("YYYY/MM/DD"));
 
 
-        // Convert each Persian date to Miladi (Gregorian)
         const miladiDates = persianDates.map(date => convertToMiladi(date));
 
         console.log("Persian Dates:", persianDates);
@@ -128,23 +124,7 @@ const Assets = () =>
     const [searchCode,setSearchCode]=useState(null)
     const [searchSiteData,setSearchSiteData]=useState(null)
 
-    // function addRandomNumbersToObject(data)
-    // {
-    //     const updatedData = {};
-    //     for (const key in data) {
-    //         if (data.hasOwnProperty(key)) {
-    //             updatedData[key] = Math.floor(Math.random() * 100) + 1;
-    //         }
-    //     }
-    //     return updatedData;
-    // }
 
-    // useEffect(() => {
-    //     const updatedMapData = addRandomNumbersToObject(initialMapData);
-    //     const updatedMapDataIran = addRandomNumbersToObject(initialMapDataIran);
-    //     setMapProvincesData(updatedMapData);
-    //     setMapIranData(updatedMapDataIran);
-    // }, []);
     async function fetchAndCacheData(cacheKey, apiUrl)
     {
         const cachedData = JSON.parse(localStorage.getItem(cacheKey)) || {};
@@ -160,16 +140,6 @@ const Assets = () =>
             return jsonData;
         }
     }
-
-    // const getCanonicalProvinceName = (provinceName) => {
-    //     for (const groupObj of provinceNameVariations) {
-    //         const variations = Object.values(groupObj)[0];
-    //         if (variations.some(variation => variation.toLowerCase() === provinceName.toLowerCase())) {
-    //             return variations[0]; // Return the first variation as the canonical name
-    //         }
-    //     }
-    //     return provinceName; // Return the original name if no match found
-    // };
 
     const getCanonicalProvinceName = (provinceName) => {
         for (const groupObj of provinceNameVariations) {
@@ -212,151 +182,6 @@ const Assets = () =>
         return false;
     };
 
-/*
-    useEffect(() =>
-    {
-        const promises = [];
-        const promise1 = fetchAndCacheData("sites_count_cache", "http://10.15.90.87:5001/api/assets/sites_count_per_province")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("Sites count per province data", data);
-                setTotalCount(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching sites count per province data:", error);
-            });
-
-        promises.push(promise1);
-
-        // Fetch cells count per province data
-        const promise2 = fetchAndCacheData("cells_count_cache_datatat", "http://10.15.90.87:5001/api/assets/cells_count_per_province")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("kljdsldjfslk", data);
-                setCellsCount(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching cells count per province data:", error);
-            });
-
-        promises.push(promise2);
-
-        // Fetch cities per province data
-        const promise3 = fetchAndCacheData("cities_per_province_cache", "http://10.15.90.87:5001/api/assets/cities")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("Cities per province data:", data);
-                setCityCount(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching cities per province data:", error);
-            });
-
-        promises.push(promise3);
-
-        // Fetch traffic per province data
-        const promise4 = fetchAndCacheData("traffic_per_province_cache", "http://10.15.90.87:5001/api/assets/traffic_per_province")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("Traffic per province data:", data);
-                setTotalTraffic(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching traffic per province data:", error);
-            });
-
-        promises.push(promise4);
-
-        // Fetch traffic per province data
-        const promise5 = fetchAndCacheData("traffic_per_all_country",
-            "http://10.15.90.87:5001/api/assets/traffic_total")
-            .then(data => {
-                // Handle the data as needed
-                setTotaldata(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching traffic per province data:", error);
-            });
-
-        promises.push(promise5);
-
-
-        const promise6 = fetchAndCacheData("sites_count_per_country",
-            "http://10.15.90.87:5001/api/assets/sites_count_per_tech")
-            .then(data2 => {
-                // Handle the data as needed
-                setData(data2);
-
-            })
-            .catch(error => {
-                console.log(error)
-            });
-
-        promises.push(promise6);
-
-        const promise7 = fetchAndCacheData("cell_counts_per_all_country",
-            "http://10.15.90.87:5001/api/assets/cells_count")
-            .then(data2 => {
-                // Handle the data as needed
-                // setDataPerProvince(data2);
-                setCellsSitePerProvince(data2)
-
-            })
-            .catch(error => {
-                // Handle errors
-                console.log(error)
-            });
-
-        promises.push(promise7);
-
-
-
-        const promise8 = fetchAndCacheData("data_country",
-            "http://10.15.90.87:5001/api/assets/total_profit_margin")
-            .then(data2 => {
-                // Handle the data as needed
-                setDataCountry(data2);
-
-
-            })
-            .catch(error => {
-                // Handle errors
-                console.log(error)
-            });
-
-        promises.push(promise8);
-
-        const promise9 = fetchAndCacheData("data_country",
-            "http://10.15.90.72:9098/api/map/Site/province-count")
-            .then(data2 => {
-                // Handle the data as needed
-                setDataCountry(data2);
-
-
-            })
-            .catch(error => {
-                // Handle errors
-                console.log(error)
-            });
-
-        promises.push(promise9);
-
-
-        // Wait for all promises to resolve
-        Promise.all(promises)
-            .then(() => {
-
-                setLoading(true); // Set loading to false once all data is fetched
-            });
-
-
-    }, []);
-*/
 
     useEffect(() => {
         const promises = [];
@@ -499,8 +324,6 @@ const Assets = () =>
                 });
         }
 
-        // console.log("province name:",provinceName)
-        //
     },[provinceName])
 
     const numberFormatter = new Intl.NumberFormat('en-US', {
@@ -512,76 +335,7 @@ const Assets = () =>
         const formattedNumber = numberFormatter.format(number);
         return formattedNumber;
     }
-    /*
-    const formatTotalRevenue = (number)=>
-    {
-        const formattedNumber = numberFormatter.format(parseInt(number/100000))
 
-        return formattedNumber;
-    }
-
-    const sum_PS = (listdata) => {
-        let total_PS = 0;
-
-        let div=1024
-        if (listdata.length > 0) {
-            listdata.forEach(item => {
-                // Iterate over the properties of each item
-                Object.keys(item).forEach(key => {
-                    // Check if the key contains "PS"
-                    if (key.includes('G_PS') && typeof item[key] === 'number') {
-                        // Add the value to the total_PS
-                        total_PS += item[key];
-                    }
-                });
-            });
-        }
-        div= (total_PS/1024)
-
-        return div.toFixed(2);
-    };
-
-    const sum_CS = (listdata) => {
-        let total_CS = 0;
-
-        let div=1024
-        if (listdata.length > 0) {
-            listdata.forEach(item => {
-                // Iterate over the properties of each item
-                Object.keys(item).forEach(key => {
-                    // Check if the key contains "CS"
-                    if (key.includes('G_CS') && typeof item[key] === 'number') {
-                        // Add the value to the total_CS
-                        total_CS += item[key];
-                    }
-                });
-            });
-        }
-        div= (total_CS/1024)
-
-        return div.toFixed(2);
-    };
-
-
-    const calculate_revenue = (province) => {
-        let total = 0;
-
-        const filterItems = totalTraffic.traffic.filter(item => item.province === province)
-
-        console.log("fksdjlfjsklfjkdlsjf",filterItems)
-
-        if (filterItems.length > 0)
-        {
-            filterItems.forEach(item =>
-            {
-                // Add the revenue of each item to the total
-                total += item.total_revenue;
-            });
-        }
-
-        return total;
-    }
-*/
     const filter_traffic_CS= (province)=>
     {
         const filterItems = dataPerProvince? dataPerProvince['total_cs'] :"data is not available now"
@@ -621,7 +375,6 @@ const Assets = () =>
             const groupKey = compareProvinceNames(item.province, province);
 
             if (groupKey) {
-                // Add group key and associated province to the dictionary
                 if (!groupDictionary[groupKey]) {
                     groupDictionary[groupKey] = [];
                 }
@@ -632,30 +385,12 @@ const Assets = () =>
             return false;
         });
 
-        // Optionally, you can store the group dictionary to see which groups were involved
 
 
         const totalcount = filterItems.reduce((acc, curr) => acc + curr.count, 0);
         return totalcount;
     }
-    /*
-    const filter_siteCount= (province)=>
-    {
 
-        // const filterItems = totalCount.sites_count.filter(item => item.province === province)
-        const filterItems = totalCount.sites_count.filter(item =>
-        {
-            if( compareProvinceNames(item.province,province) !== false)
-            {
-                console.log("1h1h1h1h1h1h1h1h11h1h1",item.province,province)
-            }
-
-         }
-        )
-
-        const totalcount = filterItems.reduce((acc, curr) => acc + curr.count, 0)
-        return totalcount;
-    }*/
 
     const filter_siteCount = (province: string): number =>
     {
@@ -665,8 +400,7 @@ const Assets = () =>
             const groupKey = compareProvinceNames(item.province, province);
 
             if (groupKey) {
-                // Add group key and associated province to the dictionary
-                if (!groupDictionary[groupKey]) {
+               if (!groupDictionary[groupKey]) {
                     groupDictionary[groupKey] = [];
                 }
                 groupDictionary[groupKey].push(item.province);
@@ -675,8 +409,6 @@ const Assets = () =>
             }
             return false;
         });
-
-        // Optionally, you can store the group dictionary to see which groups were involved
 
 
         const totalcount = filterItems.reduce((acc, curr) => acc + curr.count, 0);
@@ -709,14 +441,8 @@ const Assets = () =>
     }
     const selectProvinceHandler2 = (province) =>
     {
-        // setProvinceName(province.name)
-        // setSelectedProvince(province.name);
-        setPupop(true)
+          setPupop(true)
     }
-    const handleIntervalChange = async (interval) => {
-        await handleFetchAllProvinces();
-        setTimeInterval(interval);
-    };
 
 
     const compareProvinceNames = (provinceName1: string | null | undefined, provinceName2: string | null | undefined): string | null =>
@@ -726,14 +452,10 @@ const Assets = () =>
         {
             return false; // If either of the province names is null or undefined, return null
         }
-
-        // Function to normalize case for comparison
         const normalize = (name: string) => name.toLowerCase().replace(/\s+/g, '');
-
-        const normalizedProvince1 = normalize(provinceName1);
+     const normalizedProvince1 = normalize(provinceName1);
         const normalizedProvince2 = normalize(provinceName2);
-
-        for (const groupObj of provinceNameVariations)
+      for (const groupObj of provinceNameVariations)
         {
             const groupKey = Object.keys(groupObj)[0];
             const variations = Object.values(groupObj)[0].map(normalize);
@@ -789,23 +511,16 @@ const Assets = () =>
     };
 
 
-    const handleFetchAllProvinces = async () => {
-        console.log("Fetching all provinces data..."); // Debug log
-        const data = await fetchAllProvincesData();
-        setAllProvincesData(data);
-        console.log("All Provinces Data:", data);
-    };
 
 
 
-
-    const handleSearchCodes=(e)=>
+    const handleSearchClick=()=>
     {
 
-        setSearchCode(e.target.value)
-        if(e.target.value !=="")
+
+        if(searchCode !=="")
         {
-            fetch(`http://10.15.90.72:9098/api/inventory/site/${e.target.value}`)
+            fetch(`http://10.15.90.72:9098/api/inventory/site/${searchCode}`)
                 .then(response => {
                     if (!response.ok) {
                         // throw new Error('Network response was not ok');
@@ -813,8 +528,13 @@ const Assets = () =>
                     return response.json(); // Convert response to JSON
                 })
                 .then(data => {
-                    setSearchSiteData(data.content[0]);
-                    console.log("setSearchSiteData", data.content[0]);
+                    if (data.content && data.content.length > 0) {
+                        setSearchSiteData(data.content[0]); // Store the found data
+                    } else {
+                        // Show an alert or message for no results
+                        alert("No results found for the provided search code.");
+                        setSearchSiteData([]); // Clear previous search data if needed
+                    }
                 })
                 .catch(error => {
                     // Handle errors
@@ -822,6 +542,11 @@ const Assets = () =>
                 });
         }
 
+    }
+
+    const handleSearchCodes=(value)=>
+    {
+        setSearchCode(value)
     }
 
     return(
@@ -837,9 +562,9 @@ const Assets = () =>
                             <h2 className="font-[600] text-[20px] text-[#424242]">Province & City View</h2>
                             <div
                                 className="w-[357px] flex flex-row gap-[8px] bg-white border-[1px] border-[#e0e0e0] py-[11px] px-[12px] rounded-[4px]">
-                                <img src="./images/Asset/map/View1/search.svg" alt=""/>
+                                <img className="cursor-pointer" src="./images/Asset/map/View1/search.svg" alt="" onClick={()=>handleSearchClick()}/>
                                 <input type="text" placeholder="search code site....."
-                                       className="bg-none outline-none w-[100%]"  onChange={(e) => handleSearchCodes(e)}/>
+                                       className="bg-none outline-none w-[100%]"  onChange={(e) => handleSearchCodes(e.target.value)}/>
                             </div>
                         </div>
 
@@ -860,6 +585,7 @@ const Assets = () =>
                                                                      setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
                                                                      setView={setView} view={view}
                                                                      setItemName={setItemName} itemName={itemName}
+                                                                     searchCode={searchCode} setSearchCode={setSearchCode}
                                                             />
                                                             <div >
                                                                 <SiteMap searchSiteData={searchSiteData}/>
@@ -875,15 +601,10 @@ const Assets = () =>
                                                                 }>
                                                                     <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
                                                                              setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
-                                                                             setView={setView} view={view}/>
-                                                                    {/*<div className="timeIntervalContainer2row">*/}
-                                                                    {/*    <div className="timeIntervalContainer2">*/}
-                                                                    {/*        <button onClick={() => {*/}
-                                                                    {/*            handleIntervalChange("CS");*/}
-                                                                    {/*        }} className={timeInterval === "CS" ? "timeActive" : ""}>CS</button>*/}
-                                                                    {/*        <button onClick={() => handleIntervalChange("PS")} className={timeInterval === "PS" ? "timeActive" : ""}>PS</button>*/}
-                                                                    {/*    </div>*/}
-                                                                    {/*</div>*/}
+                                                                             setView={setView} view={view}
+                                                                             searchCode={searchCode} setSearchCode={setSearchCode}
+                                                                    />
+
                                                                     {provinceName !== "" &&
                                                                         <div>
                                                                             <div
@@ -897,50 +618,41 @@ const Assets = () =>
                                                                             </div>
                                                                         </div>
                                                                     }
+                                                                        <AssetView2 provinceName={provinceName} cityName={cityName} selectedProvince={selectedProvince} selectProvinceHandler={selectProvinceHandler}
+                                                                                    selectProvinceHandler2={selectProvinceHandler2}
+                                                                                    setCityName={setCityName} mapProvincesData={mapProvincesData} mapIranData={mapIranData} />
                                                                     {/*{*/}
-                                                                    {/*    provinceName === "" ?  <IranMap setPupop={setPupop} provinceName={provinceName}*/}
-                                                                    {/*         setProvinceName={setProvinceName} ref={onMapRef}/>:*/}
-                                                                    {/*        <motion.div className="province_Container"  onClick={()=>{*/}
-                                                                    {/*            handleProvinceSites()*/}
-                                                                    {/*        }}>*/}
-                                                                    {/*              <img src={provincesImages[provinceName]}  alt="" width={400}/>*/}
-                                                                    {/*        </motion.div>*/}
+                                                                    {/*    (provinceName === "" && cityName === "") ? (*/}
+                                                                    {/*        <IranMap*/}
+                                                                    {/*            data={mapIranData}*/}
+                                                                    {/*            colorRange='78, 132, 243'*/}
+                                                                    {/*            width={600}*/}
+                                                                    {/*            textColor='#000'*/}
+                                                                    {/*            defaultSelectedProvince=''*/}
+                                                                    {/*            deactiveProvinceColor='#eee'*/}
+                                                                    {/*            selectedProvinceColor='#3bcc6d'*/}
+                                                                    {/*            tooltipTitle='Traffic CS: '*/}
+                                                                    {/*            selectProvinceHandler={selectProvinceHandler}*/}
+                                                                    {/*        />*/}
+                                                                    {/*    ) : (provinceName !== "" && cityName === "") ? (*/}
+                                                                    {/*        <IranProvincesMap*/}
+                                                                    {/*            province={selectedProvince}*/}
+                                                                    {/*            provinceData={mapProvincesData}*/}
+                                                                    {/*            colorRange="78, 132, 243"*/}
+                                                                    {/*            deactiveProvinceColor="#eee"*/}
+                                                                    {/*            selectedProvinceColor="#3bcc6d"*/}
+                                                                    {/*            tooltipTitle="تعداد:"*/}
+                                                                    {/*            textColor="#000"*/}
+                                                                    {/*            width={600}*/}
+                                                                    {/*            selectProvinceHandler={selectProvinceHandler2}*/}
+                                                                    {/*            setCityName2={setCityName}*/}
+                                                                    {/*            cityName2={cityName}*/}
+                                                                    {/*        />*/}
+                                                                    {/*    ) : (<div className="w-full h-full">*/}
+                                                                    {/*        <MapPerProvince cityName={cityName}*/}
+                                                                    {/*                        ProvinceName={provinceName}/>*/}
+                                                                    {/*    </div>)*/}
                                                                     {/*}*/}
-
-                                                                    {
-                                                                        (provinceName === "" && cityName === "") ? (
-                                                                            <IranMap
-                                                                                data={mapIranData}
-                                                                                colorRange='78, 132, 243'
-                                                                                width={600}
-                                                                                textColor='#000'
-                                                                                defaultSelectedProvince=''
-                                                                                deactiveProvinceColor='#eee'
-                                                                                selectedProvinceColor='#3bcc6d'
-                                                                                tooltipTitle='Traffic CS: '
-                                                                                selectProvinceHandler={selectProvinceHandler}
-                                                                            />
-                                                                        ) : (provinceName !== "" && cityName === "") ? (
-                                                                            <IranProvincesMap
-                                                                                province={selectedProvince}
-                                                                                provinceData={mapProvincesData}
-                                                                                colorRange="78, 132, 243"
-                                                                                deactiveProvinceColor="#eee"
-                                                                                selectedProvinceColor="#3bcc6d"
-                                                                                tooltipTitle="تعداد:"
-                                                                                textColor="#000"
-                                                                                width={600}
-                                                                                selectProvinceHandler={selectProvinceHandler2}
-                                                                                setCityName2={setCityName}
-                                                                                cityName2={cityName}
-                                                                            />
-                                                                        ) : (<div className="w-full h-full">
-                                                                            <MapPerProvince cityName={cityName}
-                                                                                            ProvinceName={provinceName}/>
-                                                                        </div>)
-                                                                    }
-
-
                                                                 </motion.div>
                                             </div>
                                         )}
@@ -955,6 +667,7 @@ const Assets = () =>
                                                                  setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
                                                                  setView={setView} view={view}
                                                                 setItemName={setItemName} itemName={itemName}
+                                                                 searchCode={searchCode} setSearchCode={setSearchCode}
                                                         />
                                                             <div >
                                                                 <FilterMap itemName={itemName}/>
@@ -973,6 +686,7 @@ const Assets = () =>
                                                                  setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
                                                                  setView={setView} view={view}
                                                                  setItemName={setItemName} itemName={itemName}
+                                                                 searchCode={searchCode} setSearchCode={setSearchCode}
                                                         />
                                                         <div >
                                                             <FilterMap itemName={itemName}/>
