@@ -1,6 +1,6 @@
 //@ts-nocheck
 import L from "leaflet";
-import { useEffect, useRef, useState } from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
@@ -17,7 +17,9 @@ const LeafletFilter = ({ points }) =>
     const [siteName, setSiteName] = useState("");
 
     useEffect(() => {
-        if (!mapRef.current) {
+        if (!mapRef.current)
+        {
+            console.log("pointntntnns",points)
             mapRef.current = L.map("map-container", {
                 center: [32.74015808, 52.30584163],
                 zoom: 6,
@@ -38,7 +40,6 @@ const LeafletFilter = ({ points }) =>
                 showCoverageOnHover: false
             });
             mapRef.current.addLayer(markersRef.current);
-
             mapRef.current.addLayer(drawnItems);
 
             const drawControl = new L.Control.Draw({
@@ -54,23 +55,62 @@ const LeafletFilter = ({ points }) =>
             });
             mapRef.current.addControl(drawControl);
 
+            // Add event listener for polygon creation
             mapRef.current.on(L.Draw.Event.CREATED, (e) => {
+                console.log("Draw event fired:", e); // Log the entire event
                 const layer = e.layer;
                 drawnItems.addLayer(layer);
+                console.log("Polygon created:", layer.getLatLngs());
+                console.log("Polygon points:", points.length);
                 filterMarkersInPolygon(layer);
             });
         }
 
         if (points.length > 0) {
-            addMarkers(points);
+            addMarkers(points); // Always add all markers on points change
         }
     }, [points]);
 
-    const addMarkers = (pointsToShow) => {
-        const markers = [];
-        pointsToShow.forEach(position => {
-            const { latitude, longitude, sitename } = position;
 
+    const filterMarkersInPolygon = useCallback((polygonLayer) => {
+        console.log("Filtering markers, current points:", points);
+        if (points.length === 0) {
+            console.warn("No points available to filter.");
+            return; // Exit early if no points are available
+        }
+
+        // Get polygon coordinates from the layer
+        const polygonLatLngs = polygonLayer.getLatLngs()[0]; // Get the first set of latLngs if it's a multi-polygon
+        const polygon = L.polygon(polygonLatLngs); // Create a Leaflet polygon
+
+        console.log("Polygon coordinates:", polygonLatLngs);
+
+        const pointsWithinPolygon = points.filter(point => {
+            const pointLatLng = L.latLng(point.latitude, point.longitude);
+            const isInside = polygon.contains(pointLatLng); // Check if point is inside the polygon
+            console.log(`Checking point ${point.sitename} at (${point.latitude}, ${point.longitude}): ${isInside ? "Inside" : "Outside"}`);
+            return isInside;
+        });
+
+        console.log(`Total points: ${points.length}, Points within polygon: ${pointsWithinPolygon.length}`);
+
+        if (pointsWithinPolygon.length === 0) {
+            console.warn("No points found within the polygon. Displaying all markers.");
+            addMarkers(points);
+        } else {
+            console.log(`Points found within polygon: ${pointsWithinPolygon.length}`);
+            addMarkers(pointsWithinPolygon);
+        }
+    }, [points]);
+
+
+
+
+    const addMarkers = (pointsToShow) => {
+        markersRef.current.clearLayers(); // Clear current markers
+
+        const markers = pointsToShow.map(position => {
+            const { latitude, longitude, sitename } = position;
             if (!isNaN(latitude) && !isNaN(longitude)) {
                 const customIcon = L.icon({
                     iconUrl: "./images/map/FilterMap/BSC.svg",
@@ -78,27 +118,16 @@ const LeafletFilter = ({ points }) =>
                     iconAnchor: [16, 16]
                 });
 
-                const marker = L.marker([latitude, longitude], { icon: customIcon }).on('click', () => {
+                return L.marker([latitude, longitude], { icon: customIcon }).on('click', () => {
                     setSiteName(sitename);
                 });
-                markers.push(marker);
             }
-        });
+            return null;
+        }).filter(marker => marker !== null);
 
-        markersRef.current.clearLayers();
-        markersRef.current.addLayers(markers);
+        markersRef.current.addLayers(markers); // Add markers to the cluster group
     };
 
-    const filterMarkersInPolygon = (polygonLayer) => {
-        const pointsWithinPolygon = points.filter(point => {
-            const pointLatLng = L.latLng(point.latitude, point.longitude);
-            return polygonLayer.getLatLngs()[0].some((latlng) =>
-                L.polyline(latlng).getBounds().contains(pointLatLng)
-            );
-        });
-
-        addMarkers(pointsWithinPolygon);
-    };
 
     return (
         <div id="map-container" style={{ width: "100%", height: "675px", position: "relative" }}>

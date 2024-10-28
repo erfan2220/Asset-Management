@@ -33,6 +33,7 @@ const FilterMap = ({itemName}) => {
         // Fetch BSC points
         const promise1 = fetchAndCacheData("bsc-list-points", "http://10.15.90.87:5001/api/assets/bsc_list")
             .then(data => {
+
                     setBscPoints(data.data)
 
                 }
@@ -51,7 +52,6 @@ const FilterMap = ({itemName}) => {
         const promise3 = fetchAndCacheData("site-listsfaaa-points", "http://10.15.90.87:5001/api/assets/sites_location")
             .then(data => {
                     setSitePoints(data.data)
-                    console.log("pointssusfhlsdfhl",sitePoints)
                 }
             )
             .catch(error => console.error("Error fetching MSC points:", error));
@@ -125,8 +125,8 @@ const FilterMap = ({itemName}) => {
         }));
 
         setPoints(allPoints);
-        console.log("BSC",points)
     };
+
 
 
     return (
