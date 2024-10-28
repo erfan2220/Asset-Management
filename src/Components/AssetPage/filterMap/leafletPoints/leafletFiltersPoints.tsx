@@ -1,6 +1,6 @@
 //@ts-nocheck
 import L from "leaflet";
-import {useCallback, useEffect, useRef, useState} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
@@ -9,17 +9,16 @@ import "leaflet.markercluster/dist/leaflet.markercluster";
 import "leaflet-draw";
 import "./LeafletMapByFilter.css";
 
-const LeafletFilter = ({ points }) =>
-{
+const LeafletFilter = ({ points }) => {
     const mapRef = useRef(null);
     const markersRef = useRef(null);
     const drawnItems = useRef(new L.FeatureGroup()).current;
     const [siteName, setSiteName] = useState("");
 
     useEffect(() => {
-        if (!mapRef.current)
-        {
-            console.log("pointntntnns",points)
+        if (!mapRef.current) {
+            console.log("Initializing map");
+
             mapRef.current = L.map("map-container", {
                 center: [32.74015808, 52.30584163],
                 zoom: 6,
@@ -39,6 +38,7 @@ const LeafletFilter = ({ points }) =>
             markersRef.current = L.markerClusterGroup({
                 showCoverageOnHover: false
             });
+
             mapRef.current.addLayer(markersRef.current);
             mapRef.current.addLayer(drawnItems);
 
@@ -54,42 +54,47 @@ const LeafletFilter = ({ points }) =>
                 }
             });
             mapRef.current.addControl(drawControl);
-
-            // Add event listener for polygon creation
-            mapRef.current.on(L.Draw.Event.CREATED, (e) => {
-                console.log("Draw event fired:", e); // Log the entire event
-                const layer = e.layer;
-                drawnItems.addLayer(layer);
-                console.log("Polygon created:", layer.getLatLngs());
-                console.log("Polygon points:", points.length);
-                filterMarkersInPolygon(layer);
-            });
         }
 
         if (points.length > 0) {
-            addMarkers(points); // Always add all markers on points change
+            console.log("Adding markers to map with new points:", points);
+            addMarkers(points);
         }
     }, [points]);
 
+    useEffect(() => {
+        if (points.length > 0 && mapRef.current) {
+            const handleDraw = (e) => {
+                console.log("Draw event fired:", e);
+                console.log("Draw event points:", points);
+                const layer = e.layer;
+                drawnItems.addLayer(layer);
+                filterMarkersInPolygon(layer);
+            };
+
+            mapRef.current.on(L.Draw.Event.CREATED, handleDraw);
+
+            return () => {
+                mapRef.current.off(L.Draw.Event.CREATED, handleDraw);
+            };
+        }
+    }, [points]);
 
     const filterMarkersInPolygon = useCallback((polygonLayer) => {
         console.log("Filtering markers, current points:", points);
         if (points.length === 0) {
             console.warn("No points available to filter.");
-            return; // Exit early if no points are available
+            return;
         }
 
-        // Get polygon coordinates from the layer
-        const polygonLatLngs = polygonLayer.getLatLngs()[0]; // Get the first set of latLngs if it's a multi-polygon
-        const polygon = L.polygon(polygonLatLngs); // Create a Leaflet polygon
+        const polygonLatLngs = polygonLayer.getLatLngs()[0];
+        const polygon = L.polygon(polygonLatLngs);
 
         console.log("Polygon coordinates:", polygonLatLngs);
 
         const pointsWithinPolygon = points.filter(point => {
-            const pointLatLng = L.latLng(point.latitude, point.longitude);
-            const isInside = polygon.contains(pointLatLng); // Check if point is inside the polygon
-            console.log(`Checking point ${point.sitename} at (${point.latitude}, ${point.longitude}): ${isInside ? "Inside" : "Outside"}`);
-            return isInside;
+            const pointMarker = L.marker([point.latitude, point.longitude]); // Create a temporary marker for the point
+            return isMarkerInsidePolygon(pointMarker, polygon); // Check if it's inside the polygon
         });
 
         console.log(`Total points: ${points.length}, Points within polygon: ${pointsWithinPolygon.length}`);
@@ -104,10 +109,27 @@ const LeafletFilter = ({ points }) =>
     }, [points]);
 
 
+    function isMarkerInsidePolygon(marker, poly) {
+        const polyPoints = poly.getLatLngs()[0]; // Get the first set of latLngs for the polygon
+        const x = marker.getLatLng().lat, y = marker.getLatLng().lng;
+
+        let inside = false;
+        for (let i = 0, j = polyPoints.length - 1; i < polyPoints.length; j = i++)
+        {
+            const xi = polyPoints[i].lat, yi = polyPoints[i].lng;
+            const xj = polyPoints[j].lat, yj = polyPoints[j].lng;
+
+            const intersect = ((yi > y) !== (yj > y)) &&
+                (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+
+        return inside;
+    }
 
 
     const addMarkers = (pointsToShow) => {
-        markersRef.current.clearLayers(); // Clear current markers
+        markersRef.current.clearLayers();
 
         const markers = pointsToShow.map(position => {
             const { latitude, longitude, sitename } = position;
@@ -125,9 +147,8 @@ const LeafletFilter = ({ points }) =>
             return null;
         }).filter(marker => marker !== null);
 
-        markersRef.current.addLayers(markers); // Add markers to the cluster group
+        markersRef.current.addLayers(markers);
     };
-
 
     return (
         <div id="map-container" style={{ width: "100%", height: "675px", position: "relative" }}>
