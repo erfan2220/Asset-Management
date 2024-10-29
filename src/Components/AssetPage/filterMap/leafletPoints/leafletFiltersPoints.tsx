@@ -8,12 +8,18 @@ import 'react-leaflet-markercluster/dist/styles.min.css';
 import "leaflet.markercluster/dist/leaflet.markercluster";
 import "leaflet-draw";
 import "./LeafletMapByFilter.css";
+import {useSharedContext} from "../SharedSiteType/SharedSiteType";
 
-const LeafletFilter = ({ points }) => {
+const LeafletFilter = ({ points,type }) =>
+{
     const mapRef = useRef(null);
     const markersRef = useRef(null);
     const drawnItems = useRef(new L.FeatureGroup()).current;
-    const [siteName, setSiteName] = useState("");
+
+    const {siteData, setSiteData}= useSharedContext()
+    const [siteName, setSiteName]= useState()
+
+
 
     useEffect(() => {
         if (!mapRef.current) {
@@ -128,6 +134,7 @@ const LeafletFilter = ({ points }) => {
     }
 
 
+
     const addMarkers = (pointsToShow) => {
         markersRef.current.clearLayers();
 
@@ -139,10 +146,18 @@ const LeafletFilter = ({ points }) => {
                     iconSize: [32, 32],
                     iconAnchor: [16, 16]
                 });
-
-                return L.marker([latitude, longitude], { icon: customIcon }).on('click', () => {
-                    setSiteName(sitename);
+                const marker = L.marker([latitude, longitude], { icon: customIcon });
+                marker.on('click', () => {
+                    setSiteData({
+                        siteName: sitename,
+                        latitude: latitude,
+                        longitude: longitude,
+                        type: type,
+                    });
+                    console.log(`Clicked on marker: ${sitename}, Lat: ${latitude}, Long: ${longitude}`);
                 });
+
+                return marker;
             }
             return null;
         }).filter(marker => marker !== null);
@@ -150,9 +165,11 @@ const LeafletFilter = ({ points }) => {
         markersRef.current.addLayers(markers);
     };
 
+
+
     return (
         <div id="map-container" style={{ width: "100%", height: "675px", position: "relative" }}>
-            <div>Selected Site: {siteName}</div>
+
         </div>
     );
 };

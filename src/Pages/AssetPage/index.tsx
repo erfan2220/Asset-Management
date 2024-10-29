@@ -12,19 +12,21 @@ import calenderIcon from "../../images/Asset/calenderIcon.svg";
 import "./index.css";
 import DataCharts from "../../Components/AssetPage/dataCharts/dataCharts";
 import MatrixPage from "../../Components/AssetPage/MatrixPage/Matrix";
-
+import { t } from "../../translationUtil";
 
 
 
 
 const Asset = () => {
     const options = [
-        {value: "Save as new view", label: "Save as new view"},
-        {value: "Default view", label: "Default view"},
+        { value: "Save as new view", label: t("saveAsNewView") },
+        { value: "Default view", label: t("defaultView") },
     ];
 
-    const calenderOptions = [{value: "year", label: "year"}];
+    const calenderOptions = [{ value: "year", label: t("year") }];
     const [currentIndex, setCurrentIndex] = useState(1);
+
+
 
     const Matrix =()=> (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,19 +68,23 @@ const Asset = () => {
     const iconData = [
         {
             id: 1,
-            src: <List/>, name: "Asset"
+            src: <List/>,
+            name: t("Asset"),
         },
         {
             id: 2,
-            src: <MapIcon/>, name: "Asset"
+            src: <MapIcon/>,
+            name: t("Asset"),
         },
         {
             id: 3,
-            src: <Charts/>, name: "Asset"
+            src: <Charts/>,
+            name: t("Asset"),
         },
         {
             id: 4,
-            src: <Matrix />, name: "Asset"
+            src: <Matrix />,
+            name: t("Asset"),
         },
     ];
 
@@ -123,7 +129,7 @@ const Asset = () => {
                                     {/* Input Field */}
                                     <input
                                         type="text"
-                                        placeholder="search code site....."
+                                        placeholder={t("search_code_site...")}
                                         className="search-input bg-transparent border-none
                                         rounded-md py-2 px-4 pl-10 w-full h-full"
                                     />
@@ -134,7 +140,7 @@ const Asset = () => {
                             <div className="flex items-center space-x-2">
                                 <CustomSelectDropdown
                                     options={calenderOptions}
-                                    placeholder="year"
+                                    placeholder={t("year")}
                                     onSelect={handleSelect}
                                     iconSrc={calenderIcon}
                                 />

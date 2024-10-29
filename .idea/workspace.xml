@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="backup-project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetMap/Filters/Filters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetMap/Filters/Filters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/DropDown/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DropDown/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/AssetPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AssetPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +122,7 @@
       <workItem from="1729499846182" duration="336000" />
       <workItem from="1729948378903" duration="15000" />
       <workItem from="1729954331305" duration="8803000" />
-      <workItem from="1730035608550" duration="17250000" />
+      <workItem from="1730035608550" duration="30742000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />
@@ -173,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730111382268</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="backup-project">
+      <option name="closed" value="true" />
+      <created>1730118211621</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730118211621</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

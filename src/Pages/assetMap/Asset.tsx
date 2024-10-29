@@ -23,6 +23,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import {Shamsi} from "basic-shamsi";
 import SiteMap from "../../Components/AssetPage/SiteMap/FilterMap";
+import {useSharedContext} from "../../Components/AssetPage/filterMap/SharedSiteType/SharedSiteType";
 
 
 const Assets = () =>
@@ -55,6 +56,8 @@ const Assets = () =>
     const [mapIranData, setMapIranData] = useState(initialMapDataIran);
     const [timeInterval, setTimeInterval] = useState("CS");
 
+    const {siteData}=useSharedContext()
+
     const [itemName,setItemName]=useState("")
 
     const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
@@ -64,6 +67,8 @@ const Assets = () =>
     const [values, setValues] = useState([
         new DateObject({ calendar: persian, locale: persian_fa })
     ]);
+
+
 
     const [daysDates,setDaysDates]=useState([])
 
@@ -621,38 +626,6 @@ const Assets = () =>
                                                                         <AssetView2 provinceName={provinceName} cityName={cityName} selectedProvince={selectedProvince} selectProvinceHandler={selectProvinceHandler}
                                                                                     selectProvinceHandler2={selectProvinceHandler2}
                                                                                     setCityName={setCityName} mapProvincesData={mapProvincesData} mapIranData={mapIranData} />
-                                                                    {/*{*/}
-                                                                    {/*    (provinceName === "" && cityName === "") ? (*/}
-                                                                    {/*        <IranMap*/}
-                                                                    {/*            data={mapIranData}*/}
-                                                                    {/*            colorRange='78, 132, 243'*/}
-                                                                    {/*            width={600}*/}
-                                                                    {/*            textColor='#000'*/}
-                                                                    {/*            defaultSelectedProvince=''*/}
-                                                                    {/*            deactiveProvinceColor='#eee'*/}
-                                                                    {/*            selectedProvinceColor='#3bcc6d'*/}
-                                                                    {/*            tooltipTitle='Traffic CS: '*/}
-                                                                    {/*            selectProvinceHandler={selectProvinceHandler}*/}
-                                                                    {/*        />*/}
-                                                                    {/*    ) : (provinceName !== "" && cityName === "") ? (*/}
-                                                                    {/*        <IranProvincesMap*/}
-                                                                    {/*            province={selectedProvince}*/}
-                                                                    {/*            provinceData={mapProvincesData}*/}
-                                                                    {/*            colorRange="78, 132, 243"*/}
-                                                                    {/*            deactiveProvinceColor="#eee"*/}
-                                                                    {/*            selectedProvinceColor="#3bcc6d"*/}
-                                                                    {/*            tooltipTitle="تعداد:"*/}
-                                                                    {/*            textColor="#000"*/}
-                                                                    {/*            width={600}*/}
-                                                                    {/*            selectProvinceHandler={selectProvinceHandler2}*/}
-                                                                    {/*            setCityName2={setCityName}*/}
-                                                                    {/*            cityName2={cityName}*/}
-                                                                    {/*        />*/}
-                                                                    {/*    ) : (<div className="w-full h-full">*/}
-                                                                    {/*        <MapPerProvince cityName={cityName}*/}
-                                                                    {/*                        ProvinceName={provinceName}/>*/}
-                                                                    {/*    </div>)*/}
-                                                                    {/*}*/}
                                                                 </motion.div>
                                             </div>
                                         )}

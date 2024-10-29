@@ -2,18 +2,20 @@
 import "./FilterMap.css";
 import LeafletFilter from "./leafletPoints/leafletFiltersPoints";
 import { useEffect, useState } from "react";
+import {useSharedContext} from "./SharedSiteType/SharedSiteType";
 
 
 const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
-const FilterMap = ({itemName}) => {
+const FilterMap = ({itemName}) =>
+{
     // Initialize state variables
     const [bscPoints, setBscPoints] = useState([]);
     const [mscPoints, setMscPoints] = useState([]);
     const [sitePoints, setSitePoints] = useState([]);
     const [points, setPoints] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [type,setType]=useState("")
     const [loading, setLoading] = useState(true);
-
 
     // Filter items definition
     const Filter_items = [
@@ -94,8 +96,10 @@ const FilterMap = ({itemName}) => {
 
      };*/
     useEffect(() => {
-        const handleItemClick = (itemName) => {
+        const handleItemClick = (itemName) =>
+        {
             setSelectedItem(itemName === selectedItem ? null : itemName);
+            setType(itemName)
             switch (itemName) {
                 case "BSC":
                     findLatLong(bscPoints);
@@ -131,56 +135,8 @@ const FilterMap = ({itemName}) => {
 
     return (
         <div>
-            {/*<div className="asset_filter_page_header">*/}
-            {/*    <h2>Layers :</h2>*/}
-            {/*    /!* Filters based on category *!/*/}
-            {/*    /!*{Filter_items.map((item) => (*!/*/}
-            {/*    /!*    <div key={item.id}*!/*/}
-            {/*    /!*         className={`${selectedItem ===item.name ?  "Selected_asset_filter_page_item":"asset_filter_page_item"} `}*!/*/}
-            {/*    /!*         onClick={() =>handleItemClick(item.name)}>*!/*/}
-            {/*    /!*        <div className="nameandcount">*!/*/}
-            {/*    /!*            <div className="asset_filter_page_img">*!/*/}
-            {/*    /!*                <div className="asset_filter_page_img_border">*!/*/}
-            {/*    /!*                    <img src={item.url} alt="" />*!/*/}
-            {/*    /!*                </div>*!/*/}
-            {/*    /!*            </div>*!/*/}
-            {/*    /!*            <div className="asset_filter_page_span" >*!/*/}
-            {/*    /!*                <span>{item.name}</span>*!/*/}
-            {/*    /!*                {*!/*/}
-            {/*    /!*                    item.name === "MSC" &&(*!/*/}
-            {/*    /!*                        <span>{mscPoints.length}</span>*!/*/}
-            {/*    /!*                    )*!/*/}
-            {/*    /!*                }*!/*/}
-            {/*    /!*                {*!/*/}
-            {/*    /!*                    item.name === "BSC" &&(*!/*/}
-            {/*    /!*                        <span>{bscPoints.length}</span>*!/*/}
-            {/*    /!*                    )*!/*/}
-            {/*    /!*                }*!/*/}
-            {/*    /!*                {*!/*/}
-            {/*    /!*                    item.name === "Site" &&(*!/*/}
-            {/*    /!*                        <span>{sitePoints.length}</span>*!/*/}
-            {/*    /!*                    )*!/*/}
-            {/*    /!*                }*!/*/}
-            {/*    /!*                {*!/*/}
-            {/*    /!*                    item.name === "Province_sites" &&(*!/*/}
-            {/*    /!*                        <span>31</span>*!/*/}
-            {/*    /!*                    )*!/*/}
-            {/*    /!*                }*!/*/}
-            {/*    /!*            </div>*!/*/}
-            {/*    /!*        </div>*!/*/}
-            {/*    /!*        <div className="buttonFilterAsset1" >*!/*/}
-            {/*    /!*            <div className={`${selectedItem ===item.name ?  "SelectedbuttonFilterAsset1Off":"buttonFilterAsset1Off"}`}>*!/*/}
-            {/*    /!*                <div className={`${selectedItem ===item.name ?  "SelectedcircleFilterAsset1":"circleFilterAsset1"}`}>*!/*/}
-
-            {/*    /!*                </div>*!/*/}
-            {/*    /!*            </div>*!/*/}
-            {/*    /!*        </div>*!/*/}
-            {/*    /!*    </div>*!/*/}
-            {/*    /!*))}*!/*/}
-            {/*</div>*/}
-            {/* Information based on category */}
             <div className="map_data_information_base_category">
-                <LeafletFilter points={points} />
+                <LeafletFilter points={points} type={type}/>
             </div>
         </div>
     );

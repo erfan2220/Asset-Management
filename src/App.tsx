@@ -7,7 +7,7 @@ import { store } from './Redux/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { mapData as initialMapData, mapDataIran as initialMapDataIran } from "./database/IranMapWrapperData/mapData.ts";
-
+import { SharedProvider } from './Components/AssetPage/filterMap/SharedSiteType/SharedSiteType';
 
 
 const queryClient = new QueryClient();
@@ -41,6 +41,20 @@ const Layout = () => (
 
 function App()
 {
+
+    useEffect(() => {
+        const language = Cookies.get('language') || 'en';
+
+        if (language === 'fa') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.lang = 'fa';
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.lang = 'en';
+        }
+    }, []);
+
+
     const [provinceName, setProvinceName] = useState("");
     const [cityName,setCityName]=useState("")
     const [mapIranData, setMapIranData] = useState(initialMapDataIran);
@@ -63,38 +77,40 @@ function App()
 
     return (
         <QueryClientProvider client={queryClient}>
-            <Provider store={store}>
-            <BrowserRouter>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Routes>
-                        <Route path="/" element={<Layout />}>
+            <SharedProvider>
+                    <Provider store={store}>
+                        <BrowserRouter>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Routes>
+                                    <Route path="/" element={<Layout />}>
 
-                            <Route index element={<AssetMap />}/>
-                            <Route path="/asset" element={<Asset />} />
-                            <Route path="/map" element={<AssetMap />} />
-                            <Route path="/network" element={<Network />} />
-                            <Route path="/asset-categories" element={<AssetCategories />} />
-                            <Route path="/FilterBycategory" element={<FilterByCategory />} />
-                            <Route path="/AssetDetails" element={<AssetsDatails />} />
-                            <Route path="/AssetView1" element={<AssetView1 />} />
-                            <Route path="/AssetView2" element={<AssetView2
-                                provinceName={provinceName}
-                                cityName={cityName}
-                                mapIranData={mapIranData}
-                                selectProvinceHandler={selectProvinceHandler}
-                                selectedProvince={selectedProvince}
-                                mapProvincesData={mapProvincesData}
-                                selectProvinceHandler2={selectProvinceHandler2}
-                                setCityName={setCityName}
-                            />} />
-                            <Route path="/AssetView3" element={<AssetView3 />} />
-                            <Route path="/DynamicTable" element={<DynamicTable />} />
-                        </Route>
-                        <Route path="/AdminPanel" element={<AdminPanel />} />
-                    </Routes>
-                </Suspense>
-            </BrowserRouter>
-        </Provider>
+                                        <Route index element={<AssetMap />}/>
+                                        <Route path="/asset" element={<Asset />} />
+                                        <Route path="/map" element={<AssetMap />} />
+                                        <Route path="/network" element={<Network />} />
+                                        <Route path="/asset-categories" element={<AssetCategories />} />
+                                        <Route path="/FilterBycategory" element={<FilterByCategory />} />
+                                        <Route path="/AssetDetails" element={<AssetsDatails />} />
+                                        <Route path="/AssetView1" element={<AssetView1 />} />
+                                        <Route path="/AssetView2" element={<AssetView2
+                                            provinceName={provinceName}
+                                            cityName={cityName}
+                                            mapIranData={mapIranData}
+                                            selectProvinceHandler={selectProvinceHandler}
+                                            selectedProvince={selectedProvince}
+                                            mapProvincesData={mapProvincesData}
+                                            selectProvinceHandler2={selectProvinceHandler2}
+                                            setCityName={setCityName}
+                                        />} />
+                                        <Route path="/AssetView3" element={<AssetView3 />} />
+                                        <Route path="/DynamicTable" element={<DynamicTable />} />
+                                    </Route>
+                                    <Route path="/AdminPanel" element={<AdminPanel />} />
+                                </Routes>
+                            </Suspense>
+                        </BrowserRouter>
+                  </Provider>
+               </SharedProvider>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     );

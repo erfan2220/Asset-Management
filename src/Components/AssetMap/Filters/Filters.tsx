@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 import "./Filters.css"
@@ -75,55 +76,20 @@ const Filters:React.FC<FilterProps> = (props) =>
 
     const TechnologyTech=[
         {
-            name: "1 Tech",
-            Layers:[
-                {
-                    index:1,
-                    name:"2G",
-                },
-                {
-                    index:2,
-                    name:"3G",
-                },
-                {
-                    index:3,
-                    name:"4G",
-                },
-            ]
+            name: "2G",
+            Layers:[]
         },
         {
-            name: "2Tech",
-            Layers:[
-                {
-                    index:1,
-                    name:"2G",
-                },
-                {
-                    index:2,
-                    name:"3G",
-                },
-                {
-                    index:3,
-                    name:"4G",
-                },
-            ]
+            name: "3G",
+            Layers:[]
         },
         {
-            name: "3Tech",
-            Layers:[
-                {
-                    index:1,
-                    name:"2G",
-                },
-                {
-                    index:2,
-                    name:"3G",
-                },
-                {
-                    index:3,
-                    name:"4G",
-                },
-            ]
+            name: "4G",
+            Layers:[]
+        },
+        {
+            name: "5G",
+            Layers:[]
         },
     ]
 
@@ -195,7 +161,7 @@ const Filters:React.FC<FilterProps> = (props) =>
                                    </div>
 
                                     <div className="flex flex-col gap-[12px] px-[16px] ">
-                                        {props.technologyIndex ===index &&item.Layers.map((layer) =>
+                                        {props.technologyIndex ===index && item.Layers.length>0 && item.Layers?.map((layer) =>
                                             <div className="items flex flex-row items-center gap-[10px]">
                                                 <div className={props.technologyLayer===layer.index?
                                                     "w-[16px] h-[16px] rounded-full border-[1px] border-[#66B0FF] flex justify-center items-center":
