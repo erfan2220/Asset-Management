@@ -71,11 +71,11 @@ const Asset = () => {
             src: <List/>,
             name: t("Asset"),
         },
-        {
-            id: 2,
-            src: <MapIcon/>,
-            name: t("Asset"),
-        },
+        // {
+        //     id: 2,
+        //     src: <MapIcon/>,
+        //     name: t("Asset"),
+        // },
         {
             id: 3,
             src: <Charts/>,

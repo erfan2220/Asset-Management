@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="backup-project">
+    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="adding-polygon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AssetMap/Filters/Filters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetMap/Filters/Filters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView2/AssetView2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView2/AssetView2.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/DropDown/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DropDown/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/AssetPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AssetPage/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
     </list>
@@ -28,7 +30,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Add-Calender" />
+        <entry key="$PROJECT_DIR$" value="backup-project" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,38 +62,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;backup-project&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.20.4&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/Components/AssetPage/AssetView1/ActiveTab1Country&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;C:/Program Files/nodejs/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\EH4840132046\\React projects\\Asset-front\\Asset-front\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop-v1.1",
+    "javascript.nodejs.core.library.configured.version": "18.20.4",
+    "javascript.nodejs.core.library.typings.version": "",
+    "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/Components/AssetPage/AssetView1/sitaData",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "C:\\Users\\EH4840132046\\React projects\\Asset-front\\Asset-front\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1\sitaData" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1\ActiveTab1Country" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView3" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView2" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView1" />
-      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\public\images\Asset\map\View1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1" />
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\map\FilterMap" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\public\images\Asset\map\View1\Selection" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\public\images\Asset\map\View1" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\public\images\map\Filters" />
-      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\images\Menu" />
-      <recent name="C:\React Projects\React Projects\Asset-front\Asset-front\src\images\Asset" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -122,7 +124,10 @@
       <workItem from="1729499846182" duration="336000" />
       <workItem from="1729948378903" duration="15000" />
       <workItem from="1729954331305" duration="8803000" />
-      <workItem from="1730035608550" duration="30742000" />
+      <workItem from="1730035608550" duration="31607000" />
+      <workItem from="1730192691247" duration="83000" />
+      <workItem from="1730192835399" duration="6000" />
+      <workItem from="1730193924015" duration="30804000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />
@@ -188,7 +193,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730118211621</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="adding-polygon">
+      <option name="closed" value="true" />
+      <created>1730191103734</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1730191103734</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +223,7 @@
     <MESSAGE value="Adding two parts contains cityMapping and ProvinceMapping" />
     <MESSAGE value="losting-map" />
     <MESSAGE value="backup-project" />
-    <option name="LAST_COMMIT_MESSAGE" value="backup-project" />
+    <MESSAGE value="adding-polygon" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding-polygon" />
   </component>
 </project>

@@ -4,7 +4,7 @@ import IranProvincesMap from "../../../Components/AssetPage/IranMapWrapper/IranM
 import React, { lazy, Suspense } from 'react';
 import { IranMap } from 'react-iran-map'
 
-const AssetView2 = ({ provinceName, cityName, mapIranData, selectProvinceHandler, selectedProvince, mapProvincesData, selectProvinceHandler2, setCityName }) =>
+const AssetView2 = ({setSiteNameClicked, provinceName, cityName, mapIranData, selectProvinceHandler, selectedProvince, mapProvincesData, selectProvinceHandler2, setCityName }) =>
 {
     return (
         <Suspense fallback={<div>Loading Map...</div>}>
@@ -37,7 +37,7 @@ const AssetView2 = ({ provinceName, cityName, mapIranData, selectProvinceHandler
                     />
                 ) : (
                     <div className="w-full h-full">
-                        <MapPerProvince cityName={cityName} ProvinceName={provinceName} />
+                        <MapPerProvince cityName={cityName} ProvinceName={provinceName} setSiteNameClicked={setSiteNameClicked} />
                     </div>
                 )
             }

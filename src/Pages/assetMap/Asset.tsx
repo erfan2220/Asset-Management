@@ -24,6 +24,7 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import {Shamsi} from "basic-shamsi";
 import SiteMap from "../../Components/AssetPage/SiteMap/FilterMap";
 import {useSharedContext} from "../../Components/AssetPage/filterMap/SharedSiteType/SharedSiteType";
+import SitaData from "../../Components/AssetPage/AssetView1/sitaData/SitaData";
 
 
 const Assets = () =>
@@ -55,6 +56,18 @@ const Assets = () =>
     const [groupDictionary,setGroupDictionary]=useState()
     const [mapIranData, setMapIranData] = useState(initialMapDataIran);
     const [timeInterval, setTimeInterval] = useState("CS");
+
+    const [siteNameClicked,setSiteNameClicked]=useState(null)
+
+
+    const [tech,setTech]=useState({
+        type:"",
+        tech:""
+    })
+
+    const [techLayer,setTechLayer]=useState([])
+    const [techNames,setTechNames]=useState([])
+
 
     const {siteData}=useSharedContext()
 
@@ -516,7 +529,7 @@ const Assets = () =>
     };
 
 
-
+console.log("siteNameClickded",siteNameClicked)
 
 
     const handleSearchClick=()=>
@@ -586,12 +599,17 @@ const Assets = () =>
                                                             (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
                                                                 "pb-[0] overflow-hidden relative"
                                                         }>
+
                                                             <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
                                                                      setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
                                                                      setView={setView} view={view}
                                                                      setItemName={setItemName} itemName={itemName}
                                                                      searchCode={searchCode} setSearchCode={setSearchCode}
+                                                                     tech={tech}  setTech={setTech}
+                                                                     techLayer={techLayer} setTechLayer={setTechLayer}
+                                                                     techNames={techNames} setTechNames={setTechNames}
                                                             />
+
                                                             <div >
                                                                 <SiteMap searchSiteData={searchSiteData}/>
                                                             </div>
@@ -607,7 +625,11 @@ const Assets = () =>
                                                                     <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
                                                                              setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
                                                                              setView={setView} view={view}
+                                                                             setItemName={setItemName} itemName={itemName}
                                                                              searchCode={searchCode} setSearchCode={setSearchCode}
+                                                                             tech={tech}  setTech={setTech}
+                                                                             techLayer={techLayer} setTechLayer={setTechLayer}
+                                                                             techNames={techNames} setTechNames={setTechNames}
                                                                     />
 
                                                                     {provinceName !== "" &&
@@ -623,7 +645,7 @@ const Assets = () =>
                                                                             </div>
                                                                         </div>
                                                                     }
-                                                                        <AssetView2 provinceName={provinceName} cityName={cityName} selectedProvince={selectedProvince} selectProvinceHandler={selectProvinceHandler}
+                                                                        <AssetView2 setSiteNameClicked ={setSiteNameClicked} provinceName={provinceName} cityName={cityName} selectedProvince={selectedProvince} selectProvinceHandler={selectProvinceHandler}
                                                                                     selectProvinceHandler2={selectProvinceHandler2}
                                                                                     setCityName={setCityName} mapProvincesData={mapProvincesData} mapIranData={mapIranData} />
                                                                 </motion.div>
@@ -639,11 +661,14 @@ const Assets = () =>
                                                         <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
                                                                  setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
                                                                  setView={setView} view={view}
-                                                                setItemName={setItemName} itemName={itemName}
+                                                                 setItemName={setItemName} itemName={itemName}
                                                                  searchCode={searchCode} setSearchCode={setSearchCode}
+                                                                 tech={tech}  setTech={setTech}
+                                                                 techLayer={techLayer} setTechLayer={setTechLayer}
+                                                                 techNames={techNames} setTechNames={setTechNames}
                                                         />
                                                             <div >
-                                                                <FilterMap itemName={itemName}/>
+                                                                <FilterMap tech={tech} itemName={itemName}/>
                                                             </div>
                                                     </motion.div>
                                                 </div>)
@@ -660,9 +685,12 @@ const Assets = () =>
                                                                  setView={setView} view={view}
                                                                  setItemName={setItemName} itemName={itemName}
                                                                  searchCode={searchCode} setSearchCode={setSearchCode}
+                                                                 tech={tech}  setTech={setTech}
+                                                                 techLayer={techLayer} setTechLayer={setTechLayer}
+                                                                 techNames={techNames} setTechNames={setTechNames}
                                                         />
                                                         <div >
-                                                            <FilterMap itemName={itemName}/>
+                                                            <FilterMap tech={tech} itemName={itemName}/>
                                                         </div>
                                                     </motion.div>
                                                 </div>)
@@ -745,7 +773,7 @@ const Assets = () =>
                                                 </div>
                                             </div>
                                             <div>
-                                                {pupop && (
+                                                {pupop && siteNameClicked ===null&& (
                                                     <div>
 
                                                         <div className="total_map_data">
@@ -882,9 +910,20 @@ const Assets = () =>
                                                         </div>
                                                     </div>
                                                 )}
+
+                                                {siteNameClicked !==null && (
+                                                    <>
+                                                        <div>
+                                                            <SitaData setData={setData} data={data} siteNameClicked={siteNameClicked}
+                                                                               provinceName={provinceName}
+                                                                               setProvinceName={setProvinceName}/>
+                                                        </div>
+
+                                                    </>
+                                                )}
                                             </div>
                                             {/*Total data left direction of map */}
-                                            {!pupop && (
+                                            {!pupop && siteNameClicked ===null && (
                                                 <>
                                                     <div>
                                                         <ActiveTab1Country setData={setData} data={data}

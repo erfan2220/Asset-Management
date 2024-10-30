@@ -141,8 +141,9 @@ const LeafletFilter = ({ points,type }) =>
         const markers = pointsToShow.map(position => {
             const { latitude, longitude, sitename } = position;
             if (!isNaN(latitude) && !isNaN(longitude)) {
+                const randomIcon = Math.random() < 0.5 ? "1.svg" : "2.svg";
                 const customIcon = L.icon({
-                    iconUrl: "./images/map/FilterMap/BSC.svg",
+                    iconUrl: `./images/map/FilterMap/${randomIcon}`,
                     iconSize: [32, 32],
                     iconAnchor: [16, 16]
                 });

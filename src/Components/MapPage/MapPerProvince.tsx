@@ -25,7 +25,7 @@ const fetchPoints = async ({ queryKey }) => {
     return response.json(); // Convert response to JSON
 };
 
-const MapPerProvince = ({ cityName, ProvinceName }) => {
+const MapPerProvince = ({ cityName, ProvinceName,setSiteNameClicked }) => {
     const [canonicalProvinceName, setCanonicalProvinceName] = useState("");
     const [canonicalCityName, setCanonicalCityName] = useState("");
     const mapRef = useRef<L.Map | null>(null);
@@ -81,7 +81,6 @@ const MapPerProvince = ({ cityName, ProvinceName }) => {
 
 
 
-    console.log("ksjfdlkjfkldsjfl")
     useEffect(() => {
         setCanonicalProvinceName(provinceMapping2[ProvinceName]);
     }, [ProvinceName]);
@@ -100,55 +99,6 @@ const MapPerProvince = ({ cityName, ProvinceName }) => {
 
 
 
-    // useEffect(() =>
-    // {
-    //     if (!mapRef.current) {
-    //         mapRef.current = L.map("map-container", {
-    //             center: [32.74015808, 52.30584163],
-    //             zoom: 6,
-    //             scrollWheelZoom: false
-    //         });
-    //
-    //         const tileLayerOffline = L.tileLayer("http://10.15.90.87/tiles/{z}/{x}/{y}.png", {
-    //             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    //             minZoom: 1,
-    //             maxZoom: 13
-    //         });
-    //         tileLayerOffline.addTo(mapRef.current);
-    //     }
-    //
-    //     if (!markersRef.current) {
-    //         markersRef.current = L.markerClusterGroup({
-    //             showCoverageOnHover:false
-    //         });
-    //         mapRef.current.addLayer(markersRef.current);
-    //     }
-    //
-    //     if (points.length>0) {
-    //         const markers: L.Marker[] = [];
-    //         points.forEach(position => {
-    //             const { latitude, longitude,siteName } = position;
-    //
-    //             if (!isNaN(latitude) && !isNaN(longitude)) {
-    //                 const customIcon = L.icon({
-    //                     iconUrl: "./FilterMap/BSC.svg",
-    //                     iconSize: [32, 32],
-    //                     iconAnchor: [16, 16]
-    //                 });
-    //
-    //                 // const marker = L.marker([latitude, longitude], { icon: customIcon });
-    //                 const marker = L.marker([latitude, longitude], { icon: customIcon }).on('click',()=>{
-    //                     setSiteName(siteName)
-    //                 });
-    //                 markers.push(marker);
-    //             }
-    //         });
-    //
-    //         markersRef.current.clearLayers();
-    //         markersRef.current.addLayers(markers);
-    //     }
-    // }, [points]);
-    //
 
 
     useEffect(() =>
@@ -175,23 +125,32 @@ const MapPerProvince = ({ cityName, ProvinceName }) => {
             mapRef.current.addLayer(markersRef.current);
         }
 
-        if (points.length>0) {
+        if (points.length > 0) {
             const markers: L.Marker[] = [];
-            points.forEach(position => {
-                const { latitude, longitude,siteName } = position;
+            const uniquePoints = new Set();
 
-                if (!isNaN(latitude) && !isNaN(longitude)) {
+            points.forEach(position => {
+                const { latitude, longitude, siteName } = position;
+
+                // Generate a unique key based on latitude and longitude or siteName
+                const uniqueKey = `${latitude}-${longitude}-${siteName}`;
+
+                if (!uniquePoints.has(uniqueKey) && !isNaN(latitude) && !isNaN(longitude)) {
+                    const randomIcon = Math.random() < 0.5 ? "1.svg" : "2.svg";
+
                     const customIcon = L.icon({
-                        iconUrl: "../../images/map/FilterMap/BSC.svg",
+                        iconUrl: `../../images/map/FilterMap/${randomIcon}`,
                         iconSize: [32, 32],
                         iconAnchor: [16, 16]
                     });
 
-                    // const marker = L.marker([latitude, longitude], { icon: customIcon });
-                    const marker = L.marker([latitude, longitude], { icon: customIcon }).on('click',()=>{
-                        setSiteName(siteName)
+                    const marker = L.marker([latitude, longitude], { icon: customIcon }).on('click', () => {
+                        setSiteName(siteName);
+                        setSiteNameClicked(siteName);
                     });
+
                     markers.push(marker);
+                    uniquePoints.add(uniqueKey);  // Add to the set to prevent duplicates
                 }
             });
 
@@ -200,25 +159,6 @@ const MapPerProvince = ({ cityName, ProvinceName }) => {
         }
     }, [points]);
 
-
-    /*useEffect(() => {
-        if (mapRef.current && points.length>0) {
-            const bounds = mapRef.current.getBounds();
-            const visiblePoints = points.filter(point =>
-                bounds.contains([point.latitude, point.longitude])
-            );
-
-            const markers = visiblePoints.map(position => {
-                const { latitude, longitude, siteName } = position;
-                return L.marker([latitude, longitude]).on('click', () => {
-                    setSiteName(siteName);
-                });
-            });
-
-            markersRef.current.clearLayers();
-            markersRef.current.addLayers(markers);
-        }
-    }, [points, mapRef.current]);*/
 
 
     if (error) return <div>Error fetching data</div>;

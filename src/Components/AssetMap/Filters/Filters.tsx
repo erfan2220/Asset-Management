@@ -14,6 +14,12 @@ interface FilterProps {
     setItemName: (itemName: string) => void;
     searchCode: string;
     setSearchCode: (searchCode: string) => void;
+    tech: string;
+    setTech: (tech: string) => void;
+    techLayer: string;
+    setTechLayer: (techLayer: string) => void;
+    techNames: string;
+    setTechNames: (techNames: string) => void;
 }
 
 
@@ -47,11 +53,11 @@ const Filters:React.FC<FilterProps> = (props) =>
                 },
                 {
                     index:2,
-                    name:"BSC",
+                    name:"RNC",
                 },
                 {
                     index:3,
-                    name:"BTS",
+                    name:"nodeb",
                 },
             ]
         },
@@ -60,15 +66,11 @@ const Filters:React.FC<FilterProps> = (props) =>
             Layers:[
                 {
                     index:1,
-                    name:"MSC",
+                    name:"MME",
                 },
                 {
                     index:2,
-                    name:"BSC",
-                },
-                {
-                    index:3,
-                    name:"BTS",
+                    name:"enodeb",
                 },
             ]
         },
@@ -76,20 +78,25 @@ const Filters:React.FC<FilterProps> = (props) =>
 
     const TechnologyTech=[
         {
-            name: "2G",
-            Layers:[]
-        },
-        {
-            name: "3G",
-            Layers:[]
-        },
-        {
-            name: "4G",
-            Layers:[]
-        },
-        {
-            name: "5G",
-            Layers:[]
+            name: null,
+            Layers:[
+                {
+                    index:1,
+                    name:"2G",
+                },
+                {
+                    index:2,
+                    name:"3G",
+                },
+                {
+                    index:3,
+                    name:"4G",
+                },
+                {
+                    index:4,
+                    name:"5G",
+                },
+            ]
         },
     ]
 
@@ -106,10 +113,19 @@ const Filters:React.FC<FilterProps> = (props) =>
     {
         props.setTechnologyIndex(index)
     }
-    const handleTopologyLayer=(index:number,name:string)=>
+    const handleTopologyLayer=(index:number,name:string,tech:string)=>
     {
+        props.setTech({
+            type:name,
+            tech:tech
+        })
         props.setTechnologyLayer(index)
         props.setItemName(name)
+    }
+    const handleTechLayer=(index:number,name:string)=>
+    {
+        props.setTechLayer(index)
+        props.setTechNames(name)
     }
 
     return (
@@ -151,7 +167,7 @@ const Filters:React.FC<FilterProps> = (props) =>
                                             </div>
 
                                             <div className={props.technologyIndex===index? "relative bg-[#007Bff] w-[30px] h-[18px] rounded-[8px]":
-                                                "relative bg-[#BDBDBD]  w-[30px] h-[18px] rounded-[8px]"} onClick={()=>handleTopologyIndex(index)}>
+                                                "relative bg-[#BDBDBD]  w-[30px] h-[18px] rounded-[8px]"} onClick={()=>handleTopologyIndex(index,item.name)}>
                                                 <div className={props.technologyIndex===index? "absolute w-[10px] h-[10px] rounded-full bg-white top-[4px] right-[4px]":
                                                     "absolute w-[10px] h-[10px] rounded-full bg-white top-[4px] left-[4px]"}>
 
@@ -166,7 +182,7 @@ const Filters:React.FC<FilterProps> = (props) =>
                                                 <div className={props.technologyLayer===layer.index?
                                                     "w-[16px] h-[16px] rounded-full border-[1px] border-[#66B0FF] flex justify-center items-center":
                                                     "w-[16px] h-[16px] rounded-full border-[1px] border-[#21212180] flex justify-center items-center"}
-                                                    onClick={()=>handleTopologyLayer(layer.index,layer.name)}>
+                                                    onClick={()=>handleTopologyLayer(layer.index,layer.name,item.name)}>
                                                      <div className={props.technologyLayer===layer.index?"w-[8px] h-[8px] rounded-full bg-[#66B0FF]":""}>
                                                     </div>
                                                 </div>
@@ -195,22 +211,26 @@ const Filters:React.FC<FilterProps> = (props) =>
                     {
                         TechnologyTech.map((item,index)=>
                             <div>
-                                <div className="items px-[16px] py-[8px]  flex flex-row items-center justify-between  border-t-[1px]">
+                                {item.name !==null &&
+                                    <div className="items px-[16px] py-[8px]  flex flex-row items-center justify-between  border-t-[1px]">
 
-                                    <div className=" flex flex-row items-center gap-[12px]">
-                                        <p className="text-[14px] text-[#212121]">{item.name}</p>
-                                        <img src="./images/map/CaretDown.svg" alt=""/>
+                                            <div className=" flex flex-row items-center gap-[12px]">
+                                                <p className="text-[14px] text-[#212121]">{item.name}</p>
+                                                <img src="./images/map/CaretDown.svg" alt=""/>
+                                            </div>
+
+                                            <div className={props.technologyIndex===index? "relative bg-[#007Bff] w-[30px] h-[18px] rounded-[8px]":
+                                            "relative bg-[#BDBDBD] w-[30px] h-[18px] rounded-[8px]"} onClick={()=>handleTopologyIndex(index)}>
+                                            <div className={props.technologyIndex===index? "absolute w-[10px] h-[10px] rounded-full bg-white top-[4px] right-[4px]":
+                                                "absolute w-[10px] h-[10px] rounded-full bg-white top-[4px] left-[4px]"}>
+
+                                            </div>
                                     </div>
 
-                                    <div className={props.technologyIndex===index? "relative bg-[#007Bff] w-[30px] h-[18px] rounded-[8px]":
-                                        "relative bg-[#BDBDBD] w-[30px] h-[18px] rounded-[8px]"} onClick={()=>handleTopologyIndex(index)}>
-                                        <div className={props.technologyIndex===index? "absolute w-[10px] h-[10px] rounded-full bg-white top-[4px] right-[4px]":
-                                            "absolute w-[10px] h-[10px] rounded-full bg-white top-[4px] left-[4px]"}>
 
-                                        </div>
+
                                     </div>
-
-                                </div>
+                                }
 
                                 <div className="flex flex-col gap-[12px] px-[16px] ">
                                     {props.technologyIndex ===index &&item.Layers.map((layer) =>

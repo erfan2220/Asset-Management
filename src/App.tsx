@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {lazy, Suspense, useState} from "react";
+import React, {lazy, Suspense, useState,useEffect} from "react";
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Navbar from "./Components/Navbar/Navbar";
 import { Provider } from 'react-redux';
@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { mapData as initialMapData, mapDataIran as initialMapDataIran } from "./database/IranMapWrapperData/mapData.ts";
 import { SharedProvider } from './Components/AssetPage/filterMap/SharedSiteType/SharedSiteType';
+import Cookies from "js-cookie";
 
 
 const queryClient = new QueryClient();
