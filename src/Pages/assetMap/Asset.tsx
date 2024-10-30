@@ -25,6 +25,8 @@ import {Shamsi} from "basic-shamsi";
 import SiteMap from "../../Components/AssetPage/SiteMap/FilterMap";
 import {useSharedContext} from "../../Components/AssetPage/filterMap/SharedSiteType/SharedSiteType";
 import SitaData from "../../Components/AssetPage/AssetView1/sitaData/SitaData";
+import {tab} from "@testing-library/user-event/dist/tab";
+import ActiveTab2Country from "../../Components/AssetPage/AssetView1/ActiveTab2Country/ActiveTab2Country";
 
 
 const Assets = () =>
@@ -629,8 +631,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                              searchCode={searchCode} setSearchCode={setSearchCode}
                                                                              tech={tech}  setTech={setTech}
                                                                              techLayer={techLayer} setTechLayer={setTechLayer}
-                                                                             techNames={techNames} setTechNames={setTechNames}
-                                                                    />
+                                                                             techNames={techNames} setTechNames={setTechNames}/>
 
                                                                     {provinceName !== "" &&
                                                                         <div>
@@ -922,14 +923,42 @@ console.log("siteNameClickded",siteNameClicked)
                                                     </>
                                                 )}
                                             </div>
+
+
                                             {/*Total data left direction of map */}
                                             {!pupop && siteNameClicked ===null && (
                                                 <>
-                                                    <div>
-                                                        <ActiveTab1Country setData={setData} data={data}
-                                                                           provinceName={provinceName}
-                                                                           setProvinceName={setProvinceName}/>
-                                                    </div>
+                                                    {
+                                                        activeTab === 1 &&
+                                                        <div>
+                                                            <ActiveTab1Country setData={setData} data={data}
+                                                                               provinceName={provinceName}
+                                                                               setProvinceName={setProvinceName}/>
+                                                        </div>
+                                                    }
+                                                    {
+                                                        activeTab === 2 &&
+                                                        <div>
+                                                            <ActiveTab2Country />
+                                                        </div>
+                                                    }
+                                                    {
+                                                        activeTab === 3 &&
+                                                        <div>
+                                                            <ActiveTab1Country setData={setData} data={data}
+                                                                               provinceName={provinceName}
+                                                                               setProvinceName={setProvinceName}/>
+                                                        </div>
+                                                    }
+                                                    {
+                                                        activeTab === 4 &&
+                                                        <div>
+                                                            <ActiveTab1Country setData={setData} data={data}
+                                                                               provinceName={provinceName}
+                                                                               setProvinceName={setProvinceName}/>
+                                                        </div>
+                                                    }
+
 
                                                 </>
                                             )}

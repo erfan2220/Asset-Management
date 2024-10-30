@@ -20,7 +20,7 @@ const FilterMap = ({itemName,tech}) =>
     const [selectedItem, setSelectedItem] = useState(null);
     const [type,setType]=useState("")
 
-    const [apiTech,setApiTech]=useState("http://10.15.90.72:9098/api/report/asset/category/technology/2G?size=98270")
+    const [apiTech,setApiTech]=useState("http://10.15.90.72:9098/api/report/asset/technology/2G")
     const [loading, setLoading] = useState(true);
 
     console.log("tech",tech)
@@ -36,13 +36,13 @@ const FilterMap = ({itemName,tech}) =>
     useEffect(() => {
         if (tech.tech === "2G" && tech.type === "BTS") {
             console.log("2G")
-            setApiTech("http://10.15.90.72:9098/api/report/asset/category/technology/2G?size=98270");
+            setApiTech("http://10.15.90.72:9098/api/report/asset/technology/2G");
         } else if (tech.tech === "3G" && tech.type === "nodeb") {
             console.log("3G")
-            setApiTech("http://10.15.90.72:9098/api/report/asset/category/technology/3G?size=189537");
+            setApiTech("http://10.15.90.72:9098/api/report/asset/technology/3G");
         } else if (tech.tech === "4G" && tech.type === "enodeb") {
             console.log("4G")
-            setApiTech("http://10.15.90.72:9098/api/report/asset/category/technology/4G?size=98270");
+            setApiTech("http://10.15.90.72:9098/api/report/asset/technology/4G");
         }
         else if ( tech.type === "RNC" || tech.type === "BSC" ) {
             console.log("4G")
@@ -62,15 +62,15 @@ const FilterMap = ({itemName,tech}) =>
                 (response)=>{
                     if(tech.type === "MSC" || tech.type === "RNC" || tech.type === "BSC")
                     {
-                        setSitePoints(response.data)
-                        console.log("response.data.content",response.data.data)
+                        setSitePoints(response.data.data)
+                        console.log("response.data.content",response)
                         handleItemClick(tech.type,response.data.data);
                     }
                     else
                     {
-                        setSitePoints(response.data.content)
-                        console.log("response.data.content",response.data.content)
-                        handleItemClick(tech.type,response.data.content);
+                        setSitePoints(response.data)
+                        console.log("response.data.content",response)
+                        handleItemClick(tech.type,response.data);
                     }
                     setLoading(false)
 

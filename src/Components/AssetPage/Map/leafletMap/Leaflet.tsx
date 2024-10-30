@@ -28,10 +28,10 @@ const LeafletFilter = () => {
                 scrollWheelZoom: false
             });
 
-            const tileLayerOffline = L.tileLayer("http://10.15.90.87/tiles/{z}/{x}/{y}.png", {
+            const tileLayerOffline = L.tileLayer("http://10.15.90.87/opt/eam/front_end/map/tiles/{z}/{x}/{y}.png", {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 minZoom: 1,
-                maxZoom: 13
+                maxZoom: 14
             });
             tileLayerOffline.addTo(mapRef.current);
 
