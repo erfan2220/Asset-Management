@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Items1, Items2, Items3} from "./DataBase/dataScores";
 import {Items4} from "./DataBase/dataAssets";
 import LeafletMap from "./leafletMap/Leaflet";
+import { t } from "../../../translationUtil";
 
 
 
@@ -155,7 +156,7 @@ const Map = () => {
                             <div className="serviceRequest absolute right-[56px] top-0 bg-white rounded-[4px]
                                  w-[188px] h-[371px] py-[16px] ">
                                 <div className="flex flex-col pb-[8px] border-b-[1px] px-[16px]">
-                                    <h2>Assets</h2>
+                                    <h2>{t("Assets")}</h2>
                                     <span className="text-[12px] opacity-50">Layer</span>
                                 </div>
                                 <div className="flex flex-col gap-[12px] pt-[8px] px-[16px]

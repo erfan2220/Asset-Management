@@ -355,7 +355,7 @@ const SitaData = (props) =>
                          onClick={() => {
                              setSiteTypesOpen(!siteTypesOpen)
                          }}>
-                        <span>Total</span>
+                        <span>{t("Total")}</span>
                         <img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>
                         {siteTypesOpen && (
                             <div className="border-[1px] border-[#e0e0e0]flex flex-col
@@ -428,11 +428,11 @@ const SitaData = (props) =>
                 </div>
             </div>
             <div className="data_row_box">
-                <h2>Total traffic</h2>
+                <h2>{t("Total traffic")}</h2>
                 <div className="row_items_traffic">
                     <div className="total_map_data_item_for_quantity_3">
                         <div className="total_map_data_item_2">
-                            <h3>Traffic PS</h3>
+                            <h3>{t("Traffic PS")}</h3>
                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
                             <p>data is not available</p>
                         </div>
@@ -471,7 +471,7 @@ const SitaData = (props) =>
                     </div>
                     <div className="total_map_data_item_for_quantity">
                         <div className="total_map_data_item_2">
-                            <h3>Margin</h3>
+                            <h3>{t("Margin")}</h3>
                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
                             <p>data is not available</p>
                         </div>
@@ -482,7 +482,7 @@ const SitaData = (props) =>
                     </div>
                     <div className="total_map_data_item_for_quantity">
                         <div className="total_map_data_item_2">
-                            <h3>Profit</h3>
+                            <h3>{t("Profit")}</h3>
                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
                             <p>data is not available</p>
                         </div>
@@ -493,7 +493,7 @@ const SitaData = (props) =>
                     </div>
                     <div className="total_map_data_item_for_quantity">
                         <div className="total_map_data_item_2">
-                            <h3>Total revenue</h3>
+                            <h3>{t("Total revenue")}</h3>
                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
                             <p>{siteData ? format(siteData?.revenue) : "data is not available"}</p>
                         </div>

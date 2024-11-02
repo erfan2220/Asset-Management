@@ -9,43 +9,45 @@ import { ReactComponent as AdminIcon } from "../../images/Menu/1.svg";
 import { ReactComponent as MapIcon } from "../../images/Menu/9.svg";
 import { ReactComponent as AssetCategories } from "../../images/Menu/8.svg";
 import { ReactComponent as SubMenu } from "../../images/Menu/10.svg";
+import { t } from "../../translationUtil";
+
 
 const menu = [
 
   {
-    name: "Map",
+    name: t("Map"),
     subMenu: [],
     route: "/map",
     icon: <MapIcon />,
   },
   {
-    name: "Asset",
+    name: t("Asset"),
     Items: ["Data table", "Map", "Charts", "Matrix"],
     subMenu: [],
     route: "/asset",
     icon: <AssetIcon />,
   },
   {
-    name: "Asset Categories",
+    name: t("Asset Categories"),
     subMenu: [
       {
-        name: "Technologies",
+        name: t("Technologies"),
         subMenu: ["2G", "3G", "4G", "5G"],
       },
       {
-        name: "Network Area",
+        name: t("Network Area"),
         subMenu: ["RAN","TX","IPBB","CS Core","PS Core"],
       },
       {
-        name: "Miscelaneous",
+        name: t("Miscelaneous"),
         subMenu: [],
       },
       {
-        name: "Site Type",
+        name: t("Site Type"),
         subMenu: ["USO","WLL","شهری","جاده ای","روستایی"],
       },
       {
-        name: "Vendors",
+        name: t("Vendors"),
         subMenu: ["Huawei","Ericsson","Nokia","ZTE"],
       },
     ],
@@ -71,7 +73,7 @@ const menu = [
   //   icon: <ScoreIcon />,
   // },
   {
-    name: "Admin Panel",
+    name: t("Admin Panel"),
     subMenu: [],
     route: "/AdminPanel",
     icon: <AdminIcon />,

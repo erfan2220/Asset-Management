@@ -7,6 +7,8 @@ import L from "leaflet";
 import 'react-leaflet-markercluster/dist/styles.min.css'
 import "leaflet.markercluster/dist/leaflet.markercluster";
 import "./LeafletMapByFilter.css"
+import { t } from "../../translationUtil";
+
 
 
 // Fetching function using the native fetch API
@@ -49,7 +51,7 @@ const MapPerProvince = ({ cityName, ProvinceName,setSiteNameClicked }) => {
 
                     <div className=" flex flex-col items-center justify-center
                  w-[334px] h-[120px] rounded-[4px] shadow-[0 4px 8px #00000014] bg-[#fff] gap-[16px] z-50">
-                        <h2 className="text-[20px] text-[#212121] font-[600]">Enterprise Asset Management</h2>
+                        <h2 className="text-[20px] text-[#212121] font-[600]">{t("Enterprise Asset Management")}</h2>
                         <div className="circlesRotating flex flex-row justify-center z-50">
                             <Circle1 delay="0s" />
                             <Circle2 delay="0.2s" />
