@@ -1,4 +1,3 @@
-
 //@ts-nocheck
 import React, {useEffect, useRef, useState} from "react";
 import { IranMap } from 'react-iran-map'
@@ -713,7 +712,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                               fill={activeTab === 1 ? "#007BFF" : "#757575"}/>
                                                     </svg>
                                                     <span
-                                                        className={activeTab === 1 ? "active" : ""}>Total</span>
+                                                        className={activeTab === 1 ? "active" : ""}>{t("Total")}</span>
                                                 </div>
                                                 <div
                                                     className={activeTab === 2 ? "chooseActiveIndexItem1" : "chooseDeactiveIndexItem1"}
@@ -948,3 +947,6 @@ console.log("siteNameClickded",siteNameClicked)
     );
 }
 export default Assets;
+
+
+
