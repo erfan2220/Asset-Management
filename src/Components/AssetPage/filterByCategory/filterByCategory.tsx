@@ -833,7 +833,7 @@ const FilterByCategory = () =>
                                                                             <div className="row_items_traffic">
                                                                                 <div className="total_map_data_item_for_quantity">
                                                                                     <div className="total_map_data_item_2">
-                                                                                        <h3>Cost</h3>
+                                                                                        <h3>{t("Cost")}</h3>
                                                                                         <p> {dataPerProvince ? (format(provinceName === "Khuzestan"?
                                                                                             filter_cost_per_province("Khouzestan"):
                                                                                             filter_cost_per_province(provinceName))):"data is not available"
@@ -951,7 +951,7 @@ const FilterByCategory = () =>
                                                                     <div className="row_items_traffic">
                                                                         <div className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
-                                                                                <h3>Cost</h3>
+                                                                                <h3>{t("Cost")}</h3>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_cost`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">

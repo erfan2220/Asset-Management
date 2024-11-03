@@ -372,7 +372,7 @@ const SitaData = (props) =>
                                                          rounded-[8px]  flex flex-row items-center justify-between w-[163px]">
                         <img src="/images/Asset/map/View1/CalendarBlank.svg"
                              alt=""/>
-                        <span className="text-nowrap">this week</span>
+                        <span className="text-nowrap">{t("this week")}</span>
                         <img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>
 
                     </div>
@@ -460,7 +460,7 @@ const SitaData = (props) =>
                 <div className="row_items_traffic">
                     <div className="total_map_data_item_for_quantity">
                         <div className="total_map_data_item_2">
-                            <h3>Cost</h3>
+                            <h3>{t("Cost")}</h3>
                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
                             <p>data is not available</p>
                         </div>

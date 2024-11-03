@@ -853,7 +853,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
-                                                                            <h3>Cost</h3>
+                                                                            <h3>{t("Cost")}</h3>
                                                                             <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
                                                                                 filter_cost_per_province("Khouzestan") :
                                                                                 filter_cost_per_province(provinceName))) : "data is not available"
