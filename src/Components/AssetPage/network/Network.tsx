@@ -9,6 +9,8 @@ import './Asset.css'
 import IranProvincesMap from "../IranMapWrapper/IranMapProvinces.tsx";
 import { mapData as initialMapData, mapDataIran as initialMapDataIran } from "../../../database/IranMapWrapperData/mapData.ts";
 import {provinceNameVariations} from "../../../database/dictionaryProvinces/dictionaryProvinces.ts";
+import { t } from "../../../translationUtil";
+
 
 
 
@@ -708,7 +710,7 @@ const Network = () =>
                             {activeIndex === 1 && (
                                 <div>
                                     <div className="Assets_header">
-                                        <h2>Assets/Network</h2>
+                                    <h2>{t("Assets/Network")}</h2>
                                     </div>
                                     <div className="home">
                                         <div className=" box5">
@@ -779,7 +781,7 @@ const Network = () =>
                                          16.875 17.5 16.875H2.5C2.33424 16.875 2.17527 16.8092 2.05806 16.6919C1.94085 16.5747 1.875 16.4158 1.875 16.25V3.75C1.875 3.58424 1.94085 3.42527 2.05806 3.30806C2.17527 3.19085 2.33424 3.125 2.5 3.125C2.66576 3.125 2.82473 3.19085 2.94194 3.30806C3.05915 3.42527 3.125 3.58424 3.125 3.75V12.2414L7.05781 8.30781C7.11586 8.2497 7.18479 8.2036 7.26066 8.17215C7.33654 8.1407 7.41787 8.12451 7.5 8.12451C7.58213 8.12451 7.66346 8.1407 7.73934 8.17215C7.81521 8.2036 7.88414 8.2497 7.94219 8.30781L10 10.3664L14.1164 6.25H12.5C12.3342 6.25 12.1753 6.18415 12.0581 6.06694C11.9408 5.94973 11.875 5.79076 11.875 5.625C11.875 5.45924 11.9408 5.30027 12.0581 5.18306C12.1753 5.06585 12.3342 5 12.5 5H15.625C15.7908 5 15.9497 5.06585 16.0669 5.18306C16.1842 5.30027 16.25 5.45924 16.25 5.625V8.75C16.25 8.91576 16.1842 9.07473 16.0669 9.19194C15.9497 9.30915 15.7908 9.375 15.625 9.375C15.4592 9.375 15.3003 9.30915 15.1831 9.19194C15.0658 9.07473 15 8.91576 15 8.75V7.13359L10.4422 11.6922C10.3841 11.7503 10.3152 11.7964 10.2393 11.8279C10.1635 11.8593 10.0821 11.8755 10 11.8755C9.91787 11.8755 9.83654 11.8593 9.76066 11.8279C9.68479 11.7964 9.61586 11.7503 9.55781 11.6922L7.5 9.63359L3.125 14.0086V15.625H17.5C17.6658 15.625 17.8247 15.6908 17.9419 15.8081C18.0592 15.9253 18.125 16.0842 18.125 16.25Z"
                                                                           fill={activeTab ===1 ?"#007BFF":"#757575"}/>
                                                                 </svg>
-                                                                <span className={activeTab ===1 ?"active":""}>Total</span>
+                                                                <span className={activeTab ===1 ?"active":""}>{t("Total")}</span>
                                                             </div>
                                                             <div className={activeTab ===2 ?"chooseActiveIndexItem1":"chooseDeactiveIndexItem1"} onClick={()=>{
                                                                 handleTab(2)
@@ -795,7 +797,7 @@ const Network = () =>
                                                                         </clipPath>
                                                                     </defs>
                                                                 </svg>
-                                                                <span className={activeTab ===2 ?"active":""}>Financial</span>
+                                                                <span className={activeTab ===2 ?"active":""}>{t("Financial")}</span>
                                                             </div>
                                                             <div className={activeTab ===3?"chooseActiveIndexItem1":"chooseDeactiveIndexItem1"} onClick={()=>{
                                                                 handleTab(3)
@@ -817,7 +819,7 @@ const Network = () =>
                                                                           fill={activeTab ===4 ?"#007BFF":"#757575"}/>
                                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12.8987 3.89165C11.8975 3.29657 10.7435 2.99765 9.57423 3.03114C8.40494 3.06463 7.27061 3.42908 6.30618 4.08034C5.34183 4.73155 4.58827 5.64186 4.13413 6.70218C3.68002 7.76243 3.54406 8.92873 3.74209 10.0626C3.94013 11.1965 4.46403 12.2513 5.25252 13.1012C5.46918 13.3347 5.45551 13.6997 5.22198 13.9163C4.98845 14.133 4.62349 14.1193 4.40683 13.8858C3.46778 12.8736 2.84225 11.6156 2.60568 10.2611C2.36911 8.90652 2.53167 7.51348 3.0737 6.24799C3.61569 4.98256 4.51395 3.8986 5.66058 3.1243C6.80714 2.35005 8.1541 1.91774 9.5412 1.87801C10.9283 1.83828 12.2982 2.19277 13.4881 2.89998C14.6781 3.60723 15.6383 4.63777 16.2536 5.86986C16.8689 7.10203 17.113 8.48334 16.9563 9.84924C16.7997 11.2151 16.249 12.507 15.3708 13.5714C15.1681 13.8171 14.8045 13.852 14.5588 13.6492C14.3131 13.4465 14.2782 13.0829 14.481 12.8372C15.2181 11.9439 15.6791 10.861 15.8102 9.71779C15.9414 8.57455 15.7372 7.41792 15.2215 6.38526C14.7058 5.35253 13.8999 4.4867 12.8987 3.89165Z" fill="#757575"/>
                                                                 </svg>
-                                                                <span className={activeTab ===4 ?"active":""}>Physical</span>
+                                                                <span className={activeTab ===4 ?"active":""}>{t("Physical")}</span>
                                                             </div>
                                                         </div>
                                                         <div>
@@ -832,7 +834,7 @@ const Network = () =>
                                                                         </div>
                                                                         <div className="total_map_data_item_group">
                                                                             <div className="total_map_data_item_spp1">
-                                                                                <h3>Site Counts</h3>
+                                                                                <h3>{t("Site Counts")}</h3>
                                                                                 <p> {totalCount?(
                                                                                     format(
                                                                                         provinceName === "Khuzestan" ? (
@@ -847,7 +849,7 @@ const Network = () =>
                                                                                 }</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_spp2">
-                                                                                <h3>Cell Counts</h3>
+                                                                                <h3>{t("Cell Counts")}</h3>
                                                                                 <p> {cellsCount?(
                                                                                     format(
                                                                                         provinceName === "Khuzestan" ? (
@@ -860,11 +862,11 @@ const Network = () =>
                                                                             </div>
                                                                         </div>
                                                                         <div className="data_row_box">
-                                                                            <h2>Total traffic</h2>
+                                                                            <h2>{t("Total traffic")}</h2>
                                                                             <div className="row_items_traffic">
                                                                                 <div className="total_map_data_item_for_quantity">
                                                                                     <div className="total_map_data_item_2">
-                                                                                        <h3>Traffic PS</h3>
+                                                                                        <h3>{t("Traffic PS")}</h3>
                                                                                         <p> {dataPerProvince ? (format(provinceName === "Khuzestan"?
                                                                                             filter_traffic_PS("Khouzestan"):
                                                                                             filter_traffic_PS(provinceName))):"data is not available"
@@ -877,7 +879,7 @@ const Network = () =>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
                                                                                     <div className="total_map_data_item_2">
-                                                                                        <h3>Traffic CS</h3>
+                                                                                        <h3>{t("Traffic CS")}S</h3>
                                                                                         <p> {dataPerProvince ? (format(provinceName === "Khuzestan"?
                                                                                             filter_traffic_CS("Khouzestan"):
                                                                                             filter_traffic_CS(provinceName))):"data is not available"
@@ -891,11 +893,11 @@ const Network = () =>
                                                                             </div>
                                                                         </div>
                                                                         <div className="data_row_box">
-                                                                            <h2>Costs and revenue</h2>
+                                                                            <h2>{t("Costs and revenue")}</h2>
                                                                             <div className="row_items_traffic">
                                                                                 <div className="total_map_data_item_for_quantity">
                                                                                     <div className="total_map_data_item_2">
-                                                                                        <h3>Cost</h3>
+                                                                                        <h3>{t("Cost")}</h3>
                                                                                         <p> {dataPerProvince ? (format(provinceName === "Khuzestan"?
                                                                                             filter_cost_per_province("Khouzestan"):
                                                                                             filter_cost_per_province(provinceName))):"data is not available"
@@ -909,7 +911,7 @@ const Network = () =>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
                                                                                     <div className="total_map_data_item_2">
-                                                                                        <h3>Margin</h3>
+                                                                                        <h3>{t("Margin")}</h3>
                                                                                         <p> {dataPerProvince ? (format(provinceName === "Khuzestan"?
                                                                                             filter_margin_per_province("Khouzestan"):
                                                                                             filter_margin_per_province(provinceName))):"data is not available"
@@ -922,7 +924,7 @@ const Network = () =>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
                                                                                     <div className="total_map_data_item_2">
-                                                                                        <h3>Profit</h3>
+                                                                                        <h3>{t("Profit")}</h3>
                                                                                         <p> {dataPerProvince ? (format(provinceName === "Khuzestan"?
                                                                                             filter_profit_per_province("Khouzestan"):
                                                                                             filter_profit_per_province(provinceName))):"data is not available"
@@ -935,7 +937,7 @@ const Network = () =>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
                                                                                     <div className="total_map_data_item_2">
-                                                                                        <h3>Total revenue</h3>
+                                                                                        <h3>{t("Total revenue")}</h3>
                                                                                         <p> {dataPerProvince ? (format(provinceName === "Khuzestan"?
                                                                                             filter_revenue_per_province("Khouzestan"):
                                                                                             filter_revenue_per_province(provinceName))):"data is not available"
@@ -958,10 +960,10 @@ const Network = () =>
                                                                 <div className="header_total_map_data_2">
                                                                     <div className="header_total_map_data_1">
                                                                         <img src="./images/Total_svg.svg" alt=""/>
-                                                                        <h2>Total statistics </h2>
+                                                                        <h2>{t("Total statistics")}  </h2>
                                                                     </div>
                                                                     <div className="table_container_siteType" onClick={()=>{setSiteTypesOpen(!siteTypesOpen)}}>
-                                                                        <span>Total</span>
+                                                                        <span>{t("Total")}</span>
                                                                         <img src="/images/arrow/CaretDown.svg" alt=""/>
                                                                         {   siteTypesOpen &&(
                                                                             <div className="menuSitesOption">
@@ -974,7 +976,7 @@ const Network = () =>
                                                                 </div>
                                                                 <div className="total_map_data_item_group">
                                                                     <div className="total_map_data_item_spp1">
-                                                                        <h3>Site Counts</h3>
+                                                                        <h3>{t("Site Counts")}</h3>
                                                                         <p>{format(sitePoints.length)}</p>
                                                                     </div>
                                                                     <div className="total_map_data_item_spp2">
@@ -983,11 +985,11 @@ const Network = () =>
                                                                     </div>
                                                                 </div>
                                                                 <div className="data_row_box">
-                                                                    <h2>Total traffic</h2>
+                                                                    <h2>{t("Total traffic")}</h2>
                                                                     <div className="row_items_traffic">
                                                                         <div className="total_map_data_item_for_quantity_3">
                                                                             <div className="total_map_data_item_2">
-                                                                                <h3>Traffic PS</h3>
+                                                                                <h3>{t("Traffic PS")}</h3>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_ps`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
@@ -1013,7 +1015,7 @@ const Network = () =>
                                                                     <div className="row_items_traffic">
                                                                         <div className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
-                                                                                <h3>Cost</h3>
+                                                                                <h3>{t("Cost")}</h3>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_cost`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
@@ -1023,7 +1025,7 @@ const Network = () =>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
-                                                                                <h3>Margin</h3>
+                                                                                <h3>{t("Margin")}</h3>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_margin`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
@@ -1033,7 +1035,7 @@ const Network = () =>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
-                                                                                <h3>Profit</h3>
+                                                                                <h3>{t("Profit")}</h3>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_profit`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
@@ -1043,7 +1045,7 @@ const Network = () =>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
-                                                                                <h3>Total revenue</h3>
+                                                                                <h3>{t("Total revenue")}</h3>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_rev`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">

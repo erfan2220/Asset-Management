@@ -1,59 +1,58 @@
 //@ts-nocheck
-import React, {useEffect, useRef, useState} from 'react';
-import {Calendar, DateObject} from "react-multi-date-picker";
+import React, { useEffect, useRef, useState } from 'react';
+import { Calendar, DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import Rate from "../../dataCharts/rateColor/Rate";
 import loading from "../../../Loading/Loading";
 import "./ActiveTab1Country.css"
-import {Shamsi} from "basic-shamsi";
-import {provinceNameVariations} from "../../../../database/dictionaryProvinces/dictionaryProvinces";
-
-
-const ActiveTab1Country = (props) =>
-{
+import { Shamsi } from "basic-shamsi";
+import { provinceNameVariations } from "../../../../database/dictionaryProvinces/dictionaryProvinces";
+import { t } from '../../../../translationUtil';
 
 
 
+const ActiveTab1Country = (props) => {
 
-    const [calenderSelection,setCalenderSelection]=useState(1)
-    const [dataCountry,setDataCountry]=useState([])
-    const [siteTypesOpen,setSiteTypesOpen]=useState(false)
-    const [calenderOpen,setCalenderOpen]=useState(false)
+
+
+
+    const [calenderSelection, setCalenderSelection] = useState(1)
+    const [dataCountry, setDataCountry] = useState([])
+    const [siteTypesOpen, setSiteTypesOpen] = useState(false)
+    const [calenderOpen, setCalenderOpen] = useState(false)
     const [sitePoints, setSitePoints] = useState([]);
 
-    const [totalTraffic,setTotalTraffic]=useState(null)
-    const [totalCount,setTotalCount]=useState(null)
-    const [cellsCount,setCellsCount]=useState(null)
-    const [cityCount,setCityCount]=useState(null)
-    const [totaldata,setTotaldata]=useState(null)
+    const [totalTraffic, setTotalTraffic] = useState(null)
+    const [totalCount, setTotalCount] = useState(null)
+    const [cellsCount, setCellsCount] = useState(null)
+    const [cityCount, setCityCount] = useState(null)
+    const [totaldata, setTotaldata] = useState(null)
 
-    const [cellsSitePerProvince ,setCellsSitePerProvince ]=useState()
+    const [cellsSitePerProvince, setCellsSitePerProvince] = useState()
     const [values, setValues] = useState([
         new DateObject({ calendar: persian, locale: persian_fa })
     ]);
 
-    const [loading,setLoading]=useState(false)
+    const [loading, setLoading] = useState(false)
 
-    const calenderRef=useRef()
+    const calenderRef = useRef()
 
-    const [daysDates,setDaysDates]=useState([])
+    const [daysDates, setDaysDates] = useState([])
 
 
     const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
-    async function fetchAndCacheData(cacheKey, apiUrl)
-    {
+    async function fetchAndCacheData(cacheKey, apiUrl) {
         const cachedData = JSON.parse(localStorage.getItem(cacheKey)) || {};
 
-        if (cachedData.data && Date.now() - cachedData.timestamp < CACHE_EXPIRATION_TIME)
-        {
+        if (cachedData.data && Date.now() - cachedData.timestamp < CACHE_EXPIRATION_TIME) {
             return cachedData.data;
         }
         else {
             const response = await fetch(apiUrl);
             const jsonData = await response.json();
-            localStorage.setItem(cacheKey, JSON.stringify({data: jsonData, timestamp: Date.now()}));
+            localStorage.setItem(cacheKey, JSON.stringify({ data: jsonData, timestamp: Date.now() }));
             return jsonData;
         }
     }
@@ -92,8 +91,7 @@ const ActiveTab1Country = (props) =>
         return provinceName; // Return the original name if no match found
     };
 
-    const handleDateChange = (dates) =>
-    {
+    const handleDateChange = (dates) => {
 
         setValues(dates);
 
@@ -114,8 +112,7 @@ const ActiveTab1Country = (props) =>
 
 
 
-    useEffect(() =>
-    {
+    useEffect(() => {
         const promises = [];
         const promise1 = fetchAndCacheData("sites_count_cache", "http://10.15.90.87:5001/api/assets/sites_count_per_province")
             .then(data => {
@@ -249,15 +246,13 @@ const ActiveTab1Country = (props) =>
 
     });
 
-    const handleSelection=(index)=>
-    {
-        setCalenderSelection (index)
+    const handleSelection = (index) => {
+        setCalenderSelection(index)
         setCalenderOpen(true)
     }
 
 
-    useEffect(() =>
-    {
+    useEffect(() => {
         const handleData = (data, setter) => {
             if (data) {
                 setter(data); // If data is valid, set the state
@@ -266,8 +261,7 @@ const ActiveTab1Country = (props) =>
 
 
 
-        if(daysDates.length>0)
-        {
+        if (daysDates.length > 0) {
 
             const formatDate = (dateStr) => {
                 const date = new Date(dateStr);
@@ -277,8 +271,8 @@ const ActiveTab1Country = (props) =>
                 return `${year}-${month}-${day}`;
             };
 
-            const fromDate =  formatDate(daysDates[0]);  // Use the first date for both cases
-            const toDate = daysDates.length >1 ?formatDate(daysDates[1]) : formatDate(daysDates[0]);
+            const fromDate = formatDate(daysDates[0]);  // Use the first date for both cases
+            const toDate = daysDates.length > 1 ? formatDate(daysDates[1]) : formatDate(daysDates[0]);
 
 
             fetch(`http://10.15.90.72:9098/api/iran-total-traffic?fromDateTime=${fromDate}&toDateTime=${toDate}`)
@@ -288,27 +282,25 @@ const ActiveTab1Country = (props) =>
                     }
                     return response.json(); // Convert response to JSON
                 }).then(data => {
-                handleData(data, setDataCountry)
+                    handleData(data, setDataCountry)
 
 
-            }).catch(error => {
-                // Handle errors
-                console.error('Error fetching data:', error);
-            });
+                }).catch(error => {
+                    // Handle errors
+                    console.error('Error fetching data:', error);
+                });
 
 
             fetch("http://10.15.90.87:5001/api/assets/sites_location")
-                .then((res) =>
-                {
-                    if (!res.ok)
-                    {
+                .then((res) => {
+                    if (!res.ok) {
                         // throw new Error("Failed to fetch");
                     }
                     return res.json();
                 })
                 .then((res) => {
                     setSitePoints(res.data); // Assuming data is an array of site points
-                    console.log("rererreres",res.data)
+                    console.log("rererreres", res.data)
                 })
                 .catch((error) => {
                     alert("Data is not available");
@@ -318,8 +310,7 @@ const ActiveTab1Country = (props) =>
 
 
 
-    useEffect(()=>
-    {
+    useEffect(() => {
         //get site counts
         fetch("http://10.15.90.87:5001/api/assets/sites_location")
             .then((res) => {
@@ -335,8 +326,7 @@ const ActiveTab1Country = (props) =>
                 alert("Data is not available");
             });
 
-        if(props.provinceName !=="")
-        {
+        if (props.provinceName !== "") {
             const canonicalProvinceName = getCanonicalProvinceName(props.provinceName);
 
 
@@ -347,11 +337,11 @@ const ActiveTab1Country = (props) =>
                     }
                     return response.json(); // Convert response to JSON
                 }).then(data => {
-                setDataPerProvince(data?.data[0]);
-            }).catch(error => {
-                // Handle errors
-                console.error('Error fetching data:', error);
-            });
+                    setDataPerProvince(data?.data[0]);
+                }).catch(error => {
+                    // Handle errors
+                    console.error('Error fetching data:', error);
+                });
 
 
 
@@ -360,172 +350,171 @@ const ActiveTab1Country = (props) =>
 
         }
 
-    },[props.provinceName])
+    }, [props.provinceName])
 
-    const format = (number)=>
-    {
+    const format = (number) => {
         const formattedNumber = numberFormatter.format(number);
         return formattedNumber;
     }
 
     return (
-        loading?
-             <div className="total_map_data">
-            <div className="header_total_map_data_2">
-                <div className="header_total_map_data_1">
-                    <img src="./images/Asset/map/View1/total_svg.svg" alt=""/>
-                    <h2>Total statistics </h2>
-                </div>
-                <div className="flex flex-row items-center gap-[20px]">
-                    <div className="relative border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px]
+        loading ?
+            <div className="total_map_data">
+                <div className="header_total_map_data_2">
+                    <div className="header_total_map_data_1">
+                        <img src="./images/Asset/map/View1/total_svg.svg" alt="" />
+                        <h2>{t("Total statistics")} </h2>
+                    </div>
+                    <div className="flex flex-row items-center gap-[20px]">
+                        <div className="relative border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px]
                                                          rounded-[8px]  flex flex-row items-center justify-between w-[130px] pl-[16px] pr-[16px]"
-                         onClick={() => {
-                             setSiteTypesOpen(!siteTypesOpen)
-                         }}>
-                        <span>Total</span>
-                        <img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>
-                        {siteTypesOpen && (
-                            <div className="border-[1px] border-[#e0e0e0]flex flex-col
+                            onClick={() => {
+                                setSiteTypesOpen(!siteTypesOpen)
+                            }}>
+                            <span>{t("Total")}</span>
+                            <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />
+                            {siteTypesOpen && (
+                                <div className="border-[1px] border-[#e0e0e0]flex flex-col
                                                                  gap-[6px] absolute top-[50px] left-0 bg-[#fafafa] w-[100%] ">
-                                <p className="hover:bg-blue-500 py-[8px] pl-[8px]">جاده
-                                    ای </p>
-                                <p className="hover:bg-blue-500  py-[8px] pl-[8px]">شهری </p>
-                                <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> USO </p>
-                                <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> WLL </p>
-                            </div>)}
-                    </div>
+                                    <p className="hover:bg-blue-500 py-[8px] pl-[8px]">جاده
+                                        ای </p>
+                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]">شهری </p>
+                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> USO </p>
+                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> WLL </p>
+                                </div>)}
+                        </div>
 
-                    <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px]
+                        <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px]
                                                          rounded-[8px]  flex flex-row items-center justify-between w-[163px]">
-                        <img src="/images/Asset/map/View1/CalendarBlank.svg"
-                             alt=""/>
-                        <span className="text-nowrap">this week</span>
-                        <img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>
+                            <img src="/images/Asset/map/View1/CalendarBlank.svg"
+                                alt="" />
+                            <span className="text-nowrap">{t("this week")}</span>
+                            <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />
 
-                    </div>
+                        </div>
 
-                    <div
-                        className=" relative rounded-[8px] bg-[#f5f6f7] border-[1px] border-[#e0e0e0] w-[80px] py-[6px]  flex flex-row items-center justify-center gap-[3px]">
                         <div
-                            className={calenderSelection === 1 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
-                            onClick={() => handleSelection(1)}>
-                            <img
-                                src="./images/Asset/map/View1/Selection/Calender.svg"
-                                alt=""/>
-                            {
-                                calenderSelection === 1 && calenderOpen &&
-                                <div
-                                    className="p-[20px] z-50 absolute right-0 top-[50px] bg-white border-[1px] border-[#e0e0e0] rounded-[4px]"
-                                    ref={calenderRef}>
-                                    <Calendar calendar={persian} locale={persian_fa}
-                                              range
-                                              rangeHover value={values}
-                                              onChange={handleDateChange}/>
+                            className=" relative rounded-[8px] bg-[#f5f6f7] border-[1px] border-[#e0e0e0] w-[80px] py-[6px]  flex flex-row items-center justify-center gap-[3px]">
+                            <div
+                                className={calenderSelection === 1 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
+                                onClick={() => handleSelection(1)}>
+                                <img
+                                    src="./images/Asset/map/View1/Selection/Calender.svg"
+                                    alt="" />
+                                {
+                                    calenderSelection === 1 && calenderOpen &&
+                                    <div
+                                        className="p-[20px] z-50 absolute right-0 top-[50px] bg-white border-[1px] border-[#e0e0e0] rounded-[4px]"
+                                        ref={calenderRef}>
+                                        <Calendar calendar={persian} locale={persian_fa}
+                                            range
+                                            rangeHover value={values}
+                                            onChange={handleDateChange} />
 
-                                    {/*<DatePicker  calendar={persian}*/}
-                                    {/*           locale={persian_fa} value={value} onChange={setValue}   multiple*/}
-                                    {/*             dateSeparator=" & "/>*/}
-                                </div>
-                            }
-                        </div>
-                        <div
-                            className={calenderSelection === 2 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
-                            onClick={() => handleSelection(2)}>
-                            <img
-                                src="./images/Asset/map/View1/Selection/default.svg"
-                                alt=""/>
+                                        {/*<DatePicker  calendar={persian}*/}
+                                        {/*           locale={persian_fa} value={value} onChange={setValue}   multiple*/}
+                                        {/*             dateSeparator=" & "/>*/}
+                                    </div>
+                                }
+                            </div>
+                            <div
+                                className={calenderSelection === 2 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
+                                onClick={() => handleSelection(2)}>
+                                <img
+                                    src="./images/Asset/map/View1/Selection/default.svg"
+                                    alt="" />
+                            </div>
+
                         </div>
 
                     </div>
+
 
                 </div>
+                <div className="total_map_data_item_group">
+                    <div className="total_map_data_item_spp1">
+                        <h3>{t("Site Counts")}</h3>
+                        <p>{format(sitePoints.length)}
 
-
-            </div>
-            <div className="total_map_data_item_group">
-                <div className="total_map_data_item_spp1">
-                    <h3>Site Counts</h3>
-                    <p>{format(sitePoints.length)}
-
-                    </p>
-                </div>
-                <div className="total_map_data_item_spp2">
-                    <h3>Cell Counts</h3>
-                    <p>464,085</p>
-                </div>
-            </div>
-            <div className="data_row_box">
-                <h2>Total traffic</h2>
-                <div className="row_items_traffic">
-                    <div className="total_map_data_item_for_quantity_3">
-                        <div className="total_map_data_item_2">
-                            <h3>Traffic PS</h3>
-                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>
-                        </div>
-                        <div className="total_map_data_item_3">
-                            <Rate value="4"/>
-                            <h6>TB</h6>
-                        </div>
+                        </p>
                     </div>
-                    <div className="total_map_data_item_for_quantity">
-                        <div className="total_map_data_item_2">
-                            <h3>Traffic CS</h3>
-                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>
-                        </div>
-
-                        <div className="total_map_data_item_3">
-                            <Rate value="4"/>
-                            <h6>TB</h6>
-                        </div>
+                    <div className="total_map_data_item_spp2">
+                        <h3>{t("Cell Counts")}</h3>
+                        <p>464,085</p>
                     </div>
                 </div>
-            </div>
-            <div className="data_row_box">
-                <h2>Costs and revenue</h2>
-                <div className="row_items_traffic">
-                    <div className="total_map_data_item_for_quantity">
-                        <div className="total_map_data_item_2">
-                            <h3>Cost</h3>
-                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>
+                <div className="data_row_box">
+                    <h2>{t("Total traffic")}</h2>
+                    <div className="row_items_traffic">
+                        <div className="total_map_data_item_for_quantity_3">
+                            <div className="total_map_data_item_2">
+                                <h3>{t("Traffic PS")}</h3>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>
+                            </div>
+                            <div className="total_map_data_item_3">
+                                <Rate value="4" />
+                                <h6>TB</h6>
+                            </div>
                         </div>
-                        <div className="total_map_data_item_3">
-                            <Rate value="4"/>
-                            <h6>تومان</h6>
-                        </div>
-                    </div>
-                    <div className="total_map_data_item_for_quantity">
-                        <div className="total_map_data_item_2">
-                            <h3>Margin</h3>
-                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>
-                        </div>
-                        <div className="total_map_data_item_3">
-                            <Rate value="4"/>
-                            <h6>%</h6>
-                        </div>
-                    </div>
-                    <div className="total_map_data_item_for_quantity">
-                        <div className="total_map_data_item_2">
-                            <h3>Profit</h3>
-                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>
-                        </div>
-                        <div className="total_map_data_item_3">
-                            <Rate value="4"/>
-                            <h6>تومان</h6>
-                        </div>
-                    </div>
-                    <div className="total_map_data_item_for_quantity">
-                        <div className="total_map_data_item_2">
-                            <h3>Total revenue</h3>
-                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>
-                        </div>
-                        <div className="total_map_data_item_3">
-                            <Rate value="4"/>
-                            <h6>تومان</h6>
+                        <div className="total_map_data_item_for_quantity">
+                            <div className="total_map_data_item_2">
+                                <h3>{t("Traffic CS")}</h3>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>
+                            </div>
+
+                            <div className="total_map_data_item_3">
+                                <Rate value="4" />
+                                <h6>TB</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>:
+                <div className="data_row_box">
+                    <h2>{t("Costs and revenue")}</h2>
+                    <div className="row_items_traffic">
+                        <div className="total_map_data_item_for_quantity">
+                            <div className="total_map_data_item_2">
+                                <h3>{t("Cost")}</h3>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>
+                            </div>
+                            <div className="total_map_data_item_3">
+                                <Rate value="4" />
+                                <h6>تومان</h6>
+                            </div>
+                        </div>
+                        <div className="total_map_data_item_for_quantity">
+                            <div className="total_map_data_item_2">
+                                <h3>{t("Margin")}</h3>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>
+                            </div>
+                            <div className="total_map_data_item_3">
+                                <Rate value="4" />
+                                <h6>%</h6>
+                            </div>
+                        </div>
+                        <div className="total_map_data_item_for_quantity">
+                            <div className="total_map_data_item_2">
+                                <h3>{t("Profit")}</h3>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>
+                            </div>
+                            <div className="total_map_data_item_3">
+                                <Rate value="4" />
+                                <h6>تومان</h6>
+                            </div>
+                        </div>
+                        <div className="total_map_data_item_for_quantity">
+                            <div className="total_map_data_item_2">
+                                <h3>{t("Total revenue")}</h3>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>
+                            </div>
+                            <div className="total_map_data_item_3">
+                                <Rate value="4" />
+                                <h6>تومان</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> :
             <div>loading</div>);
 };
 

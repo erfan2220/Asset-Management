@@ -1,6 +1,8 @@
 //@ts-nocheck
 import {useEffect, useState} from "react";
 import "./Loading.css"
+import { t } from "../../translationUtil";
+
 const LoadingProgress = () =>
 {
 
@@ -14,7 +16,7 @@ const LoadingProgress = () =>
 
                 <div className=" flex flex-col items-center justify-center
                  w-[334px] h-[120px] rounded-[4px] shadow-[0 4px 8px #00000014] bg-[#fff] gap-[16px]">
-                   <h2 className="text-[20px] text-[#212121] font-[600]">Enterprise Asset Management</h2>
+                   <h2 className="text-[20px] text-[#212121] font-[600]">{t("Enterprise Asset Management")}</h2>
                     <div className="circlesRotating flex flex-row justify-center">
                         <Circle1 delay="0s" />
                         <Circle2 delay="0.4s" />

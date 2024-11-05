@@ -6,6 +6,8 @@ import LoadingProgress from "../Loading/Loading";
 import Pagination from "../AssetTable/pagination/Pagination";
 import {useLocation, useNavigate} from "react-router-dom";
 import DynamicApi from "./DynamicApi"
+import { t } from "../../translationUtil";
+
 
 const DynamicTable = () =>
 {
@@ -160,9 +162,10 @@ const DynamicTable = () =>
         });
     };
     const options = [
-        {value: "Save as new view", label: "Save as new view"},
-        {value: "Default view", label: "Default view"},
+        { value: "Save as new view", label: t("Save as new view") },
+        { value: "Default view", label: t("Default view") },
     ];
+
 
     const saveNewView =(viewName)=>
     {
@@ -235,7 +238,7 @@ const DynamicTable = () =>
                 <div className="flex-grow">
                     <CustomSelectDropdown
                         options={options}
-                        placeholder="View : Default view"
+                        placeholder={t("View : Default view")}
                         onSelect={handleSelect}
                         setOption={setOption}
                         option={option}
@@ -246,7 +249,7 @@ const DynamicTable = () =>
                 }`}
                      onClick={() => setExportOpen(!exportOpen)}>
                     <p className="text-[#212121] font-[600] px-[24px] py-[7px] border-r-[1px] border-r-[#e0e0e0] "
-                    >Export</p>
+                    >{t("Export")}</p>
                     <svg className="mx-[10px] " width="18" height="18" viewBox="0 0 18 18" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -257,9 +260,9 @@ const DynamicTable = () =>
                         <div className="absolute bg-white left-0 top-[42px] z-50
                         w-full  flex flex-col border-[1px] border-[#e0e0e0] rounded-[4px]">
                             <h2 className="px-[24px] py-[8px] w-full hover:bg-[#007bFF] hover:text-white"
-                                onClick={() => exportToCSV(data)}>Csv file </h2>
+                                onClick={() => exportToCSV(data)}>{t("Csv file")} </h2>
                             <h2 className="px-[24px] py-[8px] w-full hover:bg-[#007bFF] hover:text-white"
-                                onClick={() => exportToCSV(data)}>Excel file </h2>
+                                onClick={() => exportToCSV(data)}>{t("Excel file")} </h2>
                         </div>
 
                     )}
@@ -280,8 +283,8 @@ const DynamicTable = () =>
                                                     outline-none  rounded-[4px] py-[11px] px-[12px]">
                                 <img className="cursor-pointer" src="/images/Asset/MagnifyingGlass.svg" alt=""/>
                                 <input className="outline-none bg-transparent border-none w-full h-full" type="text"
-                                       placeholder="search here"
-                                       value={searchTerm || ''} // Use an empty string if searchTerm is undefined
+                  placeholder={t("search here")}
+                  value={searchTerm || ''} // Use an empty string if searchTerm is undefined
                                        onChange={(e) => setSearchTerm(e.target.value)}/>
                             </div>
 

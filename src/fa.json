@@ -11,5 +11,37 @@
   "Asset Categories": "دسته بندی دارایی ها",
   "Admin Panel": "پنل ادمین",
   "Technologies": "تکنولوژی",
-  "Site Type": "نوع سایت"
+  "Site Type": "نوع سایت",
+  "Province & City View":"نمایش استان ها و شهر ها",
+  "Total":"اطلاعات کلی",
+  "Financial":"اطلاعات مالی",
+  "Traffic":"ترافیک سایت",
+  "Physical":"اطلاعات فیزیکی",
+  "Assets":"دارایی ها",
+  "Network":"شبکه",
+  "Enterprise Asset Management":"سامانه مدیریت دارایی سازمانی",
+  "search here":"اینجا جستجو کنید",
+  "search code site ...":"کد سایت را جستجو کنید",
+  "Prev":"قبلی",
+  "Next":"بعدی",
+  "Items Per Page":"آیتم ها هر صفحه",
+  "New Asset":"دارایی جدید",
+  "Assets/Network":"دارایی/شبکه",
+  "Total statistics":"تمامی استان ها",
+  "Site Counts":"تعداد سایت ها",
+  "Cell Counts":"تعداد سل ها",
+  "Total traffic":"ترافیک",
+  "Traffic PS":"PS مجموع ",
+  "Traffic CS":"CS مجموع ",
+  "Costs and revenue":"هزینه ها و درآمد",
+  "Cost":"هزینه",
+  "Margin":"حاشیه",
+  "Profit":"سوددهی",
+  "Total revenue":"درآمد",
+  "Map":"نقشه دارایی ها",
+  "this week":"هفته اخیر",
+  "Good Health":"سلامت بالا"
+  
+
+
 }

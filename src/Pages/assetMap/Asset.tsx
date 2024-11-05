@@ -1,4 +1,3 @@
-
 //@ts-nocheck
 import React, {useEffect, useRef, useState} from "react";
 import { IranMap } from 'react-iran-map'
@@ -25,12 +24,16 @@ import {Shamsi} from "basic-shamsi";
 import SiteMap from "../../Components/AssetPage/SiteMap/FilterMap";
 import {useSharedContext} from "../../Components/AssetPage/filterMap/SharedSiteType/SharedSiteType";
 import SitaData from "../../Components/AssetPage/AssetView1/sitaData/SitaData";
-import {tab} from "@testing-library/user-event/dist/tab";
-import ActiveTab2Country from "../../Components/AssetPage/AssetView1/ActiveTab2Country/ActiveTab2Country";
+import { t } from "../../translationUtil";
+import Cookies from 'js-cookie';
+
+
 
 
 const Assets = () =>
 {
+    const isRTL = Cookies.get('language') === 'fa';
+
     const [activeIndex,setActiveIndex]=useState(2)
     const [data, setData] = useState(null);
     const [dataPerProvince, setDataPerProvince] = useState(null);
@@ -575,15 +578,15 @@ console.log("siteNameClickded",siteNameClicked)
             <div className="Assets-map-2">
                 <div>
                     <div>
-                        <div className="Assets_header">
-                            <h2>Assets/Network</h2>
+        <div className={`Assets_header ${isRTL ? 'rtl' : ''}`}>
+                        <h2>{t("Assets/Network")}</h2>
                         </div>
-                        <div className="flex flex-row items-center justify-between">
-                            <h2 className="font-[600] text-[20px] text-[#424242]">Province & City View</h2>
+                        <div className={"flex flex-row items-center justify-between"}>
+                        <h2 className= "font-[600] text-[20px] text-[#424242]">{t("Province & City View")}</h2>
                             <div
                                 className="w-[357px] flex flex-row gap-[8px] bg-white border-[1px] border-[#e0e0e0] py-[11px] px-[12px] rounded-[4px]">
                                 <img className="cursor-pointer" src="./images/Asset/map/View1/search.svg" alt="" onClick={()=>handleSearchClick()}/>
-                                <input type="text" placeholder="search code site....."
+                                <input type="text" placeholder={t("search_code_site...")}
                                        className="bg-none outline-none w-[100%]"  onChange={(e) => handleSearchCodes(e.target.value)}/>
                             </div>
                         </div>
@@ -631,7 +634,8 @@ console.log("siteNameClickded",siteNameClicked)
                                                                              searchCode={searchCode} setSearchCode={setSearchCode}
                                                                              tech={tech}  setTech={setTech}
                                                                              techLayer={techLayer} setTechLayer={setTechLayer}
-                                                                             techNames={techNames} setTechNames={setTechNames}/>
+                                                                             techNames={techNames} setTechNames={setTechNames}
+                                                                    />
 
                                                                     {provinceName !== "" &&
                                                                         <div>
@@ -712,7 +716,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                               fill={activeTab === 1 ? "#007BFF" : "#757575"}/>
                                                     </svg>
                                                     <span
-                                                        className={activeTab === 1 ? "active" : ""}>Total</span>
+                                                        className={activeTab === 1 ? "active" : ""}>{t("Total")}</span>
                                                 </div>
                                                 <div
                                                     className={activeTab === 2 ? "chooseActiveIndexItem1" : "chooseDeactiveIndexItem1"}
@@ -733,12 +737,13 @@ console.log("siteNameClickded",siteNameClicked)
                                                         </defs>
                                                     </svg>
                                                     <span
-                                                        className={activeTab === 2 ? "active" : ""}>Financial</span>
+                                                        className={activeTab === 2 ? "active" : ""}>{t("Financial")}</span>
                                                 </div>
                                                 <div
                                                     className={activeTab === 3 ? "chooseActiveIndexItem1" : "chooseDeactiveIndexItem1"}
                                                     onClick={() => {
                                                         handleTab(3)
+                                                        
                                                     }}>
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -747,7 +752,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                               fill={activeTab === 3 ? "#007BFF" : "#757575"}/>
                                                     </svg>
                                                     <span
-                                                        className={activeTab === 3 ? "active" : ""}>Traffic</span>
+                                                        className={activeTab === 3 ? "active" : ""}>{t("Traffic")}</span>
                                                 </div>
                                                 <div
                                                     className={activeTab === 4 ? "chooseActiveIndexItem1" : "chooseDeactiveIndexItem1"}
@@ -770,7 +775,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                               fill="#757575"/>
                                                     </svg>
                                                     <span
-                                                        className={activeTab === 4 ? "active" : ""}>Physical</span>
+                                                        className={activeTab === 4 ? "active" : ""}>{t("Physical")}</span>
                                                 </div>
                                             </div>
                                             <div>
@@ -786,7 +791,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                             </div>
                                                             <div className="total_map_data_item_group">
                                                                 <div className="total_map_data_item_spp1">
-                                                                    <h3>Site Counts</h3>
+                                                                    <h3>{t("Site Counts")}</h3>
                                                                     <p> {totalCount ? (
                                                                         format(
                                                                             provinceName === "Khuzestan" ? (
@@ -801,7 +806,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                     }</p>
                                                                 </div>
                                                                 <div className="total_map_data_item_spp2">
-                                                                    <h3>Cell Counts</h3>
+                                                                    <h3>{t("Cell Counts")}</h3>
                                                                     <p> {cellsCount ? (
                                                                         format(
                                                                             provinceName === "Khuzestan" ? (
@@ -814,12 +819,12 @@ console.log("siteNameClickded",siteNameClicked)
                                                                 </div>
                                                             </div>
                                                             <div className="data_row_box">
-                                                                <h2>Total traffic</h2>
+                                                                <h2>{t("Total traffic")}</h2>
                                                                 <div className="row_items_traffic">
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
-                                                                            <h3>Traffic PS</h3>
+                                                                            <h3>{t("Traffic PS")}</h3>
                                                                             <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
                                                                                 filter_traffic_PS("Khouzestan") :
                                                                                 filter_traffic_PS(provinceName))) : "data is not available"
@@ -833,7 +838,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
-                                                                            <h3>Traffic CS</h3>
+                                                                            <h3>{t("Traffic CS")}</h3>
                                                                             <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
                                                                                 filter_traffic_CS("Khouzestan") :
                                                                                 filter_traffic_CS(provinceName))) : "data is not available"
@@ -847,12 +852,12 @@ console.log("siteNameClickded",siteNameClicked)
                                                                 </div>
                                                             </div>
                                                             <div className="data_row_box">
-                                                                <h2>Costs and revenue</h2>
+                                                                <h2>{t("Costs and revenue")}</h2>
                                                                 <div className="row_items_traffic">
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
-                                                                            <h3>Cost</h3>
+                                                                            <h3>{t("Cost")}</h3>
                                                                             <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
                                                                                 filter_cost_per_province("Khouzestan") :
                                                                                 filter_cost_per_province(provinceName))) : "data is not available"
@@ -867,7 +872,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
-                                                                            <h3>Margin</h3>
+                                                                            <h3>{t("Margin")}</h3>
                                                                             <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
                                                                                 filter_margin_per_province("Khouzestan") :
                                                                                 filter_margin_per_province(provinceName))) : "data is not available"
@@ -881,7 +886,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
-                                                                            <h3>Profit</h3>
+                                                                            <h3>{t("Profit")}</h3>
                                                                             <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
                                                                                 filter_profit_per_province("Khouzestan") :
                                                                                 filter_profit_per_province(provinceName))) : "data is not available"
@@ -895,7 +900,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
-                                                                            <h3>Total revenue</h3>
+                                                                            <h3>{t("Total revenue")}</h3>
                                                                             <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
                                                                                 filter_revenue_per_province("Khouzestan") :
                                                                                 filter_revenue_per_province(provinceName))) : "data is not available"
@@ -923,42 +928,14 @@ console.log("siteNameClickded",siteNameClicked)
                                                     </>
                                                 )}
                                             </div>
-
-
                                             {/*Total data left direction of map */}
                                             {!pupop && siteNameClicked ===null && (
                                                 <>
-                                                    {
-                                                        activeTab === 1 &&
-                                                        <div>
-                                                            <ActiveTab1Country setData={setData} data={data}
-                                                                               provinceName={provinceName}
-                                                                               setProvinceName={setProvinceName}/>
-                                                        </div>
-                                                    }
-                                                    {
-                                                        activeTab === 2 &&
-                                                        <div>
-                                                            <ActiveTab2Country />
-                                                        </div>
-                                                    }
-                                                    {
-                                                        activeTab === 3 &&
-                                                        <div>
-                                                            <ActiveTab1Country setData={setData} data={data}
-                                                                               provinceName={provinceName}
-                                                                               setProvinceName={setProvinceName}/>
-                                                        </div>
-                                                    }
-                                                    {
-                                                        activeTab === 4 &&
-                                                        <div>
-                                                            <ActiveTab1Country setData={setData} data={data}
-                                                                               provinceName={provinceName}
-                                                                               setProvinceName={setProvinceName}/>
-                                                        </div>
-                                                    }
-
+                                                    <div>
+                                                        <ActiveTab1Country setData={setData} data={data}
+                                                                           provinceName={provinceName}
+                                                                           setProvinceName={setProvinceName}/>
+                                                    </div>
 
                                                 </>
                                             )}
@@ -975,3 +952,6 @@ console.log("siteNameClickded",siteNameClicked)
     );
 }
 export default Assets;
+
+
+

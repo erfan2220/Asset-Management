@@ -1,3 +1,5 @@
+import { t } from "../../../../translationUtil"
+
 export  const Items1 =[
     {
         index:1,
@@ -23,7 +25,7 @@ export  const Items2 =[
     },
     {
         index:6,
-        name:"Traffic cs"
+        name:t("Traffic CS")
     },
 ]
 export  const Items3 =[

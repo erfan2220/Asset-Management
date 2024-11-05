@@ -124,8 +124,8 @@ const AssetsTable = () => {
         });
     };
     const options = [
-        {value: "Save as new view", label: "Save as new view"},
-        {value: "Default view", label: "Default view"},
+        { value: "Save as new view", label: t("Save as new view") },
+        { value: "Default view", label: t("Default view") },
     ];
 
     const saveNewView =(viewName)=>
@@ -202,7 +202,7 @@ const AssetsTable = () => {
                 <div className="flex-grow">
                     <CustomSelectDropdown
                         options={options}
-                        placeholder="View : Default view"
+                        placeholder={t("View : Default view")}
                         onSelect={handleSelect}
                         setOption={setOption}
                         option={option}
@@ -213,7 +213,7 @@ const AssetsTable = () => {
                 }`}
                      onClick={() => setExportOpen(!exportOpen)}>
                     <p className="text-[#212121] font-[600] px-[24px] py-[7px] border-r-[1px] border-r-[#e0e0e0] "
-                    >Export</p>
+                    >{t("Export")}</p>
                     <svg className="mx-[10px] " width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M15.023 7.14804L9.39804 12.773C9.3458 12.8253 9.28376 12.8668 9.21547 12.8951C9.14719 12.9234 9.07399 12.938 9.00007 12.938C8.92615 12.938 8.85295 12.9234 8.78466 12.8951C8.71638 12.8668 8.65434 12.8253 8.6021 12.773L2.9771 7.14804C2.87155 7.04249 2.81226 6.89934 2.81226 6.75007C2.81226 6.6008 2.87155 6.45765 2.9771 6.3521C3.08265 6.24655 3.2258 6.18726 3.37507 6.18726C3.52434 6.18726 3.66749 6.24655 3.77304 6.3521L9.00007 11.5798L14.2271 6.3521C14.2794 6.29984 14.3414 6.25838 14.4097 6.2301C14.478 6.20181 14.5512 6.18726 14.6251 6.18726C14.699 6.18726 14.7722 6.20181 14.8404 6.2301C14.9087 6.25838 14.9708 6.29984 15.023 6.3521C15.0753 6.40436 15.1168 6.46641 15.145 6.53469C15.1733 6.60297 15.1879 6.67616 15.1879 6.75007C15.1879 6.82398 15.1733 6.89716 15.145 6.96545C15.1168 7.03373 15.0753 7.09578 15.023 7.14804Z"

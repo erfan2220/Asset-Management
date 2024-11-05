@@ -19,9 +19,10 @@ import { t } from "../../translationUtil";
 
 const Asset = () => {
     const options = [
-        { value: "Save as new view", label: t("saveAsNewView") },
-        { value: "Default view", label: t("defaultView") },
+        { value: "Save as new view", label: t("Save as new view") },
+        { value: "Default view", label: t("Default view") },
     ];
+
 
     const calenderOptions = [{ value: "year", label: t("year") }];
     const [currentIndex, setCurrentIndex] = useState(1);
@@ -115,7 +116,7 @@ const Asset = () => {
                             <div className="flex items-center space-x-4">
                                 <CustomSelectDropdown
                                     options={options}
-                                    placeholder="View : Default view"
+                                    placeholder={t("View : Default view")}
                                     onSelect={handleSelect}
                                 />
                                 <div className="relative flex items-center
@@ -162,7 +163,7 @@ const Asset = () => {
                         <div className="flex items-center space-x-4">
                           <CustomSelectDropdown
                                options={options}
-                               placeholder="View : Default view"
+                               placeholder={t("View : Default view")}
                                onSelect={handleSelect}/>
                         </div>
 

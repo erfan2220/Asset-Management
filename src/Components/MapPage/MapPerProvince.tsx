@@ -23,7 +23,8 @@ const fetchPoints = async ({ queryKey }) => {
     return response.json();
 };
 
-const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
+const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) =>
+{
     const [canonicalProvinceName, setCanonicalProvinceName] = useState("");
     const [canonicalCityName, setCanonicalCityName] = useState("");
     const mapRef = useRef<L.Map | null>(null);
@@ -63,6 +64,7 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
             const zoomControl = L.control.zoom({ position: 'bottomright' });
             zoomControl.addTo(mapRef.current);
 
+            const zoomLevelControl = L.control({ position: 'topright' });
 
             zoomLevelControl.onAdd = function () {
                 const div = L.DomUtil.create("div", "zoom-level-display");
