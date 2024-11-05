@@ -4,32 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44f7f8a2-9f33-47fa-b85a-7e9e98ec2cf6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Asset-front.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPage/AdminTable/AdminTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPage/AdminTable/AdminTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetCategory/Table/AssetsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetCategory/Table/AssetsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/AssetView1.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/AssetView1.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/Map/DataBase/dataScores.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/Map/DataBase/dataScores.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/Map/map.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/Map/map.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterByCategory/filterByCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterByCategory/filterByCategory.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/network/Network.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/network/Network.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetTable/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetTable/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/DynamicTable/DynamicTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DynamicTable/DynamicTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Loading/Loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Loading/Loading.tsx" afterDir="false" />
+    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="sites-repetitive">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/Map/leafletMap/Leaflet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/Map/leafletMap/Leaflet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/SiteMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/SiteMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/AssetPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/AssetPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Menu/Menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Menu/Menu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fa.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/fa.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,17 +19,224 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Erfan Hashemi &lt;e.hashemi2220@gmai.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="backup-project" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;Hashemi&quot;,
+      &quot;fullname&quot;: &quot;Seyed Erfan&quot;
+    }
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;http://10.15.90.129/Hashemi/eam.git&quot;,
+    &quot;second&quot;: &quot;59180b44-0cff-4729-9ad0-ad5fc27d5d6d&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2m90GN9wkoL7jPSKHro8Jd9dzy6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "!2 on Merging develop-v1.2",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop-v1.1",
+    "javascript.nodejs.core.library.configured.version": "18.20.4",
+    "javascript.nodejs.core.library.typings.version": "",
+    "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/Components/AssetPage/AssetView1/sitaData",
+    "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "ts.external.directory.path": "C:\\Users\\EH4840132046\\React projects\\Asset-front\\Asset-front\\node_modules\\typescript\\lib"
+    "nodejs_interpreter_path": "C:/Program Files/nodejs/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "C:\\Users\\EH4840132046\\React projects\\Asset-front\\Asset-front\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1\sitaData" />
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1\ActiveTab1Country" />
+      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView3" />
+      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView2" />
+      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView1" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\Asset\map\View1" />
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1" />
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\map\FilterMap" />
+      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\public\images\Asset\map\View1\Selection" />
+      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\public\images\Asset\map\View1" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-WS-242.21829.149" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="" />
+      <created>1726473389803</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726473389803</updated>
+      <workItem from="1726473390975" duration="1426000" />
+      <workItem from="1726475033754" duration="11628000" />
+      <workItem from="1726490574173" duration="4785000" />
+      <workItem from="1726555786737" duration="41178000" />
+      <workItem from="1726983786580" duration="12597000" />
+      <workItem from="1727003238977" duration="15124000" />
+      <workItem from="1728973250215" duration="15543000" />
+      <workItem from="1729059049686" duration="19043000" />
+      <workItem from="1729318905832" duration="1222000" />
+      <workItem from="1729320162047" duration="41623000" />
+      <workItem from="1729499846182" duration="336000" />
+      <workItem from="1729948378903" duration="15000" />
+      <workItem from="1729954331305" duration="8803000" />
+      <workItem from="1730035608550" duration="31607000" />
+      <workItem from="1730192691247" duration="83000" />
+      <workItem from="1730192835399" duration="6000" />
+      <workItem from="1730193924015" duration="58119000" />
+    </task>
+    <task id="LOCAL-00001" summary="Tab2 continues map">
+      <option name="closed" value="true" />
+      <created>1726490645377</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726490645377</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Tab2 continues map">
+      <option name="closed" value="true" />
+      <created>1726490957128</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726490957128</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adding two parts contains cityMapping and ProvinceMapping">
+      <option name="closed" value="true" />
+      <created>1727008188639</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727008188639</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding two parts contains cityMapping and ProvinceMapping">
+      <option name="closed" value="true" />
+      <created>1727008201500</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1727008201500</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adding calen">
+      <option name="closed" value="true" />
+      <created>1729346988822</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729346988822</updated>
+    </task>
+    <task id="LOCAL-00006" summary="losting-map">
+      <option name="closed" value="true" />
+      <created>1729493383860</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1729493383860</updated>
+    </task>
+    <task id="LOCAL-00007" summary="backup-project">
+      <option name="closed" value="true" />
+      <created>1730111382268</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1730111382268</updated>
+    </task>
+    <task id="LOCAL-00008" summary="backup-project">
+      <option name="closed" value="true" />
+      <created>1730118211621</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730118211621</updated>
+    </task>
+    <task id="LOCAL-00009" summary="adding-polygon">
+      <option name="closed" value="true" />
+      <created>1730191103734</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1730191103734</updated>
+    </task>
+    <task id="LOCAL-00010" summary="sites-repetitive">
+      <option name="closed" value="true" />
+      <created>1730298826521</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1730298826521</updated>
+    </task>
+    <task id="LOCAL-00011" summary="sites-repetitive">
+      <option name="closed" value="true" />
+      <created>1730298867175</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1730298867175</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Tab2 continues map" />
+    <MESSAGE value="Adding two parts contains cityMapping and ProvinceMapping" />
+    <MESSAGE value="losting-map" />
+    <MESSAGE value="backup-project" />
+    <MESSAGE value="adding-polygon" />
+    <MESSAGE value="sites-repetitive" />
+    <option name="LAST_COMMIT_MESSAGE" value="sites-repetitive" />
   </component>
 </project>

@@ -6,6 +6,10 @@ import { provinceMapping2 } from "../../database/dictionaryProvinces/provinceMap
 import L from "leaflet";
 import 'react-leaflet-markercluster/dist/styles.min.css';
 import "leaflet.markercluster/dist/leaflet.markercluster";
+import "./LeafletMapByFilter.css"
+import { t } from "../../translationUtil";
+
+
 import "./LeafletMapByFilter.css";
 
 // Fetching function using the native fetch API
@@ -23,12 +27,61 @@ const fetchPoints = async ({ queryKey }) => {
     return response.json();
 };
 
-const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) =>
-{
+const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
     const [canonicalProvinceName, setCanonicalProvinceName] = useState("");
     const [canonicalCityName, setCanonicalCityName] = useState("");
     const mapRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.MarkerClusterGroup | null>(null);
+    const [siteName,setSiteName]=useState("")
+    const [siteData,setSiteData]=useState()
+    const [pointsData,setPointsData]=useState()
+
+
+
+    const LoadingProgress = () =>
+    {
+
+
+        return(
+            <div className="z-50">
+                <div className="fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#40404066] opacity-40 z-40">
+
+                </div>
+                <div className="fixed top-0 left-0 w-full h-full flex  flex-col items-center justify-center z-50">
+
+                    <div className=" flex flex-col items-center justify-center
+                 w-[334px] h-[120px] rounded-[4px] shadow-[0 4px 8px #00000014] bg-[#fff] gap-[16px] z-50">
+                        <h2 className="text-[20px] text-[#212121] font-[600]">{t("Enterprise Asset Management")}</h2>
+                        <div className="circlesRotating flex flex-row justify-center z-50">
+                            <Circle1 delay="0s" />
+                            <Circle2 delay="0.2s" />
+                            <Circle3 delay="0.4s" />
+                            <Circle4 delay="0.6s" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+
+
+    }
+
+    const Circle1 = ({ delay }) => {
+        return <div style={{ animationDelay: delay,width:8 , height:8 ,backgroundColor:"#CCE5FF",borderRadius:"18px" }} />;
+    };
+
+    const Circle2 = ({ delay }) => {
+        return <div style={{ animationDelay: delay,width:8 , height:8 ,backgroundColor:"#99CAFF",borderRadius:"18px" }} />;
+    };
+
+    const Circle3 = ({ delay }) => {
+        return <div style={{ animationDelay: delay,width:8 , height:8 ,backgroundColor:"#3395FF",borderRadius:"18px" }} />;
+    };
+    const Circle4 = ({ delay }) => {
+        return <div style={{ animationDelay: delay,width:8 , height:8 ,backgroundColor:"#ffff",borderRadius:"18px" }} />;
+    };
+
+
 
     useEffect(() => {
         setCanonicalProvinceName(provinceMapping2[ProvinceName]);
@@ -64,7 +117,6 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) =>
             const zoomControl = L.control.zoom({ position: 'bottomright' });
             zoomControl.addTo(mapRef.current);
 
-            const zoomLevelControl = L.control({ position: 'topright' });
 
             zoomLevelControl.onAdd = function () {
                 const div = L.DomUtil.create("div", "zoom-level-display");
