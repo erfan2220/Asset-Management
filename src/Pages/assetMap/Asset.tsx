@@ -25,11 +25,15 @@ import SiteMap from "../../Components/AssetPage/SiteMap/FilterMap";
 import {useSharedContext} from "../../Components/AssetPage/filterMap/SharedSiteType/SharedSiteType";
 import SitaData from "../../Components/AssetPage/AssetView1/sitaData/SitaData";
 import { t } from "../../translationUtil";
+import Cookies from 'js-cookie';
+
 
 
 
 const Assets = () =>
 {
+    const isRTL = Cookies.get('language') === 'fa';
+
     const [activeIndex,setActiveIndex]=useState(2)
     const [data, setData] = useState(null);
     const [dataPerProvince, setDataPerProvince] = useState(null);
@@ -574,11 +578,11 @@ console.log("siteNameClickded",siteNameClicked)
             <div className="Assets-map-2">
                 <div>
                     <div>
-                        <div className="Assets_header">
+        <div className={`Assets_header ${isRTL ? 'rtl' : ''}`}>
                         <h2>{t("Assets/Network")}</h2>
                         </div>
-                        <div className="flex flex-row items-center justify-between">
-                        <h2 className="font-[600] text-[20px] text-[#424242]">{t("Province & City View")}</h2>
+                        <div className={"flex flex-row items-center justify-between"}>
+                        <h2 className= "font-[600] text-[20px] text-[#424242]">{t("Province & City View")}</h2>
                             <div
                                 className="w-[357px] flex flex-row gap-[8px] bg-white border-[1px] border-[#e0e0e0] py-[11px] px-[12px] rounded-[4px]">
                                 <img className="cursor-pointer" src="./images/Asset/map/View1/search.svg" alt="" onClick={()=>handleSearchClick()}/>
