@@ -117,6 +117,7 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
             const zoomControl = L.control.zoom({ position: 'bottomright' });
             zoomControl.addTo(mapRef.current);
 
+            const zoomLevelControl = L.control({ position: 'topright' });
 
             zoomLevelControl.onAdd = function () {
                 const div = L.DomUtil.create("div", "zoom-level-display");
