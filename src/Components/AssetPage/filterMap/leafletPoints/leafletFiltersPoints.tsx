@@ -17,11 +17,13 @@ const LeafletFilter = ({ points,type }) =>
     const drawnItems = useRef(new L.FeatureGroup()).current;
 
     const {siteData, setSiteData}= useSharedContext()
+
     const [siteName, setSiteName]= useState()
 
 
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         if (!mapRef.current) {
             console.log("Initializing map");
 
@@ -37,12 +39,13 @@ const LeafletFilter = ({ points,type }) =>
             const tileLayerOffline = L.tileLayer("http://10.15.90.87/tiles/{z}/{x}/{y}.png", {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 minZoom: 1,
-                maxZoom: 13
+                maxZoom: 14
             });
             tileLayerOffline.addTo(mapRef.current);
 
             markersRef.current = L.markerClusterGroup({
-                showCoverageOnHover: false
+                showCoverageOnHover: false,
+                maxClusterRadius: (zoom) => (zoom >= 13 ? 0 : 80),
             });
 
             mapRef.current.addLayer(markersRef.current);
@@ -138,32 +141,48 @@ const LeafletFilter = ({ points,type }) =>
     const addMarkers = (pointsToShow) => {
         markersRef.current.clearLayers();
 
-        const markers = pointsToShow.map(position => {
+        const displayedMarkers = [];
+        const distanceThreshold = 0.005; // Adjust this based on your needs
+
+        pointsToShow.forEach(position => {
             const { latitude, longitude, sitename } = position;
-            if (!isNaN(latitude) && !isNaN(longitude)) {
-                const randomIcon = Math.random() < 0.5 ? "1.svg" : "2.svg";
-                const customIcon = L.icon({
-                    iconUrl: `./images/map/FilterMap/${randomIcon}`,
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 16]
+
+            // Validate latitude and longitude
+            if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+                // Check if there's a displayed marker close enough
+                const isNearby = displayedMarkers.some(marker => {
+                    const latDiff = marker.latitude - latitude;
+                    const lngDiff = marker.longitude - longitude;
+                    return (latDiff * latDiff + lngDiff * lngDiff) < (distanceThreshold * distanceThreshold);
                 });
-                const marker = L.marker([latitude, longitude], { icon: customIcon });
-                marker.on('click', () => {
-                    setSiteData({
-                        siteName: sitename,
-                        latitude: latitude,
-                        longitude: longitude,
-                        type: type,
+
+                if (!isNearby) {
+                    const randomIcon = Math.random() < 0.5 ? "1.svg" : "2.svg";
+                    const customIcon = L.icon({
+                        iconUrl: `./images/map/FilterMap/${randomIcon}`,
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 16]
                     });
-                    console.log(`Clicked on marker: ${sitename}, Lat: ${latitude}, Long: ${longitude}`);
-                });
+                    const marker = L.marker([latitude, longitude], { icon: customIcon });
 
-                return marker;
+                    marker.on('click', () => {
+                        setSiteData({
+                            siteName: sitename,
+                            latitude: latitude,
+                            longitude: longitude,
+                            type: type,
+                        });
+                        console.log(`Clicked on marker: ${sitename}, Lat: ${latitude}, Long: ${longitude}`);
+                    });
+
+                    // Add the new marker and its position to the displayed markers
+                    displayedMarkers.push({ latitude, longitude, marker });
+                    markersRef.current.addLayer(marker);
+                }
+            } else {
+                console.warn(`Invalid coordinates for sitename "${sitename}": Lat=${latitude}, Long=${longitude}`);
             }
-            return null;
-        }).filter(marker => marker !== null);
-
-        markersRef.current.addLayers(markers);
+        });
     };
 
 
