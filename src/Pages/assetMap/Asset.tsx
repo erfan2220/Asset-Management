@@ -30,6 +30,7 @@ import Cookies from 'js-cookie';
 
 import {tab} from "@testing-library/user-event/dist/tab";
 import ActiveTab2Country from "../../Components/AssetPage/AssetView1/ActiveTab2Country/ActiveTab2Country";
+import TechMap from "../../Components/AssetPage/AssetView3/TechMap";
 
 
 const Assets = () =>
@@ -67,10 +68,10 @@ const Assets = () =>
     const [siteNameClicked,setSiteNameClicked]=useState(null)
 
 
-    const [tech,setTech]=useState({
+    const [tech,setTech]=useState([{
         type:"",
         tech:""
-    })
+    }])
 
     const [techLayer,setTechLayer]=useState([])
     const [techNames,setTechNames]=useState([])
@@ -144,8 +145,8 @@ const Assets = () =>
 
     };
 
-    const [technologyIndex,setTechnologyIndex]=useState(1)
-    const [technologyLayer,setTechnologyLayer]=useState(1)
+    const [technologyIndex,setTechnologyIndex]=useState(0)
+    const [technologyLayer,setTechnologyLayer]=useState([0])
     const [searchCode,setSearchCode]=useState(null)
     const [searchSiteData,setSearchSiteData]=useState(null)
 
@@ -674,7 +675,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                  techNames={techNames} setTechNames={setTechNames}
                                                         />
                                                             <div >
-                                                                <FilterMap tech={tech} itemName={itemName}/>
+                                                                <FilterMap setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
                                                             </div>
                                                     </motion.div>
                                                 </div>)
@@ -696,7 +697,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                  techNames={techNames} setTechNames={setTechNames}
                                                         />
                                                         <div >
-                                                            <FilterMap tech={tech} itemName={itemName}/>
+                                                            <TechMap setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
                                                         </div>
                                                     </motion.div>
                                                 </div>)

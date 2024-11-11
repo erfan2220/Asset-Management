@@ -469,6 +469,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    width: 100%;
     border-radius: 6px;
     padding: 24px;
     gap: 16px;
@@ -521,6 +522,7 @@
     background-color: #fafafa !important;
 }
 
+
 .total_map_data_item_2
 {
     display: flex;
@@ -535,6 +537,9 @@
 .data_row_box
 {
     padding: 24px;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .data_row_box h2

@@ -4,10 +4,11 @@ import { Calendar, DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import Rate from "../../dataCharts/rateColor/Rate";
-
+import { t } from "../../../../translationUtil";
 import "./ActiveTab1Country.css"
 import { Shamsi } from "basic-shamsi";
 import { provinceNameVariations } from "../../../../database/dictionaryProvinces/dictionaryProvinces";
+
 
 
 const SitaData = (props) => {
@@ -365,7 +366,6 @@ const SitaData = (props) => {
                             <img src="/images/Asset/map/View1/CalendarBlank.svg"
                                 alt="" />
                             <span className="text-nowrap">{t("this week")}</span>
-                            <span className="text-nowrap">this week</span>
                             <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />
 
                         </div>
@@ -422,11 +422,9 @@ const SitaData = (props) => {
                 </div>
                 <div className="data_row_box">
                     <h2>{t("Total traffic")}</h2>
-                    <div className="row_items_traffic">
-                        <div className="total_map_data_item_for_quantity_3">
+                        <div className="total_map_data_item_for_quantity_32">
                             <div className="total_map_data_item_2">
-                                <h3>{t("Traffic PS")}</h3>
-                                <h2>Total traffic</h2>
+
                                 <div className="row_items_traffic">
                                     <div className="total_map_data_item_for_quantity_3">
                                         <div className="total_map_data_item_2">
@@ -459,7 +457,6 @@ const SitaData = (props) => {
                                     <div className="total_map_data_item_for_quantity">
                                         <div className="total_map_data_item_2">
                                             <h3>{t("Cost")}</h3>
-                                            <h3>Cost</h3>
                                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
                                             <p>data is not available</p>
                                         </div>
@@ -471,7 +468,7 @@ const SitaData = (props) => {
                                     <div className="total_map_data_item_for_quantity">
                                         <div className="total_map_data_item_2">
                                             <h3>{t("Margin")}</h3>
-                                            <h3>Margin</h3>
+
                                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
                                             <p>data is not available</p>
                                         </div>
@@ -483,7 +480,7 @@ const SitaData = (props) => {
                                     <div className="total_map_data_item_for_quantity">
                                         <div className="total_map_data_item_2">
                                             <h3>{t("Profit")}</h3>
-                                            <h3>Profit</h3>
+
                                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
                                             <p>data is not available</p>
                                         </div>
@@ -495,7 +492,7 @@ const SitaData = (props) => {
                                     <div className="total_map_data_item_for_quantity">
                                         <div className="total_map_data_item_2">
                                             <h3>{t("Total revenue")}</h3>
-                                            <h3>Total revenue</h3>
+
                                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
                                             <p>{siteData ? format(siteData?.revenue) : "data is not available"}</p>
                                         </div>
@@ -507,13 +504,13 @@ const SitaData = (props) => {
                                 </div>
                             </div>
                         </div>
-                        {/* :
-                        <div>loading</div> */}
-                    </div>
+                       {/*:*/}
+                       {/* <div>loading</div> */}
+
                 </div>
             </div>
     )
-                    
+
 
 };
 

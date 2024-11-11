@@ -1,6 +1,6 @@
 //@ts-nocheck
-import "./FilterMap.css";
-import LeafletFilter from "./leafletPoints/leafletFiltersPoints";
+import "./TechMap.css";
+import LeafletFilter from "../filterMap/leafletPoints/leafletFiltersPoints";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import LoadingProgress from "../../Loading/Loading";
@@ -14,35 +14,48 @@ interface Point {
     type: 'BTS' | 'BSC' | 'MSC' | 'RNC' | 'nodeB' | 'enodeb';
 }
 
-const FilterMap = ({ techs, setSiteNameClicked }) => {
+
+const TechMap = ({ techs, setSiteNameClicked }) =>
+{
     const [points, setPoints] = useState<Point[]>([]);
     const [loading, setLoading] = useState(true);
+    const techArray = [];
+
 
     // Memoize techs to prevent unnecessary re-renders
     const stableTechs = useMemo(() => techs, [techs]);
-
+let api;
     useEffect(() => {
         const fetchPoints = async () => {
             console.log("fetchPoints called"); // Debugging log
             setLoading(true);
             try {
-                const fetchPromises = stableTechs.map((tech) => {
-                    let apiTech = '';
+                const fetchPromises = stableTechs.map((tech) =>
+                {
 
-                    // Define API URLs based on the tech type
-                    if (tech.tech === "2G" && tech.type === "BTS") {
-                        apiTech = "http://10.15.90.72:9098/api/report/asset/technology/2G";
-                    } else if (tech.type === "nodeb") {
-                        apiTech = "http://10.15.90.72:9098/api/report/asset/technology/3G";
-                    } else if (tech.type === "enodeb") {
-                        apiTech = "http://10.15.90.72:9098/api/report/asset/technology/4G";
-                    } else if (tech.type === "RNC" || tech.type === "BSC") {
-                        apiTech = "http://10.15.90.87:5001/api/assets/bsc_list";
-                    } else if (tech.type === "MSC") {
-                        apiTech = "http://10.15.90.87:5001/api/assets/msc_list";
+
+                    if (tech.type.includes("2G")) {
+                        techArray.push("2G");
+                    }
+                    if (tech.type.includes("3G")) {
+                        techArray.push("3G");
+                    }
+                    if (tech.type.includes("4G")) {
+                        techArray.push("4G");
+                    }
+                    if (tech.type.includes("5G")) {
+                        techArray.push("5G");
                     }
 
-                    return axios.get(apiTech).then(response => {
+                    const apiTech = techArray.join("||");
+
+                    console.log("apiTech:", apiTech);
+
+                    api=`http://10.15.90.72:9098/api/report/asset/technology/2G/${apiTech}`
+
+
+
+                    return axios.get(api).then(response => {
                         return {
                             tech: tech.tech,
                             type: tech.type,
@@ -107,4 +120,4 @@ const FilterMap = ({ techs, setSiteNameClicked }) => {
     );
 };
 
-export default FilterMap;
+export default TechMap;

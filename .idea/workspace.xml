@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="Erfan-11.39">
+    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="Zoom level 14">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetMap/Filters/Filters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetMap/Filters/Filters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/ActiveTab1Country.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/ActiveTab1Country.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +29,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="backup-project" />
+        <entry key="$PROJECT_DIR$" value="develop-v1.2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,10 +64,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "!2 on develop-v1.2",
+    "git-widget-placeholder": "develop-v2.1",
     "javascript.nodejs.core.library.configured.version": "18.20.4",
     "javascript.nodejs.core.library.typings.version": "",
-    "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/Components/AssetPage/AssetView1/sitaData",
+    "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/Components/AssetPage/AssetView3",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -72,18 +81,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView3" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1\sitaData" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1\ActiveTab1Country" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView3" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView2" />
-      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\src\Components\AssetPage\AssetView1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\Asset\map\Filters" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\Asset\map\View1" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\map\FilterMap" />
       <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\public\images\Asset\map\View1\Selection" />
-      <recent name="C:\Users\Erfan Hashemi\Desktop\Asset-front\Asset-front\public\images\Asset\map\View1" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -118,6 +127,8 @@
       <workItem from="1730192691247" duration="83000" />
       <workItem from="1730192835399" duration="6000" />
       <workItem from="1730193924015" duration="58119000" />
+      <workItem from="1731242069196" duration="548000" />
+      <workItem from="1731244524663" duration="2606000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />
@@ -207,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730298867175</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Zoom level 14">
+      <option name="closed" value="true" />
+      <created>1730794688805</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1730794688805</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +251,7 @@
     <MESSAGE value="adding-polygon" />
     <MESSAGE value="sites-repetitive" />
     <MESSAGE value="Erfan-11.39" />
-    <option name="LAST_COMMIT_MESSAGE" value="Erfan-11.39" />
+    <MESSAGE value="Zoom level 14" />
+    <option name="LAST_COMMIT_MESSAGE" value="Zoom level 14" />
   </component>
 </project>

@@ -1,196 +1,180 @@
 //@ts-nocheck
 import L from "leaflet";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
-import MarkerClusterGroup from 'react-leaflet-markercluster';
-import 'react-leaflet-markercluster/dist/styles.min.css';
 import "leaflet.markercluster/dist/leaflet.markercluster";
 import "leaflet-draw";
 import "./LeafletMapByFilter.css";
-import {useSharedContext} from "../SharedSiteType/SharedSiteType";
+import { useSharedContext } from "../SharedSiteType/SharedSiteType";
 
-const LeafletFilter = ({ points,type }) =>
+// Define the Point interface
+interface Point {
+    latitude: number;
+    longitude: number;
+    sitename: string;
+    tech: string;
+    type: 'BTS' | 'BSC' | 'MSC' | 'RNC' | 'NODEB' | 'ENODEB';
+}
+
+const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: string) => void }> = ({ points, setSiteNameClicked }) =>
 {
-    const mapRef = useRef(null);
-    const markersRef = useRef(null);
-    const drawnItems = useRef(new L.FeatureGroup()).current;
 
-    const {siteData, setSiteData}= useSharedContext()
-
-    const [siteName, setSiteName]= useState()
+    const mapRef = useRef<L.Map | null>(null);
+    const markersRef = useRef<L.MarkerClusterGroup | null>(null);
+    const drawnItems = useRef<L.FeatureGroup>(new L.FeatureGroup()).current;
+    const { setSiteData } = useSharedContext();
 
 
+    const iconMap: Record<string, string> = {
+        BTS: "./images/Asset/map/Filters/BTSGreen.svg",
+        BSC: "./images/Asset/map/Filters/BSCGreen.svg",
+        MSC: "./images/Asset/map/Filters/MSCGreen.svg",
+    };
 
-    useEffect(() =>
-    {
-        if (!mapRef.current) {
-            console.log("Initializing map");
-
-            mapRef.current = L.map("map-container", {
-                center: [32.74015808, 52.30584163],
-                zoom: 6,
-                scrollWheelZoom: false,
-                zoomControl: false,
-            });
-
-            L.control.zoom({ position: 'bottomright' }).addTo(mapRef.current);
-
-            const tileLayerOffline = L.tileLayer("http://10.15.90.87/tiles/{z}/{x}/{y}.png", {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                minZoom: 1,
-                maxZoom: 14
-            });
-            tileLayerOffline.addTo(mapRef.current);
-
-            markersRef.current = L.markerClusterGroup({
-                showCoverageOnHover: false,
-                maxClusterRadius: (zoom) => (zoom >= 13 ? 0 : 80),
-            });
-
-            mapRef.current.addLayer(markersRef.current);
-            mapRef.current.addLayer(drawnItems);
-
-            const drawControl = new L.Control.Draw({
-                position: 'topright',
-                edit: { featureGroup: drawnItems },
-                draw: {
-                    polygon: true,
-                    circle: false,
-                    rectangle: false,
-                    marker: false,
-                    polyline: false
-                }
-            });
-            mapRef.current.addControl(drawControl);
-        }
-
-        if (points.length > 0) {
-            console.log("Adding markers to map with new points:", points);
-            addMarkers(points);
-        }
-    }, [points]);
 
     useEffect(() => {
-        if (points.length > 0 && mapRef.current) {
-            const handleDraw = (e) => {
-                console.log("Draw event fired:", e);
-                console.log("Draw event points:", points);
-                const layer = e.layer;
-                drawnItems.addLayer(layer);
-                filterMarkersInPolygon(layer);
-            };
-
-            mapRef.current.on(L.Draw.Event.CREATED, handleDraw);
-
-            return () => {
-                mapRef.current.off(L.Draw.Event.CREATED, handleDraw);
-            };
+        if (!mapRef.current) {
+            initializeMap();
+        }
+        // Re-run marker addition when points update
+        if (points.length > 0) {
+            addMarkers(points);
         }
     }, [points]);
 
-    const filterMarkersInPolygon = useCallback((polygonLayer) => {
-        console.log("Filtering markers, current points:", points);
-        if (points.length === 0) {
-            console.warn("No points available to filter.");
-            return;
-        }
-
-        const polygonLatLngs = polygonLayer.getLatLngs()[0];
-        const polygon = L.polygon(polygonLatLngs);
-
-        console.log("Polygon coordinates:", polygonLatLngs);
-
-        const pointsWithinPolygon = points.filter(point => {
-            const pointMarker = L.marker([point.latitude, point.longitude]); // Create a temporary marker for the point
-            return isMarkerInsidePolygon(pointMarker, polygon); // Check if it's inside the polygon
+    const initializeMap = () => {
+        mapRef.current = L.map("map-container", {
+            center: [32.74015808, 52.30584163],
+            zoom: 6,
+            scrollWheelZoom: false,
+            zoomControl: false,
         });
 
-        console.log(`Total points: ${points.length}, Points within polygon: ${pointsWithinPolygon.length}`);
+        L.control.zoom({ position: 'bottomright' }).addTo(mapRef.current);
 
-        if (pointsWithinPolygon.length === 0) {
-            console.warn("No points found within the polygon. Displaying all markers.");
-            addMarkers(points);
-        } else {
-            console.log(`Points found within polygon: ${pointsWithinPolygon.length}`);
-            addMarkers(pointsWithinPolygon);
-        }
-    }, [points]);
+        L.tileLayer("http://10.15.90.79/tiles/{z}/{x}/{y}.png", {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            minZoom: 1,
+            maxZoom: 13
+        }).addTo(mapRef.current);
 
+        markersRef.current = L.markerClusterGroup({
+            showCoverageOnHover: false,
+            maxClusterRadius: (zoom) => (zoom >= 13 ? 0 : 80),
+        });
 
-    function isMarkerInsidePolygon(marker, poly) {
-        const polyPoints = poly.getLatLngs()[0]; // Get the first set of latLngs for the polygon
-        const x = marker.getLatLng().lat, y = marker.getLatLng().lng;
+        mapRef.current.addLayer(markersRef.current);
+        mapRef.current.addLayer(drawnItems);
 
-        let inside = false;
-        for (let i = 0, j = polyPoints.length - 1; i < polyPoints.length; j = i++)
-        {
-            const xi = polyPoints[i].lat, yi = polyPoints[i].lng;
-            const xj = polyPoints[j].lat, yj = polyPoints[j].lng;
-
-            const intersect = ((yi > y) !== (yj > y)) &&
-                (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-            if (intersect) inside = !inside;
-        }
-
-        return inside;
-    }
-
-
-
-    const addMarkers = (pointsToShow) => {
-        markersRef.current.clearLayers();
-
-        const displayedMarkers = [];
-        const distanceThreshold = 0.005; // Adjust this based on your needs
-
-        pointsToShow.forEach(position => {
-            const { latitude, longitude, sitename } = position;
-
-            // Validate latitude and longitude
-            if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
-                // Check if there's a displayed marker close enough
-                const isNearby = displayedMarkers.some(marker => {
-                    const latDiff = marker.latitude - latitude;
-                    const lngDiff = marker.longitude - longitude;
-                    return (latDiff * latDiff + lngDiff * lngDiff) < (distanceThreshold * distanceThreshold);
-                });
-
-                if (!isNearby) {
-                    const randomIcon = Math.random() < 0.5 ? "1.svg" : "2.svg";
-                    const customIcon = L.icon({
-                        iconUrl: `./images/map/FilterMap/${randomIcon}`,
-                        iconSize: [32, 32],
-                        iconAnchor: [16, 16]
-                    });
-                    const marker = L.marker([latitude, longitude], { icon: customIcon });
-
-                    marker.on('click', () => {
-                        setSiteData({
-                            siteName: sitename,
-                            latitude: latitude,
-                            longitude: longitude,
-                            type: type,
-                        });
-                        console.log(`Clicked on marker: ${sitename}, Lat: ${latitude}, Long: ${longitude}`);
-                    });
-
-                    // Add the new marker and its position to the displayed markers
-                    displayedMarkers.push({ latitude, longitude, marker });
-                    markersRef.current.addLayer(marker);
-                }
-            } else {
-                console.warn(`Invalid coordinates for sitename "${sitename}": Lat=${latitude}, Long=${longitude}`);
+        const drawControl = new L.Control.Draw({
+            position: 'topright',
+            draw: {
+                polygon: true,
+                circle: false,
+                rectangle: false,
+                marker: false,
+                polyline: false
+            },
+            edit: {
+                featureGroup: drawnItems, // Layer that allows editing and deleting
+                remove: true              // Enable the delete option
             }
+        });
+        mapRef.current.addControl(drawControl);
+
+        mapRef.current.on(L.Draw.Event.CREATED, (e) => {
+            drawnItems.addLayer(e.layer);
+            filterMarkersInPolygon(e.layer);
         });
     };
 
 
 
-    return (
-        <div id="map-container" style={{ width: "100%", height: "675px", position: "relative" }}>
+    const filterMarkersInPolygon = useCallback((polygonLayer) => {
+        const polygonLatLngs = polygonLayer.getLatLngs()[0];
+        const polygon = L.polygon(polygonLatLngs);
 
-        </div>
+        const pointsWithinPolygon = points.filter(point => {
+            const pointMarker = L.marker([point.latitude, point.longitude]);
+            return isMarkerInsidePolygon(pointMarker, polygon);
+        });
+
+        addMarkers(pointsWithinPolygon.length ? pointsWithinPolygon : points);
+    }, [points]);
+
+    const isMarkerInsidePolygon = (marker: L.Marker, poly: L.Polygon) => {
+        const polyPoints = poly.getLatLngs()[0];
+        const x = marker.getLatLng().lat, y = marker.getLatLng().lng;
+        let inside = false;
+        for (let i = 0, j = polyPoints.length - 1; i < polyPoints.length; j = i++) {
+            const xi = polyPoints[i].lat, yi = polyPoints[i].lng;
+            const xj = polyPoints[j].lat, yj = polyPoints[j].lng;
+            const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    };
+
+    const addMarkers = (pointsToShow: Point[]) => {
+        if (markersRef.current) {
+            markersRef.current.clearLayers();
+        }
+
+        pointsToShow.forEach(position => {
+            // Ensure position has required properties before destructuring
+            if (position && position.latitude != null && position.longitude != null) {
+                const { latitude, longitude, sitename, type } = position;
+
+                const customIcon = L.icon({
+                    iconUrl: iconMap[type] || "./images/Asset/map/Filters/BTSGreen.svg",
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 16],
+                });
+
+                const marker = L.marker([latitude, longitude], { icon: customIcon });
+
+                marker.on('click', () => {
+                    setSiteData({ siteName: sitename, latitude, longitude, type });
+                    setSiteNameClicked(sitename);
+                    console.log(`Clicked on marker: ${sitename}, Lat: ${latitude}, Long: ${longitude}`);
+                });
+
+                if (type === 'BTS' ||type === 'nodeb' ||type === 'enodeb') {
+                    if (mapRef.current?.getZoom() < 13) {
+                        markersRef.current.addLayer(marker);
+                    } else {
+                        markersRef.current.addLayer(marker);
+                    }
+                } else if (type === 'BSC' || type === 'MSC') {
+                    markersRef.current.addLayer(marker);
+                }
+            } else {
+                console.warn(`Invalid point data: `, position);
+            }
+        });
+
+        markersRef.current.refreshClusters();
+    };
+
+    useEffect(() => {
+        const handleZoomEnd = () => {
+            addMarkers(points);
+        };
+
+        if (mapRef.current) {
+            mapRef.current.on('zoomend', handleZoomEnd);
+        }
+
+        return () => {
+            if (mapRef.current) {
+                mapRef.current.off('zoomend', handleZoomEnd);
+            }
+        };
+    }, [points]);
+
+    return (
+        <div id="map-container" style={{ width: "100%", height: "675px", position: "relative" }} />
     );
 };
 
