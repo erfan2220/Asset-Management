@@ -1,13 +1,14 @@
 //@ts-nocheck
+import React from 'react';
 import L from "leaflet";
 import { useCallback, useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet.markercluster/dist/leaflet.markercluster";
 import "leaflet-draw";
-import "./LeafletMapByFilter.css";
+import "./TechChooser.css";
 import { useSharedContext } from "../SharedSiteType/SharedSiteType";
-import {useNavigate} from "react-router-dom";
+
 
 // Define the Point interface
 interface Point {
@@ -15,10 +16,10 @@ interface Point {
     longitude: number;
     sitename: string;
     tech: string;
-    type: 'BTS' | 'BSC' | 'MSC' | 'RNC' | 'NODEB' | 'ENODEB';
+    type: '2G' | '3G' | '4G' | '5G' ;
 }
 
-const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: string) => void }> = ({ points, setSiteNameClicked }) =>
+const TechChooser : React.FC<{ points: Point[], setSiteNameClicked: (siteName: string) => void }> = ({ points, setSiteNameClicked }) =>
 {
 
     const mapRef = useRef<L.Map | null>(null);
@@ -28,9 +29,10 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
 
 
     const iconMap: Record<string, string> = {
-        BTS: "./images/Asset/map/Filters/BTSGreen.svg",
-        BSC: "./images/Asset/map/Filters/BSCGreen.svg",
-        MSC: "./images/Asset/map/Filters/MSCGreen.svg",
+        '2G': "./images/Asset/map/Filters/BTSGreen.svg",
+        '3G': "./images/Asset/map/Filters/BTSGreen.svg",
+        '4G': "./images/Asset/map/Filters/BTSGreen.svg",
+        '5G': "./images/Asset/map/Filters/BTSGreen.svg",
     };
 
 
@@ -122,21 +124,12 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
         return inside;
     };
 
-    const addMarkers = (pointsToShow: Point[]) => {
+    const addMarkers = (pointsToShow: Point[]) =>
+    {
         if (markersRef.current) {
             markersRef.current.clearLayers();
         }
 
-        const generateDirectionalPointsWithLines = (centerLat, centerLng, type) => {
-            const offset = 0.05; // Adjust distance from center as needed
-            const points = [
-                { latitude: centerLat, longitude: centerLng + offset, type }, // East
-                { latitude: centerLat, longitude: centerLng - offset, type }, // West
-                { latitude: centerLat + offset, longitude: centerLng + offset, type }, // Northeast
-                { latitude: centerLat - offset, longitude: centerLng - offset, type }  // Southwest
-            ];
-            return points;
-        };
 
 
         pointsToShow.forEach(position => {
@@ -162,33 +155,15 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
                         duration: 1 // Adjust duration if needed
                     });
 
-                    mapRef.current.once('moveend', () => {
-                        markersRef.current.clearLayers(); // Clear existing markers
-
-                        if (type === 'MSC') {
-                            const directionalBSCs = generateDirectionalPointsWithLines(latitude, longitude, 'BSC', mapRef.current);
-                            addMarkers(directionalBSCs);
-                        } else if (type === 'BSC') {
-                            const directionalBTSs = generateDirectionalPointsWithLines(latitude, longitude, 'BTS', mapRef.current);
-                            addMarkers(directionalBTSs);
-                        }
-                        console.log(`Arrived at ${sitename}, displaying nearby points.`);
-                    });
                 });
 
-                if (type === 'BTS' || type === 'nodeb' || type === 'enodeb' )
-                {
+
                     if (mapRef.current?.getZoom() < 13) {
                         markersRef.current?.addLayer(marker);
                     } else {
                         marker.addTo(mapRef.current); // Add directly to the map without clustering
                     }
-                } else if (type === 'MSC' || type === 'BSC' || type === 'RNC') {
-                    // Add unclustered points directly to the map
-                    marker.addTo(mapRef.current);
-                } else {
-                    markersRef.current?.addLayer(marker);
-                }
+
 
             }
             else
@@ -201,9 +176,30 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
         markersRef.current.refreshClusters();
     };
 
+    const debounce = (func, delay) => {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => func(...args), delay);
+        };
+    };
+
+
     useEffect(() => {
         const handleZoomEnd = () => {
-            addMarkers(points);
+            if (mapRef.current.getZoom() < 13) {
+                if (markersRef.current) {
+                    markersRef.current.addTo(mapRef.current); // Clustered markers at low zoom
+                }
+            } else {
+                mapRef.current.eachLayer((layer) => {
+                    if (layer instanceof L.Marker && layer !== markersRef.current) {
+                        mapRef.current.removeLayer(layer);
+                    }
+                });
+                markersRef.current?.clearLayers();
+                addMarkers(points); // Non-clustered markers at high zoom
+            }
         };
 
         if (mapRef.current) {
@@ -211,15 +207,14 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
         }
 
         return () => {
-            if (mapRef.current) {
-                mapRef.current.off('zoomend', handleZoomEnd);
-            }
+            mapRef.current?.off('zoomend', handleZoomEnd);
         };
     }, [points]);
+
 
     return (
         <div id="map-container" style={{ width: "100%", height: "675px", position: "relative" }} />
     );
 };
 
-export default LeafletFilter;
+export default TechChooser;

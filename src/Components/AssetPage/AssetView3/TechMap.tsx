@@ -4,6 +4,7 @@ import LeafletFilter from "../filterMap/leafletPoints/leafletFiltersPoints";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import LoadingProgress from "../../Loading/Loading";
+import TechChooser from "../filterMap/TechChooser/TechChooser";
 
 // Define the Point interface
 interface Point {
@@ -47,19 +48,21 @@ let api;
                         techArray.push("5G");
                     }
 
-                    const apiTech = techArray.join("||");
+                    const apiTech = techArray.join(",");
 
                     console.log("apiTech:", apiTech);
 
-                    api=`http://10.15.90.72:9098/api/report/asset/technology/2G/${apiTech}`
+                    api=`http://10.15.90.72:9098/api/report/asset/multiple-technology?technologies=${apiTech}`
 
 
 
-                    return axios.get(api).then(response => {
+                    return axios.get(api).then(response =>
+                    {
+                     console.log("respoooosoososososo",response.data)
                         return {
                             tech: tech.tech,
                             type: tech.type,
-                            data: response.data.data || response.data
+                            data: response.data
                         };
                     });
                 });
@@ -71,9 +74,7 @@ let api;
                 results.forEach(result => {
                     const { tech, type, data } = result;
 
-                    if (type === "nodeb") {
-                        console.log("nodeb data:", data); // Log data for enodeb
-                    }
+
 
                     // Map and parse points, then add to allPoints array
                     const pointsWithLatLong = data.map(point => ({
@@ -109,11 +110,12 @@ let api;
         fetchPoints();
     }, [stableTechs]);
 
+    console.log("pointtts",points)
     return (
         <div>
             {loading ? <LoadingProgress /> :
                 <div className="map_data_information_base_category">
-                    <LeafletFilter points={points} setSiteNameClicked={setSiteNameClicked} />
+                    <TechChooser points={points} setSiteNameClicked={setSiteNameClicked} />
                 </div>
             }
         </div>
