@@ -27,6 +27,7 @@ const SitaData = (props) => {
     const [cellsCount, setCellsCount] = useState(null)
     const [cityCount, setCityCount] = useState(null)
     const [totaldata, setTotaldata] = useState(null)
+    const [dataTraffic,setDataTraffic]=useState(null)
 
     const [cellsSitePerProvince, setCellsSitePerProvince] = useState()
     const [values, setValues] = useState([
@@ -300,27 +301,66 @@ const SitaData = (props) => {
             return `${year}-${month}-${day}`;
         };
 
+        const formatDate2 = (dateStr) => {
+            const date = new Date(dateStr);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${month}/${day}/${year}`;
+        };
+
+        const today = new Date();
+        const todayFormatted1 = formatDate(today);
+        const todayFormatted2 = formatDate2(today);
+
+        console.log("todayFormatted1",todayFormatted1)
+        console.log("todayFormatted2",todayFormatted2)
+
         const fromDate = formatDate(daysDates[0]);  // Use the first date for both cases
         const toDate = daysDates.length > 1 ? formatDate(daysDates[1]) : formatDate(daysDates[0]);
 
+        const fromDate2 = formatDate2(daysDates[0]);  // Use the first date for both cases
+        const toDate2 = daysDates.length > 1 ? formatDate2(daysDates[1]) : formatDate2(daysDates[0]);
 
         if (props.siteNameClicked && daysDates.length < 1) {
-            fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=4/01/2024&toDate=4/30/2024`)
+            fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=${todayFormatted1}&toDate=${todayFormatted1}`)
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) => {
-                    console.log("Site Data for", props.siteNameClicked, res);
+
                     setSiteData(res);
                 })
                 .catch((error) => {
                     console.error("Error fetching site data:", error);
                 });
+
+            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${todayFormatted2}&toDate=${todayFormatted2}`)
+                .then((res) => res.json())  // Parse as JSON
+                .then((res) => {
+                    console.log("Site Data for", props.siteNameClicked, res);
+                    setDataTraffic(res);
+                })
+                .catch((error) => {
+                    console.error("Error fetching site data:", error);
+                });
+
         }
         else if (props.siteNameClicked && daysDates.length > 0) {
             fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=${fromDate}4&toDate=${toDate}`)
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) => {
-                    console.log("Site Data for", props.siteNameClicked, res);
+
                     setSiteData(res);
+                })
+                .catch((error) => {
+                    console.error("Error fetching site data:", error);
+                });
+
+
+            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${fromDate2}&toDate=${toDate2}`)
+                .then((res) => res.json())  // Parse as JSON
+                .then((res) => {
+                    console.log("Site Data for", props.siteNameClicked, res);
+                    setDataTraffic(res);
                 })
                 .catch((error) => {
                     console.error("Error fetching site data:", error);
@@ -328,7 +368,8 @@ const SitaData = (props) => {
         }
     }, [props.siteNameClicked, daysDates]);
 
-    const format = (number) => {
+    const format = (number) =>
+    {
         const formattedNumber = numberFormatter.format(number);
         return formattedNumber;
     }
@@ -415,7 +456,7 @@ const SitaData = (props) => {
 
                     {/*    </p>*/}
                     {/*</div>*/}
-                    <div className="total_map_data_item_spp222">
+                    <div className="total_map_data_item_spp22222">
                         <h3>Cell Counts</h3>
                         <p>data is not available</p>
                     </div>
@@ -429,8 +470,9 @@ const SitaData = (props) => {
                                     <div className="total_map_data_item_for_quantity_3">
                                         <div className="total_map_data_item_2">
                                             <h3>Traffic PS</h3>
+                                            <p>{dataTraffic ? format(dataTraffic?.totalPsTraffic) : "data is not available"}</p>
                                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
-                                            <p>data is not available</p>
+
                                         </div>
                                         <div className="total_map_data_item_3">
                                             <Rate value="4" />
@@ -441,11 +483,12 @@ const SitaData = (props) => {
                                         <div className="total_map_data_item_2">
                                             <h3>Traffic CS</h3>
                                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
-                                            <p> data is not available</p>
+                                            <p>{dataTraffic ? format(dataTraffic?.totalCsTraffic) : "data is not available"}</p>
+                                            {/*<p> data is not available</p>*/}
                                         </div>
 
                                         <div className="total_map_data_item_3">
-                                            <Rate value="4" />
+                                        <Rate value="4" />
                                             <h6>TB</h6>
                                         </div>
                                     </div>

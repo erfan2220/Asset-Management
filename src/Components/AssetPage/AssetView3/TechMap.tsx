@@ -115,7 +115,7 @@ let api;
         <div>
             {loading ? <LoadingProgress /> :
                 <div className="map_data_information_base_category">
-                    <TechChooser points={points} setSiteNameClicked={setSiteNameClicked} />
+                    <TechChooser points={points} setPoints={setPoints} setSiteNameClicked={setSiteNameClicked} />
                 </div>
             }
         </div>

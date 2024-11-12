@@ -339,6 +339,7 @@
 }
 .row_items_traffic
 {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 8px;
@@ -508,12 +509,12 @@
     background-color: #FFFFFF;
     border: 1px solid #E0E0E0;
 }
-.total_map_data_item_spp222
+.total_map_data_item_spp22222
 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: 50%;
     border-radius: 6px;
     padding: 16px 98px 24px 16px;
     border: 1px solid #E0E0E0;
@@ -579,11 +580,12 @@
     color: #212121;
 }
 
-.total_map_data_item_spp222 p
+.total_map_data_item_spp22222 p
 {
     font-weight: 600;
     font-size: 24px;
     color: #212121;
+    white-space: nowrap;
 }
 .total_map_data_item_spp1 p
 {

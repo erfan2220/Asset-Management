@@ -19,7 +19,7 @@ interface Point {
     type: '2G' | '3G' | '4G' | '5G' ;
 }
 
-const TechChooser : React.FC<{ points: Point[], setSiteNameClicked: (siteName: string) => void }> = ({ points, setSiteNameClicked }) =>
+const TechChooser : React.FC<{ points: Point[],setPoints: (points: Point[]) => void, setSiteNameClicked: (siteName: string) => void }> = ({ points,setPoints, setSiteNameClicked }) =>
 {
 
     const mapRef = useRef<L.Map | null>(null);
@@ -95,13 +95,19 @@ const TechChooser : React.FC<{ points: Point[], setSiteNameClicked: (siteName: s
             drawnItems.addLayer(e.layer);
             filterMarkersInPolygon(e.layer);
         });
+
+        mapRef.current.on('zoomend', () => {
+            addMarkers(points);
+        });
     };
 
 
 
     const filterMarkersInPolygon = useCallback((polygonLayer) => {
-        const polygonLatLngs = polygonLayer.getLatLngs()[0];
-        const polygon = L.polygon(polygonLatLngs);
+        // const polygonLatLngs = polygonLayer.getLatLngs()[0];
+        // const polygon = L.polygon(polygonLatLngs);
+
+        const polygon = L.polygon(polygonLayer.getLatLngs()[0]);
 
         const pointsWithinPolygon = points.filter(point => {
             const pointMarker = L.marker([point.latitude, point.longitude]);
@@ -130,6 +136,7 @@ const TechChooser : React.FC<{ points: Point[], setSiteNameClicked: (siteName: s
             markersRef.current.clearLayers();
         }
 
+        const zoomLevel = mapRef.current?.getZoom() ?? 0;
 
 
         pointsToShow.forEach(position => {
@@ -150,15 +157,12 @@ const TechChooser : React.FC<{ points: Point[], setSiteNameClicked: (siteName: s
                     setSiteData({ siteName: sitename, latitude, longitude, type });
                     setSiteNameClicked(sitename);
 
-                    mapRef.current.flyTo([latitude, longitude], 12, {
-                        animate: true,
-                        duration: 1 // Adjust duration if needed
-                    });
+
 
                 });
 
 
-                    if (mapRef.current?.getZoom() < 13) {
+                    if (zoomLevel < 13) {
                         markersRef.current?.addLayer(marker);
                     } else {
                         marker.addTo(mapRef.current); // Add directly to the map without clustering
@@ -166,51 +170,62 @@ const TechChooser : React.FC<{ points: Point[], setSiteNameClicked: (siteName: s
 
 
             }
-            else
-            {
-                console.warn(`Invalid point data: `, position);
-            }
+
 
         });
 
         markersRef.current.refreshClusters();
     };
 
-    const debounce = (func, delay) => {
-        let timer;
-        return (...args) => {
-            clearTimeout(timer);
-            timer = setTimeout(() => func(...args), delay);
-        };
-    };
 
+
+
+    // useEffect(() => {
+    //     const handleZoomEnd = () => {
+    //         if (mapRef.current.getZoom() < 13) {
+    //             if (markersRef.current) {
+    //                 markersRef.current.addTo(mapRef.current); // Clustered markers at low zoom
+    //             }
+    //         } else {
+    //             mapRef.current.eachLayer((layer) => {
+    //                 if (layer instanceof L.Marker && layer !== markersRef.current) {
+    //                     mapRef.current.removeLayer(layer);
+    //                 }
+    //             });
+    //             markersRef.current?.clearLayers();
+    //             addMarkers(points); // Non-clustered markers at high zoom
+    //         }
+    //     };
+    //
+    //     // if (mapRef.current) {
+    //     //     mapRef.current.on('zoomend', handleZoomEnd);
+    //     // }
+    //     //
+    //     // return () => {
+    //     //     mapRef.current?.off('zoomend', handleZoomEnd);
+    //     // };
+    // }, [points]);
 
     useEffect(() => {
-        const handleZoomEnd = () => {
-            if (mapRef.current.getZoom() < 13) {
-                if (markersRef.current) {
-                    markersRef.current.addTo(mapRef.current); // Clustered markers at low zoom
-                }
-            } else {
-                mapRef.current.eachLayer((layer) => {
-                    if (layer instanceof L.Marker && layer !== markersRef.current) {
-                        mapRef.current.removeLayer(layer);
-                    }
-                });
-                markersRef.current?.clearLayers();
-                addMarkers(points); // Non-clustered markers at high zoom
-            }
+        const handleMapMove = () => {
+            if (!mapRef.current) return;
+
+            const bounds = mapRef.current.getBounds();
+            const visiblePoints = points.filter(point =>
+                point && point.latitude !== undefined && point.longitude !== undefined && bounds.contains([point.latitude, point.longitude])
+            );
+
+            setPoints(visiblePoints);
         };
 
         if (mapRef.current) {
-            mapRef.current.on('zoomend', handleZoomEnd);
+            mapRef.current.on('moveend', handleMapMove);
         }
 
         return () => {
-            mapRef.current?.off('zoomend', handleZoomEnd);
+            mapRef.current?.off('moveend', handleMapMove);
         };
     }, [points]);
-
 
     return (
         <div id="map-container" style={{ width: "100%", height: "675px", position: "relative" }} />
