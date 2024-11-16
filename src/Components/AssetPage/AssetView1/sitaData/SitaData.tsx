@@ -11,16 +11,14 @@ import { provinceNameVariations } from "../../../../database/dictionaryProvinces
 
 
 
-const SitaData = (props) => {
-
-
-
-
-
+const SitaData = (props) =>
+{
     const [calenderSelection, setCalenderSelection] = useState(1)
     const [siteData, setSiteData] = useState([])
     const [siteTypesOpen, setSiteTypesOpen] = useState(false)
     const [calenderOpen, setCalenderOpen] = useState(false)
+    const [openSelectiveTime, setOpenSelectiveTime] = useState(false)
+    const [openSelectiveIndex, setOpenSelectiveIndex] = useState(false)
     const [sitePoints, setSitePoints] = useState([]);
 
     const [totalTraffic, setTotalTraffic] = useState(null)
@@ -31,7 +29,8 @@ const SitaData = (props) => {
     const [dataTraffic,setDataTraffic]=useState(null)
     const [costData,setCostData]=useState(null)
 
-    const [cellsSitePerProvince, setCellsSitePerProvince] = useState()
+
+
     const [values, setValues] = useState([
         new DateObject({ calendar: persian, locale: persian_fa })
     ]);
@@ -264,8 +263,8 @@ const SitaData = (props) => {
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) =>
                 {
-                    console.log("Site Data for", props.siteNameClicked, res);
-                    setDataTraffic(res);
+                    console.log("Site Data for", props.siteNameClicked, res.siteTotalFixCostData);
+                    setCostData(res);
                 })
                 .catch((error) => {
                     console.error("Error fetching site data:", error);
@@ -286,9 +285,9 @@ const SitaData = (props) => {
 
             fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${fromDate2}&toDate=${toDate2}`)
                 .then((res) => res.json())  // Parse as JSON
-                .then((res) => {
-
-                    setCostData(res);
+                .then((res) =>
+                {
+                    setDataTraffic(res);
                 })
                 .catch((error) => {
                     console.error("Error fetching site data:", error);
@@ -299,7 +298,7 @@ const SitaData = (props) => {
                 .then((res) =>
                 {
                     console.log("Site Data for", props.siteNameClicked, res);
-                    setDataTraffic(res);
+                    setCostData(res);
                 })
                 .catch((error) => {
                     console.error("Error fetching site data:", error);
@@ -316,6 +315,56 @@ const SitaData = (props) => {
         const formattedNumber = numberFormatter.format(numberFloat);
         return formattedNumber;
     }
+    const handleSelectiveOpen=()=>
+    {
+        setOpenSelectiveTime(!openSelectiveTime)
+    }
+    const handleSelectiveOpenIndex=(number:number)=>
+    {
+        setOpenSelectiveIndex(number);
+    }
+    const calculateDateRange =(type)=>
+    {
+        const today=new Date();
+        let startDate,endDate;
+
+        switch (type) {
+            case "week":
+                endDate = new Date(today);
+                startDate = new Date(today);
+                startDate.setDate(startDate.getDate() - 7);
+                break;
+            case "month":
+                endDate = new Date(today);
+                startDate = new Date(today);
+                startDate.setMonth(startDate.getMonth() - 1);
+                break;
+            case "year":
+                endDate = new Date(today);
+                startDate = new Date(today);
+                startDate.setFullYear(startDate.getFullYear() - 1);
+                break;
+            default:
+                endDate = today;
+                startDate = today;
+        }
+        return [startDate, endDate];
+    }
+
+    const handleFilterChange = (type) => {
+        const [startDate, endDate] = calculateDateRange(type);
+
+        console.log("startDate","endDate",startDate,endDate)
+
+        // Update calendar with new dates
+        setValues([
+            new DateObject({ date: startDate, calendar: persian, locale: persian_fa }),
+            new DateObject({ date: endDate, calendar: persian, locale: persian_fa })
+        ]);
+
+        // Update daysDates in Gregorian format
+        setDaysDates([startDate, endDate]);
+    };
 
     return (
         // loading ?
@@ -326,32 +375,84 @@ const SitaData = (props) => {
                         <h2>{props.siteNameClicked} </h2>
                     </div>
                     <div className="flex flex-row items-center gap-[20px]">
-                        <div className="relative border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px]
-                                                         rounded-[8px]  flex flex-row items-center justify-between w-[130px] pl-[16px] pr-[16px]"
-                            onClick={() => {
-                                setSiteTypesOpen(!siteTypesOpen)
-                            }}>
-                            <span>{t("Total")}</span>
-                            <span>Total</span>
-                            <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />
-                            {siteTypesOpen && (
-                                <div className="border-[1px] border-[#e0e0e0]flex flex-col
-                                                                 gap-[6px] absolute top-[50px] left-0 bg-[#fafafa] w-[100%] ">
-                                    <p className="hover:bg-blue-500 py-[8px] pl-[8px]">جاده
-                                        ای </p>
-                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]">شهری </p>
-                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> USO </p>
-                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> WLL </p>
-                                </div>)}
-                        </div>
+                        {/*<div className="relative border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px]*/}
+                        {/*                                 rounded-[8px]  flex flex-row items-center justify-between w-[130px] pl-[16px] pr-[16px]"*/}
+                        {/*    onClick={() => {*/}
+                        {/*        setSiteTypesOpen(!siteTypesOpen)*/}
+                        {/*    }}>*/}
+                        {/*    <span>{t("Total")}</span>*/}
+                        {/*    <span>Total</span>*/}
+                        {/*    <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />*/}
+                        {/*    {siteTypesOpen && (*/}
+                        {/*        <div className="border-[1px] border-[#e0e0e0]flex flex-col*/}
+                        {/*                                         gap-[6px] absolute top-[50px] left-0 bg-[#fafafa] w-[100%] ">*/}
+                        {/*            <p className="hover:bg-blue-500 py-[8px] pl-[8px]">جاده*/}
+                        {/*                ای </p>*/}
+                        {/*            <p className="hover:bg-blue-500  py-[8px] pl-[8px]">شهری </p>*/}
+                        {/*            <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> USO </p>*/}
+                        {/*            <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> WLL </p>*/}
+                        {/*        </div>)}*/}
+                        {/*</div>*/}
 
                         <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px]
-                                                         rounded-[8px]  flex flex-row items-center justify-between w-[163px]">
+                                                         rounded-[8px]  flex flex-row items-center justify-between w-[163px] relative" onClick={()=>handleSelectiveOpen()}>
                             <img src="/images/Asset/map/View1/CalendarBlank.svg"
                                 alt="" />
-                            <span className="text-nowrap">{t("this week")}</span>
-                            <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />
 
+
+
+                                {
+                                    openSelectiveIndex ===1 &&
+                                    <span className="text-nowrap">
+                                       {t("this week")}
+                                    </span>
+                                }
+                                {
+                                    openSelectiveIndex ===2 &&
+                                    <span className="text-nowrap">
+                                       {t("this Month")}
+                                    </span>
+                                }
+
+                                {
+                                    openSelectiveIndex ===3 &&
+                                    <span className="text-nowrap">
+                                       {t("this Year")}
+                                    </span>
+                                }
+
+
+
+
+
+                            <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />
+                            {
+                                openSelectiveTime && (
+
+                                    <div
+                                        className="absolute bg-white w-[165px] border-[1px] border-[#e0e0e0] flex flex-col top-[50px] left-0 rounded-[4px] z-50 px-[16px] py-[10px]">
+                                        <p className={openSelectiveIndex === 1 ? "text-[15px] text-[#007BFF] cursor-pointer font-[600] text-nowrap" :
+                                            "text-[15px] text-[#424242] cursor-pointer font-[600] text-nowrap"}
+                                           onClick={() => {
+                                               handleSelectiveOpenIndex(1)
+                                               handleFilterChange("week")
+                                           }}>This Week</p>
+                                        <p className={openSelectiveIndex === 2 ? "text-[15px] text-[#007BFF] mt-[20px] cursor-pointer font-[600] text-nowrap" :
+                                            "text-[15px] text-[#424242] mt-[20px] cursor-pointer font-[600] text-nowrap"}
+                                           onClick={() => {
+                                               handleSelectiveOpenIndex(2)
+                                               handleFilterChange("month")
+                                           }}>This Month</p>
+                                        <p className={openSelectiveIndex === 3 ? "text-[15px] text-[#007BFF] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap" :
+                                            "text-[15px] text-[#424242] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap"}
+                                           onClick={() => {
+                                               handleSelectiveOpenIndex(3)
+                                               handleFilterChange("year")
+                                           }}>This Year</p>
+
+                                    </div>
+                                )
+                            }
                         </div>
 
                         <div
@@ -361,16 +462,16 @@ const SitaData = (props) => {
                                 onClick={() => handleSelection(1)}>
                                 <img
                                     src="./images/Asset/map/View1/Selection/Calender.svg"
-                                    alt="" />
+                                    alt=""/>
                                 {
                                     calenderSelection === 1 && calenderOpen &&
                                     <div
                                         className="p-[20px] z-50 absolute right-0 top-[50px] bg-white border-[1px] border-[#e0e0e0] rounded-[4px]"
                                         ref={calenderRef}>
                                         <Calendar calendar={persian} locale={persian_fa}
-                                            range
-                                            rangeHover value={values}
-                                            onChange={handleDateChange} />
+                                                  range
+                                                  rangeHover value={values}
+                                                  onChange={handleDateChange}/>
 
                                         {/*<DatePicker  calendar={persian}*/}
                                         {/*           locale={persian_fa} value={value} onChange={setValue}   multiple*/}

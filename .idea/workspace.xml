@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="Traffic Cs and PS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/ActiveTab1Country.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/ActiveTab1Country.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView2/AssetView2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView2/AssetView2.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/IranMapWrapper/IranMapWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/IranMapWrapper/IranMapWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +124,7 @@
       <workItem from="1731401427647" duration="1153000" />
       <workItem from="1731409952725" duration="18000" />
       <workItem from="1731410026311" duration="7058000" />
-      <workItem from="1731417874415" duration="15577000" />
+      <workItem from="1731417874415" duration="22014000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />
@@ -252,7 +246,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731415179827</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Traffic Cs and PS">
+      <option name="closed" value="true" />
+      <created>1731741931967</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1731741931967</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
