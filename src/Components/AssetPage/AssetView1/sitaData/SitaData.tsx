@@ -9,8 +9,6 @@ import "./ActiveTab1Country.css"
 import { Shamsi } from "basic-shamsi";
 import { provinceNameVariations } from "../../../../database/dictionaryProvinces/dictionaryProvinces";
 
-
-
 const SitaData = (props) =>
 {
     const [calenderSelection, setCalenderSelection] = useState(1)
@@ -20,7 +18,6 @@ const SitaData = (props) =>
     const [openSelectiveTime, setOpenSelectiveTime] = useState(false)
     const [openSelectiveIndex, setOpenSelectiveIndex] = useState(false)
     const [sitePoints, setSitePoints] = useState([]);
-
     const [totalTraffic, setTotalTraffic] = useState(null)
     const [totalCount, setTotalCount] = useState(null)
     const [cellsCount, setCellsCount] = useState(null)
@@ -29,21 +26,13 @@ const SitaData = (props) =>
     const [dataTraffic,setDataTraffic]=useState(null)
     const [costData,setCostData]=useState(null)
 
-
-
     const [values, setValues] = useState([
         new DateObject({ calendar: persian, locale: persian_fa })
     ]);
-
     const [loading, setLoading] = useState(false)
-
     const calenderRef = useRef()
-
     const [daysDates, setDaysDates] = useState([])
-
-
     const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
-
     async function fetchAndCacheData(cacheKey, apiUrl) {
         const cachedData = JSON.parse(localStorage.getItem(cacheKey)) || {};
 
@@ -351,19 +340,30 @@ const SitaData = (props) =>
         return [startDate, endDate];
     }
 
+    const formatDate = (date) => {
+        return date.toLocaleDateString("fa-IR", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        });
+    };
+
     const handleFilterChange = (type) => {
         const [startDate, endDate] = calculateDateRange(type);
 
-        console.log("startDate","endDate",startDate,endDate)
+        const formattedStartDate = formatDate(startDate);
+        const formattedEndDate = formatDate(endDate);
 
         // Update calendar with new dates
         setValues([
-            new DateObject({ date: startDate, calendar: persian, locale: persian_fa }),
-            new DateObject({ date: endDate, calendar: persian, locale: persian_fa })
+            new DateObject({ date: formattedStartDate, calendar: persian, locale: persian_fa }),
+            new DateObject({ date: formattedEndDate, calendar: persian, locale: persian_fa })
         ]);
 
+        console.log("startDate","endDate",formattedStartDate,formattedEndDate)
+        console.log("startDate","endDate",values)
         // Update daysDates in Gregorian format
-        setDaysDates([startDate, endDate]);
+        setDaysDates([formattedStartDate, formattedEndDate]);
     };
 
     return (
@@ -394,32 +394,43 @@ const SitaData = (props) =>
                         {/*        </div>)}*/}
                         {/*</div>*/}
 
-                        <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px]
-                                                         rounded-[8px]  flex flex-row items-center justify-between w-[163px] relative" onClick={()=>handleSelectiveOpen()}>
+                        <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
+                        flex flex-row items-center justify-between min-w-[163px] relative" onClick={()=>handleSelectiveOpen()}>
                             <img src="/images/Asset/map/View1/CalendarBlank.svg"
                                 alt="" />
+                            {/*{*/}
+                            {/*    daysDates?.length === 1 &&*/}
+                            {/*    <span className="text-nowrap">*/}
+                            {/*           {daysDates[0]}*/}
+                            {/*    </span>*/}
+                            {/*}*/}
+
+                            {/*{*/}
+                            {/*    daysDates?.length === 2 &&*/}
+                            {/*    <span className="text-nowrap">*/}
+                            {/*           {daysDates[0]}-{daysDates[1]}*/}
+                            {/*    </span>*/}
+                            {/*}*/}
 
 
-
-                                {
-                                    openSelectiveIndex ===1 &&
-                                    <span className="text-nowrap">
+                            {daysDates.length<1 && openSelectiveIndex === 1 &&
+                                <span className="text-nowrap">
                                        {t("this week")}
                                     </span>
-                                }
-                                {
-                                    openSelectiveIndex ===2 &&
+                            }
+                            {
+                             daysDates.length<1 && openSelectiveIndex ===2 &&
                                     <span className="text-nowrap">
                                        {t("this Month")}
                                     </span>
-                                }
+                             }
 
-                                {
-                                    openSelectiveIndex ===3 &&
+                             {
+                             daysDates.length<1 && openSelectiveIndex ===3 &&
                                     <span className="text-nowrap">
                                        {t("this Year")}
                                     </span>
-                                }
+                             }
 
 
 
