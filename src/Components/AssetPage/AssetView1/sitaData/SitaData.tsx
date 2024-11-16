@@ -16,6 +16,7 @@ const SitaData = (props) => {
 
 
 
+
     const [calenderSelection, setCalenderSelection] = useState(1)
     const [siteData, setSiteData] = useState([])
     const [siteTypesOpen, setSiteTypesOpen] = useState(false)
@@ -28,6 +29,7 @@ const SitaData = (props) => {
     const [cityCount, setCityCount] = useState(null)
     const [totaldata, setTotaldata] = useState(null)
     const [dataTraffic,setDataTraffic]=useState(null)
+    const [costData,setCostData]=useState(null)
 
     const [cellsSitePerProvince, setCellsSitePerProvince] = useState()
     const [values, setValues] = useState([
@@ -127,92 +129,6 @@ const SitaData = (props) => {
 
         promises.push(promise1);
 
-        // Fetch cells count per province data
-        const promise2 = fetchAndCacheData("cells_count_cache_datatat", "http://10.15.90.87:5001/api/assets/cells_count_per_province")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("kljdsldjfslk", data);
-                setCellsCount(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching cells count per province data:", error);
-            });
-
-        promises.push(promise2);
-
-        // Fetch cities per province data
-        const promise3 = fetchAndCacheData("cities_per_province_cache", "http://10.15.90.87:5001/api/assets/cities")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("Cities per province data:", data);
-                setCityCount(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching cities per province data:", error);
-            });
-
-        promises.push(promise3);
-
-        // Fetch traffic per province data
-        const promise4 = fetchAndCacheData("traffic_per_province_cache", "http://10.15.90.87:5001/api/assets/traffic_per_province")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("Traffic per province data:", data);
-                setTotalTraffic(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching traffic per province data:", error);
-            });
-
-        promises.push(promise4);
-
-        // Fetch traffic per province data
-        const promise5 = fetchAndCacheData("traffic_per_all_country",
-            "http://10.15.90.87:5001/api/assets/traffic_total")
-            .then(data => {
-                // Handle the data as needed
-                setTotaldata(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching traffic per province data:", error);
-            });
-
-        promises.push(promise5);
-
-
-        const promise6 = fetchAndCacheData("sites_count_per_country",
-            "http://10.15.90.87:5001/api/assets/sites_count_per_tech")
-            .then(data2 => {
-                // Handle the data as needed
-                props.setData(data2);
-
-            })
-            .catch(error => {
-                console.log(error)
-            });
-
-        promises.push(promise6);
-
-        const promise7 = fetchAndCacheData("cell_counts_per_all_country",
-            "http://10.15.90.87:5001/api/assets/cells_count")
-            .then(data2 => {
-                // Handle the data as needed
-                // setDataPerProvince(data2);
-                setCellsSitePerProvince(data2)
-
-            })
-            .catch(error => {
-                // Handle errors
-                console.log(error)
-            });
-
-        promises.push(promise7);
-
-
         // Wait for all promises to resolve
         Promise.all(promises)
             .then(() => {
@@ -292,7 +208,9 @@ const SitaData = (props) => {
     // }, [props.siteNameClicked]);
 
 
-    useEffect(() => {
+    useEffect(() =>
+    {
+
         const formatDate = (dateStr) => {
             const date = new Date(dateStr);
             const year = date.getFullYear();
@@ -326,7 +244,6 @@ const SitaData = (props) => {
             fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=${todayFormatted1}&toDate=${todayFormatted1}`)
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) => {
-
                     setSiteData(res);
                 })
                 .catch((error) => {
@@ -336,6 +253,17 @@ const SitaData = (props) => {
             fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${todayFormatted2}&toDate=${todayFormatted2}`)
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) => {
+                    setDataTraffic(res);
+                })
+                .catch((error) => {
+                    console.error("Error fetching site data:", error);
+                });
+
+
+            fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${todayFormatted1}&toDateTime=${todayFormatted1}`)
+                .then((res) => res.json())  // Parse as JSON
+                .then((res) =>
+                {
                     console.log("Site Data for", props.siteNameClicked, res);
                     setDataTraffic(res);
                 })
@@ -359,6 +287,17 @@ const SitaData = (props) => {
             fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${fromDate2}&toDate=${toDate2}`)
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) => {
+
+                    setCostData(res);
+                })
+                .catch((error) => {
+                    console.error("Error fetching site data:", error);
+                });
+
+            fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${fromDate}&toDateTime=${toDate}`)
+                .then((res) => res.json())  // Parse as JSON
+                .then((res) =>
+                {
                     console.log("Site Data for", props.siteNameClicked, res);
                     setDataTraffic(res);
                 })
@@ -368,9 +307,13 @@ const SitaData = (props) => {
         }
     }, [props.siteNameClicked, daysDates]);
 
+
     const format = (number) =>
     {
-        const formattedNumber = numberFormatter.format(number);
+        // console.log("number",number)
+        const numberFloat=parseFloat(number);
+        // console.log("numberFloat",numberFloat)
+        const formattedNumber = numberFormatter.format(numberFloat);
         return formattedNumber;
     }
 
@@ -449,18 +392,18 @@ const SitaData = (props) => {
 
 
                 </div>
-                <div className="total_map_data_item_group">
-                    {/*<div className="total_map_data_item_spp1">*/}
-                    {/*    <h3>Site Counts</h3>*/}
-                    {/*    <p>{format(sitePoints.length)}*/}
+                {/*<div className="total_map_data_item_group">*/}
+                {/*    /!*<div className="total_map_data_item_spp1">*!/*/}
+                {/*    /!*    <h3>Site Counts</h3>*!/*/}
+                {/*    /!*    <p>{format(sitePoints.length)}*!/*/}
 
-                    {/*    </p>*/}
-                    {/*</div>*/}
-                    <div className="total_map_data_item_spp22222">
-                        <h3>Cell Counts</h3>
-                        <p>data is not available</p>
-                    </div>
-                </div>
+                {/*    /!*    </p>*!/*/}
+                {/*    /!*</div>*!/*/}
+                {/*    /!*<div className="total_map_data_item_spp22222">*!/*/}
+                {/*    /!*    <h3>Cell Counts</h3>*!/*/}
+                {/*    /!*    <p>data is not available</p>*!/*/}
+                {/*    /!*</div>*!/*/}
+                {/*</div>*/}
                 <div className="data_row_box">
                     <h2>{t("Total traffic")}</h2>
                         <div className="total_map_data_item_for_quantity_32">
@@ -494,61 +437,64 @@ const SitaData = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="data_row_box">
+                            <div className="data_row_box_2">
                                 <h2>Costs and revenue</h2>
-                                <div className="row_items_traffic">
-                                    <div className="total_map_data_item_for_quantity">
-                                        <div className="total_map_data_item_2">
-                                            <h3>{t("Cost")}</h3>
-                                            {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
-                                            <p>data is not available</p>
+                                <div className="total_map_data_item_2">
+                                    <div className="row_items_traffic">
+                                        <div className="total_map_data_item_for_quantity">
+                                            <div className="total_map_data_item_2">
+                                                <h3>{t("Cost")}</h3>
+                                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
+                                                {/*<p>data is not available</p>*/}
+                                                <p>{costData ? format(costData?.siteTotalFixCostData) : "data is not available"}</p>
+                                            </div>
+                                            <div className="total_map_data_item_3">
+                                            <Rate value="4"/>
+                                                <h6>تومان</h6>
+                                            </div>
                                         </div>
-                                        <div className="total_map_data_item_3">
-                                            <Rate value="4" />
-                                            <h6>تومان</h6>
-                                        </div>
-                                    </div>
-                                    <div className="total_map_data_item_for_quantity">
-                                        <div className="total_map_data_item_2">
-                                            <h3>{t("Margin")}</h3>
+                                        <div className="total_map_data_item_for_quantity">
+                                            <div className="total_map_data_item_2">
+                                                <h3>{t("Margin")}</h3>
 
-                                            {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
-                                            <p>data is not available</p>
+                                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
+                                                <p>data is not available</p>
+                                            </div>
+                                            <div className="total_map_data_item_3">
+                                                <Rate value="4"/>
+                                                <h6>%</h6>
+                                            </div>
                                         </div>
-                                        <div className="total_map_data_item_3">
-                                            <Rate value="4" />
-                                            <h6>%</h6>
-                                        </div>
-                                    </div>
-                                    <div className="total_map_data_item_for_quantity">
-                                        <div className="total_map_data_item_2">
-                                            <h3>{t("Profit")}</h3>
+                                        <div className="total_map_data_item_for_quantity">
+                                            <div className="total_map_data_item_2">
+                                                <h3>{t("Profit")}</h3>
 
-                                            {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
-                                            <p>data is not available</p>
+                                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
+                                                <p>data is not available</p>
+                                            </div>
+                                            <div className="total_map_data_item_3">
+                                                <Rate value="4"/>
+                                                <h6>تومان</h6>
+                                            </div>
                                         </div>
-                                        <div className="total_map_data_item_3">
-                                            <Rate value="4" />
-                                            <h6>تومان</h6>
-                                        </div>
-                                    </div>
-                                    <div className="total_map_data_item_for_quantity">
-                                        <div className="total_map_data_item_2">
-                                            <h3>{t("Total revenue")}</h3>
+                                        <div className="total_map_data_item_for_quantity">
+                                            <div className="total_map_data_item_2">
+                                                <h3>{t("Total revenue")}</h3>
 
-                                            {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
-                                            <p>{siteData ? format(siteData?.revenue) : "data is not available"}</p>
-                                        </div>
-                                        <div className="total_map_data_item_3">
-                                            <Rate value="4" />
-                                            <h6>تومان</h6>
+                                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
+                                                <p>{siteData ? format(siteData?.revenue) : "data is not available"}</p>
+                                            </div>
+                                            <div className="total_map_data_item_3">
+                                                <Rate value="4"/>
+                                                <h6>تومان</h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             </div>
-                        </div>
-                       {/*:*/}
-                       {/* <div>loading</div> */}
+                            {/*:*/}
+                            {/* <div>loading</div> */}
 
                 </div>
             </div>

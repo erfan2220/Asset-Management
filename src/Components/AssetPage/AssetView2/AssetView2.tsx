@@ -9,8 +9,7 @@ const AssetView2 = ({setSiteNameClicked, provinceName, cityName, mapIranData, se
     return (
         <Suspense fallback={<div>Loading Map...</div>}>
             {
-                (provinceName === "" && cityName === "") ? (
-                    <IranMap
+                (provinceName === "" && cityName === "") ? (<IranMap
                         data={mapIranData}
                         colorRange="78, 132, 243"
                         width={600}
@@ -20,9 +19,7 @@ const AssetView2 = ({setSiteNameClicked, provinceName, cityName, mapIranData, se
                         selectedProvinceColor="#3bcc6d"
                         tooltipTitle="Traffic CS: "
                         selectProvinceHandler={selectProvinceHandler}
-                    />
-                ) : (provinceName !== "" && cityName === "") ? (
-                    <IranProvincesMap
+                    />) : (provinceName !== "" && cityName === "") ? (<IranProvincesMap
                         province={selectedProvince}
                         provinceData={mapProvincesData}
                         colorRange="78, 132, 243"
@@ -34,12 +31,9 @@ const AssetView2 = ({setSiteNameClicked, provinceName, cityName, mapIranData, se
                         selectProvinceHandler={selectProvinceHandler2}
                         setCityName2={setCityName}
                         cityName2={cityName}
-                    />
-                ) : (
-                    <div className="w-full h-full">
+                    />) : (<div className="w-full h-full">
                         <MapPerProvince cityName={cityName} ProvinceName={provinceName} setSiteNameClicked={setSiteNameClicked} />
-                    </div>
-                )
+                    </div>)
             }
         </Suspense>
     );

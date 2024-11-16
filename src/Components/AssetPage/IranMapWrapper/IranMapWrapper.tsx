@@ -20,11 +20,14 @@ const IranProvincesMap: React.memo<ProvinceType> = ({
                                                       selectProvinceHandler,
                                                       setCityName2,
                                                         cityName2
-                                                    }) => {
+                                                    }) =>
+{
+
+
     const mapRef = useRef(null)
 
-console.log("teststst",province)
     const [cityName, setCityName] = useState<null | string>(null)
+
     const [selectedCity, setSelectedCity] = useState<selectedCityType>({
         name: '',
         faName: '',
@@ -34,8 +37,6 @@ console.log("teststst",province)
         return text.trim()
     }
 
-
-
     const pathClickedHandle = (pathName: string) =>
     {
 
@@ -43,7 +44,7 @@ console.log("teststst",province)
             .flatMap((province) => province)
             .find((province) => trimValue(province.cityFaName) === pathName)
 
-    setCityName2(selectedCityData?.cityName)
+        setCityName2(selectedCityData?.cityName)
 
         setSelectedCity({
             faName: selectedCityData?.cityFaName,

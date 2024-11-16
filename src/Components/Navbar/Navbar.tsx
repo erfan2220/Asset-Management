@@ -20,7 +20,11 @@ const Navbar = () => {
 
     return (
         <div className="flex flex-row items-center bg-[#14141A] justify-between pl-[32px] pr-[20px] py-[20px]">
-            <h2 className="text-white">Logo EAM</h2>
+            <div className="flex flex-row item_center gap-[4px]">
+                <img src="./images/Navbar/logo.svg" alt=""/>
+                <h2 className="text-white">EAM</h2>
+            </div>
+
 
             <div className="flex flex-row items-center gap-[20px]">
                 <select

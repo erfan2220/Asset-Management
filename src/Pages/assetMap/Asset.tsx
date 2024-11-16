@@ -1,23 +1,16 @@
 //@ts-nocheck
 import React, {useEffect, useRef, useState} from "react";
-import { IranMap } from 'react-iran-map'
-// import IranMap from "../../Components/AssetPage/IranMap/iranMap";
 import Rate from "../../Components/AssetPage/dataCharts/rateColor/Rate"
 import FilterMap from "../../Components/AssetPage/filterMap/FilterMap";
 import {motion} from "framer-motion"
 import "./Asset.css"
-import IranProvincesMap from "../../Components/AssetPage/IranMapWrapper/IranMapWrapper";
 import { mapData as initialMapData, mapDataIran as initialMapDataIran } from "../../database/IranMapWrapperData/mapData.ts";
 import {provinceNameVariations} from "../../database/dictionaryProvinces/dictionaryProvinces.ts";
-// import provincesImages from "../../database/ProvincesNames/provinces";
 import {provinceMapping} from "../../database/dictionaryProvinces/provinceMapping"
-import MapPerProvince from "../../Components/MapPage/MapPerProvince";
 import Filters from "../../Components/AssetMap/Filters/Filters";
-import AssetView1 from "../../Components/AssetPage/AssetView1/AssetView1";
-import AssetView3 from "../../Components/AssetPage/AssetView3/AssetView3";
 import AssetView2 from "../../Components/AssetPage/AssetView2/AssetView2";
 import ActiveTab1Country from "../../Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country";
-import {Calendar, DateObject} from "react-multi-date-picker";
+import { DateObject} from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import {Shamsi} from "basic-shamsi";
@@ -26,9 +19,6 @@ import {useSharedContext} from "../../Components/AssetPage/filterMap/SharedSiteT
 import SitaData from "../../Components/AssetPage/AssetView1/sitaData/SitaData";
 import { t } from "../../translationUtil";
 import Cookies from 'js-cookie';
-
-
-import {tab} from "@testing-library/user-event/dist/tab";
 import ActiveTab2Country from "../../Components/AssetPage/AssetView1/ActiveTab2Country/ActiveTab2Country";
 import TechMap from "../../Components/AssetPage/AssetView3/TechMap";
 
@@ -36,13 +26,11 @@ import TechMap from "../../Components/AssetPage/AssetView3/TechMap";
 const Assets = () =>
 {
     const isRTL = Cookies.get('language') === 'fa';
-
-    const [activeIndex,setActiveIndex]=useState(2)
     const [data, setData] = useState(null);
     const [dataPerProvince, setDataPerProvince] = useState(null);
     const [provinceName, setProvinceName] = useState("");
     const [cityName,setCityName]=useState("")
-    const [  selectedProvince,setSelectedProvince] = useState("")
+    const [selectedProvince,setSelectedProvince] = useState("")
     const [sitePoints, setSitePoints] = useState([]);
     const [pupop,setPupop]=useState(false)
     const [loading,setLoading]=useState(false)
@@ -674,7 +662,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                  techLayer={techLayer} setTechLayer={setTechLayer}
                                                                  techNames={techNames} setTechNames={setTechNames}
                                                         />
-                                                            <div >
+                                                            <div>
                                                                 <FilterMap setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
                                                             </div>
                                                     </motion.div>

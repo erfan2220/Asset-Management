@@ -342,6 +342,15 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    margin-top: 24px;
+    gap: 8px;
+}
+.row_items_traffic_2
+{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin: 24px;
     gap: 8px;
 }
 .total_map_data_item_3
@@ -532,14 +541,15 @@
     justify-content: center;
     border-radius: 6px;
     gap: 16px;
-    margin: 24px;
+    margin: 0 24px;
     direction: ltr;
 }
-.data_row_box
+.data_row_box_2
 {
-    padding: 24px;
+
     display: flex;
     flex-direction: column;
+    margin-top: 24px;
 
 }
 
