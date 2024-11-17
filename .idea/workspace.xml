@@ -7,6 +7,7 @@
     <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="Filter Zamani">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/dataCharts/rateColor/Rate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/dataCharts/rateColor/Rate.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +22,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop-v2.3" />
+        <entry key="$PROJECT_DIR$" value="develop-v2.5" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,7 +57,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop-v2.4&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop-v2.5-backup&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.20.4&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/EH4840132046/React projects/Asset-front/Asset-front/public/images&quot;,
@@ -124,7 +125,8 @@
       <workItem from="1731401427647" duration="1153000" />
       <workItem from="1731409952725" duration="18000" />
       <workItem from="1731410026311" duration="7058000" />
-      <workItem from="1731417874415" duration="27784000" />
+      <workItem from="1731417874415" duration="31728000" />
+      <workItem from="1731825210866" duration="62000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />
@@ -262,7 +264,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731748428040</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Filter Zamani">
+      <option name="closed" value="true" />
+      <created>1731760637592</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1731760637592</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
