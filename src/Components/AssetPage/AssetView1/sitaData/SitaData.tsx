@@ -341,7 +341,7 @@ const SitaData = (props) =>
     }
 
     const formatDate = (date) => {
-        return date.toLocaleDateString("fa-IR", {
+        return date.toLocaleDateString("en-US", {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
@@ -355,13 +355,13 @@ const SitaData = (props) =>
         const formattedEndDate = formatDate(endDate);
 
         // Update calendar with new dates
-        setValues([
-            new DateObject({ date: formattedStartDate, calendar: persian, locale: persian_fa }),
-            new DateObject({ date: formattedEndDate, calendar: persian, locale: persian_fa })
-        ]);
+        // setValues([
+        //     new DateObject({ date: formattedStartDate, calendar: persian, locale: persian_fa }),
+        //     new DateObject({ date: formattedEndDate, calendar: persian, locale: persian_fa })
+        // ]);
 
         console.log("startDate","endDate",formattedStartDate,formattedEndDate)
-        console.log("startDate","endDate",values)
+        // console.log("startDate","endDate",values)
         // Update daysDates in Gregorian format
         setDaysDates([formattedStartDate, formattedEndDate]);
     };
@@ -398,19 +398,19 @@ const SitaData = (props) =>
                         flex flex-row items-center justify-between min-w-[163px] relative" onClick={()=>handleSelectiveOpen()}>
                             <img src="/images/Asset/map/View1/CalendarBlank.svg"
                                 alt="" />
-                            {/*{*/}
-                            {/*    daysDates?.length === 1 &&*/}
-                            {/*    <span className="text-nowrap">*/}
-                            {/*           {daysDates[0]}*/}
-                            {/*    </span>*/}
-                            {/*}*/}
+                            {
+                                daysDates?.length === 1 &&
+                                <span className="text-nowrap">
+                                       {daysDates[0]}
+                                </span>
+                            }
 
-                            {/*{*/}
-                            {/*    daysDates?.length === 2 &&*/}
-                            {/*    <span className="text-nowrap">*/}
-                            {/*           {daysDates[0]}-{daysDates[1]}*/}
-                            {/*    </span>*/}
-                            {/*}*/}
+                            {
+                                daysDates?.length === 2 &&
+                                <span className="text-nowrap">
+                                       {daysDates[0]}-{daysDates[1]}
+                                </span>
+                            }
 
 
                             {daysDates.length<1 && openSelectiveIndex === 1 &&
@@ -529,8 +529,8 @@ const SitaData = (props) =>
                                             {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
 
                                         </div>
-                                        <div className="total_map_data_item_3">
-                                            <Rate value="4" />
+                                        <div className="total_map_data_item_3 ">
+                                            <Rate value="4"/>
                                             <h6>TB</h6>
                                         </div>
                                     </div>
