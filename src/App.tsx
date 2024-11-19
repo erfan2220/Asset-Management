@@ -101,6 +101,7 @@ function App() {
                   <Route path="network" element={<Network />} />
                   <Route
                     path="asset-categories"
+                    
                     element={<AssetCategories />}
                   />
                   <Route
