@@ -982,7 +982,7 @@ const AssetView1 = () => {
                                                                     </div>
                                                                 </div>
                                                                 <div className="data_row_box">
-                                                                    <h2>{t("Total traffic")}</h2>
+                                                                    <h2>{t("Traffic")}</h2>
                                                                     <div className="row_items_traffic">
                                                                         <div className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
@@ -993,8 +993,8 @@ const AssetView1 = () => {
                                                                                 }</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value={+4} />
-                                                                                <h6>TB</h6>
+                                                                                <Rate value={+4}  dayDates={daysDates}/>
+                                                                                <h6>GB</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
@@ -1006,8 +1006,8 @@ const AssetView1 = () => {
                                                                                 }</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value={+4} />
-                                                                                <h6>TB</h6>
+                                                                                <Rate value={+4} dayDates={daysDates}/>
+                                                                                <h6>ERLANG</h6>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1015,7 +1015,22 @@ const AssetView1 = () => {
                                                                 <div className="data_row_box">
                                                                     <h2>{t("Costs and revenue")}</h2>
                                                                     <div className="row_items_traffic">
-                                                                        <div className="total_map_data_item_for_quantity">
+                                                                        <div
+                                                                            className="total_map_data_item_for_quantity">
+                                                                            <div className="total_map_data_item_2">
+                                                                                <h3>{t("Total revenue")}</h3>
+                                                                                <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
+                                                                                    filter_revenue_per_province("Khouzestan") :
+                                                                                    filter_revenue_per_province(provinceName))) : "data is not available"
+                                                                                }</p>
+                                                                            </div>
+                                                                            <div className="total_map_data_item_3">
+                                                                                <Rate value="4" dayDates={daysDates}/>
+                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
                                                                                 <h3>{t("Cost")}</h3>
                                                                                 <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
@@ -1025,24 +1040,13 @@ const AssetView1 = () => {
 
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="4" />
-                                                                                <h6>تومان</h6>
+                                                                                <Rate value="4" dayDates={daysDates}/>
+                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="total_map_data_item_for_quantity">
-                                                                            <div className="total_map_data_item_2">
-                                                                                <h3>{t("Margin")}</h3>
-                                                                                <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
-                                                                                    filter_margin_per_province("Khouzestan") :
-                                                                                    filter_margin_per_province(provinceName))) : "data is not available"
-                                                                                }</p>
-                                                                            </div>
-                                                                            <div className="total_map_data_item_3">
-                                                                                <Rate value="4" />
-                                                                                <h6>%</h6>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="total_map_data_item_for_quantity">
+
+                                                                        <div
+                                                                            className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
                                                                                 <h3>{t("Profit")}</h3>
                                                                                 <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
@@ -1051,23 +1055,25 @@ const AssetView1 = () => {
                                                                                 }</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="4" />
-                                                                                <h6>تومان</h6>
+                                                                                <Rate value="4" dayDates={daysDates}/>
+                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="total_map_data_item_for_quantity">
+                                                                        <div
+                                                                            className="total_map_data_item_for_quantity">
                                                                             <div className="total_map_data_item_2">
-                                                                                <h3>{t("Total revenue")}</h3>
+                                                                                <h3>{t("Margin")}</h3>
                                                                                 <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
-                                                                                    filter_revenue_per_province("Khouzestan") :
-                                                                                    filter_revenue_per_province(provinceName))) : "data is not available"
+                                                                                    filter_margin_per_province("Khouzestan") :
+                                                                                    filter_margin_per_province(provinceName))) : "data is not available"
                                                                                 }</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="4" />
-                                                                                <h6> تومان</h6>
+                                                                                <Rate value="4" dayDates={daysDates}/>
+                                                                                <h6>%</h6>
                                                                             </div>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1078,14 +1084,18 @@ const AssetView1 = () => {
                                                 {!pupop && (
                                                     <>
                                                         <div>
-                                                            <ActiveTab1Country setData={setData} data={data} provinceName={provinceName} setProvinceName={setProvinceName} />
+                                                            <ActiveTab1Country setData={setData} data={data}
+                                                                               provinceName={provinceName}
+                                                                               setProvinceName={setProvinceName}/>
                                                         </div>
                                                         <div className="total_map_data">
                                                             <div className="header_total_map_data_2">
                                                                 <div className="header_total_map_data_1">
-                                                                    <img src="./images/Asset/map/View1/total_svg.svg" alt="" />
+                                                                    <img src="./images/Asset/map/View1/total_svg.svg"
+                                                                         alt=""/>
                                                                     <h2>{t("Total statistics")} </h2>
                                                                 </div>
+
                                                                 <div className="flex flex-row items-center gap-[20px]">
                                                                     <div className="relative border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px]
                                                                      rounded-[8px]  flex flex-row items-center justify-between w-[130px] pl-[16px] pr-[16px]"
@@ -1165,7 +1175,7 @@ const AssetView1 = () => {
                                                                 </div>
                                                             </div>
                                                             <div className="data_row_box">
-                                                                <h2>{t("Total traffic")}</h2>
+                                                                <h2>{t("Traffic")}</h2>
                                                                 <div className="row_items_traffic">
                                                                     <div className="total_map_data_item_for_quantity_3">
                                                                         <div className="total_map_data_item_2">
@@ -1173,8 +1183,8 @@ const AssetView1 = () => {
                                                                             <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4" />
-                                                                            <h6>TB</h6>
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6>GB</h6>
                                                                         </div>
                                                                     </div>
                                                                     <div className="total_map_data_item_for_quantity">
@@ -1184,8 +1194,8 @@ const AssetView1 = () => {
                                                                         </div>
 
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4" />
-                                                                            <h6>TB</h6>
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6>ERLNAG</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1195,44 +1205,49 @@ const AssetView1 = () => {
                                                                 <div className="row_items_traffic">
                                                                     <div className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
+                                                                            <h3>{t("Total revenue")}</h3>
+                                                                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>
+                                                                        </div>
+                                                                        <div className="total_map_data_item_3">
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div className="total_map_data_item_for_quantity">
+                                                                        <div className="total_map_data_item_2">
                                                                             <h3>{t("Cost")}</h3>
                                                                             <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4" />
-                                                                            <h6>تومان</h6>
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6 className="text-nowrap">میلیون تومان</h6>
                                                                         </div>
                                                                     </div>
-                                                                    <div className="total_map_data_item_for_quantity">
-                                                                        <div className="total_map_data_item_2">
-                                                                            <h3>{t("Margin")}</h3>
-                                                                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>
-                                                                        </div>
-                                                                        <div className="total_map_data_item_3">
-                                                                            <Rate value="4" />
-                                                                            <h6>%</h6>
-                                                                        </div>
-                                                                    </div>
+
+
                                                                     <div className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
                                                                             <h3>{t("Profit")}</h3>
                                                                             <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4" />
-                                                                            <h6>تومان</h6>
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6 className="text-nowrap">میلیون تومان</h6>
                                                                         </div>
                                                                     </div>
+
                                                                     <div className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
-                                                                            <h3>{t("Total revenue")}</h3>
-                                                                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>
+                                                                            <h3>{t("Margin")}</h3>
+                                                                            <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4" />
-                                                                            <h6>تومان</h6>
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6>%</h6>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1247,7 +1262,7 @@ const AssetView1 = () => {
                     </div>
                 </div>
             </div> : <div>
-                <LoadingProgress />
+                <LoadingProgress/>
             </div>);
 };
 

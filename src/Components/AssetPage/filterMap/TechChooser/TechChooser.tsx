@@ -21,7 +21,6 @@ interface Point {
 
 const TechChooser : React.FC<{ points: Point[],setPoints: (points: Point[]) => void, setSiteNameClicked: (siteName: string) => void }> = ({ points,setPoints, setSiteNameClicked }) =>
 {
-
     const mapRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.MarkerClusterGroup | null>(null);
     const drawnItems = useRef<L.FeatureGroup>(new L.FeatureGroup()).current;
@@ -103,19 +102,26 @@ const TechChooser : React.FC<{ points: Point[],setPoints: (points: Point[]) => v
 
 
 
+    // const filterMarkersInPolygon = useCallback((polygonLayer) => {
+    //     // const polygonLatLngs = polygonLayer.getLatLngs()[0];
+    //     // const polygon = L.polygon(polygonLatLngs);
+    //
+    //     const polygon = L.polygon(polygonLayer.getLatLngs()[0]);
+    //
+    //     const pointsWithinPolygon = points.filter(point => {
+    //         const pointMarker = L.marker([point.latitude, point.longitude]);
+    //         return isMarkerInsidePolygon(pointMarker, polygon);
+    //     });
+    //
+    //     addMarkers(pointsWithinPolygon.length ? pointsWithinPolygon : points);
+    // }, [points]);
+
     const filterMarkersInPolygon = useCallback((polygonLayer) => {
-        // const polygonLatLngs = polygonLayer.getLatLngs()[0];
-        // const polygon = L.polygon(polygonLatLngs);
-
-        const polygon = L.polygon(polygonLayer.getLatLngs()[0]);
-
-        const pointsWithinPolygon = points.filter(point => {
-            const pointMarker = L.marker([point.latitude, point.longitude]);
-            return isMarkerInsidePolygon(pointMarker, polygon);
-        });
-
+        const bounds = polygonLayer.getBounds(); // Get bounding box of the polygon
+        const pointsWithinPolygon = points.filter(point => bounds.contains([point.latitude, point.longitude]));
         addMarkers(pointsWithinPolygon.length ? pointsWithinPolygon : points);
     }, [points]);
+
 
     const isMarkerInsidePolygon = (marker: L.Marker, poly: L.Polygon) => {
         const polyPoints = poly.getLatLngs()[0];

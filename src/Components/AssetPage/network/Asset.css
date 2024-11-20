@@ -300,7 +300,7 @@
     justify-content: space-between;
     border-radius: 6px;
     width: 100%;
-    height: 145px;
+    height: 86px;
     gap: 15px;
     direction: ltr;
     background-color: #EFF7FF;
@@ -312,7 +312,7 @@
     align-items: center;
     border-radius: 6px;
     width: 100%;
-    height: 145px;
+    height: 90px;
     gap: 15px;
     direction: ltr;
     justify-content: space-between;
@@ -349,12 +349,25 @@
     grid-template-columns: repeat(2,1fr);
     gap: 8px;
 }
+
+.total_map_data_item_spp2 h3
+{
+    font-weight: 500;
+    font-size: 14px;
+    color: #757575;
+}
+.total_map_data_item_2 h3
+{
+    font-weight: 500;
+    font-size: 14px;
+    color: #757575;
+}
 .total_map_data_item_3
 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 18px;
+    gap: 8px;
     margin-right: 20px;
 }
 ._map_umwor_73 ._svg_umwor_265
@@ -417,7 +430,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 23px 24px 23px 24px;
+    padding: 12px 24px;
     justify-content: space-between;
     direction: ltr;
     background-color: #FFFFFF;
@@ -494,7 +507,7 @@
     border-radius: 6px;
     padding:16px 98px 24px 16px;
     justify-content: space-between;
-    gap: 16px;
+    gap: 8px;
     direction: ltr;
     background-color: #FFFFFF;
     border: 1px solid #E0E0E0;
@@ -521,7 +534,7 @@
     border-radius: 6px;
     padding: 16px 98px 24px 16px;
     border: 1px solid #E0E0E0;
-    gap: 16px;
+    gap: 8px;
     direction: ltr;
     background-color: #FFFFFF;
 }
@@ -533,13 +546,13 @@
     align-items: flex-start;
     justify-content: center;
     border-radius: 6px;
-    gap: 16px;
+    gap: 8px;
     margin: 24px;
     direction: ltr;
 }
 .data_row_box
 {
-    padding: 24px;
+    padding: 6px 24px;
 }
 
 .data_row_box h2
@@ -560,8 +573,8 @@
 }
 .total_map_data_item_3 h6
 {
-    font-size: 16px;
-    color: #757575;
+    font-size: 12px;
+    color: #212121;
     font-weight: 400;
     text-align: right;
 }
@@ -574,21 +587,21 @@
 
 .total_map_data_item_2 p
 {
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 700;
+    font-size: 20px;
     color: #212121;
 }
 
 .total_map_data_item_spp2 p
 {
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 700;
+    font-size: 20px;
     color: #212121;
 }
 .total_map_data_item_spp1 p
 {
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 700;
+    font-size: 20px;
     color: #212121;
 }
 

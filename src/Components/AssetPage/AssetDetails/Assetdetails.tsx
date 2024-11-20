@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -102,7 +103,7 @@ const AssetDetails = () => {
 
                     <div className="flex flex-row justify-between w-full">
                         <p className="text-sm text-gray-500 mb-4">Health</p>
-                        <Rate value={-8}/>
+                        <Rate value={-8} dayDates={[]}/>
                     </div>
                     <div style={{ width: 80, height: 80 }}>
                         <CircularProgressbar
@@ -121,7 +122,7 @@ const AssetDetails = () => {
                 <div className="bg-white py-[16px] px-[18px] rounded shadow-md flex flex-col items-center">
                     <div className="flex flex-row justify-between w-full">
                         <p className="text-sm text-gray-500 mb-4">Critically</p>
-                        <Rate value={+8}/>
+                        <Rate value={+8} dayDates={[]}/>
                     </div>
                     <div style={{ width: 80, height: 80 }}>
                         <CircularProgressbar
@@ -140,7 +141,7 @@ const AssetDetails = () => {
                 <div className="bg-white py-[16px] px-[18px] rounded shadow-md flex flex-col items-center">
                     <div className="flex flex-row justify-between w-full">
                         <p className="text-sm text-gray-500 mb-4">RIsk</p>
-                        <Rate value={+8}/>
+                        <Rate value={+8} dayDates={[]}/>
                     </div>
                     <div style={{ width: 80, height: 80 }}>
                         <CircularProgressbar

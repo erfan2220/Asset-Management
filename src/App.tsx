@@ -1,5 +1,4 @@
-
-//@ts-nocheck
+// //@ts-nocheck
 // import React, { lazy, Suspense, useEffect } from "react";
 // import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 // import Navbar from "./Components/Navbar/Navbar";
@@ -9,9 +8,9 @@
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 // import Cookies from "js-cookie";
 // import Login from "./Pages/Login";
-
+//
 // const queryClient = new QueryClient();
-
+//
 // const Asset = lazy(() => import("./Pages/AssetPage"));
 // const AssetMap = lazy(() => import("./Pages/assetMap/Asset"));
 // const Menu = lazy(() => import("./Pages/Menu/Menu"));
@@ -38,8 +37,8 @@
 //   () => import("./Components/DynamicTable/DynamicTable")
 // );
 // const AdminPanel = lazy(() => import("./Pages/AdminPanel/AdminPanel"));
-
-
+//
+//
 // const Layout = () => (
 //   <>
 //     <Navbar />
@@ -51,16 +50,16 @@
 //     </div>
 //   </>
 // );
-
+//
 // const PrivateRoute = ({ children }: { children: JSX.Element }) => {
 //   const authToken = Cookies.get("authToken");
 //   return authToken ? children : <Navigate to="/login" />;
 // };
-
+//
 // function App() {
 //   useEffect(() => {
 //     const language = Cookies.get("language") || "en";
-
+//
 //     if (language === "fa") {
 //       document.documentElement.setAttribute("dir", "rtl");
 //       document.documentElement.lang = "fa";
@@ -69,7 +68,7 @@
 //       document.documentElement.lang = "en";
 //     }
 //   }, []);
-
+//
 //   return (
 //     <QueryClientProvider client={queryClient}>
 //       <Provider store={store}>
@@ -87,7 +86,7 @@
 //               >
 //                 <Route index element={<AssetMap />} />
 //                 <Route path="/asset" element={<Asset />} />
-
+//
 //                 <Route path="/network" element={<Network />} />
 //                 <Route
 //                     path="/asset-categories"
@@ -116,10 +115,10 @@
 //                   /> */}
 //         <Route path="/AssetView3" element={<AssetView3 />} />
 //         <Route path="/DynamicTable" element={<DynamicTable />} />
-                
+//
 //               </Route>
 //               <Route path="/AdminPanel" element={<AdminPanel />} />
-
+//
 //             </Routes>
 //           </Suspense>
 //         </BrowserRouter>
@@ -128,7 +127,7 @@
 //     </QueryClientProvider>
 //   );
 // }
-
+//
 // export default App;
 
 
