@@ -563,6 +563,16 @@ console.log("siteNameClickded",siteNameClicked)
         setSearchCode(value)
     }
 
+
+
+    console.log("tech",tech)
+
+    const capitalizeFirstLetter=(item:string)=>
+    {
+        return String(item).charAt(0).toUpperCase() + String(item).slice(1);
+    }
+
+
     return(
         <div className="Assets_container">
 
@@ -612,7 +622,8 @@ console.log("siteNameClickded",siteNameClicked)
                                                         </motion.div>
                                                     </div>)
                                         }
-                                        {searchCode ==="" && view === 1 && (
+
+                                        {searchCode ==="" && (view === 1 )  && (
                                             <div>
                                                                 <motion.div className={
                                                                     (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
@@ -640,14 +651,17 @@ console.log("siteNameClickded",siteNameClicked)
                                                                             </div>
                                                                         </div>
                                                                     }
+
                                                                         <AssetView2 setSiteNameClicked ={setSiteNameClicked} provinceName={provinceName} cityName={cityName} selectedProvince={selectedProvince} selectProvinceHandler={selectProvinceHandler}
                                                                                     selectProvinceHandler2={selectProvinceHandler2}
                                                                                     setCityName={setCityName} mapProvincesData={mapProvincesData} mapIranData={mapIranData} />
+
+
                                                                 </motion.div>
                                             </div>
                                         )}
                                         {
-                                            searchCode ==="" && view === 2 && (
+                                            searchCode ==="" &&  view === 2 && (
                                                 <div>
                                                     <motion.div className={
                                                         (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
@@ -663,13 +677,15 @@ console.log("siteNameClickded",siteNameClicked)
                                                                  techNames={techNames} setTechNames={setTechNames}
                                                         />
                                                             <div>
-                                                                <FilterMap setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
+                                                                <FilterMap provinceName={provinceName} setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
                                                             </div>
                                                     </motion.div>
                                                 </div>)
                                         }
                                         {
-                                            searchCode ==="" && view === 3 && (
+                                            /*view 3 shows mix of technologies for when I have provinces or I don't have we must uses this component
+                                            * for example Tehran 2g and 3g sites or only 2G sites of All of Iran */
+                                            searchCode ===""  && view===3 && (
                                                 <div>
                                                     <motion.div className={
                                                         (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
@@ -684,12 +700,35 @@ console.log("siteNameClickded",siteNameClicked)
                                                                  techLayer={techLayer} setTechLayer={setTechLayer}
                                                                  techNames={techNames} setTechNames={setTechNames}
                                                         />
-                                                        <div >
-                                                            <TechMap setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
+                                                        <div>
+                                                            <TechMap provinceName={provinceName} setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
                                                         </div>
                                                     </motion.div>
                                                 </div>)
                                         }
+
+                                        {/*{*/}
+                                        {/*    searchCode ==="" && provinceName === "" && tech?.length>0 && (*/}
+                                        {/*        <div>*/}
+                                        {/*            <motion.div className={*/}
+                                        {/*                (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :*/}
+                                        {/*                    "pb-[0] overflow-hidden relative"*/}
+                                        {/*            }>*/}
+                                        {/*                <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}*/}
+                                        {/*                         setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}*/}
+                                        {/*                         setView={setView} view={view}*/}
+                                        {/*                         setItemName={setItemName} itemName={itemName}*/}
+                                        {/*                         searchCode={searchCode} setSearchCode={setSearchCode}*/}
+                                        {/*                         tech={tech}  setTech={setTech}*/}
+                                        {/*                         techLayer={techLayer} setTechLayer={setTechLayer}*/}
+                                        {/*                         techNames={techNames} setTechNames={setTechNames}*/}
+                                        {/*                />*/}
+                                        {/*                <div >*/}
+                                        {/*                    <TechMap setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>*/}
+                                        {/*                </div>*/}
+                                        {/*            </motion.div>*/}
+                                        {/*        </div>)*/}
+                                        {/*}*/}
 
 
                                         <div className="data_box_asset">
@@ -777,7 +816,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                             </div>
                                                             <div className="header_total_map_data">
                                                                 <img src="./images/Province.svg" alt=""/>
-                                                                <h2>{provinceName} </h2>
+                                                                <h2 className="text-[#000000] font-[600] ">{capitalizeFirstLetter(provinceName)} </h2>
                                                             </div>
                                                             <div className="total_map_data_item_group">
                                                                 <div className="total_map_data_item_spp1">
@@ -809,7 +848,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                 </div>
                                                             </div>
                                                             <div className="data_row_box">
-                                                                <h2>{t("Total traffic")}</h2>
+                                                                <h2>{t("Traffic")}</h2>
                                                                 <div className="row_items_traffic">
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
@@ -821,8 +860,8 @@ console.log("siteNameClickded",siteNameClicked)
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value={+4}/>
-                                                                            <h6>TB</h6>
+                                                                            <Rate value={+4} dayDates={daysDates}/>
+                                                                            <h6>GB</h6>
                                                                         </div>
                                                                     </div>
                                                                     <div
@@ -835,13 +874,13 @@ console.log("siteNameClickded",siteNameClicked)
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value={+4}/>
-                                                                            <h6>TB</h6>
+                                                                            <Rate value={+4} dayDates={daysDates}/>
+                                                                            <h6>ERLANG</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="data_row_box">
+                                                            <div className="data_row_box_2">
                                                                 <h2>{t("Costs and revenue")}</h2>
                                                                 <div className="row_items_traffic">
                                                                     <div
@@ -855,8 +894,8 @@ console.log("siteNameClickded",siteNameClicked)
 
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4"/>
-                                                                            <h6>تومان</h6>
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6 className="text-nowrap">میلیون تومان</h6>
                                                                         </div>
                                                                     </div>
                                                                     <div
@@ -869,7 +908,7 @@ console.log("siteNameClickded",siteNameClicked)
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4"/>
+                                                                            <Rate value="4" dayDates={daysDates}/>
                                                                             <h6>%</h6>
                                                                         </div>
                                                                     </div>
@@ -883,8 +922,8 @@ console.log("siteNameClickded",siteNameClicked)
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4"/>
-                                                                            <h6>تومان</h6>
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6 className="text-nowrap">میلیون تومان</h6>
                                                                         </div>
                                                                     </div>
                                                                     <div
@@ -897,8 +936,8 @@ console.log("siteNameClickded",siteNameClicked)
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
-                                                                            <Rate value="4"/>
-                                                                            <h6> تومان</h6>
+                                                                            <Rate value="4" dayDates={daysDates}/>
+                                                                            <h6 className="text-nowrap"> میلیون تومان</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>

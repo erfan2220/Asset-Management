@@ -1,6 +1,6 @@
 //@ts-nocheck
 import L from "leaflet";
-import { useCallback, useEffect, useRef } from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet.markercluster/dist/leaflet.markercluster";
@@ -26,13 +26,36 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
     const drawnItems = useRef<L.FeatureGroup>(new L.FeatureGroup()).current;
     const { setSiteData } = useSharedContext();
 
+    const [activeType, setActiveType] = useState<string | null>(null); // Tracks the active type (MSC/BSC clicked)
+    const [activeMarker, setActiveMarker] = useState<string | null>(null); // Tracks active marker by sitename or type
 
-    const iconMap: Record<string, string> = {
-        BTS: "./images/Asset/map/Filters/BTSGreen.svg",
-        BSC: "./images/Asset/map/Filters/BSCGreen.svg",
-        MSC: "./images/Asset/map/Filters/MSCGreen.svg",
+
+    const iconMap: Record<string, { default: string; clicked: string }> = {
+        MSC: {
+            default: "./images/Asset/map/Filters/MSCGreen.svg",
+            clicked: "./images/map/Topology/MSC-Clicked.svg",
+        },
+        BSC: {
+            default: "./images/Asset/map/Filters/BSCGreen.svg",
+            clicked: "./images/map/Topology/BSC-Clicked.svg",
+        },
+        RNC: {
+            default: "./images/Asset/map/Filters/BSCGreen.svg",
+            clicked: "./images/map/Topology/BSC-Clicked.svg",
+        },
+        BTS: {
+            default: "./images/Asset/map/Filters/BTSGreen.svg",
+            clicked: "./images/map/Topology/Site-unClicked.svg",
+        },
+        nodeb: {
+            default: "./images/Asset/map/Filters/BTSGreen.svg",
+            clicked: "./images/map/Topology/Site-unClicked.svg",
+        },
+        enoedb: {
+            default: "./images/Asset/map/Filters/BTSGreen.svg",
+            clicked: "./images/map/Topology/Site-unClicked.svg",
+        },
     };
-
 
     useEffect(() =>
     {
@@ -122,7 +145,8 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
         return inside;
     };
 
-    const addMarkers = (pointsToShow: Point[]) => {
+    const addMarkers = (pointsToShow: Point[]) =>
+    {
         if (markersRef.current) {
             markersRef.current.clearLayers();
         }
@@ -144,35 +168,90 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
             if (position && position.latitude != null && position.longitude != null) {
                 const { latitude, longitude, sitename, type } = position;
 
+                const isActive = activeMarker === sitename;
+                const iconUrl = isActive
+                    ? iconMap[type]?.clicked
+                    : iconMap[type]?.default;
+
                 const customIcon = L.icon({
-                    iconUrl: iconMap[type] || "./images/Asset/map/Filters/BTSGreen.svg",
+                    iconUrl: iconUrl || "./images/Asset/map/Filters/BTSGreen.svg",
                     iconSize: [32, 32],
                     iconAnchor: [16, 16],
                 });
 
                 const marker = L.marker([latitude, longitude], { icon: customIcon });
 
-                marker.on('click', () =>
-                {
+                // marker.on('click', () =>
+                // {
+                //     setSiteData({ siteName: sitename, latitude, longitude, type });
+                //     setSiteNameClicked(sitename);
+                //
+                //     mapRef.current.flyTo([latitude, longitude], 12, {
+                //         animate: true,
+                //         duration: 1 // Adjust duration if needed
+                //     });
+                //
+                //     if (type === 'MSC') {
+                //         marker.setIcon(
+                //             L.icon({
+                //                 iconUrl: "./images/Asset/map/Topology/MSC-Clicked.svg", // Use a different icon for clicked MSC
+                //                 iconSize: [32, 32],
+                //                 iconAnchor: [16, 16],
+                //             })
+                //         );
+                //     }
+                //     if (type === 'MSC') {
+                //         marker.setIcon(
+                //             L.icon({
+                //                 iconUrl: "./images/Asset/map/Topology/BSC-Clicked.svg", // Use a different icon for clicked MSC
+                //                 iconSize: [32, 32],
+                //                 iconAnchor: [16, 16],
+                //             })
+                //         );
+                //     }
+                //
+                //     mapRef.current.once('moveend', () => {
+                //         markersRef.current.clearLayers(); // Clear existing markers
+                //
+                //         if (type === 'MSC') {
+                //             const directionalBSCs = generateDirectionalPointsWithLines(latitude, longitude, 'BSC', mapRef.current);
+                //             addMarkers(directionalBSCs);
+                //         } else if (type === 'BSC') {
+                //             const directionalBTSs = generateDirectionalPointsWithLines(latitude, longitude, 'BTS', mapRef.current);
+                //             addMarkers(directionalBTSs);
+                //         }
+                //         console.log(`Arrived at ${sitename}, displaying nearby points.`);
+                //     });
+                // });
+
+                marker.on("click", () => {
+                    setActiveType(type); // Update active type
                     setSiteData({ siteName: sitename, latitude, longitude, type });
                     setSiteNameClicked(sitename);
 
+                    marker.setIcon(
+                        L.icon({
+                            iconUrl: iconMap[type]?.clicked || "./images/Asset/map/Filters/BTSGreen.svg",
+                            iconSize: [32, 32],
+                            iconAnchor: [16, 16],
+                        })
+                    );
+
                     mapRef.current.flyTo([latitude, longitude], 12, {
                         animate: true,
-                        duration: 1 // Adjust duration if needed
+                        duration: 1, // Adjust duration if needed
                     });
 
-                    mapRef.current.once('moveend', () => {
+                    // Add directional points when needed
+                    mapRef.current.once("moveend", () => {
                         markersRef.current.clearLayers(); // Clear existing markers
-
-                        if (type === 'MSC') {
-                            const directionalBSCs = generateDirectionalPointsWithLines(latitude, longitude, 'BSC', mapRef.current);
+                        if (type === "MSC") {
+                            const directionalBSCs = generateDirectionalPointsWithLines(latitude, longitude, "BSC");
                             addMarkers(directionalBSCs);
-                        } else if (type === 'BSC') {
-                            const directionalBTSs = generateDirectionalPointsWithLines(latitude, longitude, 'BTS', mapRef.current);
+                        } else if (type === "BSC" || type === "RNC") {
+                            const directionalBTSs = generateDirectionalPointsWithLines(latitude, longitude, "BTS");
                             addMarkers(directionalBTSs);
                         }
-                        console.log(`Arrived at ${sitename}, displaying nearby points.`);
                     });
                 });
 

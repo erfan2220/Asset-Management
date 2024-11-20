@@ -366,23 +366,23 @@ const ActiveTab1Country = (props) => {
                         <h2>{t("Total statistics")} </h2>
                     </div>
                     <div className="flex flex-row items-center gap-[20px]">
-                        <div className="relative border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px]
-                                                         rounded-[8px]  flex flex-row items-center justify-between w-[130px] pl-[16px] pr-[16px]"
-                            onClick={() => {
-                                setSiteTypesOpen(!siteTypesOpen)
-                            }}>
-                            <span>{t("Total")}</span>
-                            <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />
-                            {siteTypesOpen && (
-                                <div className="border-[1px] border-[#e0e0e0]flex flex-col
-                                                                 gap-[6px] absolute top-[50px] left-0 bg-[#fafafa] w-[100%] ">
-                                    <p className="hover:bg-blue-500 py-[8px] pl-[8px]">جاده
-                                        ای </p>
-                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]">شهری </p>
-                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> USO </p>
-                                    <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> WLL </p>
-                                </div>)}
-                        </div>
+                        {/*<div className="relative border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px]*/}
+                        {/*                                 rounded-[8px]  flex flex-row items-center justify-between w-[130px] pl-[16px] pr-[16px]"*/}
+                        {/*    onClick={() => {*/}
+                        {/*        setSiteTypesOpen(!siteTypesOpen)*/}
+                        {/*    }}>*/}
+                        {/*    <span>{t("Total")}</span>*/}
+                        {/*    <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />*/}
+                        {/*    {siteTypesOpen && (*/}
+                        {/*        <div className="border-[1px] border-[#e0e0e0]flex flex-col*/}
+                        {/*                                         gap-[6px] absolute top-[50px] left-0 bg-[#fafafa] w-[100%] ">*/}
+                        {/*            <p className="hover:bg-blue-500 py-[8px] pl-[8px]">جاده*/}
+                        {/*                ای </p>*/}
+                        {/*            <p className="hover:bg-blue-500  py-[8px] pl-[8px]">شهری </p>*/}
+                        {/*            <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> USO </p>*/}
+                        {/*            <p className="hover:bg-blue-500  py-[8px] pl-[8px]"> WLL </p>*/}
+                        {/*        </div>)}*/}
+                        {/*</div>*/}
 
                         <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px]
                                                          rounded-[8px]  flex flex-row items-center justify-between w-[163px]">
@@ -444,7 +444,7 @@ const ActiveTab1Country = (props) => {
                     </div>
                 </div>
                 <div className="data_row_box">
-                    <h2>{t("Total traffic")}</h2>
+                    <h2>{t("Traffic")}</h2>
                     <div className="row_items_traffic">
                         <div className="total_map_data_item_for_quantity_3">
                             <div className="total_map_data_item_2">
@@ -452,8 +452,8 @@ const ActiveTab1Country = (props) => {
                                 <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
-                                <Rate value="4" />
-                                <h6>TB</h6>
+                                <Rate value="4" dayDates={[]}/>
+                                <h6>GB</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
@@ -463,8 +463,8 @@ const ActiveTab1Country = (props) => {
                             </div>
 
                             <div className="total_map_data_item_3">
-                                <Rate value="4" />
-                                <h6>TB</h6>
+                                <Rate value="4" dayDates={[]}/>
+                                <h6>ERLANG</h6>
                             </div>
                         </div>
                     </div>
@@ -478,8 +478,8 @@ const ActiveTab1Country = (props) => {
                                 <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
-                                <Rate value="4" />
-                                <h6>تومان</h6>
+                                <Rate value="4" dayDates={[]}/>
+                                <h6 className="text-nowrap">میلیون تومان</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
@@ -488,7 +488,7 @@ const ActiveTab1Country = (props) => {
                                 <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
-                                <Rate value="4" />
+                                <Rate value="4" dayDates={[]}/>
                                 <h6>%</h6>
                             </div>
                         </div>
@@ -498,8 +498,8 @@ const ActiveTab1Country = (props) => {
                                 <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
-                                <Rate value="4" />
-                                <h6>تومان</h6>
+                                <Rate value="4" dayDates={[]}/>
+                                <h6 className="text-nowrap">میلیون تومان</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
@@ -508,8 +508,8 @@ const ActiveTab1Country = (props) => {
                                 <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
-                                <Rate value="4" />
-                                <h6>تومان</h6>
+                                <Rate value="4" dayDates={[]}/>
+                                <h6 className="text-nowrap">میلیون تومان</h6>
                             </div>
                         </div>
                     </div>

@@ -798,7 +798,7 @@ const FilterByCategory = () =>
                                                                             </div>
                                                                         </div>
                                                                         <div className="data_row_box">
-                                                                            <h2>{t("Total traffic")}</h2>
+                                                                            <h2>{t("Traffic")}</h2>
                                                                             <div className="row_items_traffic">
                                                                                 <div className="total_map_data_item_for_quantity">
                                                                                     <div className="total_map_data_item_2">
@@ -809,8 +809,8 @@ const FilterByCategory = () =>
                                                                                         }</p>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
-                                                                                        <Rate value="4"/>
-                                                                                        <h6>TB</h6>
+                                                                                        <Rate value="4" dayDates={[]}/>
+                                                                                        <h6>GB</h6>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
@@ -822,8 +822,8 @@ const FilterByCategory = () =>
                                                                                         }</p>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
-                                                                                        <Rate value="-2"/>
-                                                                                        <h6>TB</h6>
+                                                                                        <Rate value="-2" dayDates={[]}/>
+                                                                                        <h6>ERLANG</h6>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -841,8 +841,8 @@ const FilterByCategory = () =>
 
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
-                                                                                        <Rate value="+4"/>
-                                                                                        <h6>تومان</h6>
+                                                                                        <Rate value="+4" dayDates={[]}/>
+                                                                                        <h6 className="text-nowrap">میلیون تومان</h6>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
@@ -854,7 +854,7 @@ const FilterByCategory = () =>
                                                                                         }</p>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
-                                                                                        <Rate value="+7"/>
+                                                                                        <Rate value="+7" dayDates={[]}/>
                                                                                         <h6>%</h6>
                                                                                     </div>
                                                                                 </div>
@@ -867,8 +867,8 @@ const FilterByCategory = () =>
                                                                                         }</p>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
-                                                                                        <Rate value="+3"/>
-                                                                                        <h6>تومان</h6>
+                                                                                        <Rate value="+3" dayDates={[]}/>
+                                                                                        <h6 className="text-nowrap">میلیون تومان</h6>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
@@ -880,8 +880,8 @@ const FilterByCategory = () =>
                                                                                         }</p>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
-                                                                                        <Rate value="+12"/>
-                                                                                        <h6> تومان</h6>
+                                                                                        <Rate value="+12" dayDates={[]}/>
+                                                                                        <h6 className="text-nowrap"> میلیون تومان</h6>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -921,7 +921,7 @@ const FilterByCategory = () =>
                                                                     </div>
                                                                 </div>
                                                                 <div className="data_row_box">
-                                                                    <h2>{t("Total traffic")}</h2>
+                                                                    <h2>{t("Traffic")}</h2>
                                                                     <div className="row_items_traffic">
                                                                         <div className="total_map_data_item_for_quantity_3">
                                                                             <div className="total_map_data_item_2">
@@ -929,8 +929,8 @@ const FilterByCategory = () =>
                                                                                 <p>{format(dataCountry.data[dataCountry.data.length-2][`total_ps`])}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="-2"/>
-                                                                                <h6>TB</h6>
+                                                                                <Rate value="-2" dayDates={[]}/>
+                                                                                <h6>GB</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
@@ -940,8 +940,8 @@ const FilterByCategory = () =>
                                                                             </div>
 
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="+2"/>
-                                                                                <h6>TB</h6>
+                                                                                <Rate value="+2" dayDates={[]}/>
+                                                                                <h6>ERLANG</h6>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -955,8 +955,8 @@ const FilterByCategory = () =>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_cost`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="+1"/>
-                                                                                <h6>تومان</h6>
+                                                                                <Rate value="+1" dayDates={[]}/>
+                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
@@ -965,7 +965,7 @@ const FilterByCategory = () =>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_margin`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="+5"/>
+                                                                                <Rate value="+5" dayDates={[]}/>
                                                                                 <h6>%</h6>
                                                                             </div>
                                                                         </div>
@@ -975,8 +975,8 @@ const FilterByCategory = () =>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_profit`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="-2"/>
-                                                                                <h6>تومان</h6>
+                                                                                <Rate value="-2" dayDates={[]}/>
+                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
@@ -985,8 +985,8 @@ const FilterByCategory = () =>
                                                                                 <p>{dataCountry ?format(dataCountry.data[dataCountry.data.length-2][`total_rev`]):"data is not available"}</p>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
-                                                                                <Rate value="+5"/>
-                                                                                <h6>تومان</h6>
+                                                                                <Rate value="+5" dayDates={[]}/>
+                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                     </div>

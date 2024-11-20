@@ -4,6 +4,7 @@ import axios from "axios";
 import EditModal from "./EditPricingModal";
 import deleteIcon from "../../images/AdminPanel/deleteIcon.svg"
 import editIcon from "../../images/AdminPanel/editIcon.svg"
+import apiClient from "../../ApiClient";
 
 
 const Table = () => {
@@ -53,7 +54,7 @@ const Table = () => {
 
   useEffect(() => {
     // Fetch data from API
-    axios
+    apiClient
       .get("http://10.15.90.72:9098/api/provinceEP")
       .then((response) => {
         setData(response.data.content);

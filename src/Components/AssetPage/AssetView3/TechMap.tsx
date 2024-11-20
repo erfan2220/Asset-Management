@@ -12,11 +12,11 @@ interface Point {
     longitude: number;
     sitename: string;
     tech: string;
-    type: 'BTS' | 'BSC' | 'MSC' | 'RNC' | 'nodeB' | 'enodeb';
+    type: 'Single-Tech'|'Multi-Tech'|'BTS' | 'BSC' | 'MSC' | 'RNC' | 'nodeB' | 'enodeb';
 }
 
 
-const TechMap = ({ techs, setSiteNameClicked }) =>
+const TechMap = ({ techs, setSiteNameClicked,provinceName }) =>
 {
     const [points, setPoints] = useState<Point[]>([]);
     const [loading, setLoading] = useState(true);
@@ -25,34 +25,98 @@ const TechMap = ({ techs, setSiteNameClicked }) =>
 
     // Memoize techs to prevent unnecessary re-renders
     const stableTechs = useMemo(() => techs, [techs]);
-let api;
-    useEffect(() => {
-        const fetchPoints = async () => {
-            console.log("fetchPoints called"); // Debugging log
-            setLoading(true);
-            try {
-                const fetchPromises = stableTechs.map((tech) =>
-                {
+        let api;
+        useEffect(() => {
+            const fetchPoints = async () => {
+                console.log("fetchPoints called"); // Debugging log
+                setLoading(true);
+                try {
+                    const fetchPromises = stableTechs.map((tech) =>
+                    {
 
 
-                    if (tech.type.includes("2G")) {
-                        techArray.push("2G");
-                    }
-                    if (tech.type.includes("3G")) {
-                        techArray.push("3G");
-                    }
-                    if (tech.type.includes("4G")) {
-                        techArray.push("4G");
-                    }
-                    if (tech.type.includes("5G")) {
-                        techArray.push("5G");
-                    }
+                    // if (tech.type.includes("2G")) {
+                    //     techArray.push("2G");
+                    // }
+                    // if (tech.type.includes("3G")) {
+                    //     techArray.push("3G");
+                    // }
+                    // if (tech.type.includes("4G")) {
+                    //     techArray.push("4G");
+                    // }
+                    // if (tech.type.includes("5G")) {
+                    //     techArray.push("5G");
+                    // }
+                    // if (tech.type.includes("2G-3G")) {
+                    //     techArray.push("2G,3G");
+                    // }
+                    // if (tech.type.includes("2G-4G")) {
+                    //     techArray.push("2G,4G");
+                    // }
+                    // if (tech.type.includes("All-Tech")) {
+                    //     techArray.push("2G,3G,4G");
+                    // }
+                        if (tech.type === "2G") {
+                            techArray.push("2G");
+                        }
+                        if (tech.type === "3G") {
+                            techArray.push("3G");
+                        }
+                        if (tech.type === "4G") {
+                            techArray.push("4G");
+                        }
+                        if (tech.type === "5G") {
+                            techArray.push("5G");
+                        }
+                        if (tech.type === "2G3G") {
+                            techArray.push("2G,3G");
+                        }
+                        if (tech.type === "2G4G") {
+                            techArray.push("2G,4G");
+                        }
+                        if (tech.type === "2G5G") {
+                            techArray.push("2G,5G");
+                        }
+                        if (tech.type === "3G4G") {
+                            techArray.push("3G,4G");
+                        }
+                        if (tech.type === "3G5G") {
+                            techArray.push("3G,5G");
+                        }
+                        if (tech.type === "4G5G") {
+                            techArray.push("4G,5G");
+                        }
+                        if (tech.type === "2G3G5G") {
+                            techArray.push("2G,3G,5G");
+                        }
+                        if (tech.type === "2G3G4G") {
+                            techArray.push("2G,3G,4G");
+                        }
+                        if (tech.type === "2G4G5G") {
+                            techArray.push("2G,4G,5G");
+                        }
+                        if (tech.type === "3G4G5G") {
+                            techArray.push("3G,4G,5G");
+                        }
 
-                    const apiTech = techArray.join(",");
+                        if (tech.type === "All-Tech") {
+                            techArray.push("2G,3G,4G,5G");
+                        }
+
+
+
+                    const apiTech = techArray
 
                     console.log("apiTech:", apiTech);
+                    if(provinceName === "")
+                    {
+                        api=`http://10.15.90.72:9098/api/report/asset/multiple-technology?technologies=${apiTech}`
+                    }
+                    else
+                    {
+                        api=`http://10.15.90.72:9098/api/report/asset/fix-multiple-technology?technologies=${apiTech}&province=${provinceName}`
+                    }
 
-                    api=`http://10.15.90.72:9098/api/report/asset/multiple-technology?technologies=${apiTech}`
 
 
 
