@@ -388,7 +388,8 @@ const ActiveTab1Country = (props) => {
                                                          rounded-[8px]  flex flex-row items-center justify-between w-[163px]">
                             <img src="/images/Asset/map/View1/CalendarBlank.svg"
                                 alt="" />
-                            <span className="text-nowrap">{t("this week")}</span>
+                            <span className="text-nowrap">{t("Today")}</span>
+                            {/*<span className="text-nowrap">{t("this week")}</span>*/}
                             <img src="/images/Asset/map/View1/CaretDown.svg" alt="" />
 
                         </div>
@@ -434,13 +435,14 @@ const ActiveTab1Country = (props) => {
                 <div className="total_map_data_item_group">
                     <div className="total_map_data_item_spp1">
                         <h3>{t("Site Counts")}</h3>
-                        <p>{format(sitePoints.length)}
+                        {/*<p>{format(sitePoints.length)}*/}
+                        <p>{(sitePoints.length)}
 
                         </p>
                     </div>
                     <div className="total_map_data_item_spp2">
                         <h3>{t("Cell Counts")}</h3>
-                        <p>464,085</p>
+                        <p>464085</p>
                     </div>
                 </div>
                 <div className="data_row_box">
@@ -449,7 +451,8 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity_3">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Traffic PS")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
+                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalPS`] : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
@@ -459,12 +462,13 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Traffic CS")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
+                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]: "data is not available"}</p>
                             </div>
 
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
-                                <h6>ERLANG</h6>
+                                <h6>Erlang</h6>
                             </div>
                         </div>
                     </div>
@@ -475,17 +479,19 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Cost")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
+                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCost`] : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
-                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                <h6 className="text-nowrap"> تومان</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Margin")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
+                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`] : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
@@ -495,21 +501,23 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Profit")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
+                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`] : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
-                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                <h6 className="text-nowrap"> تومان</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Total revenue")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
+                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalRev`] : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
-                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                <h6 className="text-nowrap"> تومان</h6>
                             </div>
                         </div>
                     </div>

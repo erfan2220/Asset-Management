@@ -823,7 +823,7 @@ const FilterByCategory = () =>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
                                                                                         <Rate value="-2" dayDates={[]}/>
-                                                                                        <h6>ERLANG</h6>
+                                                                                        <h6>Erlang</h6>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -842,7 +842,7 @@ const FilterByCategory = () =>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
                                                                                         <Rate value="+4" dayDates={[]}/>
-                                                                                        <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                        <h6 className="text-nowrap">تومان</h6>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
@@ -868,7 +868,7 @@ const FilterByCategory = () =>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
                                                                                         <Rate value="+3" dayDates={[]}/>
-                                                                                        <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                        <h6 className="text-nowrap"> تومان</h6>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="total_map_data_item_for_quantity">
@@ -881,7 +881,7 @@ const FilterByCategory = () =>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
                                                                                         <Rate value="+12" dayDates={[]}/>
-                                                                                        <h6 className="text-nowrap"> میلیون تومان</h6>
+                                                                                        <h6 className="text-nowrap"> تومان</h6>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -941,7 +941,7 @@ const FilterByCategory = () =>
 
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="+2" dayDates={[]}/>
-                                                                                <h6>ERLANG</h6>
+                                                                                <h6>Erlang</h6>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -956,7 +956,7 @@ const FilterByCategory = () =>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="+1" dayDates={[]}/>
-                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                <h6 className="text-nowrap"> تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
@@ -976,7 +976,7 @@ const FilterByCategory = () =>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="-2" dayDates={[]}/>
-                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                <h6 className="text-nowrap"> تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
@@ -986,7 +986,7 @@ const FilterByCategory = () =>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="+5" dayDates={[]}/>
-                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                <h6 className="text-nowrap"> تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                     </div>

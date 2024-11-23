@@ -44,7 +44,7 @@ const BarChart = () =>
             <div className="flex items-center justify-between w-full border-[1px] border-[#0000001A] pt-[16px] px-[20px]">
                 <div className="flex flex-row items-center">
                     <h2 className="text-[18px] font-[600] text-[#212121]">Financial Statistics per Technology</h2>
-                    <span className="text-[12px]  text-[#424242] text-nowrap">(میلیون تومان)</span>
+                    <span className="text-[12px]  text-[#424242] text-nowrap">( تومان)</span>
                 </div>
 
                 <div className="flex flex-row items-center gap-[3px] p-[6px] bg-[#fafafaa] border-[1px] border-[#e0e0e0] rounded-[4px]">

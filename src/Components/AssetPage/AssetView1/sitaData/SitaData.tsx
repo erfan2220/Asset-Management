@@ -264,7 +264,7 @@ const SitaData = (props) =>
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) =>
                 {
-                    console.log("Site Data for", props.siteNameClicked, res.siteTotalFixCostData);
+                    console.log("Site Data for", props.siteNameClicked, res);
                     setProfitMarginData(res);
                 })
                 .catch((error) => {
@@ -546,7 +546,8 @@ const SitaData = (props) =>
                             <div className="total_map_data_item_for_quantity_3">
                                 <div className="total_map_data_item_2">
                                     <h3>Traffic PS</h3>
-                                    <p>{dataTraffic ? format(dataTraffic?.totalPsTraffic) : "data is not available"}</p>
+                                    {/*<p>{dataTraffic ? format(dataTraffic?.totalPsTraffic) : "data is not available"}</p>*/}
+                                    <p>{dataTraffic ? Math.floor(dataTraffic?.totalPsTraffic) : "data is not available"}</p>
                                     {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
 
                                 </div>
@@ -559,13 +560,14 @@ const SitaData = (props) =>
                                 <div className="total_map_data_item_2">
                                     <h3>Traffic CS</h3>
                                     {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
-                                    <p>{dataTraffic ? format(dataTraffic?.totalCsTraffic) : "data is not available"}</p>
+                                    {/*<p>{dataTraffic ? format(dataTraffic?.totalCsTraffic) : "data is not available"}</p>*/}
+                                    <p>{dataTraffic ? Math.floor(dataTraffic?.totalCsTraffic): "data is not available"}</p>
                                     {/*<p> data is not available</p>*/}
                                 </div>
 
                                 <div className="total_map_data_item_3">
                                     <Rate value="4" dayDates={daysDates}/>
-                                    <h6>ERLANG</h6>
+                                    <h6>Erlang</h6>
                                 </div>
                             </div>
 
@@ -586,11 +588,12 @@ const SitaData = (props) =>
                                 <h3>{t("Total revenue")}</h3>
 
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
-                                <p>{siteData ? format(siteData?.revenue) : "data is not available"}</p>
+                                {/*<p>{siteData ? format(siteData?.revenue) : "data is not available"}</p>*/}
+                                <p>{siteData ? siteData?.revenue : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={daysDates}/>
-                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                <h6 className="text-nowrap"> تومان</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
@@ -598,30 +601,33 @@ const SitaData = (props) =>
                                 <h3>{t("Cost")}</h3>
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
                                 {/*<p>data is not available</p>*/}
-                                <p>{costData ? format(costData?.siteTotalFixCostData) : "data is not available"}</p>
+                                {/*<p>{profitMarginData ? format(profitMarginData.cost) : "data is not available"}</p>*/}
+                                <p>{profitMarginData ? profitMarginData.cost : "data is not available"}</p>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={daysDates}/>
-                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                <h6 className="text-nowrap"> تومان</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Profit")}</h3>
-                                <p>{profitMarginData ? format(profitMarginData.profit) : "data is not available"}</p>
+                                {/*<p>{profitMarginData ? format(profitMarginData.profit) : "data is not available"}</p>*/}
+                                <p>{profitMarginData ? profitMarginData.profit : "data is not available"}</p>
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
                                 {/*<p>data is not available</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                             <Rate value="4" dayDates={daysDates}/>
-                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                <h6 className="text-nowrap"> تومان</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Margin")}</h3>
 
-                                <p>{profitMarginData? format(profitMarginData.margin) : "data is not available"}</p>
+                                {/*<p>{profitMarginData? format(profitMarginData.margin) : "data is not available"}</p>*/}
+                                <p>{profitMarginData? profitMarginData.margin: "data is not available"}</p>
                                 {/*<p>data is not available</p>*/}
                             </div>
                             <div className="total_map_data_item_3">

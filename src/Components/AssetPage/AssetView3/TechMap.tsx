@@ -5,6 +5,7 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import LoadingProgress from "../../Loading/Loading";
 import TechChooser from "../filterMap/TechChooser/TechChooser";
+import {provinceMapping2} from "../../../database/dictionaryProvinces/provinceMapping";
 
 // Define the Point interface
 interface Point {
@@ -69,38 +70,38 @@ const TechMap = ({ techs, setSiteNameClicked,provinceName }) =>
                             techArray.push("5G");
                         }
                         if (tech.type === "2G3G") {
-                            techArray.push("2G,3G");
+                            techArray.push("2G3G");
                         }
                         if (tech.type === "2G4G") {
-                            techArray.push("2G,4G");
+                            techArray.push("2G4G");
                         }
                         if (tech.type === "2G5G") {
-                            techArray.push("2G,5G");
+                            techArray.push("2G5G");
                         }
                         if (tech.type === "3G4G") {
-                            techArray.push("3G,4G");
+                            techArray.push("3G4G");
                         }
                         if (tech.type === "3G5G") {
-                            techArray.push("3G,5G");
+                            techArray.push("3G5G");
                         }
                         if (tech.type === "4G5G") {
-                            techArray.push("4G,5G");
+                            techArray.push("4G5G");
                         }
                         if (tech.type === "2G3G5G") {
-                            techArray.push("2G,3G,5G");
+                            techArray.push("2G3G5G");
                         }
                         if (tech.type === "2G3G4G") {
-                            techArray.push("2G,3G,4G");
+                            techArray.push("2G3G4G");
                         }
                         if (tech.type === "2G4G5G") {
-                            techArray.push("2G,4G,5G");
+                            techArray.push("2G4G5G");
                         }
                         if (tech.type === "3G4G5G") {
-                            techArray.push("3G,4G,5G");
+                            techArray.push("3G4G5G");
                         }
 
                         if (tech.type === "All-Tech") {
-                            techArray.push("2G,3G,4G,5G");
+                            techArray.push("2G3G4G5G");
                         }
 
 
@@ -108,13 +109,14 @@ const TechMap = ({ techs, setSiteNameClicked,provinceName }) =>
                     const apiTech = techArray
 
                     console.log("apiTech:", apiTech);
+
                     if(provinceName === "")
                     {
                         api=`http://10.15.90.72:9098/api/report/asset/multiple-technology?technologies=${apiTech}`
                     }
                     else
                     {
-                        api=`http://10.15.90.72:9098/api/report/asset/fix-multiple-technology?technologies=${apiTech}&province=${provinceName}`
+                        api=`http://10.15.90.72:9098/api/report/asset/fix-multiple-technology?technologies=${apiTech}&province=${provinceMapping2[provinceName]}`
                     }
 
 

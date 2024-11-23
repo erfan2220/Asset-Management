@@ -433,17 +433,28 @@ const Assets = () =>
     {
         setActiveTab(index)
     }
+    console.log("provinceeesName",provinceName,cityName)
     const handleBackMap =()=>
     {
-        if( cityName !=="")
+        setPupop(false)
+        setSiteNameClicked(null)
+        if(provinceName !=="" && cityName !=="")
         {
             setCityName("")
         }
-        if( cityName === "")
+        else if(provinceName !=="" && cityName ==="")
         {
-            setProvinceName("")
+           setProvinceName("")
         }
-        setPupop(false)
+        // if( cityName !=="")
+        // {
+        //     setCityName("")
+        // }
+        // if( cityName === "")
+        // {
+        //     setProvinceName("")
+        // }
+
 
     }
     const selectProvinceHandler = (province) =>
@@ -821,8 +832,21 @@ console.log("siteNameClickded",siteNameClicked)
                                                             <div className="total_map_data_item_group">
                                                                 <div className="total_map_data_item_spp1">
                                                                     <h3>{t("Site Counts")}</h3>
+                                                                    {/*<p> {totalCount ? (*/}
+                                                                    {/*    format(*/}
+                                                                    {/*        provinceName === "Khuzestan" ? (*/}
+                                                                    {/*                filter_siteCount("Khouzestan")*/}
+                                                                    {/*            ) :*/}
+                                                                    {/*            provinceName === "Ardebil" ? (*/}
+                                                                    {/*                filter_siteCount("ardabil")*/}
+                                                                    {/*            ) : (*/}
+                                                                    {/*                filter_siteCount(provinceName)*/}
+                                                                    {/*            )*/}
+                                                                    {/*    )) : "data is not available"*/}
+                                                                    {/*}</p>*/}
+
                                                                     <p> {totalCount ? (
-                                                                        format(
+
                                                                             provinceName === "Khuzestan" ? (
                                                                                     filter_siteCount("Khouzestan")
                                                                                 ) :
@@ -831,19 +855,37 @@ console.log("siteNameClickded",siteNameClicked)
                                                                                 ) : (
                                                                                     filter_siteCount(provinceName)
                                                                                 )
-                                                                        )) : "data is not available"
+                                                                        ) : "data is not available"
                                                                     }</p>
                                                                 </div>
                                                                 <div className="total_map_data_item_spp2">
                                                                     <h3>{t("Cell Counts")}</h3>
+                                                                    {/*<p> {cellsCount ? (*/}
+                                                                    {/*    format(*/}
+                                                                    {/*        provinceName === "Khuzestan" ? (*/}
+                                                                    {/*            filter_cells("Khouzestan")*/}
+                                                                    {/*        ) : (*/}
+                                                                    {/*            filter_cells(provinceName)*/}
+                                                                    {/*        )*/}
+                                                                    {/*    )) : "data is not available"*/}
+                                                                    {/*}</p>  */}
+                                                                    {/*<p> {cellsCount ? (*/}
+                                                                    {/*    format(*/}
+                                                                    {/*        provinceName === "Khuzestan" ? (*/}
+                                                                    {/*            filter_cells("Khouzestan")*/}
+                                                                    {/*        ) : (*/}
+                                                                    {/*            filter_cells(provinceName)*/}
+                                                                    {/*        )*/}
+                                                                    {/*    )) : "data is not available"*/}
+                                                                    {/*}</p>*/}
                                                                     <p> {cellsCount ? (
-                                                                        format(
+
                                                                             provinceName === "Khuzestan" ? (
                                                                                 filter_cells("Khouzestan")
                                                                             ) : (
                                                                                 filter_cells(provinceName)
                                                                             )
-                                                                        )) : "data is not available"
+                                                                        ): "data is not available"
                                                                     }</p>
                                                                 </div>
                                                             </div>
@@ -854,9 +896,14 @@ console.log("siteNameClickded",siteNameClicked)
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
                                                                             <h3>{t("Traffic PS")}</h3>
-                                                                            <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
+                                                                            {/*<p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?*/}
+                                                                            {/*    filter_traffic_PS("Khouzestan") :*/}
+                                                                            {/*    filter_traffic_PS(provinceName))) : "data is not available"*/}
+                                                                            {/*}</p>  */}
+
+                                                                            <p> {dataPerProvince ? (provinceName === "Khuzestan" ?
                                                                                 filter_traffic_PS("Khouzestan") :
-                                                                                filter_traffic_PS(provinceName))) : "data is not available"
+                                                                                filter_traffic_PS(provinceName)) : "data is not available"
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
@@ -868,14 +915,18 @@ console.log("siteNameClickded",siteNameClicked)
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
                                                                             <h3>{t("Traffic CS")}</h3>
-                                                                            <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
+                                                                            {/*<p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?*/}
+                                                                            {/*    filter_traffic_CS("Khouzestan") :*/}
+                                                                            {/*    filter_traffic_CS(provinceName))) : "data is not available"*/}
+                                                                            {/*}</p>*/}
+                                                                            <p> {dataPerProvince ? (provinceName === "Khuzestan" ?
                                                                                 filter_traffic_CS("Khouzestan") :
-                                                                                filter_traffic_CS(provinceName))) : "data is not available"
+                                                                                filter_traffic_CS(provinceName)) : "data is not available"
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
                                                                             <Rate value={+4} dayDates={daysDates}/>
-                                                                            <h6>ERLANG</h6>
+                                                                            <h6>Erlang</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -887,24 +938,34 @@ console.log("siteNameClickded",siteNameClicked)
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
                                                                             <h3>{t("Cost")}</h3>
-                                                                            <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
+                                                                            {/*<p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?*/}
+                                                                            {/*    filter_cost_per_province("Khouzestan") :*/}
+                                                                            {/*    filter_cost_per_province(provinceName))) : "data is not available"*/}
+                                                                            {/*}</p> */}
+
+                                                                            <p> {dataPerProvince ? (provinceName === "Khuzestan" ?
                                                                                 filter_cost_per_province("Khouzestan") :
-                                                                                filter_cost_per_province(provinceName))) : "data is not available"
+                                                                                filter_cost_per_province(provinceName)) : "data is not available"
                                                                             }</p>
 
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
                                                                             <Rate value="4" dayDates={daysDates}/>
-                                                                            <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                            <h6 className="text-nowrap"> تومان</h6>
                                                                         </div>
                                                                     </div>
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
                                                                             <h3>{t("Margin")}</h3>
-                                                                            <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
+                                                                            {/*<p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?*/}
+                                                                            {/*    filter_margin_per_province("Khouzestan") :*/}
+                                                                            {/*    filter_margin_per_province(provinceName))) : "data is not available"*/}
+                                                                            {/*}</p>*/}
+
+                                                                            <p> {dataPerProvince ? (provinceName === "Khuzestan" ?
                                                                                 filter_margin_per_province("Khouzestan") :
-                                                                                filter_margin_per_province(provinceName))) : "data is not available"
+                                                                                filter_margin_per_province(provinceName)): "data is not available"
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
@@ -916,28 +977,38 @@ console.log("siteNameClickded",siteNameClicked)
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
                                                                             <h3>{t("Profit")}</h3>
-                                                                            <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
+                                                                            {/*<p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?*/}
+                                                                            {/*    filter_profit_per_province("Khouzestan") :*/}
+                                                                            {/*    filter_profit_per_province(provinceName))) : "data is not available"*/}
+                                                                            {/*}</p> */}
+
+                                                                            <p> {dataPerProvince ? (provinceName === "Khuzestan" ?
                                                                                 filter_profit_per_province("Khouzestan") :
-                                                                                filter_profit_per_province(provinceName))) : "data is not available"
+                                                                                filter_profit_per_province(provinceName)) : "data is not available"
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
                                                                             <Rate value="4" dayDates={daysDates}/>
-                                                                            <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                            <h6 className="text-nowrap"> تومان</h6>
                                                                         </div>
                                                                     </div>
                                                                     <div
                                                                         className="total_map_data_item_for_quantity">
                                                                         <div className="total_map_data_item_2">
                                                                             <h3>{t("Total revenue")}</h3>
-                                                                            <p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?
+                                                                            {/*<p> {dataPerProvince ? (format(provinceName === "Khuzestan" ?*/}
+                                                                            {/*    filter_revenue_per_province("Khouzestan") :*/}
+                                                                            {/*    filter_revenue_per_province(provinceName))) : "data is not available"*/}
+                                                                            {/*}</p>*/}
+
+                                                                            <p> {dataPerProvince ? (provinceName === "Khuzestan" ?
                                                                                 filter_revenue_per_province("Khouzestan") :
-                                                                                filter_revenue_per_province(provinceName))) : "data is not available"
+                                                                                filter_revenue_per_province(provinceName)) : "data is not available"
                                                                             }</p>
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
                                                                             <Rate value="4" dayDates={daysDates}/>
-                                                                            <h6 className="text-nowrap"> میلیون تومان</h6>
+                                                                            <h6 className="text-nowrap">  تومان</h6>
                                                                         </div>
                                                                     </div>
                                                                 </div>

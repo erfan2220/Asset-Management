@@ -887,7 +887,7 @@ const Network = () =>
                                                                                     </div>
                                                                                     <div className="total_map_data_item_3">
                                                                                         <Rate value="4" dayDates={[]}/>
-                                                                                        <h6>ERLANG</h6>
+                                                                                        <h6>Erlang</h6>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -908,7 +908,7 @@ const Network = () =>
                                                                                     <div
                                                                                         className="total_map_data_item_3">
                                                                                         <Rate value="4" dayDates={[]}/>
-                                                                                        <h6 className="text-nowrap"> میلیون تومان</h6>
+                                                                                        <h6 className="text-nowrap">  تومان</h6>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div
@@ -925,7 +925,7 @@ const Network = () =>
                                                                                     <div
                                                                                         className="total_map_data_item_3">
                                                                                         <Rate value="4" dayDates={[]}/>
-                                                                                        <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                        <h6 className="text-nowrap"> تومان</h6>
                                                                                     </div>
                                                                                 </div>
 
@@ -942,7 +942,7 @@ const Network = () =>
                                                                                     <div
                                                                                         className="total_map_data_item_3">
                                                                                         <Rate value="4" dayDates={[]}/>
-                                                                                        <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                        <h6 className="text-nowrap"> تومان</h6>
                                                                                     </div>
                                                                                 </div>
 
@@ -1023,7 +1023,7 @@ const Network = () =>
 
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="4" dayDates={[]}/>
-                                                                                <h6>ERLANG</h6>
+                                                                                <h6>Erlang</h6>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1038,7 +1038,7 @@ const Network = () =>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="4" dayDates={[]}/>
-                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                <h6 className="text-nowrap"> تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
@@ -1058,7 +1058,7 @@ const Network = () =>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="4" dayDates={[]}/>
-                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                <h6 className="text-nowrap"> تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div className="total_map_data_item_for_quantity">
@@ -1068,7 +1068,7 @@ const Network = () =>
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="4" dayDates={[]}/>
-                                                                                <h6 className="text-nowrap">میلیون تومان</h6>
+                                                                                <h6 className="text-nowrap"> تومان</h6>
                                                                             </div>
                                                                         </div>
                                                                     </div>
