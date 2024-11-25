@@ -435,14 +435,11 @@ const ActiveTab1Country = (props) => {
                 <div className="total_map_data_item_group">
                     <div className="total_map_data_item_spp1">
                         <h3>{t("Site Counts")}</h3>
-                        {/*<p>{format(sitePoints.length)}*/}
-                        <p>{(sitePoints.length)}
-
-                        </p>
+                        <p>{format(sitePoints.length)}</p>
                     </div>
                     <div className="total_map_data_item_spp2">
                         <h3>{t("Cell Counts")}</h3>
-                        <p>464085</p>
+                        <p>464,085</p>
                     </div>
                 </div>
                 <div className="data_row_box">
@@ -451,8 +448,8 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity_3">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Traffic PS")}</h3>
-                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
-                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalPS`] : "data is not available"}</p>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalPS`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
@@ -462,8 +459,8 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Traffic CS")}</h3>
-                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
-                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]: "data is not available"}</p>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]: "data is not available"}</p>*/}
                             </div>
 
                             <div className="total_map_data_item_3">
@@ -479,8 +476,8 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Cost")}</h3>
-                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
-                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCost`] : "data is not available"}</p>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCost`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
@@ -490,8 +487,8 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Margin")}</h3>
-                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
-                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`] : "data is not available"}</p>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
@@ -501,8 +498,8 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Profit")}</h3>
-                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
-                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`] : "data is not available"}</p>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
@@ -512,8 +509,8 @@ const ActiveTab1Country = (props) => {
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Total revenue")}</h3>
-                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
-                                <p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalRev`] : "data is not available"}</p>
+                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>
+                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalRev`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>

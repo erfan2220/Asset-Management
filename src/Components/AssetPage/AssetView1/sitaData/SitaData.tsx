@@ -230,7 +230,7 @@ const SitaData = (props) =>
         const toDate2 = daysDates.length > 1 ? formatDate2(daysDates[1]) : formatDate2(daysDates[0]);
 
         if (props.siteNameClicked && daysDates.length < 1) {
-            fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=${todayFormatted1}&toDate=${todayFormatted1}`)
+            fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/${props.siteNameClicked}?fromDate=${todayFormatted1}&toDate=${todayFormatted1}`)
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) => {
                     setSiteData(res);
@@ -249,16 +249,16 @@ const SitaData = (props) =>
                 });
 
 
-            fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${todayFormatted1}&toDateTime=${todayFormatted1}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) =>
-                {
-                    console.log("Site Data for", props.siteNameClicked, res.siteTotalFixCostData);
-                    setCostData(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
+            // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${todayFormatted1}&toDateTime=${todayFormatted1}`)
+            //     .then((res) => res.json())  // Parse as JSON
+            //     .then((res) =>
+            //     {
+            //         console.log("Site Data for", props.siteNameClicked, res.siteTotalFixCostData);
+            //         setCostData(res);
+            //     })
+            //     .catch((error) => {
+            //         console.error("Error fetching site data:", error);
+            //     });
 
             fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted1}`)
                 .then((res) => res.json())  // Parse as JSON
@@ -293,16 +293,16 @@ const SitaData = (props) =>
                     console.error("Error fetching site data:", error);
                 });
 
-            fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${fromDate}&toDateTime=${toDate}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) =>
-                {
-                    console.log("Site Data for", props.siteNameClicked, res);
-                    setCostData(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
+            // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${fromDate}&toDateTime=${toDate}`)
+            //     .then((res) => res.json())  // Parse as JSON
+            //     .then((res) =>
+            //     {
+            //         console.log("Site Data for", props.siteNameClicked, res);
+            //         setCostData(res);
+            //     })
+            //     .catch((error) => {
+            //         console.error("Error fetching site data:", error);
+            //     });
 
             fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted1}`)
                 .then((res) => res.json())  // Parse as JSON
@@ -546,8 +546,8 @@ const SitaData = (props) =>
                             <div className="total_map_data_item_for_quantity_3">
                                 <div className="total_map_data_item_2">
                                     <h3>Traffic PS</h3>
-                                    {/*<p>{dataTraffic ? format(dataTraffic?.totalPsTraffic) : "data is not available"}</p>*/}
-                                    <p>{dataTraffic ? Math.floor(dataTraffic?.totalPsTraffic) : "data is not available"}</p>
+                                    <p>{dataTraffic ? format(Math.floor(dataTraffic?.totalPsTraffic)) : "data is not available"}</p>
+                                    {/*<p>{dataTraffic ? Math.floor(dataTraffic?.totalPsTraffic) : "data is not available"}</p>*/}
                                     {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
 
                                 </div>
@@ -560,8 +560,8 @@ const SitaData = (props) =>
                                 <div className="total_map_data_item_2">
                                     <h3>Traffic CS</h3>
                                     {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
-                                    {/*<p>{dataTraffic ? format(dataTraffic?.totalCsTraffic) : "data is not available"}</p>*/}
-                                    <p>{dataTraffic ? Math.floor(dataTraffic?.totalCsTraffic): "data is not available"}</p>
+                                    <p>{dataTraffic ? format(Math.floor(dataTraffic?.totalCsTraffic)) : "data is not available"}</p>
+                                    {/*<p>{dataTraffic ? Math.floor(dataTraffic?.totalCsTraffic): "data is not available"}</p>*/}
                                     {/*<p> data is not available</p>*/}
                                 </div>
 
@@ -588,8 +588,8 @@ const SitaData = (props) =>
                                 <h3>{t("Total revenue")}</h3>
 
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
-                                {/*<p>{siteData ? format(siteData?.revenue) : "data is not available"}</p>*/}
-                                <p>{siteData ? siteData?.revenue : "data is not available"}</p>
+                                <p>{siteData ? format(siteData?.revenue) : "data is not available"}</p>
+                                {/*<p>{siteData ? siteData?.revenue : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={daysDates}/>
@@ -601,8 +601,8 @@ const SitaData = (props) =>
                                 <h3>{t("Cost")}</h3>
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
                                 {/*<p>data is not available</p>*/}
-                                {/*<p>{profitMarginData ? format(profitMarginData.cost) : "data is not available"}</p>*/}
-                                <p>{profitMarginData ? profitMarginData.cost : "data is not available"}</p>
+                                <p>{profitMarginData ? format(profitMarginData.cost) : "data is not available"}</p>
+                                {/*<p>{profitMarginData ? profitMarginData.cost : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={daysDates}/>
@@ -612,8 +612,8 @@ const SitaData = (props) =>
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Profit")}</h3>
-                                {/*<p>{profitMarginData ? format(profitMarginData.profit) : "data is not available"}</p>*/}
-                                <p>{profitMarginData ? profitMarginData.profit : "data is not available"}</p>
+                                <p>{profitMarginData ? format(profitMarginData.profit) : "data is not available"}</p>
+                                {/*<p>{profitMarginData ? profitMarginData.profit : "data is not available"}</p>*/}
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
                                 {/*<p>data is not available</p>*/}
                             </div>
@@ -626,8 +626,8 @@ const SitaData = (props) =>
                             <div className="total_map_data_item_2">
                                 <h3>{t("Margin")}</h3>
 
-                                {/*<p>{profitMarginData? format(profitMarginData.margin) : "data is not available"}</p>*/}
-                                <p>{profitMarginData? profitMarginData.margin: "data is not available"}</p>
+                                <p>{profitMarginData? format(profitMarginData.margin) : "data is not available"}</p>
+                                {/*<p>{profitMarginData? profitMarginData.margin: "data is not available"}</p>*/}
                                 {/*<p>data is not available</p>*/}
                             </div>
                             <div className="total_map_data_item_3">

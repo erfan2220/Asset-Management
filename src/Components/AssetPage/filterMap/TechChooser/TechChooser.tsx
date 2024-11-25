@@ -54,6 +54,7 @@ const TechChooser : React.FC<{ points: Point[],setPoints: (points: Point[]) => v
         mapRef.current = L.map("map-container", {
             center: [32.74015808, 52.30584163],
             zoom: 6,
+            attributionControl: false,
             scrollWheelZoom: false,
             zoomControl: false,
         });
