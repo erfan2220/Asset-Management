@@ -215,7 +215,7 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
             const tileLayerOffline = L.tileLayer("http://10.15.90.79/tiles/{z}/{x}/{y}.png", {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 minZoom: 1,
-                maxZoom: 13
+                maxZoom: 14
             });
             tileLayerOffline.addTo(mapRef.current);
 
@@ -226,7 +226,7 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
         if (!markersRef.current) {
             markersRef.current = L.markerClusterGroup({
                 showCoverageOnHover: false,
-                maxClusterRadius: zoom => (zoom >= 13 ? 0 : 80),
+                maxClusterRadius: zoom => (zoom >= 14 ? 0 : 80),
             });
             mapRef.current.addLayer(markersRef.current);
         }

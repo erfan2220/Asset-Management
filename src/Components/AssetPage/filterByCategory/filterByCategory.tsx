@@ -894,10 +894,10 @@ const FilterByCategory = () =>
                                                         {!pupop && (
                                                             <div className="total_map_data">
                                                                 <div className="header_total_map_data_2">
-                                                                    <div className="header_total_map_data_1">
-                                                                        <img src="./images/Total_svg.svg" alt=""/>
-                                                                        <h2>{t("Total statistics")} </h2>
-                                                                    </div>
+                                                                    {/*<div className="header_total_map_data_1">*/}
+                                                                    {/*    <img src="./images/Total_svg.svg" alt=""/>*/}
+                                                                    {/*    <h2>{t("Total statistics")} </h2>*/}
+                                                                    {/*</div>*/}
                                                                     <div className="table_container_siteType" onClick={()=>{setSiteTypesOpen(!siteTypesOpen)}}>
                                                                         <span>{t("Total")}</span>
                                                                         <img src="/images/arrow/CaretDown.svg" alt=""/>

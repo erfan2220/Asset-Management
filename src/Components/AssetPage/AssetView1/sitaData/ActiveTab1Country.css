@@ -318,7 +318,8 @@
 {
     left: 0;
     min-width: 100%;
-    background-image: url("../../../../images/mapbg.svg");
+    /*background-image: url("../../../../images/mapbg.svg");*/
+    background-image: url("../../../../images/Asset/background.svg");
     background-size: cover;
     flex: 1;
 }
@@ -461,6 +462,18 @@
     position: relative;
     cursor: pointer;
     padding: 12px;
+}
+.newCalnender
+{
+    direction: rtl;
+}
+.directionOfCalender
+{
+    direction: rtl;
+}
+.monthPicker
+{
+    direction: ltr;
 }
 .menuSitesOption
 {
