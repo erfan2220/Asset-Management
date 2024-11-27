@@ -14,7 +14,8 @@ interface Point {
     type: 'BTS' | 'BSC' | 'MSC' | 'RNC' | 'nodeB' | 'enodeb';
 }
 
-const FilterMap = ({ techs, setSiteNameClicked,provinceName }) => {
+const FilterMap = ({ techs, setSiteNameClicked,provinceName }) =>
+{
     const [points, setPoints] = useState<Point[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -26,7 +27,8 @@ const FilterMap = ({ techs, setSiteNameClicked,provinceName }) => {
             console.log("fetchPoints called"); // Debugging log
             setLoading(true);
             try {
-                const fetchPromises = stableTechs.map((tech) => {
+                const fetchPromises = stableTechs.map((tech) =>
+                {
                     let apiTech = '';
                     // Define API URLs based on the tech type
                     if(provinceName ==="")

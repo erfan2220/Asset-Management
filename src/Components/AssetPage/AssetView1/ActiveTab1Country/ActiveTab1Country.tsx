@@ -11,10 +11,8 @@ import { provinceNameVariations } from "../../../../database/dictionaryProvinces
 import { t } from '../../../../translationUtil';
 
 
-const ActiveTab1Country = (props) => {
-
-
-
+const ActiveTab1Country = (props) =>
+{
 
     const [calenderSelection, setCalenderSelection] = useState(1)
     const [dataCountry, setDataCountry] = useState([])
