@@ -6,13 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="New Calender">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/FilterMap.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/LandingPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/LandingPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/LandingPage/DataCenter.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/LandingPage/LefBg.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/LandingPage/Ran.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/LandingPage/RighBg.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/LandingPage/core.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/LandingPage/datacenter 1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/LandingPage/image 56.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/LandingPage/transmission.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/images/LandingPage/transmission.svg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/develop-v2.5" />
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -22,7 +33,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop-v3.2" />
+        <entry key="$PROJECT_DIR$" value="develop-v3.3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,7 +68,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop-v3.3",
+    "git-widget-placeholder": "develop-v3.3-backup",
     "javascript.nodejs.core.library.configured.version": "18.20.4",
     "javascript.nodejs.core.library.typings.version": "",
     "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/images/Asset",
@@ -81,11 +92,11 @@
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1\sitaData" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\images\LandingPage" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\Asset" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\map\Calender" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\map\Topology" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\Navbar" />
-      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\Asset\map\Filters" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -131,7 +142,7 @@
       <workItem from="1731826741328" duration="426000" />
       <workItem from="1731827791540" duration="14257000" />
       <workItem from="1731911762884" duration="50141000" />
-      <workItem from="1732349751720" duration="81721000" />
+      <workItem from="1732349751720" duration="83051000" />
     </task>
     <task id="LOCAL-00001" summary="Tab2 continues map">
       <option name="closed" value="true" />
@@ -317,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732658284202</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="New Calender">
+      <option name="closed" value="true" />
+      <created>1732689132853</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1732689132853</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

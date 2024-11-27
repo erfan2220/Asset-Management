@@ -594,12 +594,157 @@ console.log("siteNameClickded",siteNameClicked)
                         <h2>{t("Assets/Network")}</h2>
                         </div>
                         <div className={"flex flex-row items-center justify-between"}>
-                        <h2 className= "font-[600] text-[20px] text-[#424242]">{t("Province & City View")}</h2>
+                            {/*<h2 className= "font-[600] text-[20px] text-[#424242]">{t("Province & City View")}</h2>*/}
+
+                            <div>
+                                <h2 className="font-[600] text-[20px] text-[#424242] ">
+                                    {
+                                        view === 1 &&
+                                        <nav className="bg-grey-light w-full rounded-md">
+                                            <ol className="list-reset flex">
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                    >RAN</a>
+                                                </li>
+                                                <li>
+                                                    <span className="mx-2 text-neutral-400">&gt;</span>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                    >IRAN</a>
+                                                </li>
+                                                <li>
+                                                    {provinceName &&
+                                                        <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                </li>
+                                                <li className="text-neutral-400">{provinceName}</li>
+                                                <li>
+                                                    {cityName && <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                </li>
+                                                <li className="text-neutral-400">{cityName}</li>
+
+                                                <li>
+                                                    {siteNameClicked &&
+                                                        <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                </li>
+                                                <li className="text-neutral-400">{siteNameClicked}</li>
+                                            </ol>
+                                        </nav>}
+                                </h2>
+                                <h2 className="font-[600] text-[20px] text-[#424242] ">
+                                    {
+                                        view === 2 &&
+                                        <nav className="bg-grey-light w-full rounded-md">
+                                            <ol className="list-reset flex">
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                    >RAN</a>
+                                                </li>
+                                                <li>
+                                                    <span className="mx-2 text-neutral-400">&gt;</span>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                    >Topology</a>
+                                                </li>
+                                                {tech.length > 0 && <span className="mx-2 text-neutral-400">&gt;</span>}
+
+                                                <li className="flex items-center text-neutral-400">
+                                                    {tech?.map((item, index) => (
+                                                        <React.Fragment key={index}>
+                                                            {item.tech}
+                                                            {index < tech.length - 1 && (
+                                                                <span className="mx-2 text-neutral-400">,</span>
+                                                            )}
+                                                        </React.Fragment>
+                                                    ))}
+                                                </li>
+
+                                                {tech.length > 0 && <span className="mx-2 text-neutral-400">&gt;</span>}
+
+                                                <li className="flex items-center text-neutral-400">
+                                                    {tech?.map((item, index) => (
+                                                        <React.Fragment key={index}>
+                                                            {item.type}
+                                                            {index < tech.length - 1 && (
+                                                                <span className="mx-2 text-neutral-400">,</span>
+                                                            )}
+                                                        </React.Fragment>
+                                                    ))}
+                                                </li>
+
+                                                {siteNameClicked && <span className="mx-2 text-neutral-400">&gt;</span>}
+
+                                                {siteNameClicked && (
+                                                    <li className="text-neutral-400">{siteNameClicked}</li>
+                                                )}
+                                            </ol>
+                                        </nav>
+                                    }
+
+                                </h2>
+                                <h2 className="font-[600] text-[20px] text-[#424242] ">
+                                    {
+                                        view === 3 &&
+                                        <nav className="bg-grey-light w-full rounded-md">
+                                            <ol className="list-reset flex">
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                    >RAN</a>
+                                                </li>
+                                                <li>
+                                                    <span className="mx-2 text-neutral-400">&gt;</span>
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        href="#"
+                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                    >Technology</a>
+                                                </li>
+                                                <li>
+                                                    {tech.length > 0 &&
+                                                        <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                </li>
+                                                {/* <li class="text-neutral-400">{tech[1]?.type}</li> */}
+
+                                                <li className="flex items-center text-neutral-400">
+                                                    {tech?.map((item, index) => (
+                                                        <React.Fragment key={index}>
+                                                            {item.type}
+                                                            {index < tech.length - 1 && (
+                                                                <span className="mx-2 text-neutral-400">,</span>
+                                                            )}
+                                                        </React.Fragment>
+                                                    ))}
+                                                </li>
+                                                <li>
+                                                    {siteNameClicked &&
+                                                        <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                </li>
+                                                <li className="text-neutral-400">{siteNameClicked}</li>
+                                            </ol>
+                                        </nav>}
+                                </h2>
+                            </div>
+
+
                             <div
                                 className="w-[357px] flex flex-row gap-[8px] bg-white border-[1px] border-[#e0e0e0] py-[11px] px-[12px] rounded-[4px]">
-                                <img className="cursor-pointer" src="./images/Asset/map/View1/search.svg" alt="" onClick={()=>handleSearchClick()}/>
+                                <img className="cursor-pointer" src="./images/Asset/map/View1/search.svg" alt=""
+                                     onClick={() => handleSearchClick()}/>
                                 <input type="text" placeholder={t("search_code_site...")}
-                                       className="bg-none outline-none w-[100%]"  onChange={(e) => handleSearchCodes(e.target.value)}/>
+                                       className="bg-none outline-none w-[100%]"
+                                       onChange={(e) => handleSearchCodes(e.target.value)}/>
                             </div>
                         </div>
 
@@ -609,110 +754,127 @@ console.log("siteNameClickded",siteNameClicked)
                                     <div className="Total_information_map_details">
 
                                         {
-                                            searchCode !=="" &&
-                                                (
-                                                    <div>
-                                                        <motion.div className={
-                                                            (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
-                                                                "pb-[0] overflow-hidden relative"
-                                                        }>
-
-                                                            <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
-                                                                     setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
-                                                                     setView={setView} view={view}
-                                                                     setItemName={setItemName} itemName={itemName}
-                                                                     searchCode={searchCode} setSearchCode={setSearchCode}
-                                                                     tech={tech}  setTech={setTech}
-                                                                     techLayer={techLayer} setTechLayer={setTechLayer}
-                                                                     techNames={techNames} setTechNames={setTechNames}
-                                                            />
-
-                                                            <div >
-                                                                <SiteMap searchSiteData={searchSiteData}/>
-                                                            </div>
-                                                        </motion.div>
-                                                    </div>)
-                                        }
-
-                                        {searchCode ==="" && (view === 1 )  && (
-                                            <div>
-                                                                <motion.div className={
-                                                                    (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
-                                                                        "map_fixed_positition pt-[30px] px-[35px] pb-[0] overflow-hidden relative"
-                                                                }>
-                                                                    <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
-                                                                             setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
-                                                                             setView={setView} view={view}
-                                                                             setItemName={setItemName} itemName={itemName}
-                                                                             searchCode={searchCode} setSearchCode={setSearchCode}
-                                                                             tech={tech}  setTech={setTech}
-                                                                             techLayer={techLayer} setTechLayer={setTechLayer}
-                                                                             techNames={techNames} setTechNames={setTechNames}/>
-
-                                                                    {provinceName !== "" &&
-                                                                        <div>
-                                                                            <div
-                                                                                className="backItem absolute right-[20px] top-[20px] z-50 "
-                                                                                onClick={() => {
-                                                                                    handleBackMap()
-                                                                                }}>
-                                                                                <img src="/images/arrow/back.svg"
-                                                                                     alt=""/>
-                                                                                <span>Back</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    }
-
-                                                                        <AssetView2 setSiteNameClicked ={setSiteNameClicked} provinceName={provinceName} cityName={cityName} selectedProvince={selectedProvince} selectProvinceHandler={selectProvinceHandler}
-                                                                                    selectProvinceHandler2={selectProvinceHandler2}
-                                                                                    setCityName={setCityName} mapProvincesData={mapProvincesData} mapIranData={mapIranData} />
-
-
-                                                                </motion.div>
-                                            </div>
-                                        )}
-                                        {
-                                            searchCode ==="" &&  view === 2 && (
+                                            searchCode !== "" &&
+                                            (
                                                 <div>
                                                     <motion.div className={
                                                         (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
                                                             "pb-[0] overflow-hidden relative"
                                                     }>
-                                                        <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
-                                                                 setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
+
+                                                        <Filters setTechnologyIndex={setTechnologyIndex}
+                                                                 technologyIndex={technologyIndex}
+                                                                 setTechnologyLayer={setTechnologyLayer}
+                                                                 technologyLayer={technologyLayer}
                                                                  setView={setView} view={view}
                                                                  setItemName={setItemName} itemName={itemName}
                                                                  searchCode={searchCode} setSearchCode={setSearchCode}
-                                                                 tech={tech}  setTech={setTech}
+                                                                 tech={tech} setTech={setTech}
                                                                  techLayer={techLayer} setTechLayer={setTechLayer}
                                                                  techNames={techNames} setTechNames={setTechNames}
                                                         />
-                                                            <div>
-                                                                <FilterMap provinceName={provinceName} setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
+
+                                                        <div>
+                                                            <SiteMap searchSiteData={searchSiteData}/>
+                                                        </div>
+                                                    </motion.div>
+                                                </div>)
+                                        }
+
+                                        {searchCode === "" && (view === 1) && (
+                                            <div>
+                                                <motion.div className={
+                                                    (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
+                                                        "map_fixed_positition pt-[30px] px-[35px] pb-[0] overflow-hidden relative"
+                                                }>
+                                                    <Filters setTechnologyIndex={setTechnologyIndex}
+                                                             technologyIndex={technologyIndex}
+                                                             setTechnologyLayer={setTechnologyLayer}
+                                                             technologyLayer={technologyLayer}
+                                                             setView={setView} view={view}
+                                                             setItemName={setItemName} itemName={itemName}
+                                                             searchCode={searchCode} setSearchCode={setSearchCode}
+                                                             tech={tech} setTech={setTech}
+                                                             techLayer={techLayer} setTechLayer={setTechLayer}
+                                                             techNames={techNames} setTechNames={setTechNames}/>
+
+                                                    {provinceName !== "" &&
+                                                        <div>
+                                                            <div
+                                                                className="backItem absolute right-[20px] top-[20px] z-50 "
+                                                                onClick={() => {
+                                                                    handleBackMap()
+                                                                }}>
+                                                                <img src="/images/arrow/back.svg"
+                                                                     alt=""/>
+                                                                <span>Back</span>
                                                             </div>
+                                                        </div>
+                                                    }
+
+                                                    <AssetView2 setSiteNameClicked={setSiteNameClicked}
+                                                                provinceName={provinceName} cityName={cityName}
+                                                                selectedProvince={selectedProvince}
+                                                                selectProvinceHandler={selectProvinceHandler}
+                                                                selectProvinceHandler2={selectProvinceHandler2}
+                                                                setCityName={setCityName}
+                                                                mapProvincesData={mapProvincesData}
+                                                                mapIranData={mapIranData}/>
+
+
+                                                </motion.div>
+                                            </div>
+                                        )}
+                                        {
+                                            searchCode === "" && view === 2 && (
+                                                <div>
+                                                    <motion.div className={
+                                                        (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
+                                                            "pb-[0] overflow-hidden relative"
+                                                    }>
+                                                        <Filters setTechnologyIndex={setTechnologyIndex}
+                                                                 technologyIndex={technologyIndex}
+                                                                 setTechnologyLayer={setTechnologyLayer}
+                                                                 technologyLayer={technologyLayer}
+                                                                 setView={setView} view={view}
+                                                                 setItemName={setItemName} itemName={itemName}
+                                                                 searchCode={searchCode} setSearchCode={setSearchCode}
+                                                                 tech={tech} setTech={setTech}
+                                                                 techLayer={techLayer} setTechLayer={setTechLayer}
+                                                                 techNames={techNames} setTechNames={setTechNames}
+                                                        />
+                                                        <div>
+                                                            <FilterMap provinceName={provinceName}
+                                                                       setSiteNameClicked={setSiteNameClicked} techs={tech}
+                                                                       itemName={itemName}/>
+                                                        </div>
                                                     </motion.div>
                                                 </div>)
                                         }
                                         {
                                             /*view 3 shows mix of technologies for when I have provinces or I don't have we must uses this component
                                             * for example Tehran 2g and 3g sites or only 2G sites of All of Iran */
-                                            searchCode ===""  && view===3 && (
+                                            searchCode === "" && view === 3 && (
                                                 <div>
                                                     <motion.div className={
                                                         (provinceName !== "" && cityName !== "") ? "relative p-0 overflow-hidden" :
                                                             "pb-[0] overflow-hidden relative"
                                                     }>
-                                                        <Filters setTechnologyIndex={setTechnologyIndex} technologyIndex={technologyIndex}
-                                                                 setTechnologyLayer={setTechnologyLayer} technologyLayer={technologyLayer}
+                                                        <Filters setTechnologyIndex={setTechnologyIndex}
+                                                                 technologyIndex={technologyIndex}
+                                                                 setTechnologyLayer={setTechnologyLayer}
+                                                                 technologyLayer={technologyLayer}
                                                                  setView={setView} view={view}
                                                                  setItemName={setItemName} itemName={itemName}
                                                                  searchCode={searchCode} setSearchCode={setSearchCode}
-                                                                 tech={tech}  setTech={setTech}
+                                                                 tech={tech} setTech={setTech}
                                                                  techLayer={techLayer} setTechLayer={setTechLayer}
                                                                  techNames={techNames} setTechNames={setTechNames}
                                                         />
                                                         <div>
-                                                            <TechMap provinceName={provinceName} setSiteNameClicked={setSiteNameClicked} techs={tech} itemName={itemName}/>
+                                                            <TechMap provinceName={provinceName}
+                                                                     setSiteNameClicked={setSiteNameClicked} techs={tech}
+                                                                     itemName={itemName}/>
                                                         </div>
                                                     </motion.div>
                                                 </div>)
