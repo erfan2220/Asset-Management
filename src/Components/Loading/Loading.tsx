@@ -8,11 +8,11 @@ const LoadingProgress = () =>
 
 
     return(
-        <div>
+        <div className="all-loading">
             <div className="fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#40404066] opacity-40">
 
             </div>
-            <div className="fixed top-0 left-0 w-full h-full flex  flex-col items-center justify-center z-50">
+            <div className="loading-wrapper fixed top-0 left-0 w-full h-full flex  flex-col items-center justify-center z-50">
 
                 <div className=" flex flex-col items-center justify-center
                  w-[334px] h-[120px] rounded-[4px] shadow-[0 4px 8px #00000014] bg-[#fff] gap-[16px]">

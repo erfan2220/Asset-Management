@@ -76,7 +76,6 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
         mapRef.current = L.map("map-container", {
             center: [32.74015808, 52.30584163],
             zoom: 6,
-            attributionControl: false,
             scrollWheelZoom: false,
             zoomControl: false,
         });
@@ -121,34 +120,11 @@ const LeafletFilter: React.FC<{ points: Point[], setSiteNameClicked: (siteName: 
 
 
 
-//     const filterMarkersInPolygon = useCallback((polygonLayer) => {
-//         const polygonLatLngs = polygonLayer.getLatLngs()[0];
-//         const polygon = L.polygon(polygonLatLngs);
-// console.log("polygons0",points)
-//
-//         const pointsWithinPolygon = points.filter(point => {
-//             const pointMarker = L.marker([point.latitude, point.longitude]);
-//             return isMarkerInsidePolygon(pointMarker, polygon);
-//         });
-//
-//         addMarkers(pointsWithinPolygon.length ? pointsWithinPolygon : points);
-//     }, [points]);
-
     const filterMarkersInPolygon = useCallback((polygonLayer) => {
         const polygonLatLngs = polygonLayer.getLatLngs()[0];
         const polygon = L.polygon(polygonLatLngs);
-console.log("polygons0",points)
-
-        // const pointsWithinPolygon = points.filter(point => {
-        //     const pointMarker = L.marker([point.latitude, point.longitude]);
-        //     return isMarkerInsidePolygon(pointMarker, polygon);
-        // });
 
         const pointsWithinPolygon = points.filter(point => {
-            if (!point || point.latitude === undefined || point.longitude === undefined) {
-                console.warn("Invalid point:", point);
-                return false;
-            }
             const pointMarker = L.marker([point.latitude, point.longitude]);
             return isMarkerInsidePolygon(pointMarker, polygon);
         });

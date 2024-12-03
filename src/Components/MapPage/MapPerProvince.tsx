@@ -31,6 +31,8 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
     const [filterPoints, setFilterPoints] = useState([]);
     const [allPoints, setAllPoints] = useState([]);
     const [loading,setLoading] = useState(false);
+    const [isPolygonDrawn, setIsPolygonDrawn] = useState(false);
+    const drawnItems = useRef<L.FeatureGroup>(new L.FeatureGroup()).current;
     const [nearestSiteData,setNearestSiteData] = useState({
         revenue:0,
         cost:0,
@@ -167,6 +169,7 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
 
         markersRef.current.clearLayers();
         mapRef.current.invalidateSize();
+
         const markers = displayPoints.map((position) => {
             const { latitude, longitude, siteName } = position;
 
@@ -194,16 +197,76 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
     // Set markers on the map whenever filterPoints or allPoints change
     useEffect(() => {
         // Display only filterPoints when available, otherwise use allPoints
-        const displayPoints = filterPoints.length > 0 ? filterPoints : allPoints;
-
         if (!isLoading && mapRef.current && markersRef.current) {
-            updateMapMarkers(displayPoints);
+            updateMapMarkers(filterPoints.length > 0 ? filterPoints : allPoints);
         }
-    }, [filterPoints, isLoading, updateMapMarkers]);
+    }, [filterPoints, updateMapMarkers]);
 
+    const removeDuplicatePoints = (points) => {
+        const seen = new Set();
+        return points.filter((point) => {
+            const isDuplicate = seen.has(point.siteName); // or use point.latitude, point.longitude if you prefer
+            seen.add(point.siteName); // or use point.latitude, point.longitude
+            return !isDuplicate;
+        });
+    };
+    useEffect(() =>
+    {
+        if (points.length > 0)
+        {
+            const uniquePoints = removeDuplicatePoints(points);
+            setAllPoints(uniquePoints);
+        }
+    }, [points]);
+
+
+    console.log("allPoints1",points)
+
+    const filterMarkersInPolygon = useCallback((polygonLayer,points2) =>
+    {
+        if (!points2 || points2.length === 0) {
+            console.warn("No points available to filter.");
+            return;
+        }
+
+        const polygonLatLngs = polygonLayer.getLatLngs();
+        const polygon = L.polygon(polygonLatLngs);
+
+        // const pointsWithinPolygon = points.filter(point => {
+        //     const pointMarker = L.marker([point.latitude, point.longitude]);
+        //     return isMarkerInsidePolygon(pointMarker, polygon);
+        // });
+
+        const pointsWithinPolygon = points2.filter(point => {
+            if (!point || point.latitude === undefined || point.longitude === undefined) {
+                console.warn("Invalid point:", point);
+                return false;
+            }
+            const pointMarker = L.marker([point.latitude, point.longitude]);
+            return isMarkerInsidePolygon(pointMarker, polygon);
+        });
+
+        setFilterPoints(pointsWithinPolygon)
+    }, [points]);
+
+
+
+    const isMarkerInsidePolygon = (marker: L.Marker, poly: L.Polygon) => {
+        const polyPoints = poly.getLatLngs()[0];
+        const x = marker.getLatLng().lat, y = marker.getLatLng().lng;
+        let inside = false;
+        for (let i = 0, j = polyPoints.length - 1; i < polyPoints.length; j = i++) {
+            const xi = polyPoints[i].lat, yi = polyPoints[i].lng;
+            const xj = polyPoints[j].lat, yj = polyPoints[j].lng;
+            const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    };
 
     // Map setup and marker clustering
     useEffect(() => {
+        console.log("allPoints5",points)
         if (!isLoading && !mapRef.current) {
             mapRef.current = L.map("map-container", {
                 center: [32.74015808, 52.30584163],
@@ -221,7 +284,54 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
 
             const zoomControl = L.control.zoom({ position: 'bottomright' });
             zoomControl.addTo(mapRef.current);
+
+
+
+
+            if (!markersRef.current) {
+                markersRef.current = L.markerClusterGroup({
+                    showCoverageOnHover: false,
+                    // maxClusterRadius: zoom => (zoom >= 14 ? 0 : 80),
+                });
+                mapRef.current.addLayer(markersRef.current);
+
+
+
+                // mapRef.current.on('zoomend', () => {
+                //     addMarkers(points);
+                // });
+            }
+
         }
+
+        console.log("allPoints2",points)
+
+        if (!mapRef.current._drawControlInitialized) {
+            const drawControl = new L.Control.Draw({
+                position: 'topright',
+                draw: {
+                    polygon: true,
+                    circle: false,
+                    rectangle: false,
+                    marker: false,
+                    polyline: false
+                },
+                edit: {
+                    featureGroup: drawnItems,
+                    remove: true
+                }
+            });
+            mapRef.current.addControl(drawControl);
+            mapRef.current._drawControlInitialized = true; // Flag to prevent re-initialization
+        }
+
+
+        mapRef.current.on(L.Draw.Event.CREATED, (e) => {
+            const layer = e.layer;
+            drawnItems.addLayer(layer);
+            filterMarkersInPolygon(e.layer,points);
+        });
+
 
         if (!markersRef.current) {
             markersRef.current = L.markerClusterGroup({
@@ -229,11 +339,18 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
                 maxClusterRadius: zoom => (zoom >= 14 ? 0 : 80),
             });
             mapRef.current.addLayer(markersRef.current);
+            mapRef.current.addLayer(drawnItems);
+
+
+
+            // mapRef.current.on('zoomend', () => {
+            //     addMarkers(points);
+            // });
         }
 
         const displayPoints = filterPoints.length > 0 ? filterPoints : allPoints;
         if (displayPoints.length > 0) updateMapMarkers(displayPoints);
-    }, [isLoading, updateMapMarkers]);
+    }, [isLoading,updateMapMarkers]);
 
     // if (error) return <div>Error fetching data</div>;
 

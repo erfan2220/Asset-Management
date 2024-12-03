@@ -9,37 +9,44 @@ import "./ActiveTab1Country.css"
 import { Shamsi } from "basic-shamsi";
 import { provinceNameVariations } from "../../../../database/dictionaryProvinces/dictionaryProvinces";
 import { t } from '../../../../translationUtil';
+import LoadingProgress from "../../../Loading/Loading";
 
 
 const ActiveTab1Country = (props) =>
 {
 
-    const [calenderSelection, setCalenderSelection] = useState(1)
+    const [calenderSelection, setCalenderSelection] = useState(3)
     const [dataCountry, setDataCountry] = useState([])
     const [siteTypesOpen, setSiteTypesOpen] = useState(false)
     const [calenderOpen, setCalenderOpen] = useState(false)
     const [sitePoints, setSitePoints] = useState([]);
 
-    const [totalTraffic, setTotalTraffic] = useState(null)
-    const [totalCount, setTotalCount] = useState(null)
-    const [cellsCount, setCellsCount] = useState(null)
-    const [cityCount, setCityCount] = useState(null)
-    const [totaldata, setTotaldata] = useState(null)
 
+    // const [totalCount, setTotalCount] = useState(null)
+    // const [cellsCount, setCellsCount] = useState(null)
+    // const [cityCount, setCityCount] = useState(null)
+    // const [totaldata, setTotaldata] = useState(null)
+
+
+    const [siteData, setSiteData] = useState(null)
+
+    //Data to  set
+    const [totalTraffic, setTotalTraffic] = useState(null)
+    const [totalFixedCost, setTotalFixedCost] = useState(null)
+    const [totalVariableCost, setTotalVariableCost] = useState(null)
+    const [revenue, setRevenue] = useState(null)
+
+    const [profit, setProfit] = useState(null)
+    const [margin, setMargin] = useState(null)
+
+
+    const [closeFirstCalender,setCloseFirstCalender]=useState(false)
     const [closeSecondCalender,setCloseSecondCalender]=useState(false)
 
-
-
-
-
-
-
-
-
-
-
     const Year=[1403,1402,1401,1400,1399,1398,1397,1396,1395,1394,1393,1392,1391,1390];
+
     const Month=[12,11,10,9,8,7,6,5,4,3,2,1];
+
     const Day=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 
     const [year,setYear]=useState(null)
@@ -48,13 +55,16 @@ const ActiveTab1Country = (props) =>
 
 
     const [openSelectiveTime, setOpenSelectiveTime] = useState(false)
+
     const [openSelectiveIndex, setOpenSelectiveIndex] = useState(0)
+
     const [cellsSitePerProvince, setCellsSitePerProvince] = useState()
+
     const [values, setValues] = useState([
         new DateObject({ calendar: persian, locale: persian_fa })
     ]);
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const calenderRef = useRef()
 
@@ -111,178 +121,173 @@ const ActiveTab1Country = (props) =>
         return provinceName; // Return the original name if no match found
     };
 
-    const handleDateChange = (dates) => {
-
+    const handleDateChange = (dates) =>
+    {
         setValues(dates);
-
         // Convert each date to Shamsi format (e.g., '۱۴۰۳/۰۷/۰۱')
         const persianDates = dates.map(date => date.format("YYYY/MM/DD"));
-
-
         // Convert each Persian date to Miladi (Gregorian)
         const miladiDates = persianDates.map(date => convertToMiladi(date));
-
         console.log("Persian Dates:", persianDates);
         console.log("Miladi (Gregorian) Dates:", miladiDates);
 
         setDaysDates(miladiDates)
-
-
     };
 
-
+    //default Data before this
+    // useEffect(() => {
+    //     const promises = [];
+    //     // const promise1 = fetchAndCacheData("",
+    //     //     "http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM")
+    //     //     .then(data2 => {
+    //     //         // Handle the data as needed
+    //     //     })
+    //     //     .catch(error => {
+    //     //         console.log(error)
+    //     //     });
+    //     // promises.push(promise1);
+    //     //
+    //     // const promise2 = fetchAndCacheData("",
+    //     //     "http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM")
+    //     //     .then(data2 => {
+    //     //         // Handle the data as needed
+    //     //     })
+    //     //     .catch(error => {
+    //     //         console.log(error)
+    //     //     });
+    //     // promises.push(promise2);
+    //     //
+    //     // const promise3 = fetchAndCacheData("",
+    //     //     "http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM")
+    //     //     .then(data2 => {
+    //     //         // Handle the data as needed
+    //     //     })
+    //     //     .catch(error => {
+    //     //         console.log(error)
+    //     //     });
+    //     // promises.push(promise3);
+    //     //
+    //     // const promise4 = fetchAndCacheData("",
+    //     //     "http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM")
+    //     //     .then(data2 => {
+    //     //         // Handle the data as needed
+    //     //     })
+    //     //     .catch(error => {
+    //     //         console.log(error)
+    //     //     });
+    //     // promises.push(promise4);
+    //     //
+    //     // const promise5 = fetchAndCacheData("",
+    //     //     "http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM")
+    //     //     .then(data2 => {
+    //     //         // Handle the data as needed
+    //     //     })
+    //     //     .catch(error => {
+    //     //         console.log(error)
+    //     //     });
+    //     // promises.push(promise5);
+    //
+    //         // fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM`)
+    //         // fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=${fromDate2}%2012:00:00%20AM&toDate=${toDate2}%2012:00:00%20AM`)
+    //         // fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=${fromDate}&toDate=${toDate}`)
+    //         // // fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=3/26/2024%2012:00:00%20AM&toDate=4/26/2024%2012:00:00%20AM`)
+    //         // fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=${fromDate2}%2012:00:00%20AM&toDate=${toDate2}%2012:00:00%20AM`)
+    //         // fetch("http://10.15.90.87:5001/api/assets/sites_location")
+    //
+    //     const promise6 = fetchAndCacheData("sites_count_per_country",
+    //         "http://10.15.90.87:5001/api/assets/sites_count_per_tech")
+    //         .then(data2 => {
+    //             // Handle the data as needed
+    //             props.setData(data2);
+    //
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         });
+    //
+    //     promises.push(promise6);
+    //
+    //     const promise8 = fetchAndCacheData("data_countr44444",
+    //         "http://10.15.90.72:9098/api/iran-total-traffic?fromDateTime=2024-10-04&toDateTime=2024-10-04")
+    //         .then(data2 => {
+    //             // Handle the data as needed
+    //             setDataCountry(data2);
+    //         })
+    //         .catch(error => {
+    //             // Handle errors
+    //             console.log(error)
+    //         });
+    //
+    //     promises.push(promise8);
+    //
+    //     // Wait for all promises to resolve
+    //     Promise.all(promises)
+    //         .then(() => {
+    //
+    //             setLoading(false); // Set loading to false once all data is fetched
+    //         });
+    //
+    //
+    // }, []);
 
     useEffect(() => {
-        const promises = [];
-        const promise1 = fetchAndCacheData("sites_count_cache", "http://10.15.90.87:5001/api/assets/sites_count_per_province")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("Sites count per province data", data);
-                setTotalCount(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching sites count per province data:", error);
-            });
+        const handleData = (data, setter) => {
+            if (data) {
+                setter(data); // Set state with fetched data
+            }
+        };
 
-        promises.push(promise1);
+        // Calculate start and end of the year dynamically
+        const currentYear = new Date().getFullYear();
+        const startOfYear = `${currentYear}-01-01`;
+        const endOfYear = `${currentYear}-12-31`;
 
-        // Fetch cells count per province data
-        const promise2 = fetchAndCacheData("cells_count_cache_datatat", "http://10.15.90.87:5001/api/assets/cells_count_per_province")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("kljdsldjfslk", data);
-                setCellsCount(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching cells count per province data:", error);
-            });
+        console.log("Year Range:", startOfYear, endOfYear);
 
-        promises.push(promise2);
+        // Set loading to true initially
+        setLoading(true);
 
-        // Fetch cities per province data
-        const promise3 = fetchAndCacheData("cities_per_province_cache", "http://10.15.90.87:5001/api/assets/cities")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("Cities per province data:", data);
-                setCityCount(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching cities per province data:", error);
-            });
+        // Array of fetch calls
+        const fetchCalls = [
+            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=3/26/2024%2012:00:00%20AM&fromDate=3/01/2024%2012:00:00%20AM`)
+                .then((response) => response.json())
+                .then((data) => handleData(data, setTotalTraffic)),
 
-        promises.push(promise3);
+            fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=3/01/2024%2012:00:00%20AM&toDate=3/26/2024%2012:00:00%20AM`)
+                .then((response) => response.json())
+                .then((data) => handleData(data, setTotalFixedCost)),
 
-        // Fetch traffic per province data
-        const promise4 = fetchAndCacheData("traffic_per_province_cache", "http://10.15.90.87:5001/api/assets/traffic_per_province")
-            .then(data => {
-                // Handle the data as needed
-                // console.log("Traffic per province data:", data);
-                setTotalTraffic(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching traffic per province data:", error);
-            });
+            fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=2024-03-01&toDate=2024-12-03`)
+                .then((response) => response.json())
+                .then((data) => handleData(data, setTotalVariableCost)),
 
-        promises.push(promise4);
+            fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=3/01/2024%%2012:00:00%20AM&toDate=03/12/2024%2012:00:00%20AM`)
+                .then((response) => response.json())
+                .then((data) => handleData(data, setRevenue)),
 
-        // Fetch traffic per province data
-        const promise5 = fetchAndCacheData("traffic_per_all_country",
-            "http://10.15.90.87:5001/api/assets/traffic_total")
-            .then(data => {
-                // Handle the data as needed
-                setTotaldata(data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error("Error fetching traffic per province data:", error);
-            });
+            fetch("http://10.15.90.87:5001/api/assets/sites_location")
+                .then((res) => res.json())
+                .then((res) => {
+                    setSitePoints(res.data); // Assuming data is an array of site points
+                    console.log("Site Points:", res.data);
+                }),
+        ];
 
-        promises.push(promise5);
-
-
-        const promise6 = fetchAndCacheData("sites_count_per_country",
-            "http://10.15.90.87:5001/api/assets/sites_count_per_tech")
-            .then(data2 => {
-                // Handle the data as needed
-                props.setData(data2);
-
-            })
-            .catch(error => {
-                console.log(error)
-            });
-
-        promises.push(promise6);
-
-        const promise7 = fetchAndCacheData("cell_counts_per_all_country",
-            "http://10.15.90.87:5001/api/assets/cells_count")
-            .then(data2 => {
-                // Handle the data as needed
-                // setDataPerProvince(data2);
-                setCellsSitePerProvince(data2)
-
-            })
-            .catch(error => {
-                // Handle errors
-                console.log(error)
-            });
-
-        promises.push(promise7);
-
-
-
-        const promise8 = fetchAndCacheData("data_countr44444",
-            "http://10.15.90.72:9098/api/iran-total-traffic?fromDateTime=2024-10-04&toDateTime=2024-10-04")
-            .then(data2 => {
-                // Handle the data as needed
-                setDataCountry(data2);
-            })
-            .catch(error => {
-                // Handle errors
-                console.log(error)
-            });
-
-        promises.push(promise8);
-
-
-
-
-        // Wait for all promises to resolve
-        Promise.all(promises)
+        // Wait for all fetches to complete
+        Promise.all(fetchCalls)
             .then(() => {
-
-                setLoading(true); // Set loading to false once all data is fetched
+                // All fetches have completed successfully
+                setLoading(false);
+            })
+            .catch((error) => {
+                // Handle errors from any of the fetch calls
+                console.error('Error fetching data:', error);
+                setLoading(false); // Set loading to false even if there's an error
             });
-
-
     }, []);
 
 
-    const numberFormatter = new Intl.NumberFormat('en-US', {
-        style: 'decimal',
-
-    });
-
-    const handleSelection = (index) => {
-            setCalenderSelection(index)
-        if(index===1)
-        {
-            setCalenderOpen(!calenderOpen)
-            setYear(null)
-            setMonth(null)
-            setDay(null)
-        }
-        else if(index===2)
-        {
-            setCloseSecondCalender(!closeSecondCalender)
-        }
-
-    }
-
-
+    //This useEffect is used for calender
     useEffect(() => {
         const handleData = (data, setter) => {
             if (data) {
@@ -290,18 +295,20 @@ const ActiveTab1Country = (props) =>
             }
         };
 
+        if (daysDates.length > 0)
+        {
 
-
-        if (daysDates.length > 0) {
-
-            const formatDate = (dateStr) => {
+            const formatDate = (dateStr) =>
+            {
                 const date = new Date(dateStr);
                 const year = date.getFullYear();
                 const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
                 const day = String(date.getDate()).padStart(2, '0');
                 return `${year}-${month}-${day}`;
             };
-            const formatDate2 = (dateStr) => {
+
+            const formatDate2 = (dateStr) =>
+            {
                 const date = new Date(dateStr);
                 const year = date.getFullYear();
                 const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
@@ -309,65 +316,217 @@ const ActiveTab1Country = (props) =>
                 return `${month}/${day}/${year}`;
             };
 
-            const fromDate = formatDate(daysDates[0]);  // Use the first date for both cases
+            const fromDate = formatDate(daysDates[0]);
             const toDate = daysDates.length > 1 ? formatDate(daysDates[1]) : formatDate(daysDates[0]);
 
-            const fromDate2 = formatDate2(daysDates[0]);  // Use the first date for both cases
+            const fromDate2 = formatDate2(daysDates[0]);
             const toDate2 = daysDates.length > 1 ? formatDate2(daysDates[1]) : formatDate2(daysDates[0]);
 
+            console.log("todayFormatttt", fromDate, toDate);
 
-            console.log("todayFormatttt",fromDate,toDate)
+            // Set loading to true initially
+            setLoading(true);
 
-            // http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=01/01/2000%2012:00:00%20AM&fromDate=02/01/2001%2012:00:00%20AM
-            //     http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=3/26/2024%2012:00:00%20AM&fromDate=3/26/2024%2012:00:00%20AM
-            // fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate2}%2012:00:00%20AM&fromDate=${fromDate2}%2012:00:00%20AM`)
-            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=3/26/2024%2012:00:00%20AM&fromDate=3/26/2024%2012:00:00%20AM`)
-                .then(response => {
-                    if (!response.ok) {
-                        // throw new Error('Network response was not ok');
-                    }
-                    return response.json(); // Convert response to JSON
-                }).then(data => {
-                    handleData(data, setTotalTraffic)
-                }).catch(error => {
-                    // Handle errors
-                    console.error('Error fetching data:', error);
-                });
+            // Array of fetch calls
+            const fetchCalls = [
+                // fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM`)
+                fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=09/30/2024%2012:00:00%20AM&fromDate=09/01/2024%2012:00:00%20AM`)
+                    .then((response) => response.json())
+                    .then((data) => handleData(data, setTotalTraffic)),
 
-            fetch(`http://10.15.90.72:9098/api/iran-total-traffic?fromDateTime=${fromDate}&toDateTime=${toDate}`)
-                .then(response => {
-                    if (!response.ok) {
-                        // throw new Error('Network response was not ok');
-                    }
-                    return response.json(); // Convert response to JSON
-                }).then(data => {
-                    handleData(data, setDataCountry)
-                }).catch(error => {
-                    // Handle errors
-                    console.error('Error fetching data:', error);
-                });
+                fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=09/01/2024%2012:00:00%20AM&toDate=09/30/2024%2012:00:00%20AM`)
+                // fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=3/26/2024%2012:00:00%20AM&toDate=3/26/2024%2012:00:00%20AM`)
+                    .then((response) => response.json())
+                    .then((data) => handleData(data, setTotalFixedCost)),
 
+                fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=09/01/2024}&toDate=09/30/2024`)
+                // fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=2024-11-29&toDate=2024-11-29`)
+                    .then((response) => response.json())
+                    .then((data) => handleData(data, setTotalVariableCost)),
 
-            fetch("http://10.15.90.87:5001/api/assets/sites_location")
-                .then((res) => {
-                    if (!res.ok) {
-                        // throw new Error("Failed to fetch");
-                    }
-                    return res.json();
-                })
-                .then((res) => {
-                    setSitePoints(res.data); // Assuming data is an array of site points
-                    console.log("rererreres", res.data)
+                // fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=3/26/2024%2012:00:00%20AM&toDate=4/26/2024%2012:00:00%20AM`)
+                fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=09/01/2024%2012:00:00%20AM&toDate=09/30/2024%2012:00:00%20AM`)
+                    .then((response) => response.json())
+                    .then((data) => handleData(data, setRevenue)),
+
+                fetch("http://10.15.90.87:5001/api/assets/sites_location")
+                    .then((res) => res.json())
+                    .then((res) => {
+                        setSitePoints(res.data); // Assuming data is an array of site points
+                        console.log("rererreres", res.data);
+                    }),
+            ];
+
+            // Wait for all fetches to complete
+            Promise.all(fetchCalls)
+                .then(() => {
+                    // All fetches have completed successfully
+                    setLoading(false);
                 })
                 .catch((error) => {
-                    alert("Data is not available");
+                    // Handle errors from any of the fetch calls
+                    console.error('Error fetching data:', error);
+                    setLoading(false); // Set loading to false even if there's an error
                 });
         }
     }, [daysDates]);
 
 
+    // useEffect(() =>
+    // {
+    //
+    //     const formatDate = (dateStr) => {
+    //         const date = new Date(dateStr);
+    //         const year = date.getFullYear();
+    //         const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    //         const day = String(date.getDate()).padStart(2, '0');
+    //         return `${year}-${month}-${day}`;
+    //     };
+    //
+    //     const formatDate2 = (dateStr) => {
+    //         const date = new Date(dateStr);
+    //         const year = date.getFullYear();
+    //         const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    //         const day = String(date.getDate()).padStart(2, '0');
+    //         return `${month}/${day}/${year}`;
+    //     };
+    //
+    //     const today = new Date();
+    //     const todayFormatted1 = formatDate(today);
+    //     const todayFormatted2 = formatDate2(today);
+    //
+    //     console.log("todayFormatted1",todayFormatted1)
+    //     console.log("todayFormatted2",todayFormatted2)
+    //
+    //     const fromDate = formatDate(daysDates[0]);  // Use the first date for both cases
+    //     const toDate = daysDates.length > 1 ? formatDate(daysDates[1]) : formatDate(daysDates[0]);
+    //
+    //     const fromDate2 = formatDate2(daysDates[0]);  // Use the first date for both cases
+    //     const toDate2 = daysDates.length > 1 ? formatDate2(daysDates[1]) : formatDate2(daysDates[0]);
+    //
+    //     if (props.siteNameClicked && daysDates.length < 1) {
+    //         fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/${props.siteNameClicked}?fromDate=${todayFormatted1}&toDate=${todayFormatted1}`)
+    //             .then((res) => res.json())  // Parse as JSON
+    //             .then((res) => {
+    //                 setSiteData(res);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching site data:", error);
+    //             });
+    //
+    //         fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${todayFormatted2}&toDate=${todayFormatted2}`)
+    //             .then((res) => res.json())  // Parse as JSON
+    //             .then((res) => {
+    //                 setTotalTraffic(res);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching site data:", error);
+    //             });
+    //
+    //
+    //         // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${todayFormatted1}&toDateTime=${todayFormatted1}`)
+    //         //     .then((res) => res.json())  // Parse as JSON
+    //         //     .then((res) =>
+    //         //     {
+    //         //         console.log("Site Data for", props.siteNameClicked, res.siteTotalFixCostData);
+    //         //         setCostData(res);
+    //         //     })
+    //         //     .catch((error) => {
+    //         //         console.error("Error fetching site data:", error);
+    //         //     });
+    //
+    //         fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted1}`)
+    //             .then((res) => res.json())  // Parse as JSON
+    //             .then((res) =>
+    //             {
+    //                 console.log("Site Data for", props.siteNameClicked, res);
+    //                 setProfitMarginData(res);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching site data:", error);
+    //             });
+    //
+    //     }
+    //     else if (props.siteNameClicked && daysDates.length > 0) {
+    //         fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=${fromDate}4&toDate=${toDate}`)
+    //             .then((res) => res.json())  // Parse as JSON
+    //             .then((res) => {
+    //                 setSiteData(res);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching site data:", error);
+    //             });
+    //
+    //
+    //         fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${fromDate2}&toDate=${toDate2}`)
+    //             .then((res) => res.json())  // Parse as JSON
+    //             .then((res) =>
+    //             {
+    //                 setDataTraffic(res);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching site data:", error);
+    //             });
+    //
+    //         // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${fromDate}&toDateTime=${toDate}`)
+    //         //     .then((res) => res.json())  // Parse as JSON
+    //         //     .then((res) =>
+    //         //     {
+    //         //         console.log("Site Data for", props.siteNameClicked, res);
+    //         //         setCostData(res);
+    //         //     })
+    //         //     .catch((error) => {
+    //         //         console.error("Error fetching site data:", error);
+    //         //     });
+    //
+    //         fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted1}`)
+    //             .then((res) => res.json())  // Parse as JSON
+    //             .then((res) =>
+    //             {
+    //                 console.log("Site Data for", props.siteNameClicked, res);
+    //                 setProfitMarginData(res);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching site data:", error);
+    //             });
+    //     }
+    // }, [props.siteNameClicked, daysDates]);
 
-    useEffect(() => {
+
+    const numberFormatter = new Intl.NumberFormat('en-US', {
+        style: 'decimal',
+
+    });
+
+    const handleSelection = (index) =>
+    {
+        setCalenderSelection(index)
+
+        if(index===1)
+        {
+            setCloseFirstCalender(!closeFirstCalender)
+            setCloseSecondCalender(false)
+            setYear(null)
+            setMonth(null)
+            setDay(null)
+        }
+
+        else if(index===2)
+        {
+            setCloseFirstCalender(false)
+            setCloseSecondCalender(!closeSecondCalender)
+        }
+
+
+    }
+
+
+
+
+
+    useEffect(() =>
+    {
+
         //get site counts
         fetch("http://10.15.90.87:5001/api/assets/sites_location")
             .then((res) => {
@@ -383,29 +542,29 @@ const ActiveTab1Country = (props) =>
                 alert("Data is not available");
             });
 
-        if (props.provinceName !== "") {
-            const canonicalProvinceName = getCanonicalProvinceName(props.provinceName);
-
-
-            fetch(`http://10.15.90.87:5001/api/assets/province_profit_margin/${canonicalProvinceName}`)
-                .then(response => {
-                    if (!response.ok) {
-                        // throw new Error('Network response was not ok');
-                    }
-                    return response.json(); // Convert response to JSON
-                }).then(data => {
-                    setDataPerProvince(data?.data[0]);
-                }).catch(error => {
-                    // Handle errors
-                    console.error('Error fetching data:', error);
-                });
-
-
-
-            // console.log("province name:",provinceName)
-            //
-
-        }
+        // if (props.provinceName !== "") {
+        //     const canonicalProvinceName = getCanonicalProvinceName(props.provinceName);
+        //
+        //
+        //     fetch(`http://10.15.90.87:5001/api/assets/province_profit_margin/${canonicalProvinceName}`)
+        //         .then(response => {
+        //             if (!response.ok) {
+        //                 // throw new Error('Network response was not ok');
+        //             }
+        //             return response.json(); // Convert response to JSON
+        //         }).then(data => {
+        //             setDataPerProvince(data?.data[0]);
+        //         }).catch(error => {
+        //             // Handle errors
+        //             console.error('Error fetching data:', error);
+        //         });
+        //
+        //
+        //
+        //     // console.log("province name:",provinceName)
+        //     //
+        //
+        // }
 
     }, [props.provinceName])
 
@@ -481,125 +640,6 @@ const ActiveTab1Country = (props) =>
     };
 
 
-    useEffect(() =>
-    {
-
-        const formatDate = (dateStr) => {
-            const date = new Date(dateStr);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        };
-
-        const formatDate2 = (dateStr) => {
-            const date = new Date(dateStr);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${month}/${day}/${year}`;
-        };
-
-        const today = new Date();
-        const todayFormatted1 = formatDate(today);
-        const todayFormatted2 = formatDate2(today);
-
-        console.log("todayFormatted1",todayFormatted1)
-        console.log("todayFormatted2",todayFormatted2)
-
-        const fromDate = formatDate(daysDates[0]);  // Use the first date for both cases
-        const toDate = daysDates.length > 1 ? formatDate(daysDates[1]) : formatDate(daysDates[0]);
-
-        const fromDate2 = formatDate2(daysDates[0]);  // Use the first date for both cases
-        const toDate2 = daysDates.length > 1 ? formatDate2(daysDates[1]) : formatDate2(daysDates[0]);
-
-        if (props.siteNameClicked && daysDates.length < 1) {
-            fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/${props.siteNameClicked}?fromDate=${todayFormatted1}&toDate=${todayFormatted1}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) => {
-                    setSiteData(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-
-            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${todayFormatted2}&toDate=${todayFormatted2}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) => {
-                    setDataTraffic(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-
-
-            // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${todayFormatted1}&toDateTime=${todayFormatted1}`)
-            //     .then((res) => res.json())  // Parse as JSON
-            //     .then((res) =>
-            //     {
-            //         console.log("Site Data for", props.siteNameClicked, res.siteTotalFixCostData);
-            //         setCostData(res);
-            //     })
-            //     .catch((error) => {
-            //         console.error("Error fetching site data:", error);
-            //     });
-
-            fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted1}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) =>
-                {
-                    console.log("Site Data for", props.siteNameClicked, res);
-                    setProfitMarginData(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-
-        }
-        else if (props.siteNameClicked && daysDates.length > 0) {
-            fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=${fromDate}4&toDate=${toDate}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) => {
-                    setSiteData(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-
-
-            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/${props.siteNameClicked}?fromDate=${fromDate2}&toDate=${toDate2}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) =>
-                {
-                    setDataTraffic(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-
-            // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${fromDate}&toDateTime=${toDate}`)
-            //     .then((res) => res.json())  // Parse as JSON
-            //     .then((res) =>
-            //     {
-            //         console.log("Site Data for", props.siteNameClicked, res);
-            //         setCostData(res);
-            //     })
-            //     .catch((error) => {
-            //         console.error("Error fetching site data:", error);
-            //     });
-
-            fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted1}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) =>
-                {
-                    console.log("Site Data for", props.siteNameClicked, res);
-                    setProfitMarginData(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-        }
-    }, [props.siteNameClicked, daysDates]);
 
 
     const handleYear=(year)=>
@@ -670,10 +710,11 @@ const ActiveTab1Country = (props) =>
         return formattedDate;
     };
 
-console.log("dataCountry",dataCountry)
+
+    console.log("total Traffic",totalTraffic)
 
     return (
-        loading ?
+        loading ?  <LoadingProgress/>:
             <div className="total_map_data">
                 <div className="flex  flex-col">
                     <div className="header_total_map_data_2">
@@ -771,83 +812,84 @@ console.log("dataCountry",dataCountry)
                                 )
                             }
                         </div>
+                        {
+                            daysDates.length>0 &&
+                            <div className="flex flex-row items-center gap-[20px] relative">
+                                <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
+                        flex flex-row items-center  justify-between w-fit relative">
 
-                        <div className="flex flex-row items-center gap-[20px] relative">
+                                    {/*<img src="/images/Asset/map/View1/CalendarBlank.svg"*/}
+                                    {/*     alt=""/>*/}
 
-
-                            <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
-                        flex flex-row items-center  justify-between min-w-[163px] relative">
-
-                                {/*<img src="/images/Asset/map/View1/CalendarBlank.svg"*/}
-                                {/*     alt=""/>*/}
-
-                                {
-                                    daysDates?.length === 1 &&
-                                    <span className="text-nowrap">
+                                    {
+                                        daysDates?.length === 1 &&
+                                        <span className="text-nowrap">
                                        {daysDates[0]}
-                                </span>
-                                }
+                                   </span>
+                                    }
 
-                                {
-                                    daysDates?.length === 2 &&
-                                    <span className="text-nowrap">
+                                    {
+                                        daysDates?.length === 2 &&
+                                        <span className="text-nowrap">
                                        {daysDates[0]}-{daysDates[1]}
                                 </span>
-                                }
-                                <img src="./images/map/Calender/close.svg" alt="" onClick={()=>setCloseSecondCalender(false)}/>
+                                    }
+                                    <img src="./images/map/Calender/close.svg" alt="" onClick={()=>setCloseSecondCalender(false)}/>
 
 
-                                {daysDates.length < 1 && openSelectiveIndex === 1 &&
-                                    <span className="text-nowrap">
+                                    {daysDates.length < 1 && openSelectiveIndex === 1 &&
+                                        <span className="text-nowrap">
                                        {t("this Month")}
                                     </span>
-                                }
-                                {
-                                    daysDates.length < 1 && openSelectiveIndex === 2 &&
-                                    <span className="text-nowrap">
+                                    }
+                                    {
+                                        daysDates.length < 1 && openSelectiveIndex === 2 &&
+                                        <span className="text-nowrap">
                                        {t("this Season")}
                                     </span>
-                                }
+                                    }
 
-                                {
-                                    daysDates.length < 1 && openSelectiveIndex === 3 &&
-                                    <span className="text-nowrap">
+                                    {
+                                        daysDates.length < 1 && openSelectiveIndex === 3 &&
+                                        <span className="text-nowrap">
                                        {t("this Year")}
                                     </span>
-                                }
+                                    }
 
-                                {/*<img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>*/}
+                                    {/*<img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>*/}
 
+                                </div>
                             </div>
+                        }
 
 
-                        </div>
+
+
 
                     </div>
 
                     <div className=" relative rounded-[8px] bg-[#f5f6f7] border-[1px] border-[#e0e0e0] w-[80px] py-[6px]  flex flex-row items-center justify-center gap-[3px]">
-                        <div
-                            className={calenderSelection === 1 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
+                        <div className={calenderSelection === 1 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
                             onClick={() => handleSelection(1)}>
                             <img
                                 src="./images/Asset/map/View1/Selection/Calender.svg"
                                 alt=""/>
-                            {
-                                calenderSelection === 1 && calenderOpen &&
-                                <div
-                                    className="p-[20px] z-50 absolute right-0 top-[50px] bg-white border-[1px] border-[#e0e0e0] rounded-[4px]"
-                                    ref={calenderRef}>
-                                    <Calendar calendar={persian} locale={persian_fa}
-                                              range
-                                              rangeHover value={values}
-                                              onChange={handleDateChange}/>
-
-                                    {/*<DatePicker  calendar={persian}*/}
-                                    {/*           locale={persian_fa} value={value} onChange={setValue}   multiple*/}
-                                    {/*             dateSeparator=" & "/>*/}
-                                </div>
-                            }
                         </div>
+                        {
+                            calenderSelection === 1 && closeFirstCalender &&
+                            <div
+                                className="p-[20px] z-50 absolute right-0 top-[50px] bg-white border-[1px] border-[#e0e0e0] rounded-[4px]"
+                                ref={calenderRef}>
+                                <Calendar calendar={persian} locale={persian_fa}
+                                          range
+                                          rangeHover value={values}
+                                          onChange={handleDateChange}/>
+
+                                {/*<DatePicker  calendar={persian}*/}
+                                {/*           locale={persian_fa} value={value} onChange={setValue}   multiple*/}
+                                {/*             dateSeparator=" & "/>*/}
+                            </div>
+                        }
                         <div className={calenderSelection === 2 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
                             onClick={() => handleSelection(2)}>
                             <img src="./images/Asset/map/View1/Selection/default.svg"
@@ -863,7 +905,7 @@ console.log("dataCountry",dataCountry)
 
                 </div>
                     {
-                        closeSecondCalender &&
+                        closeSecondCalender && calenderSelection === 2 &&
                         <div className="directionOfCalender  py-[10px] px-[14px] bg-[#E5F2FF] ">
 
                             <div className="newCalnender  flex flex-row items-center justify-between">
@@ -937,10 +979,7 @@ console.log("dataCountry",dataCountry)
                         <h3>{t("Site Counts")}</h3>
                         <p>{format(sitePoints.length)}</p>
                     </div>
-                    <div className="total_map_data_item_spp2">
-                        <h3>{t("Cell Counts")}</h3>
-                        <p>464,085</p>
-                    </div>
+
                 </div>
                 <div className="data_row_box">
                     <h2>{t("Traffic")}</h2>
@@ -948,17 +987,20 @@ console.log("dataCountry",dataCountry)
                         <div className="total_map_data_item_for_quantity_3">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Traffic PS")}</h3>
-                                {
-                                    calenderSelection === 1 &&
-                                    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>
-                                }
-                                {
-                                    calenderSelection === 2 &&
-                                    <p>
-                                        {totalTraffic ? format( totalTraffic.totalPsTraffic): "data is not available"}
-                                    </p>
-                                }
 
+                                {/*{*/}
+                                {/*    daysDates.length === 0 &&*/}
+                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+                                {/*{*/}
+                                {/*    daysDates.length > 0 &&*/}
+                                {/*    <p>*/}
+                                {/*        {totalTraffic ? format(totalTraffic.totalPsTraffic) : "data is not available"}*/}
+                                {/*    </p>*/}
+                                {/*}*/}
+
+                                <p>{totalTraffic ? format(totalTraffic.totalPsTraffic) : "data is not available"}</p>
 
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
                                 {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalPS`] : "data is not available"}</p>*/}
@@ -972,44 +1014,80 @@ console.log("dataCountry",dataCountry)
                             <div className="total_map_data_item_2">
                                 <h3>{t("Traffic CS")}</h3>
 
-                                {
-                                    calenderSelection === 1 &&
-                                    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>
-                                }
-                                {
-                                    calenderSelection === 2 &&
-                                    <p>{totalTraffic ? format(totalTraffic.totalCsTraffic) : "data is not available"}</p>
-                                }
 
-                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]: "data is not available"}</p>*/}
+                                {/*{*/}
+                                {/*    daysDates.length === 0 &&*/}
+                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+                                {/*{*/}
+                                {/*    daysDates.length>0 &&*/}
+                                {/*    <p>{totalTraffic ? format(totalTraffic.totalCsTraffic) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+                                <p>{totalTraffic ? format(totalTraffic.totalCsTraffic) : "data is not available"}</p>
+
+
                             </div>
 
                             <div className="total_map_data_item_3">
-                                <Rate value="4" dayDates={[]}/>
+                            <Rate value="4" dayDates={[]}/>
                                 <h6>Erlang</h6>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="data_row_box">
-                    <h2>{t("Costs and revenue")}</h2>
+                    <h2>{t("Cost and Revenue")}</h2>
                     <div className="row_items_traffic">
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Cost")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>
+
+                                {/*{*/}
+                                {/*    daysDates.length === 0 &&*/}
+                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+                                {/*{*/}
+                                {/*    daysDates.length > 0 &&*/}
+                                {/*    <p>{totalVariableCost ? format(totalVariableCost.totalVariableCostVoiceData + totalFixedCost.totalFixCostData) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+
+                                <p>{totalVariableCost ? format(totalVariableCost.totalVariableCostVoiceData + totalFixedCost.totalFixCostData) : "data is not available"}</p>
                                 {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCost`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
-                                <h6 className="text-nowrap"> تومان</h6>
+                                <h6 className="text-nowrap"> ریال</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Margin")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>
+                                {/*{*/}
+                                {/*    calenderSelection === 1 &&*/}
+                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+                                {/*{*/}
+                                {/*    calenderSelection === 2 &&*/}
+                                {/*    <p>{totalVariableCost ? format(totalVariableCost.totalVariableCostVoiceData+totalFixedCost.totalFixCostData) : "data is not available"}</p>*/}
+                                {/*}*/}
                                 {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`] : "data is not available"}</p>*/}
+                                {/*{*/}
+                                {/*    daysDates.length===0  &&*/}
+                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+                                {/*{*/}
+                                {/*    daysDates.length>0  &&*/}
+                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
+
+                                <p>data is not available</p>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
@@ -1019,29 +1097,50 @@ console.log("dataCountry",dataCountry)
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Profit")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>
+
+                                {/*{*/}
+                                {/*    daysDates.length===0 &&*/}
+                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+                                <p>data is not available</p>
+                                {/*{*/}
+                                {/*    daysDates.length>0 &&*/}
+                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+
                                 {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
-                                <h6 className="text-nowrap"> تومان</h6>
+                                <h6 className="text-nowrap"> ریال</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Total revenue")}</h3>
-                                <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>
+                                {/*{*/}
+                                {/*    daysDates.length === 0 &&*/}
+                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+                                {/*{*/}
+                                {/*    daysDates.length > 0 &&*/}
+                                {/*    <p>{revenue ? format(revenue.revenue) : "data is not available"}</p>*/}
+                                {/*}*/}
+
+                                <p>{revenue ? format(revenue.revenue) : "data is not available"}</p>
+
                                 {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalRev`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
-                                <h6 className="text-nowrap"> تومان</h6>
+                                <h6 className="text-nowrap">ریال</h6>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> :
-            <div>loading</div>);
+            </div> );
+
 };
 
 export default ActiveTab1Country;

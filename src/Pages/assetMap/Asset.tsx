@@ -21,6 +21,7 @@ import { t } from "../../translationUtil";
 import Cookies from 'js-cookie';
 import ActiveTab2Country from "../../Components/AssetPage/AssetView1/ActiveTab2Country/ActiveTab2Country";
 import TechMap from "../../Components/AssetPage/AssetView3/TechMap";
+import ProvinceData from "../../Components/AssetPage/AssetView1/ProvinceData/ProvinceData";
 
 
 const Assets = () =>
@@ -52,6 +53,7 @@ const Assets = () =>
     const [groupDictionary,setGroupDictionary]=useState()
     const [mapIranData, setMapIranData] = useState(initialMapDataIran);
     const [timeInterval, setTimeInterval] = useState("CS");
+
 
     const [siteNameClicked,setSiteNameClicked]=useState(null)
 
@@ -350,37 +352,8 @@ const Assets = () =>
         return formattedNumber;
     }
 
-    const filter_traffic_CS= (province)=>
-    {
-        const filterItems = dataPerProvince? dataPerProvince['total_cs'] :"data is not available now"
-        return filterItems;
-    }
-    const filter_traffic_PS= (province)=>
-    {
-        const filterItems = (dataPerProvince? dataPerProvince['total_ps'] :"data is not available now")
-        return filterItems;
-    }
-    const filter_cost_per_province= (province)=>
-    {
-        const filterItems = dataPerProvince? dataPerProvince['total_cost'] :"data is not available now"
-        return filterItems;
-    }
-    const filter_margin_per_province= (province)=>
-    {
-        const filterItems = dataPerProvince? dataPerProvince['total_margin'] :"data is not available now"
-        return filterItems;
-    }
-    const filter_profit_per_province= (province)=>
-    {
-        const filterItems = dataPerProvince? dataPerProvince['total_profit'] :"data is not available now"
-        return filterItems;
-    }
-    const filter_revenue_per_province= (province)=>
-    {
-        const filterItems = dataPerProvince? dataPerProvince['total_revenue'] :"data is not available now"
 
-        return filterItems;
-    }
+
     const filter_cells= (province)=>
     {
         const groupDictionary: { [key: string]: string[] } = {};
@@ -406,34 +379,14 @@ const Assets = () =>
     }
 
 
-    const filter_siteCount = (province: string): number =>
-    {
-        const groupDictionary: { [key: string]: string[] } = {};
 
-        const filterItems = totalCount.sites_count.filter(item => {
-            const groupKey = compareProvinceNames(item.province, province);
-
-            if (groupKey) {
-               if (!groupDictionary[groupKey]) {
-                    groupDictionary[groupKey] = [];
-                }
-                groupDictionary[groupKey].push(item.province);
-
-                return true;
-            }
-            return false;
-        });
-
-
-        const totalcount = filterItems.reduce((acc, curr) => acc + curr.count, 0);
-        return totalcount;
-    };
 
     const handleTab=(index)=>
     {
         setActiveTab(index)
     }
-    console.log("provinceeesName",provinceName,cityName)
+
+
     const handleBackMap =()=>
     {
         setPupop(false)
@@ -454,50 +407,24 @@ const Assets = () =>
         // {
         //     setProvinceName("")
         // }
-
-
     }
     const selectProvinceHandler = (province) =>
     {
         setProvinceName(province.name)
-        console.log("ptototototo",province.name)
         setSelectedProvince(province.name);
         setPupop(true)
     }
+
     const selectProvinceHandler2 = (province) =>
     {
           setPupop(true)
     }
 
 
-    const compareProvinceNames = (provinceName1: string | null | undefined, provinceName2: string | null | undefined): string | null =>
-    {
 
-        if (!provinceName1 || !provinceName2)
-        {
-            return false; // If either of the province names is null or undefined, return null
-        }
-        const normalize = (name: string) => name.toLowerCase().replace(/\s+/g, '');
-     const normalizedProvince1 = normalize(provinceName1);
-        const normalizedProvince2 = normalize(provinceName2);
-      for (const groupObj of provinceNameVariations)
-        {
-            const groupKey = Object.keys(groupObj)[0];
-            const variations = Object.values(groupObj)[0].map(normalize);
-
-            if (variations.includes(normalizedProvince1) && variations.includes(normalizedProvince2)) {
-                return groupKey; // Return the group key where the match was found
-            }
-        }
-
-        return false; // No match found for both province names in any group
-    };
-
-    const [allProvincesData, setAllProvincesData] = useState([]);
 
     const fetchProvinceProfitMargin=async (provinceName)=>
     {
-        // const canonicalProvinceName=getCanonicalProvinceName2(provinceName);
 
         try
         {
@@ -641,8 +568,7 @@ console.log("siteNameClickded",siteNameClicked)
                                         <nav className="bg-grey-light w-full rounded-md">
                                             <ol className="list-reset flex">
                                                 <li>
-                                                    <a
-                                                        href="#"
+                                                    <a href="#"
                                                         className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
                                                     >RAN</a>
                                                 </li>
@@ -697,9 +623,7 @@ console.log("siteNameClickded",siteNameClicked)
                                         <nav className="bg-grey-light w-full rounded-md">
                                             <ol className="list-reset flex">
                                                 <li>
-                                                    <a
-                                                        href="#"
-                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                    <a href="#" className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
                                                     >RAN</a>
                                                 </li>
                                                 <li>
@@ -800,13 +724,11 @@ console.log("siteNameClickded",siteNameClicked)
 
                                                     {provinceName !== "" &&
                                                         <div>
-                                                            <div
-                                                                className="backItem absolute right-[20px] top-[20px] z-50 "
+                                                            <div className="backItem absolute right-[55px] top-[20px] z-50"
                                                                 onClick={() => {
                                                                     handleBackMap()
                                                                 }}>
-                                                                <img src="/images/arrow/back.svg"
-                                                                     alt=""/>
+                                                                <img src="/images/arrow/back.svg" alt=""/>
                                                                 <span>Back</span>
                                                             </div>
                                                         </div>
@@ -960,9 +882,8 @@ console.log("siteNameClickded",siteNameClicked)
                                                 </div>
                                             </div>
                                             <div>
-                                                {pupop && siteNameClicked ===null&& (
+                                                {/*pupop && siteNameClicked ===null&& (
                                                     <div>
-
                                                         <div className="total_map_data">
                                                             <div className="tabs_header_to_map">
                                                             </div>
@@ -1111,6 +1032,18 @@ console.log("siteNameClickded",siteNameClicked)
                                                             </div>
                                                         </div>
                                                     </div>
+                                                )*/}
+
+                                                {pupop && siteNameClicked ===null&& (
+                                                    <ProvinceData
+                                                        pupop={pupop}
+                                                        siteNameClicked={siteNameClicked}
+                                                        provinceName={provinceName}
+                                                        totalCount={totalCount}
+                                                        dataPerProvince={dataPerProvince}
+                                                        t={t}
+                                                        format={format}
+                                                      />
                                                 )}
 
                                                 {siteNameClicked !==null && (

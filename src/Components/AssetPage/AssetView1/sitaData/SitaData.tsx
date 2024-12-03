@@ -36,6 +36,7 @@ const SitaData = (props) =>
     const [profitMarginData,setProfitMarginData]=useState(null)
     const [openSelectiveTime, setOpenSelectiveTime] = useState(false)
 
+    const [closeFirstCalender,setCloseFirstCalender]=useState(false)
     const [closeSecondCalender,setCloseSecondCalender]=useState(false)
 
 
@@ -94,7 +95,8 @@ const SitaData = (props) =>
         return provinceName; // Return the original name if no match found
     };
 
-    const handleDateChange = (dates) => {
+    const handleDateChange = (dates) =>
+    {
 
         setValues(dates);
 
@@ -146,21 +148,25 @@ const SitaData = (props) =>
 
     });
 
-    const handleSelection = (index) => {
+    const handleSelection = (index) =>
+    {
         setCalenderSelection(index)
+
         if(index===1)
         {
-            setCalenderOpen(!calenderOpen)
+            setCloseFirstCalender(!closeFirstCalender)
             setCloseSecondCalender(false)
             setYear(null)
             setMonth(null)
             setDay(null)
         }
+
         else if(index===2)
         {
+            setCloseFirstCalender(false)
             setCloseSecondCalender(!closeSecondCalender)
-            setCalenderOpen(false)
         }
+
 
     }
 
@@ -272,18 +278,6 @@ const SitaData = (props) =>
                 .catch((error) => {
                     console.error("Error fetching site data:", error);
                 });
-
-
-            // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${todayFormatted1}&toDateTime=${todayFormatted1}`)
-            //     .then((res) => res.json())  // Parse as JSON
-            //     .then((res) =>
-            //     {
-            //         console.log("Site Data for", props.siteNameClicked, res.siteTotalFixCostData);
-            //         setCostData(res);
-            //     })
-            //     .catch((error) => {
-            //         console.error("Error fetching site data:", error);
-            //     });
 
             fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted2}`)
                 .then((res) => res.json())  // Parse as JSON
@@ -511,261 +505,258 @@ const SitaData = (props) =>
                     {/*        </div>)}*/}
                     {/*</div>*/}
 
-                    <div className="flex  flex-col w-full">
-                        <div className="header_total_map_data_2">
-                            {/*<div className="header_total_map_data_1">*/}
-                            {/*    <img src="./images/Asset/map/View1/total_svg.svg" alt="" />*/}
-                            {/*    <h2>{t("Total statistics")} </h2>*/}
-                            {/*</div>*/}
+            <div className="flex  flex-col">
+                <div className="header_total_map_data_2">
+                    {/*<div className="header_total_map_data_1">*/}
+                    {/*    <img src="./images/Asset/map/View1/total_svg.svg" alt="" />*/}
+                    {/*    <h2>{t("Total statistics")} </h2>*/}
+                    {/*</div>*/}
 
-                            <div className="flex flex-row gap-[16px] items-center">
+                    <div className="flex flex-row gap-[16px] items-center">
 
-                                <div className="flex flex-row items-center gap-[20px] relative">
+                        <div className="flex flex-row items-center gap-[20px] relative">
 
 
-                                    <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
+                            <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
                         flex flex-row items-center justify-between min-w-[163px] relative"
-                                         onClick={() => handleSelectiveOpen()}>
-                                        <img src="/images/Asset/map/View1/CalendarBlank.svg"
-                                             alt=""/>
-                                        {
-                                            openSelectiveIndex === 1 &&
-                                            <span className="text-nowrap">
+                                 onClick={() => handleSelectiveOpen()}>
+                                <img src="/images/Asset/map/View1/CalendarBlank.svg"
+                                     alt=""/>
+                                {
+                                    openSelectiveIndex === 1 &&
+                                    <span className="text-nowrap">
                                        {t("this Month")}
                                     </span>
-                                        }
+                                }
 
-                                        {
-                                            openSelectiveIndex === 2 &&
-                                            <span className="text-nowrap">
+                                {
+                                    openSelectiveIndex === 2 &&
+                                    <span className="text-nowrap">
                                        {t("this Season")}
                                     </span>
-                                        }
+                                }
 
-                                        {
-                                            openSelectiveIndex === 3 &&
-                                            <span className="text-nowrap">
+                                {
+                                    openSelectiveIndex === 3 &&
+                                    <span className="text-nowrap">
                                        {t("this Year")}
                                     </span>
-                                        }
+                                }
 
-                                        {/*{*/}
-                                        {/*    daysDates?.length === 2 &&*/}
-                                        {/*    <span className="text-nowrap">*/}
-                                        {/*       {t("this Year")}*/}
-                                        {/*    </span>*/}
-                                        {/*}*/}
+                                {/*{*/}
+                                {/*    daysDates?.length === 2 &&*/}
+                                {/*    <span className="text-nowrap">*/}
+                                {/*       {t("this Year")}*/}
+                                {/*    </span>*/}
+                                {/*}*/}
 
 
-                                        {daysDates.length < 1 && openSelectiveIndex === 1 &&
-                                            <span className="text-nowrap">
+                                {daysDates.length < 1 && openSelectiveIndex === 1 &&
+                                    <span className="text-nowrap">
                                        {t("this Month")}
                                     </span>
-                                        }
-                                        {
-                                            daysDates.length < 1 && openSelectiveIndex === 2 &&
-                                            <span className="text-nowrap">
+                                }
+                                {
+                                    daysDates.length < 1 && openSelectiveIndex === 2 &&
+                                    <span className="text-nowrap">
                                        {t("this Season")}
                                     </span>
-                                        }
+                                }
 
-                                        {
-                                            daysDates.length < 1 && openSelectiveIndex === 3 &&
-                                            <span className="text-nowrap">
+                                {
+                                    daysDates.length < 1 && openSelectiveIndex === 3 &&
+                                    <span className="text-nowrap">
                                        {t("this Year")}
                                     </span>
-                                        }
+                                }
 
-                                        <img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>
-
-                                    </div>
-
-                                    {
-                                        openSelectiveTime && (
-                                            <div
-                                                className="absolute bg-white w-[100%] border-[1px] border-[#e0e0e0] flex flex-col top-[50px] left-0 rounded-[4px] z-50 px-[16px] py-[10px]">
-                                                <p className={openSelectiveIndex === 1 ? "text-[15px] text-[#007BFF] cursor-pointer font-[600] text-nowrap" :
-                                                    "text-[15px] text-[#424242] cursor-pointer font-[600] text-nowrap"}
-                                                   onClick={() => {
-                                                       handleSelectiveOpenIndex(1)
-                                                       handleFilterChange("month")
-                                                   }}>This Month</p>
-                                                <p className={openSelectiveIndex === 2 ? "text-[15px] text-[#007BFF] mt-[20px] cursor-pointer font-[600] text-nowrap" :
-                                                    "text-[15px] text-[#424242] mt-[20px] cursor-pointer font-[600] text-nowrap"}
-                                                   onClick={() => {
-                                                       handleSelectiveOpenIndex(2)
-                                                       handleFilterChange("season")
-                                                   }}>This Season</p>
-                                                <p className={openSelectiveIndex === 3 ? "text-[15px] text-[#007BFF] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap" :
-                                                    "text-[15px] text-[#424242] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap"}
-                                                   onClick={() => {
-                                                       handleSelectiveOpenIndex(3)
-                                                       handleFilterChange("year")
-                                                   }}>This Year</p>
-
-                                            </div>
-                                        )
-                                    }
-                                </div>
-
-                                <div className="flex flex-row items-center gap-[20px] relative">
-
-
-                                    <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
-                        flex flex-row items-center  justify-between min-w-[163px] relative">
-
-                                        {/*<img src="/images/Asset/map/View1/CalendarBlank.svg"*/}
-                                        {/*     alt=""/>*/}
-
-                                        {
-                                            daysDates?.length === 1 &&
-                                            <span className="text-nowrap">
-                                       {daysDates[0]}
-                                </span>
-                                        }
-
-                                        {
-                                            daysDates?.length === 2 &&
-                                            <span className="text-nowrap">
-                                       {daysDates[0]}-{daysDates[1]}
-                                </span>
-                                        }
-                                        <img src="./images/map/Calender/close.svg" alt=""
-                                             onClick={() => setCloseSecondCalender(false)}/>
-
-
-                                        {daysDates.length < 1 && openSelectiveIndex === 1 &&
-                                            <span className="text-nowrap">
-                                       {t("this Month")}
-                                    </span>
-                                        }
-                                        {
-                                            daysDates.length < 1 && openSelectiveIndex === 2 &&
-                                            <span className="text-nowrap">
-                                       {t("this Season")}
-                                    </span>
-                                        }
-
-                                        {
-                                            daysDates.length < 1 && openSelectiveIndex === 3 &&
-                                            <span className="text-nowrap">
-                                       {t("this Year")}
-                                    </span>
-                                        }
-
-                                        {/*<img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>*/}
-
-                                    </div>
-
-
-                                </div>
+                                <img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>
 
                             </div>
 
-                            <div className=" relative rounded-[8px] bg-[#f5f6f7] border-[1px] border-[#e0e0e0] w-[80px] py-[6px]  flex flex-row items-center justify-center gap-[3px]">
-                                <div
-                                    className={calenderSelection === 1 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
-                                    onClick={() => handleSelection(1)}>
-                                    <img
-                                        src="./images/Asset/map/View1/Selection/Calender.svg"
-                                        alt=""/>
-                                    {
-                                        calenderSelection === 1 && calenderOpen &&
-                                        <div
-                                            className="p-[20px] z-50 absolute right-0 top-[50px] bg-white border-[1px] border-[#e0e0e0] rounded-[4px]"
-                                            ref={calenderRef}>
-                                            <Calendar calendar={persian} locale={persian_fa}
-                                                      range
-                                                      rangeHover value={values}
-                                                      onChange={handleDateChange}/>
+                            {
+                                openSelectiveTime && (
+                                    <div
+                                        className="absolute bg-white w-[100%] border-[1px] border-[#e0e0e0] flex flex-col top-[50px] left-0 rounded-[4px] z-50 px-[16px] py-[10px]">
+                                        <p className={openSelectiveIndex === 1 ? "text-[15px] text-[#007BFF] cursor-pointer font-[600] text-nowrap" :
+                                            "text-[15px] text-[#424242] cursor-pointer font-[600] text-nowrap"}
+                                           onClick={() => {
+                                               handleSelectiveOpenIndex(1)
+                                               handleFilterChange("month")
+                                           }}>This Month</p>
+                                        <p className={openSelectiveIndex === 2 ? "text-[15px] text-[#007BFF] mt-[20px] cursor-pointer font-[600] text-nowrap" :
+                                            "text-[15px] text-[#424242] mt-[20px] cursor-pointer font-[600] text-nowrap"}
+                                           onClick={() => {
+                                               handleSelectiveOpenIndex(2)
+                                               handleFilterChange("season")
+                                           }}>This Season</p>
+                                        <p className={openSelectiveIndex === 3 ? "text-[15px] text-[#007BFF] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap" :
+                                            "text-[15px] text-[#424242] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap"}
+                                           onClick={() => {
+                                               handleSelectiveOpenIndex(3)
+                                               handleFilterChange("year")
+                                           }}>This Year</p>
 
-                                            {/*<DatePicker  calendar={persian}*/}
-                                            {/*           locale={persian_fa} value={value} onChange={setValue}   multiple*/}
-                                            {/*             dateSeparator=" & "/>*/}
-                                        </div>
-                                    }
-                                </div>
-                                <div className={calenderSelection === 2 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
-                                     onClick={() => handleSelection(2)}>
-                                    <img src="./images/Asset/map/View1/Selection/default.svg"
-                                         alt=""/>
-                                </div>
-
-
-                            </div>
+                                    </div>
+                                )
+                            }
                         </div>
                         {
-                            closeSecondCalender &&
-                            <div className="directionOfCalender  py-[10px] px-[14px] bg-[#E5F2FF] ">
+                            daysDates.length > 0 &&
+                            <div className="flex flex-row items-center gap-[20px] relative">
+                                <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
+                                    flex flex-row items-center  justify-between w-fit relative">
 
-                                <div className="newCalnender  flex flex-row items-center justify-between">
-                                    <div className="flex flex-row items-center justify-between w-full">
+                                    {/*<img src="/images/Asset/map/View1/CalendarBlank.svg"*/}
+                                    {/*     alt=""/>*/}
 
-                                        <div
-                                            className="yearPicker  w-[160px] h-[40px] border-[1px] bg-[#f5f6f7] py-[10px] px-[16px]">
-                                            <select
-                                                className="w-full bg-transparent border-none outline-none text-[#757070]"
-                                                name=""
-                                                id="" onChange={(e) => handleYear(Number(e.target.value))}>
-                                                {Year.map((item) =>
-                                                    <option value={item}>سال {item}
-                                                    </option>
-                                                )}
-                                            </select>
+                                    {
+                                        daysDates?.length === 1 &&
+                                        <span className="text-nowrap">
+                                       {daysDates[0]}
+                                   </span>
+                                    }
 
-                                        </div>
+                                    {
+                                        daysDates?.length === 2 &&
+                                        <span className="text-nowrap">
+                                       {daysDates[0]}-{daysDates[1]}
+                                </span>
+                                    }
+                                    <img src="./images/map/Calender/close.svg" alt=""
+                                         onClick={() => setCloseSecondCalender(false)}/>
 
-                                        <div
-                                            className="monthPicker flex flex-row items-center gap-[16px] w-full h-[40px] py-[10px]">
-                                            <div
-                                                className=" flex flex-row items-center cursor-pointer  gap-[8px] w-full h-[40px]">
-                                                {
-                                                    Month.map((item) =>
-                                                        <div
-                                                            className={month === item ? "bg-[#007BFF] rounded-[4px] w-[32px] h-[32px] flex flex-row items-center gap-[8px] justify-center border-[1px] border-[#e0e0e0]  text-white" :
-                                                                "bg-[#f5f6f7] rounded-[4px] w-[32px] h-[32px] flex flex-row items-center gap-[8px] justify-center border-[1px] border-[#e0e0e0] bg-[#f5f6f7] text-[#757070]"}
-                                                            onClick={() => handleMonth(item)}>
-                                                            {item}
-                                                        </div>
-                                                    )
-                                                }
-                                            </div>
-                                            <div className="w-full">
-                                                <span>ماه</span>
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                </div>
+                                    {daysDates.length < 1 && openSelectiveIndex === 1 &&
+                                        <span className="text-nowrap">
+                                       {t("this Month")}
+                                    </span>
+                                    }
+                                    {
+                                        daysDates.length < 1 && openSelectiveIndex === 2 &&
+                                        <span className="text-nowrap">
+                                       {t("this Season")}
+                                    </span>
+                                    }
 
-                                <div className="newCalnender flex flex-row items-center justify-between mt-[14px]">
-                                    <div className="  w-[139px] h-[40px] border-[1px] bg-[#f5f6f7] py-[10px] px-[16px]">
-                                        <select className="w-full bg-transparent border-none outline-none text-[#757070]"
-                                                name="" id="" onChange={(e) => handleDay(Number(e.target.value))}>
-                                            {Day.map((item) =>
-                                                <option value={item}> روز {item}</option>
-                                            )}
-                                        </select>
+                                    {
+                                        daysDates.length < 1 && openSelectiveIndex === 3 &&
+                                        <span className="text-nowrap">
+                                       {t("this Year")}
+                                    </span>
+                                    }
 
-                                    </div>
-
-                                    <div
-                                        className="text-[#007Bff] py-[7px] px-[21px] cursor-pointer border-[1px] border-[#007Bff] rounded-[4px]"
-                                        onClick={() => handleTime()}>
-                                        <span className="text-[15px]">اعمال تاریخ</span>
-                                    </div>
-
+                                    {/*<img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>*/}
 
                                 </div>
-
-
                             </div>
                         }
+
+
+                    </div>
+
+                    <div
+                        className=" relative rounded-[8px] bg-[#f5f6f7] border-[1px] border-[#e0e0e0] w-[80px] py-[6px]  flex flex-row items-center justify-center gap-[3px]">
+                        <div className={calenderSelection === 1 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
+                             onClick={() => handleSelection(1)}>
+                            <img
+                                src="./images/Asset/map/View1/Selection/Calender.svg"
+                                alt=""/>
+                        </div>
+                        {
+                            calenderSelection === 1 && closeFirstCalender &&
+                            <div
+                                className="p-[20px] z-50 absolute right-0 top-[50px] bg-white border-[1px] border-[#e0e0e0] rounded-[4px]">
+
+                                <Calendar calendar={persian} locale={persian_fa}
+                                          range
+                                          rangeHover value={values}
+                                          onChange={handleDateChange}/>
+
+                                {/*<DatePicker  calendar={persian}*/}
+                                {/*           locale={persian_fa} value={value} onChange={setValue}   multiple*/}
+                                {/*             dateSeparator=" & "/>*/}
+                            </div>
+                        }
+                        <div className={calenderSelection === 2 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
+                             onClick={() => handleSelection(2)}>
+                            <img src="./images/Asset/map/View1/Selection/default.svg"
+                                 alt=""/>
+                        </div>
+
+
                     </div>
 
 
+                </div>
+                {
+                    closeSecondCalender && calenderSelection === 2 &&
+                    <div className="directionOfCalender  py-[10px] px-[14px] bg-[#E5F2FF] ">
+
+                        <div className="newCalnender  flex flex-row items-center justify-between">
+                            <div className="flex flex-row items-center justify-between w-full">
+
+                                <div
+                                    className="yearPicker  w-[160px] h-[40px] border-[1px] bg-[#f5f6f7] py-[10px] px-[16px]">
+                                    <select
+                                        className="w-full bg-transparent border-none outline-none text-[#757070]"
+                                        name=""
+                                        id="" onChange={(e) => handleYear(Number(e.target.value))}>
+                                        {Year.map((item) =>
+                                            <option value={item}>سال {item}
+                                            </option>
+                                        )}
+                                    </select>
+
+                                </div>
+
+                                <div
+                                    className="monthPicker flex flex-row items-center gap-[16px] w-full h-[40px] py-[10px]">
+                                    <div
+                                        className=" flex flex-row items-center cursor-pointer  gap-[8px] w-full h-[40px]">
+                                        {
+                                            Month.map((item) =>
+                                                <div
+                                                    className={month === item ? "bg-[#007BFF] rounded-[4px] w-[32px] h-[32px] flex flex-row items-center gap-[8px] justify-center border-[1px] border-[#e0e0e0]  text-white" :
+                                                        "bg-[#f5f6f7] rounded-[4px] w-[32px] h-[32px] flex flex-row items-center gap-[8px] justify-center border-[1px] border-[#e0e0e0] bg-[#f5f6f7] text-[#757070]"}
+                                                    onClick={() => handleMonth(item)}>
+                                                    {item}
+                                                </div>
+                                            )
+                                        }
+                                    </div>
+                                    <div className="w-full">
+                                        <span>ماه</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div className="newCalnender flex flex-row items-center justify-between mt-[14px]">
+                            <div className="  w-[139px] h-[40px] border-[1px] bg-[#f5f6f7] py-[10px] px-[16px]">
+                                <select className="w-full bg-transparent border-none outline-none text-[#757070]"
+                                        name="" id="" onChange={(e) => handleDay(Number(e.target.value))}>
+                                    {Day.map((item) =>
+                                        <option value={item}> روز {item}</option>
+                                    )}
+                                </select>
+
+                            </div>
+
+                            <div
+                                className="text-[#007Bff] py-[7px] px-[21px] cursor-pointer border-[1px] border-[#007Bff] rounded-[4px]"
+                                onClick={() => handleTime()}>
+                                <span className="text-[15px]">اعمال تاریخ</span>
+                            </div>
 
 
+                        </div>
+
+
+                    </div>
+                }
+            </div>
 
 
             {/*<div className="total_map_data_item_group">*/}
@@ -837,7 +828,7 @@ const SitaData = (props) =>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={daysDates}/>
-                                <h6 className="text-nowrap"> تومان</h6>
+                                <h6 className="text-nowrap"> ریال</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
@@ -850,7 +841,7 @@ const SitaData = (props) =>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={daysDates}/>
-                                <h6 className="text-nowrap"> تومان</h6>
+                                <h6 className="text-nowrap"> ریال</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">
@@ -863,7 +854,7 @@ const SitaData = (props) =>
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={daysDates}/>
-                                <h6 className="text-nowrap"> تومان</h6>
+                                <h6 className="text-nowrap"> ریال</h6>
                             </div>
                         </div>
                         <div className="total_map_data_item_for_quantity">

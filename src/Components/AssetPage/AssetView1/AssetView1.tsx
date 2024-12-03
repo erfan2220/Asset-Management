@@ -817,7 +817,7 @@ const AssetView1 = () => {
                                                 {/*</div>*/}
                                                 {provinceName !== "" &&
                                                     <div>
-                                                        <div className="backItem absolute right-[20px] top-[20px] z-50 "
+                                                        <div className="backItem absolute right-[40px] top-[20px] z-50 "
                                                             onClick={() => {
                                                                 handleBackMap()
                                                             }}>
@@ -1026,7 +1026,7 @@ const AssetView1 = () => {
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="4" dayDates={daysDates}/>
-                                                                                <h6 className="text-nowrap"> تومان</h6>
+                                                                                <h6 className="text-nowrap"> ریال</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div
@@ -1041,7 +1041,7 @@ const AssetView1 = () => {
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="4" dayDates={daysDates}/>
-                                                                                <h6 className="text-nowrap"> تومان</h6>
+                                                                                <h6 className="text-nowrap">ریال</h6>
                                                                             </div>
                                                                         </div>
 
@@ -1056,7 +1056,7 @@ const AssetView1 = () => {
                                                                             </div>
                                                                             <div className="total_map_data_item_3">
                                                                                 <Rate value="4" dayDates={daysDates}/>
-                                                                                <h6 className="text-nowrap"> تومان</h6>
+                                                                                <h6 className="text-nowrap"> ریال</h6>
                                                                             </div>
                                                                         </div>
                                                                         <div
@@ -1210,7 +1210,7 @@ const AssetView1 = () => {
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
                                                                             <Rate value="4" dayDates={daysDates}/>
-                                                                            <h6 className="text-nowrap"> تومان</h6>
+                                                                            <h6 className="text-nowrap"> ریال</h6>
                                                                         </div>
                                                                     </div>
 
@@ -1221,7 +1221,7 @@ const AssetView1 = () => {
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
                                                                             <Rate value="4" dayDates={daysDates}/>
-                                                                            <h6 className="text-nowrap"> تومان</h6>
+                                                                            <h6 className="text-nowrap"> ریال</h6>
                                                                         </div>
                                                                     </div>
 
@@ -1233,7 +1233,7 @@ const AssetView1 = () => {
                                                                         </div>
                                                                         <div className="total_map_data_item_3">
                                                                             <Rate value="4" dayDates={daysDates}/>
-                                                                            <h6 className="text-nowrap"> تومان</h6>
+                                                                            <h6 className="text-nowrap"> ریال</h6>
                                                                         </div>
                                                                     </div>
 

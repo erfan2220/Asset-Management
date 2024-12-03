@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="Last Changes Erfan" />
+    <list default="true" id="74d6b82b-0282-4a7e-b384-4e9e836e68b0" name="Changes" comment="Last Changes Erfan">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab1Country/ActiveTab1Country.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab2Country/BarChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/ActiveTab2Country/BarChart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/AssetView1.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/AssetView1.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/AssetView1/sitaData/SitaData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterByCategory/filterByCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterByCategory/filterByCategory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/TechChooser/TechChooser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/TechChooser/TechChooser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/filterMap/leafletPoints/leafletFiltersPoints.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AssetPage/network/Network.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AssetPage/network/Network.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Loading/Loading.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Loading/Loading.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Loading/Loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Loading/Loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MapPage/MapPerProvince.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/assetMap/Asset.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,7 +40,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop-v3.3-backup" />
+        <entry key="$PROJECT_DIR$" value="develop-v3.4" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,7 +75,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop-v3.5",
+    "git-widget-placeholder": "develop-v3.6",
     "javascript.nodejs.core.library.configured.version": "18.20.4",
     "javascript.nodejs.core.library.typings.version": "",
     "last_opened_file_path": "C:/Users/EH4840132046/React projects/Asset-front/Asset-front/src/images/Asset",
@@ -85,11 +99,11 @@
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1\sitaData" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\Components\AssetPage\AssetView1" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\src\images\LandingPage" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\Asset" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\map\Calender" />
       <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\map\Topology" />
-      <recent name="C:\Users\EH4840132046\React projects\Asset-front\Asset-front\public\images\Navbar" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -345,7 +359,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733119849402</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Last Changes Erfan">
+      <option name="closed" value="true" />
+      <created>1733123802946</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1733123802946</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

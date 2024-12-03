@@ -21,6 +21,7 @@ interface Point {
 
 const TechChooser : React.FC<{ points: Point[],setPoints: (points: Point[]) => void, setSiteNameClicked: (siteName: string) => void }> = ({ points,setPoints, setSiteNameClicked }) =>
 {
+
     const mapRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.MarkerClusterGroup | null>(null);
     const drawnItems = useRef<L.FeatureGroup>(new L.FeatureGroup()).current;
@@ -50,7 +51,8 @@ const TechChooser : React.FC<{ points: Point[],setPoints: (points: Point[]) => v
 
     }, [points]);
 
-    const initializeMap = () => {
+    const initializeMap = () =>
+    {
         mapRef.current = L.map("map-container", {
             center: [32.74015808, 52.30584163],
             zoom: 6,
@@ -64,12 +66,13 @@ const TechChooser : React.FC<{ points: Point[],setPoints: (points: Point[]) => v
         L.tileLayer("http://10.15.90.79/tiles/{z}/{x}/{y}.png", {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             minZoom: 1,
-            maxZoom: 13
+            maxZoom: 14
         }).addTo(mapRef.current);
+
 
         markersRef.current = L.markerClusterGroup({
             showCoverageOnHover: false,
-            // maxClusterRadius: (zoom) => (zoom >= 13 ? 0 : 80),
+            maxClusterRadius: (zoom) => (zoom >= 13 ? 0 : 80),
         });
 
         mapRef.current.addLayer(markersRef.current);
