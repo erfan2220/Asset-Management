@@ -266,6 +266,8 @@ const ProvinceData = ({
     // }, [daysDates]);
 
 
+
+
     return (
         <div className="total_map_data">
             <div className="tabs_header_to_map"></div>
@@ -276,10 +278,8 @@ const ProvinceData = ({
                 {/*</h2>*/}
                 <TimeZone daysDates={daysDates} setDaysDates={setDaysDates}/>
 
-
             <div className="total_map_data_item_group">
                 <div className="halfOfData">
-
                          <h3>{t("Site Counts")}</h3>
                         <p>
                             {totalCount
@@ -292,9 +292,7 @@ const ProvinceData = ({
                                 )
                                 : "data is not available"}
                         </p>
-
                 </div>
-
             </div>
             {renderSection("Traffic", [
                 renderDataItem(
@@ -355,8 +353,7 @@ const ProvinceData = ({
                     format(
                         provinceName === "Khuzestan"
                             ? filter_revenue_per_province("Khouzestan")
-                            : filter_revenue_per_province(provinceName)
-                    ),
+                            : filter_revenue_per_province(provinceName)),
                     "ریال"
                 ),
             ])}

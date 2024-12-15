@@ -4,7 +4,6 @@ import { Calendar, DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import Rate from "../../dataCharts/rateColor/Rate";
-import loading from "../../../Loading/Loading";
 import "./ActiveTab1Country.css"
 import { Shamsi } from "basic-shamsi";
 import { provinceNameVariations } from "../../../../database/dictionaryProvinces/dictionaryProvinces";
@@ -12,14 +11,17 @@ import { t } from '../../../../translationUtil';
 import LoadingProgress from "../../../Loading/Loading";
 
 
+
 const ActiveTab1Country = (props) =>
 {
+
 
     const [calenderSelection, setCalenderSelection] = useState(3)
     const [dataCountry, setDataCountry] = useState([])
     const [siteTypesOpen, setSiteTypesOpen] = useState(false)
     const [calenderOpen, setCalenderOpen] = useState(false)
     const [sitePoints, setSitePoints] = useState([]);
+
 
 
     // const [totalCount, setTotalCount] = useState(null)
@@ -56,7 +58,7 @@ const ActiveTab1Country = (props) =>
 
     const [openSelectiveTime, setOpenSelectiveTime] = useState(false)
 
-    const [openSelectiveIndex, setOpenSelectiveIndex] = useState(0)
+    const [openSelectiveIndex, setOpenSelectiveIndex] = useState(3)
 
     const [cellsSitePerProvince, setCellsSitePerProvince] = useState()
 
@@ -230,38 +232,49 @@ const ActiveTab1Country = (props) =>
     //
     // }, []);
 
-    useEffect(() => {
-        const handleData = (data, setter) => {
+    useEffect(() =>
+    {
+        const handleData = (data, setter) =>
+        {
             if (data) {
                 setter(data); // Set state with fetched data
             }
         };
 
+        const today=new Date();
+
+
+
         // Calculate start and end of the year dynamically
         const currentYear = new Date().getFullYear();
         const startOfYear = `${currentYear}-01-01`;
-        const endOfYear = `${currentYear}-12-31`;
+        const endOfYear = `${today.getFullYear()}-${(today.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
-        console.log("Year Range:", startOfYear, endOfYear);
+        const startOfYear2 = `${currentYear}/01/01`;
+        const endOfYear2 = `${today.getFullYear()}/${(today.getMonth() + 1).toString()
+            .padStart(2, "0")}/${today.getDate().toString().padStart(2, "0")}`;
 
         // Set loading to true initially
         setLoading(true);
 
+
         // Array of fetch calls
         const fetchCalls = [
-            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=3/26/2024%2012:00:00%20AM&fromDate=3/01/2024%2012:00:00%20AM`)
+            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${endOfYear2}%2012:00:00%20AM&fromDate=${startOfYear2}%2012:00:00%20AM`)
                 .then((response) => response.json())
                 .then((data) => handleData(data, setTotalTraffic)),
 
-            fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=3/01/2024%2012:00:00%20AM&toDate=3/26/2024%2012:00:00%20AM`)
+            fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=${startOfYear2}%2012:00:00%20AM&toDate=${endOfYear2}%2012:00:00%20AM`)
                 .then((response) => response.json())
                 .then((data) => handleData(data, setTotalFixedCost)),
 
-            fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=2024-03-01&toDate=2024-12-03`)
+            fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=${startOfYear}&toDate=${endOfYear}`)
                 .then((response) => response.json())
                 .then((data) => handleData(data, setTotalVariableCost)),
 
-            fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=3/01/2024%%2012:00:00%20AM&toDate=03/12/2024%2012:00:00%20AM`)
+            fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=${startOfYear2}%%2012:00:00%20AM&toDate=${endOfYear2}%2012:00:00%20AM`)
                 .then((response) => response.json())
                 .then((data) => handleData(data, setRevenue)),
 
@@ -329,23 +342,20 @@ const ActiveTab1Country = (props) =>
 
             // Array of fetch calls
             const fetchCalls = [
-                // fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM`)
-                fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=09/30/2024%2012:00:00%20AM&fromDate=09/01/2024%2012:00:00%20AM`)
-                    .then((response) => response.json())
+                fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/iran?toDate=${toDate}%2012:00:00%20AM&fromDate=${fromDate}%2012:00:00%20AM`)
+                     .then((response) => response.json())
                     .then((data) => handleData(data, setTotalTraffic)),
 
-                fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=09/01/2024%2012:00:00%20AM&toDate=09/30/2024%2012:00:00%20AM`)
-                // fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=3/26/2024%2012:00:00%20AM&toDate=3/26/2024%2012:00:00%20AM`)
+                fetch(`http://10.15.90.72:9098/api/fix-cost/iran-fix-cost?fromDate=${fromDate}%2012:00:00%20AM&toDate=${toDate}%2012:00:00%20AM`)
                     .then((response) => response.json())
                     .then((data) => handleData(data, setTotalFixedCost)),
 
-                fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=09/01/2024}&toDate=09/30/2024`)
-                // fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=2024-11-29&toDate=2024-11-29`)
-                    .then((response) => response.json())
+                fetch(`http://10.15.90.72:9098/api/variable-cost/iran-variable-cost?fromDate=${fromDate}&toDate=${toDate}`)
+                     .then((response) => response.json())
                     .then((data) => handleData(data, setTotalVariableCost)),
 
-                // fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=3/26/2024%2012:00:00%20AM&toDate=4/26/2024%2012:00:00%20AM`)
-                fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=09/01/2024%2012:00:00%20AM&toDate=09/30/2024%2012:00:00%20AM`)
+
+                fetch(`http://10.15.90.72:9098/api/revenue/country-revenue?fromDate=${fromDate}%2012:00:00%20AM&toDate=${toDate}%2012:00:00%20AM`)
                     .then((response) => response.json())
                     .then((data) => handleData(data, setRevenue)),
 
@@ -710,9 +720,6 @@ const ActiveTab1Country = (props) =>
         return formattedDate;
     };
 
-
-    console.log("total Traffic",totalTraffic)
-
     return (
         loading ?  <LoadingProgress/>:
             <div className="total_map_data">
@@ -724,35 +731,113 @@ const ActiveTab1Country = (props) =>
                     {/*</div>*/}
 
                     <div className="flex flex-row gap-[16px] items-center">
+                        {
+                            openSelectiveIndex !== 1 && openSelectiveIndex !== 2 && openSelectiveIndex !== 3 &&
+                            <div className="flex flex-row items-center gap-[20px] relative">
+                                <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
+                                  flex flex-row items-center justify-between min-w-[163px] relative"
+                                     onClick={() => handleSelectiveOpen()}>
+                                    <img src="/images/Asset/map/View1/CalendarBlank.svg" alt=""/>
 
+
+
+
+                                    {/*{*/}
+                                    {/*    daysDates?.length === 2 &&*/}
+                                    {/*    <span className="text-nowrap">*/}
+                                    {/*       {t("this Year")}*/}
+                                    {/*    </span>*/}
+                                    {/*}*/}
+
+
+                                    {
+                                        daysDates.length < 1 && openSelectiveIndex === 1 &&
+                                        <span className="text-nowrap">
+                                              {t("this Month")}
+                                        </span>
+                                    }
+                                    {
+                                        daysDates.length < 1 && openSelectiveIndex === 2 &&
+                                        <span className="text-nowrap">
+                                             {t("this Season")}
+                                        </span>
+                                    }
+
+                                    {
+                                        daysDates.length < 1 && openSelectiveIndex === 3 &&
+                                        <span className="text-nowrap">
+                                             {t("this Year")}
+                                        </span>
+                                    }
+
+                                    <img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>
+
+                                </div>
+
+                                {
+                                    openSelectiveTime && (
+                                        <div
+                                            className="absolute bg-white w-[100%] border-[1px] border-[#e0e0e0] flex flex-col top-[50px] left-0 rounded-[4px] z-50 px-[16px] py-[10px]">
+                                            <p className={openSelectiveIndex === 1 ? "text-[15px] text-[#007BFF] cursor-pointer font-[600] text-nowrap" :
+                                                "text-[15px] text-[#424242] cursor-pointer font-[600] text-nowrap"}
+                                               onClick={() => {
+                                                   handleSelectiveOpenIndex(1)
+                                                   handleFilterChange("month")
+                                               }}>This Month
+                                            </p>
+                                            <p className={openSelectiveIndex === 2 ? "text-[15px] text-[#007BFF] mt-[20px] cursor-pointer font-[600] text-nowrap" :
+                                                "text-[15px] text-[#424242] mt-[20px] cursor-pointer font-[600] text-nowrap"}
+                                               onClick={() => {
+                                                   handleSelectiveOpenIndex(2)
+                                                   handleFilterChange("season")
+                                               }}>This Season
+                                            </p>
+                                            <p className={openSelectiveIndex === 3 ? "text-[15px] text-[#007BFF] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap" :
+                                                "text-[15px] text-[#424242] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap"}
+                                               onClick={() => {
+                                                   handleSelectiveOpenIndex(3)
+                                                   handleFilterChange("year")
+                                               }}>This Year
+                                            </p>
+
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        }
                         <div className="flex flex-row items-center gap-[20px] relative">
-
-
                             <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
-                        flex flex-row items-center justify-between min-w-[163px] relative"
+                                  flex flex-row items-center justify-between min-w-[163px] relative"
                                  onClick={() => handleSelectiveOpen()}>
-                                <img src="/images/Asset/map/View1/CalendarBlank.svg"
-                                     alt=""/>
-                                {
-                                    openSelectiveIndex === 1 &&
-                                    <span className="text-nowrap">
-                                       {t("this Month")}
-                                    </span>
-                                }
+                                <img src="/images/Asset/map/View1/CalendarBlank.svg" alt=""/>
 
-                                {
-                                    openSelectiveIndex === 2 &&
-                                    <span className="text-nowrap">
-                                       {t("this Season")}
-                                    </span>
-                                }
+                                {/*{*/}
+                                {/*    daysDates.length === 0 &&*/}
+                                {/*    <span>*/}
+                                {/*         {t("this Year")}*/}
+                                {/*    </span>*/}
+                                {/*}*/}
 
-                                {
-                                    openSelectiveIndex === 3 &&
-                                    <span className="text-nowrap">
-                                       {t("this Year")}
-                                    </span>
-                                }
+                                {/*{*/}
+                                {/*    openSelectiveIndex === 1 &&*/}
+                                {/*    <span className="text-nowrap">*/}
+                                {/*       {t("this Month")}*/}
+                                {/*    </span>*/}
+                                {/*}*/}
+
+                                {/*{*/}
+                                {/*    openSelectiveIndex === 2 &&*/}
+                                {/*    <span className="text-nowrap">*/}
+                                {/*       {t("this Season")}*/}
+                                {/*    </span>*/}
+                                {/*}*/}
+
+                                {/*{*/}
+                                {/*    openSelectiveIndex === 3 &&*/}
+                                {/*    <span className="text-nowrap">*/}
+                                {/*       {t("this Year")}*/}
+                                {/*    </span>*/}
+                                {/*}*/}
 
                                 {/*{*/}
                                 {/*    daysDates?.length === 2 &&*/}
@@ -762,7 +847,8 @@ const ActiveTab1Country = (props) =>
                                 {/*}*/}
 
 
-                                {daysDates.length < 1 && openSelectiveIndex === 1 &&
+                                {
+                                    daysDates.length < 1 && openSelectiveIndex === 1 &&
                                     <span className="text-nowrap">
                                        {t("this Month")}
                                     </span>
@@ -794,86 +880,85 @@ const ActiveTab1Country = (props) =>
                                            onClick={() => {
                                                handleSelectiveOpenIndex(1)
                                                handleFilterChange("month")
-                                           }}>This Month</p>
+                                           }}>This Month
+                                        </p>
                                         <p className={openSelectiveIndex === 2 ? "text-[15px] text-[#007BFF] mt-[20px] cursor-pointer font-[600] text-nowrap" :
                                             "text-[15px] text-[#424242] mt-[20px] cursor-pointer font-[600] text-nowrap"}
                                            onClick={() => {
                                                handleSelectiveOpenIndex(2)
                                                handleFilterChange("season")
-                                           }}>This Season</p>
+                                           }}>This Season
+                                        </p>
                                         <p className={openSelectiveIndex === 3 ? "text-[15px] text-[#007BFF] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap" :
                                             "text-[15px] text-[#424242] mt-[20px] mb-[10px] cursor-pointer font-[600] text-nowrap"}
                                            onClick={() => {
                                                handleSelectiveOpenIndex(3)
                                                handleFilterChange("year")
-                                           }}>This Year</p>
+                                           }}>This Year
+                                        </p>
 
                                     </div>
                                 )
                             }
                         </div>
                         {
-                            daysDates.length>0 &&
+                            daysDates.length > 0 && openSelectiveIndex!==1 && openSelectiveIndex !==2 && openSelectiveIndex !==3 &&
                             <div className="flex flex-row items-center gap-[20px] relative">
                                 <div className="border-[1px] border-[#e0e0e0] bg-[#f5f6f7] py-[10px] pl-[16px] pr-[16px] rounded-[8px]
-                        flex flex-row items-center  justify-between w-fit relative">
-
-                                    {/*<img src="/images/Asset/map/View1/CalendarBlank.svg"*/}
-                                    {/*     alt=""/>*/}
+                                                flex flex-row items-center  justify-between w-fit relative">
 
                                     {
                                         daysDates?.length === 1 &&
                                         <span className="text-nowrap">
-                                       {daysDates[0]}
-                                   </span>
+                                            {daysDates[0]}
+                                         </span>
+                                    }
+
+                                    {
+                                        openSelectiveIndex &&daysDates?.length === 1 &&
+                                        <span className="text-nowrap">
+                                            {daysDates[0]}
+                                         </span>
                                     }
 
                                     {
                                         daysDates?.length === 2 &&
                                         <span className="text-nowrap">
-                                       {daysDates[0]}-{daysDates[1]}
-                                </span>
+                                            {daysDates[0]}-{daysDates[1]}
+                                        </span>
                                     }
                                     <img src="./images/map/Calender/close.svg" alt="" onClick={()=>setCloseSecondCalender(false)}/>
 
 
+
                                     {daysDates.length < 1 && openSelectiveIndex === 1 &&
                                         <span className="text-nowrap">
-                                       {t("this Month")}
-                                    </span>
+                                            {t("this Month")}
+                                        </span>
                                     }
                                     {
                                         daysDates.length < 1 && openSelectiveIndex === 2 &&
                                         <span className="text-nowrap">
-                                       {t("this Season")}
-                                    </span>
+                                             {t("this Season")}
+                                        </span>
                                     }
 
                                     {
                                         daysDates.length < 1 && openSelectiveIndex === 3 &&
                                         <span className="text-nowrap">
-                                       {t("this Year")}
-                                    </span>
+                                             {t("this Year")}
+                                        </span>
                                     }
-
-                                    {/*<img src="/images/Asset/map/View1/CaretDown.svg" alt=""/>*/}
 
                                 </div>
                             </div>
                         }
-
-
-
-
-
                     </div>
 
                     <div className=" relative rounded-[8px] bg-[#f5f6f7] border-[1px] border-[#e0e0e0] w-[80px] py-[6px]  flex flex-row items-center justify-center gap-[3px]">
                         <div className={calenderSelection === 1 ? "bg-[#B3D7FF] p-[5px]" : "p-[5px]"}
                             onClick={() => handleSelection(1)}>
-                            <img
-                                src="./images/Asset/map/View1/Selection/Calender.svg"
-                                alt=""/>
+                            <img src="./images/Asset/map/View1/Selection/Calender.svg" alt=""/>
                         </div>
                         {
                             calenderSelection === 1 && closeFirstCalender &&
@@ -988,19 +1073,15 @@ const ActiveTab1Country = (props) =>
                             <div className="total_map_data_item_2">
                                 <h3>{t("Traffic PS")}</h3>
 
-                                {/*{*/}
-                                {/*    daysDates.length === 0 &&*/}
-                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
-                                {/*}*/}
+                                {
+                                    daysDates.length === 0 &&
+                                    <p>{totalTraffic ? format(totalTraffic.totalPsTraffic) : "data is not available"}</p>
+                                }
 
-                                {/*{*/}
-                                {/*    daysDates.length > 0 &&*/}
-                                {/*    <p>*/}
-                                {/*        {totalTraffic ? format(totalTraffic.totalPsTraffic) : "data is not available"}*/}
-                                {/*    </p>*/}
-                                {/*}*/}
-
-                                <p>{totalTraffic ? format(totalTraffic.totalPsTraffic) : "data is not available"}</p>
+                                {
+                                    daysDates.length > 0 &&
+                                    <p>{totalTraffic ? format(totalTraffic.totalPsTraffic) : "data is not available"}</p>
+                                }
 
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
                                 {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalPS`] : "data is not available"}</p>*/}
@@ -1025,7 +1106,15 @@ const ActiveTab1Country = (props) =>
                                 {/*    <p>{totalTraffic ? format(totalTraffic.totalCsTraffic) : "data is not available"}</p>*/}
                                 {/*}*/}
 
-                                <p>{totalTraffic ? format(totalTraffic.totalCsTraffic) : "data is not available"}</p>
+                                {
+                                    daysDates.length === 0 &&
+                                    <p>{totalTraffic ? format(totalTraffic.totalPsTraffic) : "data is not available"}</p>
+                                }
+
+                                {
+                                    daysDates.length > 0 &&
+                                    <p>{totalTraffic ? format(totalTraffic.totalPsTraffic) : "data is not available"}</p>
+                                }
 
 
                             </div>
@@ -1042,20 +1131,42 @@ const ActiveTab1Country = (props) =>
                     <div className="row_items_traffic">
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
+                                <h3>{t("Total revenue")}</h3>
+
+                                {
+                                    daysDates.length === 0 &&
+                                    <p>{revenue ? format(revenue.revenue) : "data is not available"}</p>
+                                }
+
+                                {
+                                    daysDates.length > 0 &&
+                                    <p>{revenue ? format(revenue.revenue) : "data is not available"}</p>
+                                }
+
+                                {/*<p>{revenue ? format(revenue.revenue) : "data is not available"}</p>*/}
+
+                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalRev`] : "data is not available"}</p>*/}
+                            </div>
+                            <div className="total_map_data_item_3">
+                                <Rate value="4" dayDates={[]}/>
+                                <h6 className="text-nowrap">ریال</h6>
+                            </div>
+                        </div>
+                        <div className="total_map_data_item_for_quantity">
+                            <div className="total_map_data_item_2">
                                 <h3>{t("Cost")}</h3>
 
-                                {/*{*/}
-                                {/*    daysDates.length === 0 &&*/}
-                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
-                                {/*}*/}
+                                {
+                                    daysDates.length === 0 &&
+                                    <p>{totalVariableCost ? format(Math.floor(totalVariableCost.totalVariableCostVoiceData + totalFixedCost.totalFixCostData)) : "data is not available"}</p>
+                                }
 
-                                {/*{*/}
-                                {/*    daysDates.length > 0 &&*/}
-                                {/*    <p>{totalVariableCost ? format(totalVariableCost.totalVariableCostVoiceData + totalFixedCost.totalFixCostData) : "data is not available"}</p>*/}
-                                {/*}*/}
+                                {
+                                    daysDates.length > 0 &&
+                                    <p>{totalVariableCost ? format(Math.floor(totalVariableCost.totalVariableCostVoiceData + totalFixedCost.totalFixCostData)) : "data is not available"}</p>
+                                }
 
 
-                                <p>{totalVariableCost ? format(totalVariableCost.totalVariableCostVoiceData + totalFixedCost.totalFixCostData) : "data is not available"}</p>
                                 {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalCost`] : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
@@ -1063,6 +1174,29 @@ const ActiveTab1Country = (props) =>
                                 <h6 className="text-nowrap"> ریال</h6>
                             </div>
                         </div>
+
+
+                        <div className="total_map_data_item_for_quantity">
+                            <div className="total_map_data_item_2">
+                                <h3>{t("Profit")}</h3>
+
+                                {
+                                    daysDates.length === 0 &&
+                                    <p>{format("2673295000")}</p>
+                                }
+                                {
+                                    daysDates.length > 0 &&
+                                    <p>{format("5869066218")}</p>
+                                }
+
+                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`] : "data is not available"}</p>*/}
+                            </div>
+                            <div className="total_map_data_item_3">
+                                <Rate value="4" dayDates={[]}/>
+                                <h6 className="text-nowrap"> ریال</h6>
+                            </div>
+                        </div>
+
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Margin")}</h3>
@@ -1076,70 +1210,28 @@ const ActiveTab1Country = (props) =>
                                 {/*    <p>{totalVariableCost ? format(totalVariableCost.totalVariableCostVoiceData+totalFixedCost.totalFixCostData) : "data is not available"}</p>*/}
                                 {/*}*/}
                                 {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`] : "data is not available"}</p>*/}
-                                {/*{*/}
-                                {/*    daysDates.length===0  &&*/}
-                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
-                                {/*}*/}
+                                {
+                                    daysDates.length === 0 &&
+                                    <p>{format("0.34")}</p>
+                                }
 
-                                {/*{*/}
-                                {/*    daysDates.length>0  &&*/}
-                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
-                                {/*}*/}
+                                {
+                                    daysDates.length > 0 &&
+                                    <p>{format("0.24")}</p>
+                                }
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalMargin`]) : "data is not available"}</p>*/}
 
-                                <p>data is not available</p>
+
                             </div>
                             <div className="total_map_data_item_3">
                                 <Rate value="4" dayDates={[]}/>
                                 <h6>%</h6>
                             </div>
                         </div>
-                        <div className="total_map_data_item_for_quantity">
-                            <div className="total_map_data_item_2">
-                                <h3>{t("Profit")}</h3>
 
-                                {/*{*/}
-                                {/*    daysDates.length===0 &&*/}
-                                {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
-                                {/*}*/}
-                                <p>data is not available</p>
-                                {/*{*/}
-                                {/*    daysDates.length>0 &&*/}
-                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
-                                {/*}*/}
-
-                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`] : "data is not available"}</p>*/}
-                            </div>
-                            <div className="total_map_data_item_3">
-                                <Rate value="4" dayDates={[]}/>
-                                <h6 className="text-nowrap"> ریال</h6>
-                            </div>
-                        </div>
-                        <div className="total_map_data_item_for_quantity">
-                            <div className="total_map_data_item_2">
-                                <h3>{t("Total revenue")}</h3>
-                                {/*{*/}
-                                {/*    daysDates.length === 0 &&*/}
-                                {/*    <p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalRev`]) : "data is not available"}</p>*/}
-                                {/*}*/}
-
-                                {/*{*/}
-                                {/*    daysDates.length > 0 &&*/}
-                                {/*    <p>{revenue ? format(revenue.revenue) : "data is not available"}</p>*/}
-                                {/*}*/}
-
-                                <p>{revenue ? format(revenue.revenue) : "data is not available"}</p>
-
-                                {/*<p>{dataCountry.content.length > 0 ? dataCountry?.content[dataCountry?.content.length - 1][`totalRev`] : "data is not available"}</p>*/}
-                            </div>
-                            <div className="total_map_data_item_3">
-                                <Rate value="4" dayDates={[]}/>
-                                <h6 className="text-nowrap">ریال</h6>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div> );
+            </div>);
 
 };
 

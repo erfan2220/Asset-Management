@@ -7,7 +7,9 @@ import 'react-leaflet-markercluster/dist/styles.min.css';
 import "leaflet.markercluster/dist/leaflet.markercluster";
 import "./LeafletMapByFilter.css";
 
-const LeafletFilter = ({ points }: LeafletFilterProps) => {
+
+const LeafletFilter = ({ points }: LeafletFilterProps) =>
+{
     const mapRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.MarkerClusterGroup | null>(null);
     const [siteName, setSiteName] = useState("");

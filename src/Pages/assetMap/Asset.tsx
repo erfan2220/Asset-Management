@@ -463,8 +463,6 @@ const Assets = () =>
     };
 
 
-console.log("siteNameClickded",siteNameClicked)
-
 
     const handleSearchClick=()=>
     {
@@ -517,149 +515,149 @@ console.log("siteNameClickded",siteNameClicked)
             <div className="Assets-map-2">
                 <div>
                     <div>
-        <div className={`Assets_header ${isRTL ? 'rtl' : ''}`}>
-                        <h2>{t("Assets/Network")}</h2>
+                        <div className={`Assets_header ${isRTL ? 'rtl' : ''}`}>
+                            <h2>{t("Assets/Network")}</h2>
                         </div>
                         <div className={"flex flex-row items-center justify-between"}>
-                            {/*<h2 className= "font-[600] text-[20px] text-[#424242]">{t("Province & City View")}</h2>*/}
+                                {/*<h2 className= "font-[600] text-[20px] text-[#424242]">{t("Province & City View")}</h2>*/}
 
-                            <div>
-                                <h2 className="font-[600] text-[20px] text-[#424242] ">
-                                    {
-                                        view === 1 &&
-                                        <nav className="bg-grey-light w-full rounded-md">
-                                            <ol className="list-reset flex">
-                                                <li>
-                                                    <a
-                                                        href="#"
-                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
-                                                    >RAN</a>
-                                                </li>
-                                                <li>
-                                                    <span className="mx-2 text-neutral-400">&gt;</span>
-                                                </li>
-                                                <li>
-                                                    <a
-                                                        href="#"
-                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
-                                                    >IRAN</a>
-                                                </li>
-                                                <li>
-                                                    {provinceName &&
-                                                        <span className="mx-2 text-neutral-400">&gt;</span>}
-                                                </li>
-                                                <li className="text-neutral-400">{provinceName}</li>
-                                                <li>
-                                                    {cityName && <span className="mx-2 text-neutral-400">&gt;</span>}
-                                                </li>
-                                                <li className="text-neutral-400">{cityName}</li>
+                                <div>
+                                    <h2 className="font-[600] text-[20px] text-[#424242] ">
+                                        {
+                                            view === 1 &&
+                                            <nav className="bg-grey-light w-full rounded-md">
+                                                <ol className="list-reset flex">
+                                                    <li>
+                                                        <a href="#"
+                                                            className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                        >RAN</a>
+                                                    </li>
+                                                    <li>
+                                                        <span className="mx-2 text-neutral-400">&gt;</span>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                            className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                        >IRAN</a>
+                                                    </li>
+                                                    <li>
+                                                        {provinceName &&
+                                                            <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                    </li>
+                                                    <li className="text-neutral-400">{provinceName}</li>
+                                                    <li>
+                                                        {cityName && <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                    </li>
+                                                    <li className="text-neutral-400">{cityName}</li>
 
-                                                <li>
-                                                    {siteNameClicked &&
-                                                        <span className="mx-2 text-neutral-400">&gt;</span>}
-                                                </li>
-                                                <li className="text-neutral-400">{siteNameClicked}</li>
-                                            </ol>
-                                        </nav>}
-                                </h2>
-                                <h2 className="font-[600] text-[20px] text-[#424242] ">
-                                    {
-                                        view === 2 &&
-                                        <nav className="bg-grey-light w-full rounded-md">
-                                            <ol className="list-reset flex">
-                                                <li>
-                                                    <a href="#"
-                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
-                                                    >RAN</a>
-                                                </li>
-                                                <li>
-                                                    <span className="mx-2 text-neutral-400">&gt;</span>
-                                                </li>
-                                                <li>
-                                                    <a
-                                                        href="#"
-                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
-                                                    >Topology</a>
-                                                </li>
-                                                {tech.length > 0 && <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                    <li>
+                                                        {siteNameClicked &&
+                                                            <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                    </li>
 
-                                                <li className="flex items-center text-neutral-400">
-                                                    {tech?.map((item, index) => (
-                                                        <React.Fragment key={index}>
-                                                            {item.tech}
-                                                            {index < tech.length - 1 && (
-                                                                <span className="mx-2 text-neutral-400">,</span>
-                                                            )}
-                                                        </React.Fragment>
-                                                    ))}
-                                                </li>
-
-                                                {tech.length > 0 && <span className="mx-2 text-neutral-400">&gt;</span>}
-
-                                                <li className="flex items-center text-neutral-400">
-                                                    {tech?.map((item, index) => (
-                                                        <React.Fragment key={index}>
-                                                            {item.type}
-                                                            {index < tech.length - 1 && (
-                                                                <span className="mx-2 text-neutral-400">,</span>
-                                                            )}
-                                                        </React.Fragment>
-                                                    ))}
-                                                </li>
-
-                                                {siteNameClicked && <span className="mx-2 text-neutral-400">&gt;</span>}
-
-                                                {siteNameClicked && (
                                                     <li className="text-neutral-400">{siteNameClicked}</li>
-                                                )}
-                                            </ol>
-                                        </nav>
-                                    }
 
-                                </h2>
-                                <h2 className="font-[600] text-[20px] text-[#424242] ">
-                                    {
-                                        view === 3 &&
-                                        <nav className="bg-grey-light w-full rounded-md">
-                                            <ol className="list-reset flex">
-                                                <li>
-                                                    <a href="#" className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
-                                                    >RAN</a>
-                                                </li>
-                                                <li>
-                                                    <span className="mx-2 text-neutral-400">&gt;</span>
-                                                </li>
-                                                <li>
-                                                    <a
-                                                        href="#"
-                                                        className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
-                                                    >Technology</a>
-                                                </li>
-                                                <li>
-                                                    {tech.length > 0 &&
-                                                        <span className="mx-2 text-neutral-400">&gt;</span>}
-                                                </li>
-                                                {/* <li class="text-neutral-400">{tech[1]?.type}</li> */}
+                                                </ol>
+                                            </nav>}
+                                    </h2>
+                                    <h2 className="font-[600] text-[20px] text-[#424242] ">
+                                        {
+                                            view === 2 &&
+                                            <nav className="bg-grey-light w-full rounded-md">
+                                                <ol className="list-reset flex">
+                                                    <li>
+                                                        <a href="#"
+                                                            className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                        >RAN</a>
+                                                    </li>
+                                                    <li>
+                                                        <span className="mx-2 text-neutral-400">&gt;</span>
+                                                    </li>
+                                                    <li>
+                                                        <a
+                                                            href="#"
+                                                            className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                        >Topology</a>
+                                                    </li>
+                                                    {tech.length > 0 && <span className="mx-2 text-neutral-400">&gt;</span>}
 
-                                                <li className="flex items-center text-neutral-400">
-                                                    {tech?.map((item, index) => (
-                                                        <React.Fragment key={index}>
-                                                            {item.type}
-                                                            {index < tech.length - 1 && (
-                                                                <span className="mx-2 text-neutral-400">,</span>
-                                                            )}
-                                                        </React.Fragment>
-                                                    ))}
-                                                </li>
-                                                <li>
-                                                    {siteNameClicked &&
-                                                        <span className="mx-2 text-neutral-400">&gt;</span>}
-                                                </li>
-                                                <li className="text-neutral-400">{siteNameClicked}</li>
-                                            </ol>
-                                        </nav>}
-                                </h2>
-                            </div>
+                                                    <li className="flex items-center text-neutral-400">
+                                                        {tech?.map((item, index) => (
+                                                            <React.Fragment key={index}>
+                                                                {item.tech}
+                                                                {index < tech.length - 1 && (
+                                                                    <span className="mx-2 text-neutral-400">,</span>
+                                                                )}
+                                                            </React.Fragment>
+                                                        ))}
+                                                    </li>
+
+                                                    {tech.length > 0 && <span className="mx-2 text-neutral-400">&gt;</span>}
+
+                                                    <li className="flex items-center text-neutral-400">
+                                                        {tech?.map((item, index) => (
+                                                            <React.Fragment key={index}>
+                                                                {item.type}
+                                                                {index < tech.length - 1 && (
+                                                                    <span className="mx-2 text-neutral-400">,</span>
+                                                                )}
+                                                            </React.Fragment>
+                                                        ))}
+                                                    </li>
+
+                                                    {siteNameClicked && <span className="mx-2 text-neutral-400">&gt;</span>}
+
+                                                    {siteNameClicked && (
+                                                        <li className="text-neutral-400">{siteNameClicked}</li>
+                                                    )}
+                                                </ol>
+                                            </nav>
+                                        }
+
+                                    </h2>
+                                    <h2 className="font-[600] text-[20px] text-[#424242] ">
+                                        {
+                                            view === 3 &&
+                                            <nav className="bg-grey-light w-full rounded-md">
+                                                <ol className="list-reset flex">
+                                                    <li>
+                                                        <a href="#" className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                        >RAN</a>
+                                                    </li>
+                                                    <li>
+                                                        <span className="mx-2 text-neutral-400">&gt;</span>
+                                                    </li>
+                                                    <li>
+                                                        <a
+                                                            href="#"
+                                                            className="text-primary transition duration-150 ease-in-out hover:text-primary-accent-300 focus:text-primary-accent-300 active:text-primary-accent-300 motion-reduce:transition-none dark:text-primary-400"
+                                                        >Technology</a>
+                                                    </li>
+                                                    <li>
+                                                        {tech.length > 0 &&
+                                                            <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                    </li>
+                                                    {/* <li class="text-neutral-400">{tech[1]?.type}</li> */}
+
+                                                    <li className="flex items-center text-neutral-400">
+                                                        {tech?.map((item, index) => (
+                                                            <React.Fragment key={index}>
+                                                                {item.type}
+                                                                {index < tech.length - 1 && (
+                                                                    <span className="mx-2 text-neutral-400">,</span>
+                                                                )}
+                                                            </React.Fragment>
+                                                        ))}
+                                                    </li>
+                                                    <li>
+                                                        {siteNameClicked &&
+                                                            <span className="mx-2 text-neutral-400">&gt;</span>}
+                                                    </li>
+                                                    <li className="text-neutral-400">{siteNameClicked}</li>
+                                                </ol>
+                                            </nav>}
+                                    </h2>
+                        </div>
 
 
                             <div
@@ -743,7 +741,6 @@ console.log("siteNameClickded",siteNameClicked)
                                                                 mapProvincesData={mapProvincesData}
                                                                 mapIranData={mapIranData}/>
 
-
                                                 </motion.div>
                                             </div>
                                         )}
@@ -807,8 +804,7 @@ console.log("siteNameClickded",siteNameClicked)
 
                                         <div className="data_box_asset">
                                             <div className="chooseActiveIndex">
-                                                <div
-                                                    className={activeTab === 1 ? "chooseActiveIndexItem1" : "chooseDeactiveIndexItem1"}
+                                                <div className={activeTab === 1 ? "chooseActiveIndexItem1" : "chooseDeactiveIndexItem1"}
                                                     onClick={() => {
                                                         handleTab(1)
                                                     }}>

@@ -260,39 +260,10 @@ const SitaData = (props) =>
         const fromDate2 = formatDate2(daysDates[0]);  // Use the first date for both cases
         const toDate2 = daysDates.length > 1 ? formatDate2(daysDates[1]) : formatDate2(daysDates[0]);
 
-        if (props.siteNameClicked && daysDates.length < 1) {
-            fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/${props.siteNameClicked}?fromDate=${todayFormatted2}&toDate=${todayFormatted2}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) => {
-                    setSiteData(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
+        if (props.siteNameClicked && daysDates.length < 1)
+        {
 
-            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/site/${props.siteNameClicked}?toDate=${todayFormatted2}&fromDate=${todayFormatted2}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) => {
-                    setDataTraffic(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-
-            fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted2}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) =>
-                {
-                    console.log("Site Data for", props.siteNameClicked, res);
-                    setProfitMarginData(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-
-        }
-        else if (props.siteNameClicked && daysDates.length > 0) {
-            fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=${fromDate2}&toDate=${toDate2}`)
+            fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?fromDate=9/1/2024&toDate=9/1/2024`)
                 .then((res) => res.json())  // Parse as JSON
                 .then((res) => {
                     setSiteData(res);
@@ -302,37 +273,89 @@ const SitaData = (props) =>
                 });
 
 
-            fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/site/${props.siteNameClicked}?toDate=${fromDate2}&fromDate=${toDate2}`)
-                .then((res) => res.json())  // Parse as JSON
-                .then((res) =>
-                {
-                    setDataTraffic(res);
-                })
-                .catch((error) => {
-                    console.error("Error fetching site data:", error);
-                });
-
-            // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${fromDate}&toDateTime=${toDate}`)
+            // fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/${props.siteNameClicked}?fromDate=${todayFormatted2}&toDate=${todayFormatted2}`)
+            //     .then((res) => res.json())  // Parse as JSON
+            //     .then((res) => {
+            //         setSiteData(res);
+            //     })
+            //     .catch((error) => {
+            //         console.error("Error fetching site data:", error);
+            //     });
+            //
+            // fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/site/${props.siteNameClicked}?toDate=${todayFormatted2}&fromDate=${todayFormatted2}`)
+            //     .then((res) => res.json())  // Parse as JSON
+            //     .then((res) => {
+            //         setDataTraffic(res);
+            //     })
+            //     .catch((error) => {
+            //         console.error("Error fetching site data:", error);
+            //     });
+            //
+            // fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted2}`)
             //     .then((res) => res.json())  // Parse as JSON
             //     .then((res) =>
             //     {
             //         console.log("Site Data for", props.siteNameClicked, res);
-            //         setCostData(res);
+            //         setProfitMarginData(res);
             //     })
             //     .catch((error) => {
             //         console.error("Error fetching site data:", error);
             //     });
 
-            fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted2}`)
+        }
+        else if (props.siteNameClicked && daysDates.length > 0) {
+
+            fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?fromDate=9/1/2024&toDate=9/30/2024`)
                 .then((res) => res.json())  // Parse as JSON
-                .then((res) =>
-                {
-                    console.log("Site Data for", props.siteNameClicked, res);
-                    setProfitMarginData(res);
+                .then((res) => {
+                    setSiteData(res);
                 })
                 .catch((error) => {
                     console.error("Error fetching site data:", error);
                 });
+
+
+            // fetch(`http://10.15.90.72:9098/api/revenue/site-revenue/TH1340?fromDate=${fromDate2}&toDate=${toDate2}`)
+            //     .then((res) => res.json())  // Parse as JSON
+            //     .then((res) => {
+            //         setSiteData(res);
+            //     })
+            //     .catch((error) => {
+            //         console.error("Error fetching site data:", error);
+            //     });
+            //
+            //
+            // fetch(`http://10.15.90.72:9098/api/daily-traffic/site-traffic/site/${props.siteNameClicked}?toDate=${fromDate2}&fromDate=${toDate2}`)
+            //     .then((res) => res.json())  // Parse as JSON
+            //     .then((res) =>
+            //     {
+            //         setDataTraffic(res);
+            //     })
+            //     .catch((error) => {
+            //         console.error("Error fetching site data:", error);
+            //     });
+            //
+            // // fetch(`http://10.15.90.72:9098/api/fix-cost/calculate-site-fix-cost/Tehran/${props.siteNameClicked}?fromDateTime=${fromDate}&toDateTime=${toDate}`)
+            // //     .then((res) => res.json())  // Parse as JSON
+            // //     .then((res) =>
+            // //     {
+            // //         console.log("Site Data for", props.siteNameClicked, res);
+            // //         setCostData(res);
+            // //     })
+            // //     .catch((error) => {
+            // //         console.error("Error fetching site data:", error);
+            // //     });
+            //
+            // fetch(`http://10.15.90.72:9098/api/financial-state/site/${props.siteNameClicked}?date=${todayFormatted2}`)
+            //     .then((res) => res.json())  // Parse as JSON
+            //     .then((res) =>
+            //     {
+            //         console.log("Site Data for", props.siteNameClicked, res);
+            //         setProfitMarginData(res);
+            //     })
+            //     .catch((error) => {
+            //         console.error("Error fetching site data:", error);
+            //     });
         }
     }, [props.siteNameClicked, daysDates]);
 
@@ -781,7 +804,7 @@ const SitaData = (props) =>
                             <div className="total_map_data_item_for_quantity_3">
                                 <div className="total_map_data_item_2">
                                     <h3>Traffic PS</h3>
-                                    <p>{dataTraffic ? format(Math.floor(dataTraffic?.totalPsTraffic)) : "data is not available"}</p>
+                                    <p>{siteData ? format(Math.floor(siteData?.siteTrafficResponse?.totalPsTraffic)) : "data is not available"}</p>
                                     {/*<p>{dataTraffic ? Math.floor(dataTraffic?.totalPsTraffic) : "data is not available"}</p>*/}
                                     {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalPS`]) : "data is not available"}</p>*/}
 
@@ -795,13 +818,14 @@ const SitaData = (props) =>
                                 <div className="total_map_data_item_2">
                                     <h3>Traffic CS</h3>
                                     {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCS`]) : "data is not available"}</p>*/}
-                                    <p>{dataTraffic ? format(Math.floor(dataTraffic?.totalCsTraffic)) : "data is not available"}</p>
+                                    {/*<p>{dataTraffic ? format(Math.floor(dataTraffic?.totalCsTraffic)) : "data is not available"}</p>*/}
+                                    <p>{siteData ? format(Math.floor(siteData?.siteTrafficResponse?.totalCsTraffic)) : "data is not available"}</p>
                                     {/*<p>{dataTraffic ? Math.floor(dataTraffic?.totalCsTraffic): "data is not available"}</p>*/}
                                     {/*<p> data is not available</p>*/}
                                 </div>
 
                                 <div className="total_map_data_item_3">
-                                    <Rate value="4" dayDates={daysDates}/>
+                                <Rate value="4" dayDates={daysDates}/>
                                     <h6>Erlang</h6>
                                 </div>
                             </div>
@@ -836,7 +860,7 @@ const SitaData = (props) =>
                                 <h3>{t("Cost")}</h3>
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalCost`]) : "data is not available"}</p>*/}
                                 {/*<p>data is not available</p>*/}
-                                <p>{profitMarginData ? format(profitMarginData.cost) : "data is not available"}</p>
+                                <p>{siteData ? format(siteData.cost) : "data is not available"}</p>
                                 {/*<p>{profitMarginData ? profitMarginData.cost : "data is not available"}</p>*/}
                             </div>
                             <div className="total_map_data_item_3">
@@ -847,7 +871,7 @@ const SitaData = (props) =>
                         <div className="total_map_data_item_for_quantity">
                             <div className="total_map_data_item_2">
                                 <h3>{t("Profit")}</h3>
-                                <p>{profitMarginData ? format(profitMarginData.profit) : "data is not available"}</p>
+                                <p>{siteData ? format(siteData.profit) : "data is not available"}</p>
                                 {/*<p>{profitMarginData ? profitMarginData.profit : "data is not available"}</p>*/}
                                 {/*<p>{dataCountry.content.length > 0 ? format(dataCountry?.content[dataCountry?.content.length - 1][`totalProfit`]) : "data is not available"}</p>*/}
                                 {/*<p>data is not available</p>*/}
@@ -861,7 +885,7 @@ const SitaData = (props) =>
                             <div className="total_map_data_item_2">
                                 <h3>{t("Margin")}</h3>
 
-                                <p>{profitMarginData ? format(profitMarginData.margin) : "data is not available"}</p>
+                                <p>{siteData ? format(siteData.margin) : "data is not available"}</p>
                                 {/*<p>{profitMarginData? profitMarginData.margin: "data is not available"}</p>*/}
                                 {/*<p>data is not available</p>*/}
                             </div>

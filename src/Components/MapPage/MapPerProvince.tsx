@@ -23,6 +23,7 @@ const fetchPoints = async ({ queryKey }) =>
     return response.json();
 };
 
+
 const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
     const [canonicalProvinceName, setCanonicalProvinceName] = useState("");
     const [canonicalCityName, setCanonicalCityName] = useState("");
@@ -264,6 +265,14 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
         return inside;
     };
 
+    useEffect(() => {
+        if (mapRef.current) {
+            mapRef.current.on("zoomend", () => {
+                console.log("Current Zoom Level:", mapRef.current.getZoom());
+            });
+        }
+    }, []);
+
     // Map setup and marker clustering
     useEffect(() => {
         console.log("allPoints5",points)
@@ -284,6 +293,7 @@ const MapPerProvince = ({ cityName, ProvinceName, setSiteNameClicked }) => {
 
             const zoomControl = L.control.zoom({ position: 'bottomright' });
             zoomControl.addTo(mapRef.current);
+
 
 
 
